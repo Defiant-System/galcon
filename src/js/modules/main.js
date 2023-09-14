@@ -19,7 +19,8 @@ let Main = {
 
 		this.allships = [];
 
-		let point = new Point(100, 100);
-		this.allships.push(new Ship(point));
+		let point = new Point(100, 100),
+			planet = this.planets[0];
+		this.allships.push(new Ship(point, planet));
 	}
 };

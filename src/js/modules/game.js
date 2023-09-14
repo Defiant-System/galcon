@@ -15,7 +15,12 @@ let Game = {
 		this.render();
 	},
 	update() {
-		
+		Main.allships.map(s => {
+			let rect = new Rectangle(100, 100, 50, 50),
+				rad = Math.PI * .15;
+			s.Move(rect, rad, true);
+			s.Rotate(rad);
+		});
 	},
 	render() {
 		let tau = Math.PI * 2;
@@ -35,14 +40,14 @@ let Game = {
 		Main.allships.map(s => {
 			var w = 7,
 				h = w * 2,
-				c = 40;
+				c = s.vangle;
 			this.ctx.save();
 			// rotate
 			this.ctx.translate(s.pos._x, s.pos._y);
 			this.ctx.rotate((c + 90) * Math.PI / 180); 
 			this.ctx.translate(-s.pos._x, -s.pos._y);
 			// ship gui
-			this.ctx.strokeStyle = "#fff";
+			this.ctx.strokeStyle = "#b2b";
 			this.ctx.lineJoin = "round";
 			this.ctx.lineWidth = 3;
 			// ship outline
