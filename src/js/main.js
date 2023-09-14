@@ -1,8 +1,13 @@
 
 @import "./classes/misc.js"
+@import "./classes/gridcell.js"
+@import "./classes/shipset.js"
+@import "./classes/ship.js"
+@import "./classes/fleet.js"
 @import "./classes/planet.js"
 
 
+@import "./modules/main.js"
 @import "./modules/game.js"
 @import "./modules/test.js"
 
