@@ -131,7 +131,122 @@ class Matrix {
 
 class Rectangle {
 	constructor(x, y, width, height) {
+		this._topLeft = new Point(x, y);
+		this._size = new Size(width, height);
+	}
 
+	get x() { return this._topLeft._x; }
+	get y() { return this._topLeft._y; }
+	get left() { return this._topLeft._x; }
+	get top() { return this._topLeft._y; }
+	get width() { return this._size._width; }
+	get height() { return this._size._height; }
+
+	set x(value) { this._topLeft._x = value; }
+	set y(value) { this._topLeft._y = value; }
+	set width(value) { this._size.width = value; }
+	set height(value) { this._size.height = value; }
+
+	center() {
+		this._topLeft.x = -this._size.width >> 1;
+		this._topLeft.y = -this._size.height >> 1;
+
+		return this;
+	}
+
+	contains(point) {
+		var myHorizontal = point.x > this.left && point.x < this.right;
+		var myVertical = point.y > this.top && point.y < this.bottom;
+
+		return myHorizontal && myVertical;
+	}
+
+	union(rectangle) {
+		this._topLeft.x = rocket88.min(this._topLeft.x, rectangle._topLeft.x);
+		this._topLeft.y = rocket88.min(this._topLeft.y, rectangle._topLeft.y);
+		
+		var myRight = rocket88.max(this.right, rectangle.right);
+		this.size.width = myRight - this._topLeft.x;
+
+		var myBottom = rocket88.max(this.right, rectangle.right);
+		this.size.height = myRight - this._topLeft.y;
+
+		return this;
+	}
+
+	inflate(size) {
+		this._topLeft.x -= size.width;
+		this._topLeft.y -= size.height;
+
+		this._size.width += size.width * 2;
+		this._size.height += size.height * 2;
+			return this;
+	}
+
+	deflate(size) {
+		this._topLeft.x += size.width;
+		this._topLeft.y += size.height;
+
+		this._size.width -= size.width * 2;
+		this._size.height -= size.height * 2;
+
+		return this;
+	}
+
+	translate(x, y) {
+		this._topLeft.x += x;
+		this._topLeft.y += y;
+
+		return this;
+	}
+
+	intersects(rectangle) {
+		return !(rectangle.left > this.right || 
+       			 rectangle.right < this.left || 
+       			 rectangle.top > this.bottom ||
+       			 rectangle.bottom < this.top);			
+	}
+
+	empty() {
+		this._topLeft.empty();
+		this._size.empty();
+		return this;
+	}
+
+	clone() {
+		return new rocket88.Rectangle(this._topLeft.x, this._topLeft.y, this._size.width, this._size.height);
+	}
+
+	copy(rectangle) {
+		this._topLeft.x = rectangle.left;
+		this._topLeft.y = rectangle.top;
+		this._size.width = rectangle.size.width;
+		this._size.height = rectangle.size.height;
+		return this;
+	}
+}
+
+
+class Size {
+	constructor(width, height) {
+		this.width = width || 0;
+		this.height = height || 0;
+	}
+
+	empty() {
+		this.width = 0;
+		this.height = 0;
+		return this;
+	}
+
+	clone() {
+		return new Size(this.width, this.height);
+	}
+
+	copy(size) {
+		this.width = size.width;
+		this.height = size.height;
+		return this;
 	}
 }
 

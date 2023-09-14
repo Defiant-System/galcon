@@ -27,6 +27,14 @@ const galcon = {
 		switch (event.type) {
 			case "window.init":
 				break;
+			case "insert-ship":
+				let point = new Point(event.offsetX, event.offsetY);
+				Main.allships.push(new Ship(point, Main.planets[2]));
+				break;
+			case "pause-game":
+				// stops loop
+				Game._paused = true;
+				break;
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;

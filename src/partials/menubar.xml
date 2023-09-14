@@ -9,4 +9,10 @@
 		<Menu type="divider"/>
 		<Menu name="License"/>
 	</Menu>
+
+	<Menu for="game-options">
+		<Menu name="Pause" click="pause-game"/>
+		<Menu type="divider"/>
+		<Menu name="License"/>
+	</Menu>
 </MenuBar>

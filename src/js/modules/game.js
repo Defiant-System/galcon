@@ -42,12 +42,11 @@ let Game = {
 		let tau = Math.PI * 2;
 
 		this.ctx.clearRect(0, 0, this.width, this.height);
-		this.ctx.fillStyle = "#fff";
-		this.ctx.strokeStyle = "#fff";
 		this.ctx.lineWidth = 2;
 		// this.ctx.fillRect(50, 50, 30, 30);
 
 		Main.planets.map(p => {
+			this.ctx.strokeStyle = p.color || "#fff";
 			this.ctx.beginPath();
 			this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
 			this.ctx.stroke();

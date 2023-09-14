@@ -2,7 +2,7 @@
 let Test = {
 	init(APP) {
 		
-		// setTimeout(() => Game._paused = true, 5e3);
+		setTimeout(() => Game._paused = true, 20e3);
 
 	}
 };

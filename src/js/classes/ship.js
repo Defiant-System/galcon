@@ -8,13 +8,12 @@ class Ship {
 		this.vpos = new Point(pos._x, pos._y);
 		this.dv = new Point(0, 0);
 
-		this.ship_radius = 5.1;
+		this.ship_radius = 12;
 		this.speed = 0.65;
 		this.aspeed = Math.PI / 64;
 		
 		this.angle = 0;
 		this.vangle = 0;
-
 		this.rot_time = 0;
 		this.frame = 0;
 		this.vframe = 0;
@@ -29,41 +28,36 @@ class Ship {
 	}
 
 	Rotate(delta) {
-		let px = this.vpos._x - this.ppos._x,
-			py = this.vpos._y - this.ppos._y,
-			npos = new Point(px, py);
+		let _loc_2 = new Point(this.vpos._x - this.ppos._x, this.vpos._y - this.ppos._y);
+		let _loc_3 = this.vangle;
+		let _loc_4 = Math.atan2(_loc_2._y, _loc_2._x);
+		let _loc_5 = this.aspeed * 4 * delta;
 
-		let vangl = this.vangle;
-		let theta = Math.atan2(npos._y, npos._x);
-		let aPlus = this.aspeed * 2 * delta;
+		if (this.vframe == 0) _loc_3 = _loc_4;
+        if (_loc_4 - _loc_3 > Math.PI) _loc_3 = _loc_3 + Math.PI * 2;
+        if (_loc_3 - _loc_4 > Math.PI) _loc_4 = _loc_4 + Math.PI * 2;
+        if (_loc_3 < _loc_4) _loc_3 = _loc_3 + _loc_5;
+        if (_loc_3 > _loc_4) _loc_3 = _loc_3 - _loc_5;
+        if (Math.abs(_loc_4 - _loc_3) < _loc_5) _loc_3 = _loc_4;
 
-		if (this.vframe == 0) vangl = theta;
-		if (theta - vangl > Math.PI) vangl = vangl + Math.PI * 2;
-		if (vangl - theta > Math.PI) theta = theta + Math.PI * 2;
-		if (vangl < theta) vangl = vangl + aPlus;
-		if (vangl > theta) vangl = vangl - aPlus;
-		if (Math.abs(theta - vangl) < aPlus) vangl = theta;
-
-		this.vangle = vangl;
+		this.vangle = _loc_3;
 		this.vframe += 1;
 	}
 
-	Move(rect, delta, WTF) {
+	Move(rect, delta, smooth) {
 		this.collision_num = 0;
 		
-		let px = this.pos._x - this.ppos._x,
-			py = this.pos._y - this.ppos._y,
-			npos = new Point(px, py);
+		let _loc_4 = new Point(this.pos._x - this.ppos._x, this.pos._y - this.ppos._y);
 
-		if (npos.x + npos.y < this.speed / 15 && this.frame % 16 == 0) {
-			this.pos._x = this.pos._x + (Math.random() * 2 - 1) * this.speed * 3;
-			this.pos._y = this.pos._y + (Math.random() * 2 - 1) * this.speed * 3;
+		if (_loc_4._x + _loc_4._y < this.speed / 15 && this.frame % 16 == 0) {
+			this.pos._x += (Math.random() * 2 - 1) * this.speed * 3;
+			this.pos._y += (Math.random() * 2 - 1) * this.speed * 3;
 		}
 			
-		npos._x = this.target.pos._x - this.pos._x;
-		npos._y = this.target.pos._y - this.pos._y;
+		_loc_4._x = this.target.pos._x - this.pos._x;
+		_loc_4._y = this.target.pos._y - this.pos._y;
 		let _loc_5 = this.angle;
-		let _loc_6 = Math.atan2(npos._y, npos._x);
+		let _loc_6 = Math.atan2(_loc_4._y, _loc_4._x);
 
 		if (this.frame == 0) {
 			_loc_5 = _loc_6;
@@ -84,19 +78,13 @@ class Ship {
 			}
 		}
 
-		if (this.rot_time > 40) {
-			this.aspeed = this.aspeed + Math.PI * 2 / (64 * 40);
-		}
-		if (_loc_5 > Math.PI) {
-			_loc_5 = _loc_5 - Math.PI * 2;
-		}
-		if (_loc_5 < -Math.PI) {
-			_loc_5 = _loc_5 + Math.PI * 2;
-		}
+		if (this.rot_time > 40) this.aspeed += Math.PI * 2 / (64 * 40);
+		if (_loc_5 > Math.PI) _loc_5 = _loc_5 - Math.PI * 2;
+		if (_loc_5 < -Math.PI) _loc_5 = _loc_5 + Math.PI * 2;
 
 		this.angle = _loc_5;
-		this.pos._x = this.pos._x + Math.cos(this.angle) * this.speed * delta;
-		this.pos._y = this.pos._y + Math.sin(this.angle) * this.speed * delta;
+		this.pos._x += Math.cos(this.angle) * this.speed * delta;
+		this.pos._y += Math.sin(this.angle) * this.speed * delta;
 
 		if (this.pos._x < rect.left) this.pos._x = rect.left;
 		if (this.pos._x > rect.right) this.pos._x = rect.right;
@@ -106,6 +94,7 @@ class Ship {
 		this.ppos._x = this.vpos._x;
 		this.ppos._y = this.vpos._y;
 		this.stuckcheck += 1;
+
 		if (this.stuckcheck > 60) {
 			this.stuckcheck = 0;
 			if (this.pos.subtract(this.checkpos).length < 3) {
@@ -115,7 +104,7 @@ class Ship {
 				this.checkpos = new Point(this.pos._x, this.pos._y);
 			}
 		}
-		if (WTF) {
+		if (smooth) {
 			this.vpos._x = this.vpos._x + (this.pos._x - this.vpos._x) * 0.12 * delta;
 			this.vpos._y = this.vpos._y + (this.pos._y - this.vpos._y) * 0.12 * delta;
 		} else {
@@ -131,6 +120,7 @@ class Ship {
 		this.dv._x = planet.pos._x - this.pos._x;
 		this.dv._y = planet.pos._y - this.pos._y;
 		var _loc_2 = Math.sqrt(this.dv._x * this.dv._x + this.dv._y * this.dv._y);
+
 		if (_loc_2 > planet.radius + this.ship_radius) {
 			return;
 		}
@@ -149,11 +139,11 @@ class Ship {
 		let _loc_5 = 0.5;
 
 		if (_loc_2 > 0) {
-			this.pos._x = this.pos._x - _loc_4._x * this.speed * _loc_5;
-			this.pos._y = this.pos._y - _loc_4._y * this.speed * _loc_5;
+			this.pos._x -= _loc_4._x * this.speed * _loc_5;
+			this.pos._y -= _loc_4._y * this.speed * _loc_5;
 		} else{
-			this.pos._x = this.pos._x + _loc_4._x * this.speed * _loc_5;
-			this.pos._y = this.pos._y + _loc_4._y * this.speed * _loc_5;
+			this.pos._x += _loc_4._x * this.speed * _loc_5;
+			this.pos._y += _loc_4._y * this.speed * _loc_5;
 		}
 
 		this.dv._x = planet.pos._x - this.pos._x;
@@ -170,7 +160,7 @@ class Ship {
 	}
 
 	Arrived() {
-		// stops loop
-		Game._paused = true;
+		let index = Main.allships.findIndex(s => s == this);
+		Main.allships.splice(index, 1);
 	}
 }
