@@ -12,7 +12,8 @@ let Main = {
 		// create planets
 		this.planets = [];
 		this.planets.push(new Planet(250, 180, 35, 0, 1, 0));
-		this.planets.push(new Planet(420, 240, 20, 0, 1, 0));
+		this.planets.push(new Planet(420, 290, 20, 0, 1, 0));
+		this.planets.push(new Planet(540, 340, 5, 0, 1, 0));
 
 		// create shipsets
 		// let rect = new Rectangle(0, 0, this.winwidth, this.winheight);
@@ -21,7 +22,7 @@ let Main = {
 		this.allships = [];
 
 		let point = new Point(100, 100),
-			planet = this.planets[1];
+			planet = this.planets[2];
 		this.allships.push(new Ship(point, planet));
 	}
 };

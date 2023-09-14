@@ -35,7 +35,7 @@ class Ship {
 
 		let vangl = this.vangle;
 		let theta = Math.atan2(npos._y, npos._x);
-		let aPlus = this.aspeed * 4 * delta;
+		let aPlus = this.aspeed * 2 * delta;
 
 		if (this.vframe == 0) vangl = theta;
 		if (theta - vangl > Math.PI) vangl = vangl + Math.PI * 2;
@@ -68,21 +68,15 @@ class Ship {
 		if (this.frame == 0) {
 			_loc_5 = _loc_6;
 		} else {
-			if (_loc_6 - _loc_5 > Math.PI) {
-				_loc_5 = _loc_5 + Math.PI * 2;
-			}
-			if (_loc_5 - _loc_6 > Math.PI) {
-				_loc_6 = _loc_6 + Math.PI * 2;
-			}
+			if (_loc_6 - _loc_5 > Math.PI) _loc_5 = _loc_5 + Math.PI * 2;
+			if (_loc_5 - _loc_6 > Math.PI) _loc_6 = _loc_6 + Math.PI * 2;
 			if (_loc_5 < _loc_6) {
 				_loc_5 = _loc_5 + this.aspeed * delta;
-				var _loc_8 = this.rot_time + 1;
-				this.rot_time = _loc_8;
+				this.rot_time += 1;
 			}
 			if (_loc_5 > _loc_6) {
 				_loc_5 = _loc_5 - this.aspeed * delta;
-				var _loc_8 = this.rot_time + 1;
-				this.rot_time = _loc_8;
+				this.rot_time += 1;
 			}
 			if (Math.abs(_loc_6 - _loc_5) < this.aspeed * delta) {
 				_loc_5 = _loc_6;
@@ -104,10 +98,10 @@ class Ship {
 		this.pos._x = this.pos._x + Math.cos(this.angle) * this.speed * delta;
 		this.pos._y = this.pos._y + Math.sin(this.angle) * this.speed * delta;
 
-		if (this.pos.x < rect.left) this.pos.x = rect.left;
-		if (this.pos.x > rect.right) this.pos.x = rect.right;
-		if (this.pos.y < rect.top) this.pos.y = rect.top;
-		if (this.pos.y > rect.bottom) this.pos.y = rect.bottom;
+		if (this.pos._x < rect.left) this.pos._x = rect.left;
+		if (this.pos._x > rect.right) this.pos._x = rect.right;
+		if (this.pos._y < rect.top) this.pos._y = rect.top;
+		if (this.pos._y > rect.bottom) this.pos._y = rect.bottom;
 		
 		this.ppos._x = this.vpos._x;
 		this.ppos._y = this.vpos._y;

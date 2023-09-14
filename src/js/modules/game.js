@@ -54,23 +54,23 @@ let Game = {
 		});
 
 		Main.allships.map(s => {
-			var w = 7,
+			var w = 6,
 				h = w * 2,
-				c = s.vangle + Math.PI * .5;
+				c = s.vangle + (Math.PI * .5);
 			this.ctx.save();
 			// rotate
-			this.ctx.translate(s.pos._x, s.pos._y);
+			this.ctx.translate(s.vpos._x, s.vpos._y);
 			this.ctx.rotate(c);
-			this.ctx.translate(-s.pos._x, -s.pos._y);
+			this.ctx.translate(-s.vpos._x, -s.vpos._y);
 			// ship gui
 			this.ctx.strokeStyle = "#b2b";
 			this.ctx.lineJoin = "round";
 			this.ctx.lineWidth = 3;
 			// ship outline
 			this.ctx.beginPath();
-			this.ctx.moveTo(s.pos._x, s.pos._y - h);
-			this.ctx.lineTo(s.pos._x + w, s.pos._y + w);
-			this.ctx.lineTo(s.pos._x - w, s.pos._y + w);
+			this.ctx.moveTo(s.vpos._x, s.vpos._y - h);
+			this.ctx.lineTo(s.vpos._x + w, s.vpos._y + w);
+			this.ctx.lineTo(s.vpos._x - w, s.vpos._y + w);
 			this.ctx.closePath();
 			this.ctx.stroke();
 
