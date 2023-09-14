@@ -9,17 +9,33 @@ let Game = {
 		this.height = this.cvs.prop("offsetHeight");
 		this.cvs.attr({ width: this.width, height: this.height });
 
+		this._paused = false;
+
 		Main.init();
 
+		this.frame();
+	},
+	frame() {
 		this.update();
 		this.render();
+
+		if (this._paused) return;
+		requestAnimationFrame(this.frame.bind(this));
 	},
 	update() {
+		let get_distance = (p1, p2) =>
+				Math.sqrt(Math.pow((p1._x-p2._x), 2) + Math.pow((p1._y-p2._y), 2));
+
 		Main.allships.map(s => {
 			let rect = new Rectangle(100, 100, 50, 50),
-				rad = Math.PI * .15;
-			s.Move(rect, rad, true);
-			s.Rotate(rad);
+				delta = 2;
+			s.Move(rect, delta, true);
+			s.Rotate(delta);
+
+			Main.planets.map(p => {
+				let dist = get_distance(s.pos, p.pos);
+				if (dist < p.radius) s.CollidePlanet(p);
+			});
 		});
 	},
 	render() {
@@ -40,11 +56,11 @@ let Game = {
 		Main.allships.map(s => {
 			var w = 7,
 				h = w * 2,
-				c = s.vangle;
+				c = s.vangle + Math.PI * .5;
 			this.ctx.save();
 			// rotate
 			this.ctx.translate(s.pos._x, s.pos._y);
-			this.ctx.rotate((c + 90) * Math.PI / 180); 
+			this.ctx.rotate(c);
 			this.ctx.translate(-s.pos._x, -s.pos._y);
 			// ship gui
 			this.ctx.strokeStyle = "#b2b";

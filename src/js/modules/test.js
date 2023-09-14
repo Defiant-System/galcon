@@ -2,7 +2,7 @@
 let Test = {
 	init(APP) {
 		
-		// setTimeout(() => window.find(`.toolbar-tool_[data-arg="13"]`).trigger("click"), 500);
+		// setTimeout(() => Game._paused = true, 5e3);
 
 	}
 };
