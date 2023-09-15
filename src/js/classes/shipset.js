@@ -21,7 +21,7 @@ class Shipset {
 	}
 
 	RemoveShip(ship) {
-		let index = this._allships.findIndex(s => s == this);
+		let index = this._allships.indexOf(ship);
 		this._allships.splice(index, 1);
 	}
 
