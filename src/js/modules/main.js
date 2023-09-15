@@ -16,13 +16,12 @@ let Main = {
 		this.planets.push(new Planet(540, 340, 5, 0, 1, 2));
 
 		// create shipsets
-		// let rect = new Rectangle(0, 0, this.winwidth, this.winheight);
-		// this.allships = new Shipset(rect, this.planets);
+		let rect = new Rectangle(0, 0, this.winwidth, this.winheight);
+		this.allships = new Shipset(rect, this.planets);
 
-		this.allships = [];
-
-		//this.allships.push(new Ship(new Point(420, 340), this.planets[2]));
-		this.allships.push(new Ship(new Point(150, 140), this.planets[2]));
-		this.allships.push(new Ship(new Point(110, 150), this.planets[2]));
+		let source = this.planets[0],
+			target = this.planets[2],
+			percent = .5;
+		this.allships.LaunchShips(null, null, source, target, percent);
 	}
 };

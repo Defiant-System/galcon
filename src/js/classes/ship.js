@@ -147,7 +147,7 @@ class Ship {
 		this.dv._y = planet.pos._y - this.pos._y;
 		dist = planet.pos.distance(this.pos);
 
-		var loc_3 = (planet.radius + this.ship_radius) / dist;
+		let loc_3 = (planet.radius + this.ship_radius) / dist;
 		this.pos._x = planet.pos._x - this.dv._x * loc_3;
 		this.pos._y = planet.pos._y - this.dv._y * loc_3;
 	}
@@ -163,7 +163,7 @@ class Ship {
         this.collision_num += 1;
         this.dv._x = ship.pos._x - this.pos._x;
         this.dv._y = ship.pos._y - this.pos._y;
-        var loc_3 = Math.sqrt(this.dv._x * this.dv._x + this.dv._y * this.dv._y);
+        let loc_3 = Math.sqrt(this.dv._x * this.dv._x + this.dv._y * this.dv._y);
         if (loc_3 > this.ship_radius * 1.75) return;
 
         if (loc_3 == 0) {
@@ -172,9 +172,9 @@ class Ship {
             this.dv._y = Math.random() * 2 - 1;
         }
             
-        var loc_4 = (this.pos._x + ship.pos._x) / 2;
-        var loc_5 = (this.pos._y + ship.pos._y) / 2;
-        var loc_6 = this.ship_radius / loc_3;
+        let loc_4 = (this.pos._x + ship.pos._x) / 2;
+        let loc_5 = (this.pos._y + ship.pos._y) / 2;
+        let loc_6 = this.ship_radius / loc_3;
         this.dv._x = this.dv._x * loc_6;
         this.dv._y = this.dv._y * loc_6;
         this.pos._x = loc_4 - this.dv._x;
@@ -185,8 +185,7 @@ class Ship {
 
 	Arrived() {
 		if (this.pos.distance(this.target.pos) < this.target.radius) {
-			let index = Main.allships.findIndex(s => s == this);
-			Main.allships.splice(index, 1);
+			Main.allships.RemoveShip(this);
 		}
 	}
 }
