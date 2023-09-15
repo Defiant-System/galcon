@@ -8,13 +8,13 @@ class Ship {
 		this.vpos = new Point(pos._x, pos._y);
 		this.dv = new Point(0, 0);
 
-		this.ship_radius = 12;
+		this.ship_radius = 10;
 		this.speed = 0.65;
-		this.aspeed = Math.PI / 64;
+		this.angle_speed = Math.PI / 64;
 		
 		this.angle = 0;
 		this.vangle = 0;
-		this.rot_time = 0;
+		this.rotation_time = 0;
 		this.frame = 0;
 		this.vframe = 0;
 
@@ -31,13 +31,13 @@ class Ship {
 		let _loc_2 = new Point(this.vpos._x - this.ppos._x, this.vpos._y - this.ppos._y);
 		let _loc_3 = this.vangle;
 		let _loc_4 = Math.atan2(_loc_2._y, _loc_2._x);
-		let _loc_5 = this.aspeed * 4 * delta;
+		let _loc_5 = this.angle_speed * 4 * delta;
 
 		if (this.vframe == 0) _loc_3 = _loc_4;
-        if (_loc_4 - _loc_3 > Math.PI) _loc_3 = _loc_3 + Math.PI * 2;
-        if (_loc_3 - _loc_4 > Math.PI) _loc_4 = _loc_4 + Math.PI * 2;
-        if (_loc_3 < _loc_4) _loc_3 = _loc_3 + _loc_5;
-        if (_loc_3 > _loc_4) _loc_3 = _loc_3 - _loc_5;
+        if (_loc_4 - _loc_3 > Math.PI) _loc_3 += Math.PI * 2;
+        if (_loc_3 - _loc_4 > Math.PI) _loc_4 += Math.PI * 2;
+        if (_loc_3 < _loc_4) _loc_3 += _loc_5;
+        if (_loc_3 > _loc_4) _loc_3 -= _loc_5;
         if (Math.abs(_loc_4 - _loc_3) < _loc_5) _loc_3 = _loc_4;
 
 		this.vangle = _loc_3;
@@ -47,42 +47,48 @@ class Ship {
 	Move(rect, delta, smooth) {
 		this.collision_num = 0;
 		
-		let _loc_4 = new Point(this.pos._x - this.ppos._x, this.pos._y - this.ppos._y);
+		let tmpPos = new Point();
+		tmpPos._x = this.pos._x - this.ppos._x;
+		tmpPos._y = this.pos._y - this.ppos._y;
 
-		if (_loc_4._x + _loc_4._y < this.speed / 15 && this.frame % 16 == 0) {
+		if (tmpPos._x + tmpPos._y < this.speed / 15 && this.frame % 16 == 0) {
 			this.pos._x += (Math.random() * 2 - 1) * this.speed * 3;
 			this.pos._y += (Math.random() * 2 - 1) * this.speed * 3;
 		}
 			
-		_loc_4._x = this.target.pos._x - this.pos._x;
-		_loc_4._y = this.target.pos._y - this.pos._y;
-		let _loc_5 = this.angle;
-		let _loc_6 = Math.atan2(_loc_4._y, _loc_4._x);
+		tmpPos._x = this.target.pos._x - this.pos._x;
+		tmpPos._y = this.target.pos._y - this.pos._y;
+		let currAngle = this.angle;
+		let diffAngle = Math.atan2(tmpPos._y, tmpPos._x);
 
 		if (this.frame == 0) {
-			_loc_5 = _loc_6;
+			currAngle = diffAngle;
 		} else {
-			if (_loc_6 - _loc_5 > Math.PI) _loc_5 = _loc_5 + Math.PI * 2;
-			if (_loc_5 - _loc_6 > Math.PI) _loc_6 = _loc_6 + Math.PI * 2;
-			if (_loc_5 < _loc_6) {
-				_loc_5 = _loc_5 + this.aspeed * delta;
-				this.rot_time += 1;
+			if (diffAngle - currAngle > Math.PI) {
+				currAngle += Math.PI * 2;
 			}
-			if (_loc_5 > _loc_6) {
-				_loc_5 = _loc_5 - this.aspeed * delta;
-				this.rot_time += 1;
+			if (currAngle - diffAngle > Math.PI) {
+				diffAngle += Math.PI * 2;
 			}
-			if (Math.abs(_loc_6 - _loc_5) < this.aspeed * delta) {
-				_loc_5 = _loc_6;
-				this.rot_time = 0;
+			if (currAngle < diffAngle) {
+				currAngle += this.angle_speed * delta;
+				this.rotation_time += 1;
+			}
+			if (currAngle > diffAngle) {
+				currAngle -= this.angle_speed * delta;
+				this.rotation_time += 1;
+			}
+			if (Math.abs(diffAngle - currAngle) < this.angle_speed * delta) {
+				currAngle = diffAngle;
+				this.rotation_time = 0;
 			}
 		}
 
-		if (this.rot_time > 40) this.aspeed += Math.PI * 2 / (64 * 40);
-		if (_loc_5 > Math.PI) _loc_5 = _loc_5 - Math.PI * 2;
-		if (_loc_5 < -Math.PI) _loc_5 = _loc_5 + Math.PI * 2;
+		if (this.rotation_time > 40) this.angle_speed += Math.PI * 2 / (64 * 40);
+		if (currAngle > Math.PI) currAngle -= Math.PI * 2;
+		if (currAngle < -Math.PI) currAngle += Math.PI * 2;
 
-		this.angle = _loc_5;
+		this.angle = currAngle;
 		this.pos._x += Math.cos(this.angle) * this.speed * delta;
 		this.pos._y += Math.sin(this.angle) * this.speed * delta;
 
@@ -105,8 +111,8 @@ class Ship {
 			}
 		}
 		if (smooth) {
-			this.vpos._x = this.vpos._x + (this.pos._x - this.vpos._x) * 0.12 * delta;
-			this.vpos._y = this.vpos._y + (this.pos._y - this.vpos._y) * 0.12 * delta;
+			this.vpos._x += (this.pos._x - this.vpos._x) * 0.12 * delta;
+			this.vpos._y += (this.pos._y - this.vpos._y) * 0.12 * delta;
 		} else {
 			this.vpos._x = this.pos._x;
 			this.vpos._y = this.pos._y;

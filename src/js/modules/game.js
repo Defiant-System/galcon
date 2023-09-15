@@ -34,7 +34,7 @@ let Game = {
 
 			Main.planets.map(p => {
 				let dist = get_distance(s.pos, p.pos);
-				if (dist < p.radius) s.CollidePlanet(p);
+				if (dist < p.radius * 1.5) s.CollidePlanet(p);
 			});
 		});
 	},
@@ -60,18 +60,27 @@ let Game = {
 			// rotate
 			this.ctx.translate(s.vpos._x, s.vpos._y);
 			this.ctx.rotate(c);
-			this.ctx.translate(-s.vpos._x, -s.vpos._y);
+
+			// debug ring
+			this.ctx.strokeStyle = "#eeeeee77";
+			this.ctx.lineWidth = 1;
+			this.ctx.beginPath();
+			this.ctx.arc(0, 0, s.ship_radius, 0, tau, true);
+			this.ctx.stroke();
+
 			// ship gui
 			this.ctx.strokeStyle = "#b2b";
 			this.ctx.lineJoin = "round";
 			this.ctx.lineWidth = 3;
 			// ship outline
 			this.ctx.beginPath();
-			this.ctx.moveTo(s.vpos._x, s.vpos._y - h);
-			this.ctx.lineTo(s.vpos._x + w, s.vpos._y + w);
-			this.ctx.lineTo(s.vpos._x - w, s.vpos._y + w);
+			this.ctx.moveTo(0, -9);
+			this.ctx.lineTo(6, 7);
+			this.ctx.lineTo(-6, 7);
 			this.ctx.closePath();
 			this.ctx.stroke();
+
+			this.ctx.translate(-s.vpos._x, -s.vpos._y);
 
 			this.ctx.restore();
 		});

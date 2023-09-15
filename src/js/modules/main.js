@@ -11,8 +11,8 @@ let Main = {
 
 		// create planets
 		this.planets = [];
-		this.planets.push(new Planet(250, 180, 35, 0, 1, 0));
-		this.planets.push(new Planet(420, 290, 20, 0, 1, 1));
+		this.planets.push(new Planet(250, 180, 30, 0, 1, 0));
+		this.planets.push(new Planet(400, 260, 40, 0, 1, 1));
 		this.planets.push(new Planet(540, 340, 5, 0, 1, 2));
 
 		// create shipsets
@@ -21,7 +21,7 @@ let Main = {
 
 		this.allships = [];
 
-		let point = new Point(100, 100),
+		let point = new Point(140, 140),
 			planet = this.planets[2];
 		this.allships.push(new Ship(point, planet));
 	}
