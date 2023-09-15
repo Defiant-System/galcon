@@ -336,6 +336,12 @@ class Point {
 		this._y = y;
 	}
 
+	distance(point) {
+		var myX = this._x - point._x;
+        var myY = this._y - point._y;
+        return Math.sqrt(myX * myX + myY * myY);			
+	}
+
 	abs() {
 		this.x = Math.abs(this.x);
 		this.y = Math.abs(this.y);

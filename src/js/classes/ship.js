@@ -161,12 +161,14 @@ class Ship {
 		this.pos._y = planet.pos._y - this.dv._y * _loc_3;
 	}
 	
-	Collide() {
+	Collide(ship) {
 		
 	}
 
 	Arrived() {
-		let index = Main.allships.findIndex(s => s == this);
-		Main.allships.splice(index, 1);
+		if (this.pos.distance(this.target.pos) < this.target.radius) {
+			let index = Main.allships.findIndex(s => s == this);
+			Main.allships.splice(index, 1);
+		}
 	}
 }

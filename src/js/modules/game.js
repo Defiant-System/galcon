@@ -23,9 +23,6 @@ let Game = {
 		requestAnimationFrame(this.frame.bind(this));
 	},
 	update() {
-		let get_distance = (p1, p2) =>
-				Math.sqrt(Math.pow((p1._x-p2._x), 2) + Math.pow((p1._y-p2._y), 2));
-
 		Main.allships.map(s => {
 			let rect = new Rectangle(100, 100, 50, 50),
 				delta = 2;
@@ -33,8 +30,7 @@ let Game = {
 			s.Rotate(delta);
 
 			Main.planets.map(p => {
-				let dist = get_distance(s.pos, p.pos);
-				if (dist < p.radius * 1.25) s.CollidePlanet(p);
+				if (s.pos.distance(p.pos) < p.radius * 1.25) s.CollidePlanet(p);
 			});
 		});
 	},

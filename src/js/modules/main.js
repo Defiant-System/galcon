@@ -21,8 +21,7 @@ let Main = {
 
 		this.allships = [];
 
-		let point = new Point(140, 140),
-			planet = this.planets[2];
-		this.allships.push(new Ship(point, planet));
+		this.allships.push(new Ship(new Point(150, 140), this.planets[2]));
+		this.allships.push(new Ship(new Point(100, 140), this.planets[2]));
 	}
 };
