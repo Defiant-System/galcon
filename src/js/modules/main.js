@@ -19,9 +19,9 @@ let Main = {
 		let rect = new Rectangle(0, 0, this.winwidth, this.winheight);
 		this.allships = new Shipset(rect, this.planets);
 
-		let source = this.planets[0],
-			target = this.planets[2],
-			ship_num = 15;
-		this.allships.LaunchShips(null, null, source, target, ship_num);
+		// let source = this.planets[0],
+		// 	target = this.planets[2],
+		// 	ship_num = 15;
+		// this.allships.LaunchShips(null, null, source, target, ship_num);
 	}
 };

@@ -23,10 +23,10 @@ class Planet {
 	}
 
 	Tick() {
-		
+		this.ships = this.ships + (this.production / 50);
 	}
 
-	ShipHit() {
-		
+	ShipHit(ship) {
+		this.ships += 1;
 	}
 }

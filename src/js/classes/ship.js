@@ -185,6 +185,7 @@ class Ship {
 
 	Arrived() {
 		if (this.pos.distance(this.target.pos) < this.target.radius) {
+			this.target.ShipHit(this);
 			Main.allships.RemoveShip(this);
 		}
 	}
