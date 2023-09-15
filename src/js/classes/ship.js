@@ -133,58 +133,54 @@ class Ship {
 		tmp_pos._x = -tmp_pos._y;
 		tmp_pos._y = dist;
 		dist = this.dv._x * tmp_pos._x + this.dv._y * tmp_pos._y;
-		let _loc_5 = 0.5;
+		let loc_5 = 0.5;
 
 		if (dist > 0) {
-			this.pos._x -= tmp_pos._x * this.speed * _loc_5;
-			this.pos._y -= tmp_pos._y * this.speed * _loc_5;
+			this.pos._x -= tmp_pos._x * this.speed * loc_5;
+			this.pos._y -= tmp_pos._y * this.speed * loc_5;
 		} else{
-			this.pos._x += tmp_pos._x * this.speed * _loc_5;
-			this.pos._y += tmp_pos._y * this.speed * _loc_5;
+			this.pos._x += tmp_pos._x * this.speed * loc_5;
+			this.pos._y += tmp_pos._y * this.speed * loc_5;
 		}
 
 		this.dv._x = planet.pos._x - this.pos._x;
 		this.dv._y = planet.pos._y - this.pos._y;
 		dist = planet.pos.distance(this.pos);
 
-		var _loc_3 = (planet.radius + this.ship_radius) / dist;
-		this.pos._x = planet.pos._x - this.dv._x * _loc_3;
-		this.pos._y = planet.pos._y - this.dv._y * _loc_3;
+		var loc_3 = (planet.radius + this.ship_radius) / dist;
+		this.pos._x = planet.pos._x - this.dv._x * loc_3;
+		this.pos._y = planet.pos._y - this.dv._y * loc_3;
 	}
 	
 	Collide(ship) {
 		let collision_count = 0;
-        // while (collision_count < ship.collision_num) {
-        //     if (ship.collision_history[collision_count] == this) {
-        //         return;
-        //     }
-        //     collision_count++;
-        // }
+        while (collision_count < ship.collision_num) {
+            if (ship.collision_history[collision_count] == this) return;
+            collision_count++;
+        }
 
         this.collision_history[this.collision_num] = ship;
         this.collision_num += 1;
         this.dv._x = ship.pos._x - this.pos._x;
         this.dv._y = ship.pos._y - this.pos._y;
-        var _loc_3 = Math.sqrt(this.dv._x * this.dv._x + this.dv._y * this.dv._y);
-        if (_loc_3 > this.ship_radius * 2) {
-            return;
-        }
+        var loc_3 = Math.sqrt(this.dv._x * this.dv._x + this.dv._y * this.dv._y);
+        if (loc_3 > this.ship_radius * 1.75) return;
 
-        if (_loc_3 == 0) {
-            _loc_3 = 1;
+        if (loc_3 == 0) {
+            loc_3 = 1;
             this.dv._x = Math.random() * 2 - 1;
             this.dv._y = Math.random() * 2 - 1;
         }
             
-        var _loc_4 = (this.pos._x + ship.pos._x) / 2;
-        var _loc_5 = (this.pos._y + ship.pos._y) / 2;
-        var _loc_6 = this.ship_radius / _loc_3;
-        this.dv._x = this.dv._x * _loc_6;
-        this.dv._y = this.dv._y * _loc_6;
-        this.pos._x = _loc_4 - this.dv._x;
-        this.pos._y = _loc_5 - this.dv._y;
-        ship.pos._x = _loc_4 + this.dv._x;
-        ship.pos._y = _loc_5 + this.dv._y;
+        var loc_4 = (this.pos._x + ship.pos._x) / 2;
+        var loc_5 = (this.pos._y + ship.pos._y) / 2;
+        var loc_6 = this.ship_radius / loc_3;
+        this.dv._x = this.dv._x * loc_6;
+        this.dv._y = this.dv._y * loc_6;
+        this.pos._x = loc_4 - this.dv._x;
+        this.pos._y = loc_5 - this.dv._y;
+        ship.pos._x = loc_4 + this.dv._x;
+        ship.pos._y = loc_5 + this.dv._y;
 	}
 
 	Arrived() {
