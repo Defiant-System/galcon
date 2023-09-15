@@ -59,7 +59,8 @@ let Game = {
 	},
 	render() {
 		let width = this.width,
-			tau = Math.PI * 2;
+			tau = Math.PI * 2,
+			piHalf = Math.PI / 2;
 
 		this.cvs.attr({ width });
 		// this.ctx.clearRect(0, 0, this.width, this.height);
@@ -70,7 +71,7 @@ let Game = {
 
 		Main.planets.map(p => {
 			this.ctx.fillStyle =
-			this.ctx.strokeStyle = p.color || "#fff";
+			this.ctx.strokeStyle = Colors[p.owner] || "#fff";
 			this.ctx.beginPath();
 			this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
 			this.ctx.stroke();
@@ -81,7 +82,7 @@ let Game = {
 		Main.allships.map(s => {
 			var w = 6,
 				h = w * 2,
-				c = s.vangle + (Math.PI * .5);
+				c = s.vangle + piHalf;
 			this.ctx.save();
 			// rotate
 			this.ctx.translate(s.vpos._x, s.vpos._y);
@@ -95,7 +96,7 @@ let Game = {
 			// this.ctx.stroke();
 
 			// ship gui
-			this.ctx.strokeStyle = "#b2b";
+			this.ctx.strokeStyle = Colors[s.owner] || "#fff";
 			this.ctx.lineJoin = "round";
 			this.ctx.lineWidth = 3;
 			// ship outline

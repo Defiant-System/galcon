@@ -1,4 +1,6 @@
 
+@import "./pgn/tutorial.js"
+
 @import "./classes/misc.js"
 @import "./classes/gridcell.js"
 @import "./classes/shipset.js"

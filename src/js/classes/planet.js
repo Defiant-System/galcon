@@ -10,11 +10,9 @@ class Planet {
 			attack_timer = 0,
 			initialized = false;
 		
-		let colors = ["#f90", "#f0f", "#099"];
-
 		this.pos = new Point(Math.floor(x), Math.floor(y));
 		this.zpos = new Point();
-		this.color = colors[texture];
+		this.owner = owner;
 		this.texture = Math.max(Math.min(texture, 63), 0);
 		this.production = Math.max(production, 15);
 		this.ships = production;
