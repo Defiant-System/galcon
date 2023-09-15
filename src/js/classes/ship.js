@@ -1,8 +1,6 @@
 
 class Ship {
 	constructor(pos, planet, fleet_id, owner, value) {
-		let ship_speed_multiplier = 1.3;
-
 		this.pos = pos;
 		this.ppos = new Point(pos._x, pos._y);
 		this.vpos = new Point(pos._x, pos._y);
@@ -121,48 +119,56 @@ class Ship {
 	}
 	
 	CollidePlanet(planet) {
+		if (this.pos.distance(planet.pos) > planet.radius + this.ship_radius) return;
 		if (planet === this.target) return this.Arrived();
 
-		this.dv._x = planet.pos._x - this.pos._x;
-		this.dv._y = planet.pos._y - this.pos._y;
-		var _loc_2 = Math.sqrt(this.dv._x * this.dv._x + this.dv._y * this.dv._y);
-
-		if (_loc_2 > planet.radius + this.ship_radius) {
-			return;
-		}
-
 		// tangent slide
-		let _loc_4 = new Point(this.target.pos._x - planet.pos._x, this.target.pos._y - planet.pos._y);
-		_loc_2 = Math.sqrt(_loc_4._x * _loc_4._x + _loc_4._y * _loc_4._y);
-		if (_loc_2 == 0) _loc_2 = 1;
+		let tmp_pos = new Point(this.target.pos._x - planet.pos._x, this.target.pos._y - planet.pos._y);
+		let dist = this.target.pos.distance(planet.pos);
+		if (dist == 0) dist = 1;
 		
-		_loc_4._x = _loc_4._x / _loc_2;
-		_loc_4._y = _loc_4._y / _loc_2;
-		_loc_2 = _loc_4._x;
-		_loc_4._x = -_loc_4._y;
-		_loc_4._y = _loc_2;
-		_loc_2 = this.dv._x * _loc_4._x + this.dv._y * _loc_4._y;
+		tmp_pos._x = tmp_pos._x / dist;
+		tmp_pos._y = tmp_pos._y / dist;
+		dist = tmp_pos._x;
+		tmp_pos._x = -tmp_pos._y;
+		tmp_pos._y = dist;
+		dist = this.dv._x * tmp_pos._x + this.dv._y * tmp_pos._y;
 		let _loc_5 = 0.5;
 
-		if (_loc_2 > 0) {
-			this.pos._x -= _loc_4._x * this.speed * _loc_5;
-			this.pos._y -= _loc_4._y * this.speed * _loc_5;
+		if (dist > 0) {
+			this.pos._x -= tmp_pos._x * this.speed * _loc_5;
+			this.pos._y -= tmp_pos._y * this.speed * _loc_5;
 		} else{
-			this.pos._x += _loc_4._x * this.speed * _loc_5;
-			this.pos._y += _loc_4._y * this.speed * _loc_5;
+			this.pos._x += tmp_pos._x * this.speed * _loc_5;
+			this.pos._y += tmp_pos._y * this.speed * _loc_5;
 		}
 
 		this.dv._x = planet.pos._x - this.pos._x;
 		this.dv._y = planet.pos._y - this.pos._y;
-		_loc_2 = Math.sqrt(this.dv._x * this.dv._x + this.dv._y * this.dv._y);
+		dist = planet.pos.distance(this.pos);
 
-		var _loc_3 = (planet.radius + this.ship_radius) / _loc_2;
+		var _loc_3 = (planet.radius + this.ship_radius) / dist;
 		this.pos._x = planet.pos._x - this.dv._x * _loc_3;
 		this.pos._y = planet.pos._y - this.dv._y * _loc_3;
 	}
 	
 	Collide(ship) {
-		
+		let collision_count = 0;
+        // while (collision_count < ship.collision_num) {
+        //     if (ship.collision_history[collision_count] == this) {
+        //         return;
+        //     }
+        //     collision_count++;
+        // }
+
+        this.collision_history[this.collision_num] = param1;
+        this.collision_num += 1;
+        this.dv._x = ship.pos._x - this.pos._x;
+        this.dv._y = ship.pos._y - this.pos._y;
+        var _loc_3 = Math.sqrt(dv.x * dv.x + dv.y * dv.y);
+        if (_loc_3 > ship_radius * 2) {
+            return;
+        }
 	}
 
 	Arrived() {

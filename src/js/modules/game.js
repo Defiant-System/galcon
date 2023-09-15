@@ -23,14 +23,19 @@ let Game = {
 		requestAnimationFrame(this.frame.bind(this));
 	},
 	update() {
-		Main.allships.map(s => {
+		Main.allships.map(s1 => {
 			let rect = new Rectangle(100, 100, 50, 50),
 				delta = 2;
-			s.Move(rect, delta, true);
-			s.Rotate(delta);
+			s1.Move(rect, delta, true);
+			s1.Rotate(delta);
+
+			// Main.allships.map(s2 => {
+			// 	if (s1 === s2) return;
+			// 	if (s1.pos.distance(s2.pos) < s1.ship_radius * 2) s1.Collide(s2);
+			// });
 
 			Main.planets.map(p => {
-				if (s.pos.distance(p.pos) < p.radius * 1.25) s.CollidePlanet(p);
+				s1.CollidePlanet(p);
 			});
 		});
 	},
@@ -58,11 +63,11 @@ let Game = {
 			this.ctx.rotate(c);
 
 			// debug ring
-			this.ctx.strokeStyle = "#eeeeee77";
-			this.ctx.lineWidth = 1;
-			this.ctx.beginPath();
-			this.ctx.arc(0, 0, s.ship_radius, 0, tau, true);
-			this.ctx.stroke();
+			// this.ctx.strokeStyle = "#eeeeee77";
+			// this.ctx.lineWidth = 1;
+			// this.ctx.beginPath();
+			// this.ctx.arc(0, 0, s.ship_radius, 0, tau, true);
+			// this.ctx.stroke();
 
 			// ship gui
 			this.ctx.strokeStyle = "#b2b";
