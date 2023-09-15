@@ -29,10 +29,10 @@ let Game = {
 			s1.Move(rect, delta, true);
 			s1.Rotate(delta);
 
-			// Main.allships.map(s2 => {
-			// 	if (s1 === s2) return;
-			// 	if (s1.pos.distance(s2.pos) < s1.ship_radius * 2) s1.Collide(s2);
-			// });
+			Main.allships.map(s2 => {
+				if (s1 === s2) return;
+				if (s1.pos.distance(s2.pos) < s1.ship_radius * 2) s1.Collide(s2);
+			});
 
 			Main.planets.map(p => {
 				s1.CollidePlanet(p);

@@ -161,14 +161,30 @@ class Ship {
         //     collision_count++;
         // }
 
-        this.collision_history[this.collision_num] = param1;
+        this.collision_history[this.collision_num] = ship;
         this.collision_num += 1;
         this.dv._x = ship.pos._x - this.pos._x;
         this.dv._y = ship.pos._y - this.pos._y;
-        var _loc_3 = Math.sqrt(dv.x * dv.x + dv.y * dv.y);
-        if (_loc_3 > ship_radius * 2) {
+        var _loc_3 = Math.sqrt(this.dv._x * this.dv._x + this.dv._y * this.dv._y);
+        if (_loc_3 > this.ship_radius * 2) {
             return;
         }
+
+        if (_loc_3 == 0) {
+            _loc_3 = 1;
+            this.dv._x = Math.random() * 2 - 1;
+            this.dv._y = Math.random() * 2 - 1;
+        }
+            
+        var _loc_4 = (this.pos._x + ship.pos._x) / 2;
+        var _loc_5 = (this.pos._y + ship.pos._y) / 2;
+        var _loc_6 = this.ship_radius / _loc_3;
+        this.dv._x = this.dv._x * _loc_6;
+        this.dv._y = this.dv._y * _loc_6;
+        this.pos._x = _loc_4 - this.dv._x;
+        this.pos._y = _loc_5 - this.dv._y;
+        ship.pos._x = _loc_4 + this.dv._x;
+        ship.pos._y = _loc_5 + this.dv._y;
 	}
 
 	Arrived() {
