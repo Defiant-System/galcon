@@ -34,7 +34,7 @@ let Game = {
 
 			Main.planets.map(p => {
 				let dist = get_distance(s.pos, p.pos);
-				if (dist < p.radius * 1.5) s.CollidePlanet(p);
+				if (dist < p.radius * 1.25) s.CollidePlanet(p);
 			});
 		});
 	},

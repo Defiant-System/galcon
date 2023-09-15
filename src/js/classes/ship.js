@@ -28,38 +28,38 @@ class Ship {
 	}
 
 	Rotate(delta) {
-		let _loc_2 = new Point(this.vpos._x - this.ppos._x, this.vpos._y - this.ppos._y);
-		let _loc_3 = this.vangle;
-		let _loc_4 = Math.atan2(_loc_2._y, _loc_2._x);
-		let _loc_5 = this.angle_speed * 4 * delta;
+		let tmp_point = new Point(this.vpos._x - this.ppos._x, this.vpos._y - this.ppos._y);
+		let vector_angle = this.vangle;
+		let diff_angle = Math.atan2(tmp_point._y, tmp_point._x);
+		let move_angle = this.angle_speed * 4 * delta;
 
-		if (this.vframe == 0) _loc_3 = _loc_4;
-        if (_loc_4 - _loc_3 > Math.PI) _loc_3 += Math.PI * 2;
-        if (_loc_3 - _loc_4 > Math.PI) _loc_4 += Math.PI * 2;
-        if (_loc_3 < _loc_4) _loc_3 += _loc_5;
-        if (_loc_3 > _loc_4) _loc_3 -= _loc_5;
-        if (Math.abs(_loc_4 - _loc_3) < _loc_5) _loc_3 = _loc_4;
+		if (this.vframe == 0) vector_angle = diff_angle;
+        if (diff_angle - vector_angle > Math.PI) vector_angle += Math.PI * 2;
+        if (vector_angle - diff_angle > Math.PI) diff_angle += Math.PI * 2;
+        if (vector_angle < diff_angle) vector_angle += move_angle;
+        if (vector_angle > diff_angle) vector_angle -= move_angle;
+        if (Math.abs(diff_angle - vector_angle) < move_angle) vector_angle = diff_angle;
 
-		this.vangle = _loc_3;
+		this.vangle = vector_angle;
 		this.vframe += 1;
 	}
 
 	Move(rect, delta, smooth) {
 		this.collision_num = 0;
 		
-		let tmpPos = new Point();
-		tmpPos._x = this.pos._x - this.ppos._x;
-		tmpPos._y = this.pos._y - this.ppos._y;
+		let tmp_point = new Point();
+		tmp_point._x = this.pos._x - this.ppos._x;
+		tmp_point._y = this.pos._y - this.ppos._y;
 
-		if (tmpPos._x + tmpPos._y < this.speed / 15 && this.frame % 16 == 0) {
+		if (tmp_point._x + tmp_point._y < this.speed / 15 && this.frame % 16 == 0) {
 			this.pos._x += (Math.random() * 2 - 1) * this.speed * 3;
 			this.pos._y += (Math.random() * 2 - 1) * this.speed * 3;
 		}
 			
-		tmpPos._x = this.target.pos._x - this.pos._x;
-		tmpPos._y = this.target.pos._y - this.pos._y;
+		tmp_point._x = this.target.pos._x - this.pos._x;
+		tmp_point._y = this.target.pos._y - this.pos._y;
 		let currAngle = this.angle;
-		let diffAngle = Math.atan2(tmpPos._y, tmpPos._x);
+		let diffAngle = Math.atan2(tmp_point._y, tmp_point._x);
 
 		if (this.frame == 0) {
 			currAngle = diffAngle;
