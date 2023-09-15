@@ -34,7 +34,7 @@ const galcon = {
 				/* falls through */
 			case "pause-game":
 				// stops loop
-				Game._paused = true;
+				Game.fpsControl.stop();
 				break;
 			case "insert-ship":
 				Main.allships.AddShip(event.offsetX, event.offsetY, Main.planets[2]);

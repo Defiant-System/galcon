@@ -9,9 +9,6 @@ let Game = {
 		this.height = this.cvs.prop("offsetHeight");
 		this.cvs.attr({ width: this.width, height: this.height });
 
-		this._logicTick = 0;
-		this._paused = false;
-
 		Main.init();
 
 		let that = this;
