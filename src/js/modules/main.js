@@ -21,7 +21,7 @@ let Main = {
 
 		let source = this.planets[0],
 			target = this.planets[2],
-			percent = .5;
-		this.allships.LaunchShips(null, null, source, target, percent);
+			ship_num = 5;
+		this.allships.LaunchShips(null, null, source, target, ship_num);
 	}
 };

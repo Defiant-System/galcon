@@ -148,35 +148,35 @@ class Rectangle {
 	set height(value) { this._size.height = value; }
 
 	center() {
-		this._topLeft.x = -this._size.width >> 1;
-		this._topLeft.y = -this._size.height >> 1;
+		this._topLeft._x = -this._size.width >> 1;
+		this._topLeft._y = -this._size.height >> 1;
 
 		return this;
 	}
 
 	contains(point) {
-		var myHorizontal = point.x > this.left && point.x < this.right;
+		var myHorizontal = point._x > this.left && point._x < this.right;
 		var myVertical = point.y > this.top && point.y < this.bottom;
 
 		return myHorizontal && myVertical;
 	}
 
 	union(rectangle) {
-		this._topLeft.x = rocket88.min(this._topLeft.x, rectangle._topLeft.x);
-		this._topLeft.y = rocket88.min(this._topLeft.y, rectangle._topLeft.y);
+		this._topLeft._x = rocket88.min(this._topLeft._x, rectangle._topLeft._x);
+		this._topLeft._y = rocket88.min(this._topLeft._y, rectangle._topLeft._y);
 		
 		var myRight = rocket88.max(this.right, rectangle.right);
-		this.size.width = myRight - this._topLeft.x;
+		this.size.width = myRight - this._topLeft._x;
 
 		var myBottom = rocket88.max(this.right, rectangle.right);
-		this.size.height = myRight - this._topLeft.y;
+		this.size.height = myRight - this._topLeft._y;
 
 		return this;
 	}
 
 	inflate(size) {
-		this._topLeft.x -= size.width;
-		this._topLeft.y -= size.height;
+		this._topLeft._x -= size.width;
+		this._topLeft._y -= size.height;
 
 		this._size.width += size.width * 2;
 		this._size.height += size.height * 2;
@@ -184,8 +184,8 @@ class Rectangle {
 	}
 
 	deflate(size) {
-		this._topLeft.x += size.width;
-		this._topLeft.y += size.height;
+		this._topLeft._x += size.width;
+		this._topLeft._y += size.height;
 
 		this._size.width -= size.width * 2;
 		this._size.height -= size.height * 2;
@@ -194,8 +194,8 @@ class Rectangle {
 	}
 
 	translate(x, y) {
-		this._topLeft.x += x;
-		this._topLeft.y += y;
+		this._topLeft._x += x;
+		this._topLeft._y += y;
 
 		return this;
 	}
@@ -214,12 +214,12 @@ class Rectangle {
 	}
 
 	clone() {
-		return new rocket88.Rectangle(this._topLeft.x, this._topLeft.y, this._size.width, this._size.height);
+		return new rocket88.Rectangle(this._topLeft._x, this._topLeft._y, this._size.width, this._size.height);
 	}
 
 	copy(rectangle) {
-		this._topLeft.x = rectangle.left;
-		this._topLeft.y = rectangle.top;
+		this._topLeft._x = rectangle.left;
+		this._topLeft._y = rectangle.top;
 		this._size.width = rectangle.size.width;
 		this._size.height = rectangle.size.height;
 		return this;
@@ -259,25 +259,25 @@ class Vector {
 	}
 
 	distance(vector) {
-		var myX = this.x - vector._x;
-        var myY = this.y - vector._y;
+		var myX = this._x - vector._x;
+        var myY = this._y - vector._y;
 
         return Math.sqrt(myX * myX + myY * myY);			
 	}
 
-	direction() {
-		var myX = point.x - this.x,
-			myY = point.y - this.y;
+	direction(vector) {
+		var myX = vector._x - this._x,
+			myY = vector._y - this._y;
 
    		return Math.atan2(myY, myX);
 	}
 
 	dot(vector) {
-			return this.x * vector.x + this.y * vector.y;			
+		return this._x * vector._x + this._y * vector._y;			
 	}
 
 	cross(vector) {
-			return this.x * vector.x - this.y * vector.y;			
+		return this._x * vector._x - this._y * vector._y;			
 	}
 
 	unit() {
@@ -286,25 +286,24 @@ class Vector {
 
 	normalize() { 
 		var myInversed = 1 / this.length;
-		this.x *= myInversed;
-		this.y *= myInversed;
-
+		this._x *= myInversed;
+		this._y *= myInversed;
 		return this;
 	}
 
 	rotate(matrix) {
-		var myX = this.x * matrix.a + this.y * matrix.b,
-			myY = this.x * matrix.c + this.y * matrix.d;
+		var myX = this._x * matrix.a + this._y * matrix.b,
+			myY = this._x * matrix.c + this._y * matrix.d;
 
-		this.x = myX;
-		this.y = myY;
+		this._x = myX;
+		this._y = myY;
 
 		return this;
 	}
 
 	translate(matrix) {
-		this.x += matrix.tx;
-		this.y += matrix.ty;
+		this._x += matrix.tx;
+		this._y += matrix.ty;
 
 		return this;
 	}
@@ -317,12 +316,12 @@ class Vector {
 	}
 
 	clone() {
-		return new rocket88.Vector(this.x, this.y);
+		return new rocket88.Vector(this._x, this._y);
 	}
 
 	copy(vector) {
-		this.x = vector.x;
-		this.y = vector.y;
+		this._x = vector._x;
+		this._y = vector._y;
 
 		return this;
 	}
@@ -345,52 +344,58 @@ class Point {
 	abs() {
 		this.x = Math.abs(this.x);
 		this.y = Math.abs(this.y);
-
 		return this;
 	}
 
-	add(vector) {
-		this.x += vector.x;
-		this.y += vector.y;
-
+	normalize(thickness) { 
+		var length = Math.sqrt(this._x * this._x + this._y * this._y),
+			myInversed = 1 / length;
+		this._x *= myInversed,
+		this._y *= myInversed;
 		return this;
 	}
 
-	subtract(vector) {
-		this.x -= vector.x;
-		this.y -= vector.y;
+	add(point) {
+		this._x += point._x;
+		this._y += point._y;
+		return this;
+	}
+
+	subtract(point) {
+		this._x -= point._x;
+		this._y -= point._y;
 
 		return this;
 	}
 
 	multiply(value) {
-		this.x *= value;
-		this.y *= value;
+		this._x *= value;
+		this._y *= value;
 
 		return this;
 	}
 
 	divide(value) {
-		this.x /= value;
-		this.y /= value;
+		this._x /= value;
+		this._y /= value;
 
 		return this;
 	}
 
 	empty() {
-		this.x = 0;
-		this.y = 0;
+		this._x = 0;
+		this._y = 0;
 
 		return this;
 	}
 
 	clone() {
-		return new Point(this.x, this.y);
+		return new Point(this._x, this._y);
 	}
 
 	copy(point) {
-		this.x = point.x;
-		this.y = point.y;
+		this._x = point._x;
+		this._y = point._y;
 
 		return this;
 	}
