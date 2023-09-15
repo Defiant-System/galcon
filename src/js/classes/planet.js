@@ -21,7 +21,7 @@ class Planet {
 	}
 
 	Tick() {
-		this.ships = this.ships + (this.production / 50);
+		this.ships = this.ships + (this.production / 400);
 	}
 
 	ShipHit(ship) {

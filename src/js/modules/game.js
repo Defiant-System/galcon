@@ -9,37 +9,26 @@ let Game = {
 		this.height = this.cvs.prop("offsetHeight");
 		this.cvs.attr({ width: this.width, height: this.height });
 
-		this._secTick = 0;
+		this._logicTick = 0;
 		this._paused = false;
 
 		Main.init();
 
-		this.frame();
-	},
-	performance: (window.performance || {
-		then: Date.now(),
-		now: () => Date.now() - this.then
-	}),
-	setDelta() {
-		let now = this.performance.now();
-		this.delta = (now - this.then) / 1e3;
-		this.then = now;
-	},
-	frame() {
-		this.setDelta();
-		this.update();
-		this.render();
-
-		let sec = Math.round(this.then / 1e3);
-		if (this._secTick != sec) {
-			// update value
-			this._secTick = sec;
-			// tick planets
-			Main.planets.map(p => p.Tick());
-		}
-
-		if (this._paused) return;
-		requestAnimationFrame(this.frame.bind(this));
+		let that = this;
+		this.fpsControl = karaqu.FpsControl({
+			frames: {
+				4: () => {
+					// tick planets
+					Main.planets.map(p => p.Tick());
+				},
+				60: () => {
+					that.update();
+					that.render();
+				},
+			}
+		});
+		// start FPC
+		this.fpsControl.start();
 	},
 	update() {
 		Main.allships.map(s1 => {
