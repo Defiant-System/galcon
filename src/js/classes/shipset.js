@@ -15,7 +15,7 @@ class Shipset {
 	}
 
 	AddShip(x, y, planet, fleet_id, owner) {
-		let ship = new Ship(new Point(x, y), planet, fleet_id, owner);
+		let ship = new Ship(x, y, planet, fleet_id, owner);
 		this._allships.push(ship);
         return true;
 	}
@@ -29,6 +29,8 @@ class Shipset {
 		if (source.ships < 1) return;
 		if (ship_num > source.ships) ship_num = source.ships;
 		if (ship_num < 1) ship_num = 1;
+		
+		console.log( ship_num );
 		
 		source.ships = source.ships - ship_num;
 		if (source.ships < 0) source.ships = 0;

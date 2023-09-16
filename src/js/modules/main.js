@@ -15,15 +15,16 @@ let Main = {
 
 		// create planets
 		this.planets = [];
-		// level.planets.map(p => this.planets.push(new Planet(...p)));
+		// generate random map
 		this.generateMap();
+		// level.planets.map(p => this.planets.push(new Planet(...p)));
 
 		// create shipsets
 		let rect = new Rectangle(0, 0, this.winwidth, this.winheight);
 		this.allships = new Shipset(rect, this.planets);
 	},
 	generateMap() {
-		let ship_radius = Ship.radius * 2,
+		let ship_radius = Ship._radius * 2,
 			divs = [];
 		// basic random map
 		[...Array(this.planet_count)].map((e, id) => {

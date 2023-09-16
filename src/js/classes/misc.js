@@ -345,8 +345,8 @@ class Point {
 	}
 
 	abs() {
-		this.x = Math.abs(this.x);
-		this.y = Math.abs(this.y);
+		this._x = Math.abs(this._x);
+		this._y = Math.abs(this._y);
 		return this;
 	}
 

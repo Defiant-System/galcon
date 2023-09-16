@@ -1,12 +1,11 @@
 
 class Ship {
-	constructor(pos, planet, fleet_id, owner, value) {
-		this.pos = pos;
-		this.ppos = new Point(pos._x, pos._y);
-		this.vpos = new Point(pos._x, pos._y);
+	constructor(x, y, planet, fleet_id, owner, value) {
+		this.pos = new Point(x, y);
+		this.ppos = new Point(x, y);
+		this.vpos = new Point(x, y);
 		this.dv = new Point(0, 0);
 
-		this._radius = 10;
 		this.speed = 0.65;
 		this.angle_speed = Math.PI / 64;
 		
@@ -25,11 +24,13 @@ class Ship {
 		this.collision_num = 0;
 	}
 
-	static get radius() {
-		return Ship._radius || 10;
+	static _radius = 10;
+
+	get radius() {
+		return Ship._radius;
 	}
 
-	static set radius(v) {
+	set radius(v) {
 		Ship._radius = v;
 	}
 
