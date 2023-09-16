@@ -28,11 +28,14 @@ class Planet {
 	}
 
 	Tick() {
+		if (Game.mode !== "dev") {
+			// render surface
+			Surface.render(this);
+			// this.surface = Surface.ctx.getImageData(0, 0, 150, 150);
+			this.surface = Surface.getData();
+		}
+		// rotate planet
 		this.rotation += this.speed;
-		// render surface
-		Surface.render(this);
-		// this.surface = Surface.ctx.getImageData(0, 0, 150, 150);
-		this.surface = Surface.getData();
 		// update shap count
 		this.ships = this.ships + (this.production / 400);
 	}

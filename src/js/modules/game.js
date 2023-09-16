@@ -4,10 +4,11 @@ let Game = {
 		// fast references
 		this.cvs = window.find("canvas");
 		this.ctx = this.cvs[0].getContext("2d");
-
 		this.width = this.cvs.prop("offsetWidth"),
 		this.height = this.cvs.prop("offsetHeight");
 		this.cvs.attr({ width: this.width, height: this.height });
+
+		this.mode = "dev";
 
 		Main.init();
 
@@ -15,7 +16,7 @@ let Game = {
 			_Game = Game;
 		this.fpsControl = karaqu.FpsControl({
 			frames: {
-				6: () => {
+				10: () => {
 					// tick planets
 					_Main.planets.map(p => p.Tick());
 				},
@@ -61,18 +62,20 @@ let Game = {
 				ships = Math.round(p.ships),
 				r2 = p.radius << 1;
 
-			this.ctx.putImageData(p.surface, p.pos._x - p.radius, p.pos._y - p.radius, 0, 0, r2, r2);
-			// this.ctx.drawImage(Surface.cvs, p.pos._x - p.radius, p.pos._y - p.radius, r2, r2);
+			if (this.mode === "dev") {
+				// this.ctx.strokeStyle = color;
+				// this.ctx.beginPath();
+				// this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
+				// this.ctx.stroke();
 
-			// this.ctx.strokeStyle = color;
-			// this.ctx.fillStyle = color +"77";
-			// this.ctx.beginPath();
-			// this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
-			// this.ctx.stroke();
-
-			// this.ctx.beginPath();
-			// this.ctx.arc(p.pos._x, p.pos._y, p.radius - 3, 0, tau, true);
-			// this.ctx.fill();
+				this.ctx.fillStyle = color +"55";
+				this.ctx.beginPath();
+				this.ctx.arc(p.pos._x, p.pos._y, p.radius - 3, 0, tau, true);
+				this.ctx.fill();
+			} else {
+				this.ctx.putImageData(p.surface, p.pos._x - p.radius, p.pos._y - p.radius, 0, 0, r2, r2);
+				// this.ctx.drawImage(Surface.cvs, p.pos._x - p.radius, p.pos._y - p.radius, r2, r2);
+			}
 
 			// production number
 			this.ctx.save();
