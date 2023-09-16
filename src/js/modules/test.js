@@ -11,7 +11,7 @@ let Test = {
 		// 	Main.allships.LaunchShips(owner, fleet_id, source, target, ship_num);
 		// }, 1000);
 
-		setTimeout(() => Game.fpsControl.stop(), 1e3);
+		setTimeout(() => Game.fpsControl.stop(), 15e3);
 
 		// setTimeout(() => {
 		// 	let planet = {

@@ -67,12 +67,10 @@ let Surface = {
 			normalData = [],
 			textureCoordData = [],
 			indexData = [];
-
 		for (var latNumber=0; latNumber <= latitudeBands; latNumber++) {
 			var theta = latNumber * Math.PI / latitudeBands,
 				sinTheta = Math.sin(theta),
 				cosTheta = Math.cos(theta);
-
 			for (var longNumber=0; longNumber <= longitudeBands; longNumber++) {
 				var phi = longNumber * 2 * Math.PI / longitudeBands,
 					sinPhi = Math.sin(phi),
@@ -93,7 +91,6 @@ let Surface = {
 				vertexPositionData.push(radius * z);
 			}
 		}
-
 		for (latNumber=0; latNumber < latitudeBands; latNumber++) {
 			for (longNumber=0; longNumber < longitudeBands; longNumber++) {
 				var first = (latNumber * (longitudeBands + 1)) + longNumber,
@@ -107,7 +104,6 @@ let Surface = {
 				indexData.push(first + 1);
 			}
 		}
-
 		this.vnb.sphere = this.wgl.createBuffer();
 		this.wgl.bindBuffer(this.wgl.ARRAY_BUFFER, this.vnb.sphere);
 		this.wgl.bufferData(this.wgl.ARRAY_BUFFER, new Float32Array(normalData), this.wgl.STATIC_DRAW);
@@ -167,6 +163,8 @@ let Surface = {
 		
 		// textures are not ready
 		if (this.texture.maps) return;
+		this.wgl.viewportWidth = this.cvs.width =
+		this.wgl.viewportHeight = this.cvs.height = planet.radius * 2;
 
 		this.wgl.viewport(0, 0, this.wgl.viewportWidth, this.wgl.viewportHeight);
 		this.wgl.clear(this.wgl.COLOR_BUFFER_BIT | this.wgl.DEPTH_BUFFER_BIT);
@@ -206,5 +204,12 @@ let Surface = {
 
 		this.wgl.bindBuffer(this.wgl.ELEMENT_ARRAY_BUFFER, this.vib.sphere);
 		this.wgl.drawElements(this.wgl.TRIANGLES, this.vib.sphere.numItems, this.wgl.UNSIGNED_SHORT, 0);
+	},
+	getData() {
+		var width = this.cvs.width,
+			height = this.cvs.height,
+			img = Game.ctx.createImageData(width, height);
+		this.wgl.readPixels(0, 0, width, height, this.wgl.RGBA, this.wgl.UNSIGNED_BYTE, img.data);
+		return img;
 	}
 };

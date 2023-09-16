@@ -14,7 +14,7 @@ let Game = {
 		let that = this;
 		this.fpsControl = karaqu.FpsControl({
 			frames: {
-				4: () => {
+				10: () => {
 					// tick planets
 					Main.planets.map(p => p.Tick());
 				},
@@ -64,8 +64,8 @@ let Game = {
 			// planet atmosphere
 			this.ctx.shadowColor = '#ffffff50';
 			this.ctx.shadowBlur = 5;
-			Surface.render(p);
-			this.ctx.drawImage(Surface.cvs, p.pos._x - p.radius, p.pos._y - p.radius, r2, r2);
+			// this.ctx.drawImage(Surface.cvs, p.pos._x - p.radius, p.pos._y - p.radius, r2, r2);
+			this.ctx.putImageData(p.surface, p.pos._x - p.radius, p.pos._y - p.radius, 0, 0, r2, r2);
 			this.ctx.restore();
 
 			// this.ctx.strokeStyle = color;

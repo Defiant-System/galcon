@@ -19,12 +19,21 @@ class Planet {
 		this.ships = this.production;
 		this.radius = 15 + Math.round(this.production * .3);
 
-		this.tilt = 25;
-		this.speed = 10;
+		this.tilt = (Math.random() * 90) | 0;
+		// this.speed = ((Math.random() * 10) | 0) / 10;
+		this.speed = 1;
 		this.rotation = 22;
+
+		this.Tick();
 	}
 
 	Tick() {
+		this.rotation += this.speed;
+		// render surface
+		Surface.render(this);
+		// this.surface = Surface.ctx.getImageData(0, 0, 150, 150);
+		this.surface = Surface.getData();
+		// update shap count
 		this.ships = this.ships + (this.production / 400);
 	}
 
