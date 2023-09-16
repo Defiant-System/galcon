@@ -1,5 +1,5 @@
 
-let Colors = ["#f90", "#f0f", "#099"];
+let Colors = ["#ff9900", "#ff00ff", "#009999"];
 
 
 class Matrix {

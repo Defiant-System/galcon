@@ -53,16 +53,27 @@ let Game = {
 		this.ctx.lineWidth = 2;
 		this.ctx.textAlign = "center";
 		this.ctx.textBaseline = "middle";
-		this.ctx.font = "25px sans-serif";
+		this.ctx.font = "18px Lucida Console";
 
 		Main.planets.map(p => {
-			this.ctx.fillStyle =
-			this.ctx.strokeStyle = Colors[p.owner] || "#fff";
+			let color = Colors[p.owner] || "#ffffff",
+				ships = Math.round(p.ships);
+			this.ctx.strokeStyle = color;
+			this.ctx.fillStyle = color +"77";
 			this.ctx.beginPath();
 			this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
 			this.ctx.stroke();
+			// this.ctx.beginPath();
+			// this.ctx.arc(p.pos._x, p.pos._y, p.radius - 3, 0, tau, true);
+			this.ctx.fill();
 			// production number
-			this.ctx.fillText(Math.round(p.ships), p.pos._x, p.pos._y, p.radius * 2);
+			this.ctx.save();
+			this.ctx.lineWidth = 3;
+			this.ctx.strokeStyle = "#000";
+			this.ctx.fillStyle = "#fff";
+			this.ctx.strokeText(ships, p.pos._x, p.pos._y+2, p.radius * 2);
+			this.ctx.fillText(ships, p.pos._x, p.pos._y+2, p.radius * 2);
+			this.ctx.restore();
 		});
 
 		Main.allships.map(s => {
@@ -82,7 +93,7 @@ let Game = {
 			// this.ctx.stroke();
 
 			// ship gui
-			this.ctx.strokeStyle = Colors[s.owner] || "#fff";
+			this.ctx.fillStyle = Colors[s.owner] || "#ffffff";
 			this.ctx.lineJoin = "round";
 			this.ctx.lineWidth = 3;
 			// ship outline
