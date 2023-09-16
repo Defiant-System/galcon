@@ -3,11 +3,7 @@ class Shipset {
 	constructor(area, planets) {
 		this.max_ships = 400;
 		this.max_fleets = 300;
-
 		this._allships = [];
-		// this.AddShip(420, 340, Main.planets[2]);
-		// this.AddShip(150, 140, Main.planets[2]);
-		// this.AddShip(110, 150, Main.planets[2]);
 	}
 
 	map(func) {
