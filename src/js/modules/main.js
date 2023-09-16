@@ -24,14 +24,14 @@ let Main = {
 		this.allships = new Shipset(rect, this.planets);
 	},
 	generateMap() {
-		let ship_radius = Ship._radius * 2,
+		let ship_radius = Ship._radius << 1,
 			divs = [];
 		// basic random map
 		[...Array(this.planet_count)].map((e, id) => {
 			let x = 40 + this.prand() * (this.winwidth / this.playfield_zoom - 80),
 				y = 60 + this.prand() * (this.winheight / this.playfield_zoom - 120),
 				production = this.prand() * 100,
-				texture = Math.random() * Surface.count | 0,
+				texture = Math.random() * Surface.textures.length | 0,
 				owner = 0;
 			this.planets.push(new Planet(x, y, production, owner, id, texture));
 		});
@@ -49,7 +49,7 @@ let Main = {
 		this.planets.map(p => {
 			let y = p.pos._y - p.radius,
 				x = p.pos._x - p.radius,
-				d = p.radius * 2;
+				d = p.radius << 1;
 			divs.push(`<div class="planet-outline" data-id="${p.id}" style="width: ${d}px; height: ${d}px; top: ${y}px; left: ${x}px;"></div>`);
 		});
 		Game.cvs.after(divs.join(""));

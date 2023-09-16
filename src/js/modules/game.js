@@ -11,16 +11,17 @@ let Game = {
 
 		Main.init();
 
-		let that = this;
+		let _Main = Main,
+			_Game = Game;
 		this.fpsControl = karaqu.FpsControl({
 			frames: {
-				10: () => {
+				6: () => {
 					// tick planets
-					Main.planets.map(p => p.Tick());
+					_Main.planets.map(p => p.Tick());
 				},
 				60: () => {
-					that.update();
-					that.render();
+					_Game.update();
+					_Game.render();
 				},
 			}
 		});
@@ -37,7 +38,7 @@ let Game = {
 			// collision detection; ships
 			Main.allships.map(s2 => {
 				if (s1 === s2) return;
-				if (s1.pos.distance(s2.pos) < s1.radius * 2) s1.Collide(s2);
+				if (s1.pos.distance(s2.pos) < s1.radius << 1) s1.Collide(s2);
 			});
 			// collision detection; planets
 			Main.planets.map(p => s1.CollidePlanet(p));
@@ -58,9 +59,10 @@ let Game = {
 		Main.planets.map(p => {
 			let color = Colors[p.owner] || "#ffffff",
 				ships = Math.round(p.ships),
-				r2 = p.radius * 2;
+				r2 = p.radius << 1;
 
 			this.ctx.putImageData(p.surface, p.pos._x - p.radius, p.pos._y - p.radius, 0, 0, r2, r2);
+			// this.ctx.drawImage(Surface.cvs, p.pos._x - p.radius, p.pos._y - p.radius, r2, r2);
 
 			// this.ctx.strokeStyle = color;
 			// this.ctx.fillStyle = color +"77";
@@ -84,7 +86,7 @@ let Game = {
 
 		Main.allships.map(s => {
 			var w = 6,
-				h = w * 2,
+				h = w << 1,
 				c = s.vangle + piHalf;
 			// rotate
 			this.ctx.save();
@@ -114,28 +116,28 @@ let Game = {
 		});
 
 		let fps = this.fpsControl._log;
-		
+
 		this.ctx.save();
-		this.ctx.translate(this.width-107, this.height-47);
+		this.ctx.translate(this.width - 109, this.height - 49);
 		// draw box
-		this.ctx.fillStyle = 'rgba(0,200,100,0.5)';
-		this.ctx.fillRect(5,5,100,40);
-		this.ctx.fillStyle = 'rgba(80,255,80,0.5)';
-		this.ctx.fillRect(7,7,96,11);
-		this.ctx.fillStyle = 'rgba(255,255,255,0.6)';
+		this.ctx.fillStyle = "rgba(0,200,100,0.5)";
+		this.ctx.fillRect(5, 5, 100, 40);
+		this.ctx.fillStyle = "rgba(80,255,80,0.5)";
+		this.ctx.fillRect(7, 7, 96, 11);
+		this.ctx.fillStyle = "rgba(255,255,255,0.6)";
 		// loop log
 		for (let i=0; i<96; i++) {
 			let bar = fps[i];
 			if (!bar) break;
 			let p = bar/90;
 			if (p > 1) p = 1;
-			this.ctx.fillRect(102-i, 43, 1, -24 * p);
+			this.ctx.fillRect(102 - i, 43, 1, -24 * p);
 		}
 		// write fps
-		this.ctx.fillStyle = '#000';
-		this.ctx.font = '9px Arial';
-		this.ctx.textAlign = 'left';
-		this.ctx.fillText('FPS: '+ fps[0], 8, 16);
+		this.ctx.fillStyle = "#000";
+		this.ctx.font = "9px Arial";
+		this.ctx.textAlign = "left";
+		this.ctx.fillText('FPS: '+ fps[0], 8, 14);
 		// restore state
 		this.ctx.restore();
 	}

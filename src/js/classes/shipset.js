@@ -26,7 +26,7 @@ class Shipset {
 		if (ship_num > source.ships) ship_num = source.ships;
 		if (ship_num < 1) ship_num = 1;
 		
-		console.log( ship_num );
+		// console.log( ship_num );
 		
 		source.ships = source.ships - ship_num;
 		if (source.ships < 0) source.ships = 0;

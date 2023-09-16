@@ -10,6 +10,7 @@ let Surface = {
 	},
 	matrix: {},
 	texture: {},
+	textures: "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" "),
 	utils: {},
 	init() {
 		this.cvs = document.createElement("canvas");
@@ -19,17 +20,37 @@ let Surface = {
 		this.wgl.ratio = this.wgl.viewportWidth / this.wgl.viewportHeight;
 
 		// this.texture.maps = "astroid burst gaia gas_giant hoth".split(" ");
-		this.texture.maps = "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" ");
-		this.count = this.texture.maps.length;
+		this.texture.maps = [...this.textures];
+		this.count = this.textures.length;
+		this.piH = Math.PI / 180;
 		this.utils.mat3 = mat3;
 		this.utils.mat4 = mat4;
 		this.matrix.projection = mat4.create();
-		this.matrix.modelview  = mat4.create();
-		this.matrix.mvStack    = [];
+		this.matrix.modelview = mat4.create();
+		this.matrix.mvStack = [];
 		
 		this.initShaders();
 		this.initBuffers();
 		this.initTexture();
+
+		this.utils.mat4.perspective(45, this.wgl.ratio, 0.1, 100.0, this.matrix.projection);
+
+		this.wgl.uniform1i(this.shader.program.useColorMapUniform, true);
+		this.wgl.uniform1i(this.shader.program.useLightingUniform, true);
+		// ambient color
+		this.wgl.uniform3f(this.shader.program.ambientColorUniform, 0.2, 0.15, 0.15);
+		// light position
+		this.wgl.uniform3f(this.shader.program.pointLightingLocationUniform, -11.0, 4.0, -13.0);
+		// diffuse color
+		this.wgl.uniform3f(this.shader.program.pointLightingDiffuseColorUniform, 0.9, 0.9, 0.9);
+
+		this.wgl.bindBuffer(this.wgl.ARRAY_BUFFER, this.vpb.sphere);
+		this.wgl.vertexAttribPointer(this.shader.program.vertexPositionAttribute, this.vpb.sphere.itemSize, this.wgl.FLOAT, false, 0, 0);
+		this.wgl.bindBuffer(this.wgl.ARRAY_BUFFER, this.vtb.sphere);
+		this.wgl.vertexAttribPointer(this.shader.program.textureCoordAttribute, this.vtb.sphere.itemSize, this.wgl.FLOAT, false, 0, 0);
+		this.wgl.bindBuffer(this.wgl.ARRAY_BUFFER, this.vnb.sphere);
+		this.wgl.vertexAttribPointer(this.shader.program.vertexNormalAttribute, this.vnb.sphere.itemSize, this.wgl.FLOAT, false, 0, 0);
+
 
 		this.wgl.clearColor(0.0, 0.0, 0.0, 0.0);
 		this.wgl.enable(this.wgl.DEPTH_TEST);
@@ -155,51 +176,30 @@ let Surface = {
 		return shader;
 	},
 	render: function(planet) {
-		var pih = Math.PI / 180,
-			mat3 = this.utils.mat3,
-			mat4 = this.utils.mat4,
-			normalMatrix = mat3.create(),
-			texture = Object.keys(this.texture)[planet.texture];
+		var normalMatrix = this.utils.mat3.create();
 		
 		// textures are not ready
 		if (this.texture.maps) return;
 		this.wgl.viewportWidth = this.cvs.width =
-		this.wgl.viewportHeight = this.cvs.height = planet.radius * 2;
+		this.wgl.viewportHeight = this.cvs.height = planet.radius << 1;
 
 		this.wgl.viewport(0, 0, this.wgl.viewportWidth, this.wgl.viewportHeight);
 		this.wgl.clear(this.wgl.COLOR_BUFFER_BIT | this.wgl.DEPTH_BUFFER_BIT);
-		mat4.perspective(45, this.wgl.ratio, 0.1, 100.0, this.matrix.projection);
 
-		this.wgl.uniform1i(this.shader.program.useColorMapUniform, true);
-		this.wgl.uniform1i(this.shader.program.useLightingUniform, true);
-		// ambient color
-		this.wgl.uniform3f(this.shader.program.ambientColorUniform, 0.2, 0.15, 0.15);
-		// light position
-		this.wgl.uniform3f(this.shader.program.pointLightingLocationUniform, -11.0, 4.0, -13.0);
-		// diffuse color
-		this.wgl.uniform3f(this.shader.program.pointLightingDiffuseColorUniform, 0.9, 0.9, 0.9);
-
-		mat4.identity(this.matrix.modelview);
-		mat4.translate(this.matrix.modelview, [0, 0, -35]);
-		mat4.rotate(this.matrix.modelview, planet.tilt * pih, [1, 0, -1]);
-		mat4.rotate(this.matrix.modelview, planet.rotation * pih, [0, 1, 0]);
+		this.utils.mat4.identity(this.matrix.modelview);
+		this.utils.mat4.translate(this.matrix.modelview, [0, 0, -35]);
+		this.utils.mat4.rotate(this.matrix.modelview, planet.tilt * this.piH, [1, 0, -1]);
+		this.utils.mat4.rotate(this.matrix.modelview, planet.rotation * this.piH, [0, 1, 0]);
 
 		this.wgl.activeTexture(this.wgl.TEXTURE0);
-		this.wgl.bindTexture(this.wgl.TEXTURE_2D, this.texture[texture]);
+		this.wgl.bindTexture(this.wgl.TEXTURE_2D, this.texture[planet.texture]);
 		this.wgl.uniform1i(this.shader.program.colorMapSamplerUniform, 0);
-
-		this.wgl.bindBuffer(this.wgl.ARRAY_BUFFER, this.vpb.sphere);
-		this.wgl.vertexAttribPointer(this.shader.program.vertexPositionAttribute, this.vpb.sphere.itemSize, this.wgl.FLOAT, false, 0, 0);
-		this.wgl.bindBuffer(this.wgl.ARRAY_BUFFER, this.vtb.sphere);
-		this.wgl.vertexAttribPointer(this.shader.program.textureCoordAttribute, this.vtb.sphere.itemSize, this.wgl.FLOAT, false, 0, 0);
-		this.wgl.bindBuffer(this.wgl.ARRAY_BUFFER, this.vnb.sphere);
-		this.wgl.vertexAttribPointer(this.shader.program.vertexNormalAttribute, this.vnb.sphere.itemSize, this.wgl.FLOAT, false, 0, 0);
 
 		// set uniform matrix
 		this.wgl.uniformMatrix4fv(this.shader.program.pMatrixUniform, false, this.matrix.projection);
 		this.wgl.uniformMatrix4fv(this.shader.program.mvMatrixUniform, false, this.matrix.modelview);
-		mat4.toInverseMat3(this.matrix.modelview, normalMatrix);
-		mat3.transpose(normalMatrix);
+		this.utils.mat4.toInverseMat3(this.matrix.modelview, normalMatrix);
+		this.utils.mat3.transpose(normalMatrix);
 		this.wgl.uniformMatrix3fv(this.shader.program.nMatrixUniform, false, normalMatrix);
 
 		this.wgl.bindBuffer(this.wgl.ELEMENT_ARRAY_BUFFER, this.vib.sphere);

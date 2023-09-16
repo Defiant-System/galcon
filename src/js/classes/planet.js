@@ -14,7 +14,7 @@ class Planet {
 		this.pos = new Point(Math.floor(x), Math.floor(y));
 		this.zpos = new Point();
 		this.owner = owner;
-		this.texture = Math.max(Math.min(texture, 18), 0);
+		this.texture = Surface.textures[texture];
 		this.production = Math.max(production, 15);
 		this.ships = this.production;
 		this.radius = 15 + Math.round(this.production * .3);
