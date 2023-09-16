@@ -23,8 +23,9 @@ let Main = {
 		this.allships = new Shipset(rect, this.planets);
 	},
 	generateMap() {
-		let ship_radius = Ship.radius * 2;
-
+		let ship_radius = Ship.radius * 2,
+			divs = [];
+		// basic random map
 		[...Array(this.planet_count)].map((e, id) => {
 			let x = 40 + this.prand() * (this.winwidth / this.playfield_zoom - 80),
 				y = 60 + this.prand() * (this.winheight / this.playfield_zoom - 120),
@@ -33,7 +34,7 @@ let Main = {
 				owner = 0;
 			this.planets.push(new Planet(x, y, production, owner, id, texture));
 		});
-
+		// make sure of distance
 		this.planets.map(p1 => {
 			this.planets.map(p2 => {
 				if (p1 === p2) return;
@@ -43,6 +44,14 @@ let Main = {
 				}
 			});
 		});
+		// DIV hoverelements
+		this.planets.map(p => {
+			let y = p.pos._y - p.radius,
+				x = p.pos._x - p.radius,
+				d = p.radius * 2;
+			divs.push(`<div class="planet-outline" data-id="${p.id}" style="width: ${d}px; height: ${d}px; top: ${y}px; left: ${x}px;"></div>`);
+		});
+		Game.cvs.after(divs.join(""));
 	},
 	findEmtpySpace(planet, ship_radius) {
 		let nX = 40 + this.prand() * (this.winwidth / this.playfield_zoom - 80),

@@ -60,11 +60,18 @@ let Game = {
 				ships = Math.round(p.ships),
 				r2 = p.radius * 2;
 
+
+			
+			this.ctx.beginPath();
+			this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
+			this.ctx.clip();
+			
 			this.ctx.save();
 			// planet atmosphere
-			this.ctx.shadowColor = '#ffffff50';
+
+			this.ctx.shadowColor = '#ffffff';
 			this.ctx.shadowBlur = 5;
-			// this.ctx.drawImage(Surface.cvs, p.pos._x - p.radius, p.pos._y - p.radius, r2, r2);
+			// this.ctx.globalCompositeOperation = "overlay";
 			this.ctx.putImageData(p.surface, p.pos._x - p.radius, p.pos._y - p.radius, 0, 0, r2, r2);
 			this.ctx.restore();
 
