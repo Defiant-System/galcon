@@ -29,8 +29,8 @@ let Main = {
 			let x = 40 + this.prand() * (this.winwidth / this.playfield_zoom - 80),
 				y = 60 + this.prand() * (this.winheight / this.playfield_zoom - 120),
 				production = this.prand() * 100,
-				owner = 0,
-				texture = Math.random() * 19 | 0;
+				texture = Math.random() * Surface.count | 0,
+				owner = 0;
 			this.planets.push(new Planet(x, y, production, owner, id, texture));
 		});
 
