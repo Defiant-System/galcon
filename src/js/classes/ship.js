@@ -6,7 +6,7 @@ class Ship {
 		this.vpos = new Point(pos._x, pos._y);
 		this.dv = new Point(0, 0);
 
-		this.ship_radius = 10;
+		this._radius = 10;
 		this.speed = 0.65;
 		this.angle_speed = Math.PI / 64;
 		
@@ -23,6 +23,14 @@ class Ship {
 
 		this.collision_history = [];
 		this.collision_num = 0;
+	}
+
+	static get radius() {
+		return Ship._radius || 10;
+	}
+
+	static set radius(v) {
+		Ship._radius = v;
 	}
 
 	Rotate(delta) {
@@ -119,7 +127,7 @@ class Ship {
 	}
 	
 	CollidePlanet(planet) {
-		if (this.pos.distance(planet.pos) > planet.radius + this.ship_radius) return;
+		if (this.pos.distance(planet.pos) > planet.radius + this.radius) return;
 		if (planet === this.target) return this.Arrived();
 
 		// tangent slide
@@ -147,7 +155,7 @@ class Ship {
 		this.dv._y = planet.pos._y - this.pos._y;
 		dist = planet.pos.distance(this.pos);
 
-		let loc_3 = (planet.radius + this.ship_radius) / dist;
+		let loc_3 = (planet.radius + this.radius) / dist;
 		this.pos._x = planet.pos._x - this.dv._x * loc_3;
 		this.pos._y = planet.pos._y - this.dv._y * loc_3;
 	}
@@ -164,7 +172,7 @@ class Ship {
         this.dv._x = ship.pos._x - this.pos._x;
         this.dv._y = ship.pos._y - this.pos._y;
         let loc_3 = Math.sqrt(this.dv._x * this.dv._x + this.dv._y * this.dv._y);
-        if (loc_3 > this.ship_radius * 1.75) return;
+        if (loc_3 > this.radius * 1.75) return;
 
         if (loc_3 == 0) {
             loc_3 = 1;
@@ -174,7 +182,7 @@ class Ship {
             
         let loc_4 = (this.pos._x + ship.pos._x) / 2;
         let loc_5 = (this.pos._y + ship.pos._y) / 2;
-        let loc_6 = this.ship_radius / loc_3;
+        let loc_6 = this.radius / loc_3;
         this.dv._x = this.dv._x * loc_6;
         this.dv._y = this.dv._y * loc_6;
         this.pos._x = loc_4 - this.dv._x;

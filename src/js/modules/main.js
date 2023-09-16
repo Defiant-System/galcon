@@ -3,6 +3,7 @@ let Main = {
 	init() {
 		this.grand = 0;
 		this.rseed = Math.random() * 8388607 + 24478357;
+		this.planet_count = 10;
 
 		this.winzoom = 1;
 		this.winwidth = Game.width;
@@ -15,19 +16,16 @@ let Main = {
 		// create planets
 		this.planets = [];
 		// level.planets.map(p => this.planets.push(new Planet(...p)));
-		this.generateMap(10);
+		this.generateMap();
 
 		// create shipsets
 		let rect = new Rectangle(0, 0, this.winwidth, this.winheight);
 		this.allships = new Shipset(rect, this.planets);
-
-		// let source = this.planets[0],
-		// 	target = this.planets[2],
-		// 	ship_num = 15;
-		// this.allships.LaunchShips(null, null, source, target, ship_num);
 	},
-	generateMap(num) {
-		[...Array(num)].map((e, id) => {
+	generateMap() {
+		let ship_radius = Ship.radius * 2;
+
+		[...Array(this.planet_count)].map((e, id) => {
 			let x = 40 + this.prand() * (this.winwidth / this.playfield_zoom - 80),
 				y = 60 + this.prand() * (this.winheight / this.playfield_zoom - 120),
 				production = this.prand() * 100,
@@ -35,12 +33,33 @@ let Main = {
 				texture = 0;
 			this.planets.push(new Planet(x, y, production, owner, id, texture));
 		});
+
+		this.planets.map(p1 => {
+			this.planets.map(p2 => {
+				if (p1 === p2) return;
+				if (p1.pos.distance(p2.pos) < p1.radius + p2.radius + ship_radius) {
+					let p3 = p1.radius > p2.radius ? p2 : p1;
+					p3.pos = this.findEmtpySpace(p3, ship_radius);
+				}
+			});
+		});
+	},
+	findEmtpySpace(planet, ship_radius) {
+		let nX = 40 + this.prand() * (this.winwidth / this.playfield_zoom - 80),
+			nY = 60 + this.prand() * (this.winheight / this.playfield_zoom - 120),
+			nPos = new Point(nX, nY),
+			empty = true;
+		
+		this.planets.map(p1 => {
+			if (p1 === planet || !empty) return;
+			if (p1.pos.distance(nPos) < p1.radius + planet.radius + ship_radius) {
+				empty = false;
+			}
+		});
+		return empty ? nPos : this.findEmtpySpace(planet, ship_radius);
 	},
 	prand() {
-		var count = 25;
-        while (count--) {
-            this.prandi();
-        }
+		[...Array(25)].map(e => this.prandi());
         return this.prandi();
 	},
 	prandi() {

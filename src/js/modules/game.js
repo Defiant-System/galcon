@@ -37,7 +37,7 @@ let Game = {
 			// collision detection; ships
 			Main.allships.map(s2 => {
 				if (s1 === s2) return;
-				if (s1.pos.distance(s2.pos) < s1.ship_radius * 2) s1.Collide(s2);
+				if (s1.pos.distance(s2.pos) < s1.radius * 2) s1.Collide(s2);
 			});
 			// collision detection; planets
 			Main.planets.map(p => s1.CollidePlanet(p));
@@ -57,22 +57,34 @@ let Game = {
 
 		Main.planets.map(p => {
 			let color = Colors[p.owner] || "#ffffff",
-				ships = Math.round(p.ships);
-			this.ctx.strokeStyle = color;
-			this.ctx.fillStyle = color +"77";
-			this.ctx.beginPath();
-			this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
-			this.ctx.stroke();
+				ships = Math.round(p.ships),
+				r2 = p.radius * 2;
+
+			this.ctx.save();
+			// planet atmosphere
+			this.ctx.shadowColor = '#ffffff50';
+			this.ctx.shadowBlur = 5;
+			Surface.render(p);
+			this.ctx.drawImage(Surface.cvs, p.pos._x - p.radius, p.pos._y - p.radius, r2, r2);
+			this.ctx.restore();
+
+			// this.ctx.strokeStyle = color;
+			// this.ctx.fillStyle = color +"77";
+			// this.ctx.beginPath();
+			// this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
+			// this.ctx.stroke();
+
 			// this.ctx.beginPath();
 			// this.ctx.arc(p.pos._x, p.pos._y, p.radius - 3, 0, tau, true);
-			this.ctx.fill();
+			// this.ctx.fill();
+
 			// production number
 			this.ctx.save();
 			this.ctx.lineWidth = 3;
 			this.ctx.strokeStyle = "#000";
 			this.ctx.fillStyle = "#fff";
-			this.ctx.strokeText(ships, p.pos._x, p.pos._y+2, p.radius * 2);
-			this.ctx.fillText(ships, p.pos._x, p.pos._y+2, p.radius * 2);
+			this.ctx.strokeText(ships, p.pos._x, p.pos._y+2, r2);
+			this.ctx.fillText(ships, p.pos._x, p.pos._y+2, r2);
 			this.ctx.restore();
 		});
 

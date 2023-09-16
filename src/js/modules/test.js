@@ -13,5 +13,15 @@ let Test = {
 
 		setTimeout(() => Game.fpsControl.stop(), 1e3);
 
+		// setTimeout(() => {
+		// 	let planet = {
+		// 			tilt: 25,
+		// 			speed: 10,
+		// 			radius: 50,
+		// 			rotation: 22,
+		// 			texture: "alien",
+		// 		};
+		// 	Surface.render(planet);
+		// }, 1e3);
 	}
 };

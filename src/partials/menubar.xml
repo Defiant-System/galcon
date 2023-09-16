@@ -13,6 +13,6 @@
 	<Menu for="game-options">
 		<Menu name="Pause" click="pause-game"/>
 		<Menu type="divider"/>
-		<Menu name="License"/>
+		<Menu name="Generate Map" click="generate-map"/>
 	</Menu>
 </MenuBar>

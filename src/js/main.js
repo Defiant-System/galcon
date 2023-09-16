@@ -11,6 +11,8 @@
 
 @import "./modules/main.js"
 @import "./modules/game.js"
+@import "./modules/glMatrix.js"
+@import "./modules/surface.js"
 @import "./modules/test.js"
 
 
@@ -19,6 +21,7 @@ const galcon = {
 		// fast references
 		this.content = window.find("content");
 
+		Surface.init();
 		Game.init();
 
 		// DEV-ONLY-START
@@ -35,6 +38,11 @@ const galcon = {
 			case "pause-game":
 				// stops loop
 				Game.fpsControl.stop();
+				break;
+			case "generate-map":
+				Main.planets = [];
+				Main.generateMap();
+				Game.render();
 				break;
 			case "insert-ship":
 				Main.allships.AddShip(event.offsetX, event.offsetY, Main.planets[2]);
