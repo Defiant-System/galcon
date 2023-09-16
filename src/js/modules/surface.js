@@ -18,8 +18,8 @@ let Surface = {
 		this.wgl.viewportHeight = this.cvs.height = 150;
 		this.wgl.ratio = this.wgl.viewportWidth / this.wgl.viewportHeight;
 
-		this.texture.maps = "alien venus".split(" ");
-		// this.texture.maps = "alien astroid burst earth gaia gas_giant hoth ixchel jupiter mars mercury moon mustafar muunilinst pluto quom saturn sun tatooine venus".split(" ");
+		// this.texture.maps = "astroid burst gaia gas_giant hoth".split(" ");
+		this.texture.maps = "alien astroid burst gaia gas_giant hoth ixchel jupiter mars mercury moon mustafar muunilinst pluto quom saturn sun tatooine venus".split(" ");
 		this.utils.mat3 = mat3;
 		this.utils.mat4 = mat4;
 		this.matrix.projection = mat4.create();

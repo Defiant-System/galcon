@@ -30,7 +30,7 @@ let Main = {
 				y = 60 + this.prand() * (this.winheight / this.playfield_zoom - 120),
 				production = this.prand() * 100,
 				owner = 0,
-				texture = 0;
+				texture = Math.random() * 19 | 0;
 			this.planets.push(new Planet(x, y, production, owner, id, texture));
 		});
 
