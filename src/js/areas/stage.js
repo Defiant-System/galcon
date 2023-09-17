@@ -23,6 +23,9 @@
 				GameUI.render();
 				break;
 			case "select-planet":
+				// return Fx.explode(event.offsetX, event.offsetY);
+				// return Main.allships.AddShip(event.offsetX, event.offsetY, Main.planets[2]);
+				
 				el = $(event.target);
 				selected = Self.els.el.find(".planet-outline.selected");
 				if (el.hasClass("planet-outline")) {
@@ -39,7 +42,6 @@
 				} else {
 					selected.removeClass("selected");
 				}
-				// Main.allships.AddShip(event.offsetX, event.offsetY, Main.planets[2]);
 				break;
 		}
 	}

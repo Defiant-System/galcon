@@ -119,7 +119,8 @@ let GameUI = {
 			this.ctx.restore();
 		});
 
-		if (Fx._loaded) Fx.explode(150, 140);
+		// if (Fx._loaded) Fx.explode(150, 140);
+		Fx.render(this.ctx);
 
 		this.drawFps(this.ctx);
 	},
