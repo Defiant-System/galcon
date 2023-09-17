@@ -3,7 +3,7 @@ let GameUI = {
 	init() {
 		// fast references
 		this.cvs = window.find("canvas");
-		this.ctx = this.cvs[0].getContext("2d");
+		this.ctx = this.cvs[0].getContext("2d", { willReadFrequently: true });
 		this.width = this.cvs.prop("offsetWidth"),
 		this.height = this.cvs.prop("offsetHeight");
 		this.cvs.attr({ width: this.width, height: this.height });
@@ -13,6 +13,7 @@ let GameUI = {
 		this.mode = "dev";
 
 		Main.init();
+		Fx.init();
 
 		let _Main = Main,
 			_GameUI = GameUI;
@@ -118,30 +119,34 @@ let GameUI = {
 			this.ctx.restore();
 		});
 
-		let fps = this.fpsControl._log;
+		if (Fx._loaded) Fx.explode(150, 140);
 
-		this.ctx.save();
-		this.ctx.translate(this.width - 109, this.height - 49);
+		this.drawFps(this.ctx);
+	},
+	drawFps(ctx) {
+		let fps = this.fpsControl._log;
+		ctx.save();
+		ctx.translate(this.width - 109, this.height - 49);
 		// draw box
-		this.ctx.fillStyle = "rgba(0,200,100,0.5)";
-		this.ctx.fillRect(5, 5, 100, 40);
-		this.ctx.fillStyle = "rgba(80,255,80,0.5)";
-		this.ctx.fillRect(7, 7, 96, 11);
-		this.ctx.fillStyle = "rgba(255,255,255,0.6)";
+		ctx.fillStyle = "rgba(0,200,100,0.5)";
+		ctx.fillRect(5, 5, 100, 40);
+		ctx.fillStyle = "rgba(80,255,80,0.5)";
+		ctx.fillRect(7, 7, 96, 11);
+		ctx.fillStyle = "rgba(255,255,255,0.6)";
 		// loop log
 		for (let i=0; i<96; i++) {
 			let bar = fps[i];
 			if (!bar) break;
 			let p = bar/90;
 			if (p > 1) p = 1;
-			this.ctx.fillRect(102 - i, 43, 1, -24 * p);
+			ctx.fillRect(102 - i, 43, 1, -24 * p);
 		}
 		// write fps
-		this.ctx.fillStyle = "#000";
-		this.ctx.font = "9px Arial";
-		this.ctx.textAlign = "left";
-		this.ctx.fillText('FPS: '+ fps[0], 8, 14);
+		ctx.fillStyle = "#000";
+		ctx.font = "9px Arial";
+		ctx.textAlign = "left";
+		ctx.fillText('FPS: '+ fps[0], 8, 14);
 		// restore state
-		this.ctx.restore();
+		ctx.restore();
 	}
 }

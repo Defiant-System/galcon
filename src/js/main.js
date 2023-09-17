@@ -9,6 +9,7 @@
 @import "./classes/planet.js"
 
 @import "./modules/main.js"
+@import "./modules/fx.js"
 @import "./modules/gameui.js"
 @import "./modules/glMatrix.js"
 @import "./modules/surface.js"

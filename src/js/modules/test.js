@@ -18,7 +18,8 @@ let Test = {
 		// 	console.log( p1.distance(p2.pos) );
 		// }, 1000);
 
+		// setTimeout(() => Fx.explode(150, 140), 1e3);
 
-		// setTimeout(() => GameUI.fpsControl.stop(), 15e3);
+		setTimeout(() => GameUI.fpsControl.stop(), 3e3);
 	}
 };
