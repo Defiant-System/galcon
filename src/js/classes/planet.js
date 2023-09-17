@@ -28,7 +28,7 @@ class Planet {
 	}
 
 	Tick() {
-		if (Game.mode !== "dev") {
+		if (GameUI.mode !== "dev") {
 			// render surface
 			Surface.render(this);
 			// this.surface = Surface.ctx.getImageData(0, 0, 150, 150);

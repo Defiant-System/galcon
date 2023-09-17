@@ -6,8 +6,8 @@ let Main = {
 		this.planet_count = 10;
 
 		this.winzoom = 1;
-		this.winwidth = Game.width;
-		this.winheight = Game.height;
+		this.winwidth = GameUI.width;
+		this.winheight = GameUI.height;
 
 		this.mission_seed = 0;
 		this.playfield_zoom = 1;
@@ -24,7 +24,8 @@ let Main = {
 		this.allships = new Shipset(rect, this.planets);
 	},
 	generateMap() {
-		let ship_radius = Ship._radius << 1,
+		let APP = galcon,
+			ship_radius = Ship._radius << 1,
 			divs = [];
 		// basic random map
 		[...Array(this.planet_count)].map((e, id) => {
@@ -52,7 +53,8 @@ let Main = {
 				d = p.radius << 1;
 			divs.push(`<div class="planet-outline" data-id="${p.id}" style="width: ${d}px; height: ${d}px; top: ${y}px; left: ${x}px;"></div>`);
 		});
-		Game.cvs.after(divs.join(""));
+		APP.stage.els.el.find(".planet-outline").remove();
+		APP.stage.els.el.append(divs.join(""));
 	},
 	findEmtpySpace(planet, ship_radius) {
 		let nX = 40 + this.prand() * (this.winwidth / this.playfield_zoom - 80),

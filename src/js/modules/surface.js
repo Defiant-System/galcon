@@ -208,7 +208,7 @@ let Surface = {
 	getData() {
 		var width = this.cvs.width,
 			height = this.cvs.height,
-			img = Game.ctx.createImageData(width, height);
+			img = GameUI.ctx.createImageData(width, height);
 		this.wgl.readPixels(0, 0, width, height, this.wgl.RGBA, this.wgl.UNSIGNED_BYTE, img.data);
 		return img;
 	}

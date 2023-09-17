@@ -1,5 +1,5 @@
 
-let Game = {
+let GameUI = {
 	init() {
 		// fast references
 		this.cvs = window.find("canvas");
@@ -13,7 +13,7 @@ let Game = {
 		Main.init();
 
 		let _Main = Main,
-			_Game = Game;
+			_GameUI = GameUI;
 		this.fpsControl = karaqu.FpsControl({
 			frames: {
 				10: () => {
@@ -21,8 +21,8 @@ let Game = {
 					_Main.planets.map(p => p.Tick());
 				},
 				60: () => {
-					_Game.update();
-					_Game.render();
+					_GameUI.update();
+					_GameUI.render();
 				},
 			}
 		});
