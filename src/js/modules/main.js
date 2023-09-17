@@ -3,7 +3,7 @@ let Main = {
 	init() {
 		this.grand = 0;
 		this.rseed = Math.random() * 8388607 + 24478357;
-		this.planet_count = 10;
+		this.planet_count = 15;
 
 		this.winzoom = 1;
 		this.winwidth = GameUI.width;
@@ -22,6 +22,9 @@ let Main = {
 		// create shipsets
 		let rect = new Rectangle(0, 0, this.winwidth, this.winheight);
 		this.allships = new Shipset(rect, this.planets);
+	},
+	getPlanet(id) {
+		return this.planets.find(p => p.id === +id);
 	},
 	generateMap() {
 		let APP = galcon,
