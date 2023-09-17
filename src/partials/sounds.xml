@@ -1,0 +1,5 @@
+<Sounds>
+	<i id="blast" url="~/audio/blast.ogg"/>
+	<i id="launch" url="~/audio/launch.ogg"/>
+	<i id="takeover" url="~/audio/takeover.ogg"/>
+</Sounds>

@@ -44,5 +44,7 @@ class Planet {
 		this.ships += ship.value || 1;
 		// explosion effect
 		Fx.explode(ship.pos._x, ship.pos._y);
+
+		window.audio.play("blast");
 	}
 }
