@@ -1,5 +1,8 @@
 
 class Ship {
+
+	static _radius = 10;
+
 	constructor(x, y, planet, fleet_id, owner, value) {
 		this.pos = new Point(x, y);
 		this.ppos = new Point(x, y);
@@ -23,8 +26,6 @@ class Ship {
 		this.collision_history = [];
 		this.collision_num = 0;
 	}
-
-	static _radius = 10;
 
 	get radius() {
 		return Ship._radius;

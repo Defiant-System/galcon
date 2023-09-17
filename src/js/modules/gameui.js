@@ -8,6 +8,8 @@ let GameUI = {
 		this.height = this.cvs.prop("offsetHeight");
 		this.cvs.attr({ width: this.width, height: this.height });
 
+		this.area = new Rectangle(0, 0, this.width, this.height);
+		this.speed = 2;
 		this.mode = "dev";
 
 		Main.init();
@@ -31,11 +33,9 @@ let GameUI = {
 	},
 	update() {
 		Main.allships.map(s1 => {
-			let rect = new Rectangle(100, 100, 50, 50),
-				delta = 2;
 			// move ship
-			s1.Move(rect, delta, true);
-			s1.Rotate(delta);
+			s1.Move(this.area, this.speed, true);
+			s1.Rotate(this.speed);
 			// collision detection; ships
 			Main.allships.map(s2 => {
 				if (s1 === s2) return;

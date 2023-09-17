@@ -41,6 +41,6 @@ class Planet {
 	}
 
 	ShipHit(ship) {
-		this.ships += 1;
+		this.ships += ship.value || 1;
 	}
 }

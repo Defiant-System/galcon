@@ -32,9 +32,10 @@ let Main = {
 			divs = [];
 		// basic random map
 		[...Array(this.planet_count)].map((e, id) => {
-			let x = 40 + this.prand() * (this.winwidth / this.playfield_zoom - 80),
-				y = 60 + this.prand() * (this.winheight / this.playfield_zoom - 120),
-				production = this.prand() * 100,
+			let m = 50,
+				x = m + this.prand() * (this.winwidth / this.playfield_zoom - (m * 2)),
+				y = m + this.prand() * (this.winheight / this.playfield_zoom - (m * 2)),
+				production = 20 + (this.prand() * 80),
 				texture = Math.random() * Surface.textures.length | 0,
 				owner = 0;
 			this.planets.push(new Planet(x, y, production, owner, id, texture));

@@ -30,7 +30,7 @@
 						// let from = selected.map(e => Main.getPlanet(e.getAttribute("data-id"))),
 						let from = Main.getPlanet(selected.data("id")),
 							to = Main.getPlanet(el.data("id")),
-							ship_num = 10;
+							ship_num = from.ships * 1;
 						Main.allships.LaunchShips(0, 0, from, to, ship_num);
 						// reset
 						return selected.removeClass("selected");

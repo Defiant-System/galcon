@@ -10,8 +10,8 @@ class Shipset {
 		return this._allships.map(func);
 	}
 
-	AddShip(x, y, planet, fleet_id, owner) {
-		let ship = new Ship(x, y, planet, fleet_id, owner);
+	AddShip(x, y, planet, fleet_id, owner, value) {
+		let ship = new Ship(x, y, planet, fleet_id, owner, value);
 		this._allships.push(ship);
         return true;
 	}
@@ -48,7 +48,7 @@ class Shipset {
 
             let x = _loc_16._x + Math.cos(_loc_13) * _loc_14,
             	y = _loc_16._y + Math.sin(_loc_13) * _loc_14;
-            if (!this.AddShip(x, y, target, fleet_id, owner)) {
+            if (!this.AddShip(x, y, target, fleet_id, owner, _loc_11)) {
                 source.ships += _loc_11;
             }
             _loc_12++;

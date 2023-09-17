@@ -19,6 +19,6 @@ let Test = {
 		// }, 1000);
 
 
-		setTimeout(() => GameUI.fpsControl.stop(), 15e3);
+		// setTimeout(() => GameUI.fpsControl.stop(), 15e3);
 	}
 };
