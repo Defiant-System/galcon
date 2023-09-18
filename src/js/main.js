@@ -11,7 +11,6 @@
 @import "./modules/main.js"
 @import "./modules/fx.js"
 @import "./modules/gameui.js"
-@import "./modules/glMatrix.js"
 @import "./modules/surface.js"
 @import "./modules/test.js"
 

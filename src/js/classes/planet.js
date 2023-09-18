@@ -23,7 +23,8 @@ class Planet {
 		this.tilt = (Math.random() * 90) | 0;
 		// this.speed = ((Math.random() * 10) | 0) / 10;
 		this.speed = 1;
-		this.rotation = 22;
+		this.rotation = 0;
+		this.rotation_max = 0;
 
 		this.Tick();
 	}
@@ -31,8 +32,14 @@ class Planet {
 	Tick() {
 		// rotate planet
 		this.rotation += this.speed;
+		if (!this.rotation_max && Surface.texture[this.texture]) {
+			let ratio = Surface.texture[this.texture].width / Surface.texture[this.texture].height;
+			this.rotation_max = (ratio * (this.radius * 2)) | 0;
+		}
+		if (this.rotation > this.rotation_max) this.rotation = 0;
+
 		// update shap count
-		this.ships += this.production / 400;
+		this.ships += this.production / 1500;
 	}
 
 	ShipHit(ship) {
