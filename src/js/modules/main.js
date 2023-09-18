@@ -36,9 +36,17 @@ let Main = {
 			let m = 50,
 				x = m + this.prand() * (this.winwidth / this.playfield_zoom - (m * 2)),
 				y = m + this.prand() * (this.winheight / this.playfield_zoom - (m * 2)),
-				production = 20 + (this.prand() * 80),
+				production = 20 + (this.prand() * 60),
 				texture = Math.random() * Object.keys(Surface.maps).length | 0,
 				owner = 2;
+			if (id === 0) {
+				owner = 0;
+				production = 100;
+			}
+			if (id === this.planet_count-1) {
+				owner = 1;
+				production = 100;
+			}
 			this.planets.push(new Planet(x, y, production, owner, id, texture));
 		});
 		// make sure of distance
@@ -56,8 +64,6 @@ let Main = {
 			let y = p.pos._y - p.radius,
 				x = p.pos._x - p.radius,
 				d = p.radius << 1;
-			if (i === 0) p.owner = 0;
-			if (i === this.planets.length-1) p.owner = 1;
 			divs.push(`<div class="planet-outline ${Palette[p.owner].name}" data-id="${p.id}" style="width: ${d}px; height: ${d}px; top: ${y}px; left: ${x}px;"></div>`);
 		});
 		APP.stage.els.el.find(".planet-outline").remove();

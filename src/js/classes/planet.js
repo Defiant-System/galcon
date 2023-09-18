@@ -17,12 +17,12 @@ class Planet {
 		this.color = Palette[owner].color;
 		this.opacity = Palette[owner].opacity;
 		this.texture = Surface.maps[texture];
-		this.production = Math.max(Math.min(production, 70), 20);
-		this.ships = this.production;
-		this.radius = 15 + Math.round(this.production * .3);
+		this.production = production;
+		this.ships = this.owner !== 2 ? Math.max(Math.min(production, 65), 15) : production;
+		this.radius = 15 + Math.round(this.production * .2);
 
 		this.tilt = ((Math.random() * 90) - 45) | 0;
-		this.speed = (Math.random() * 4) - 2;
+		this.speed = (Math.random() * 3) - 1.5;
 		this.rotation = 0;
 		this.rotation_max = 0;
 
@@ -48,16 +48,30 @@ class Planet {
 		}
 		if (this.speed > 0 && this.rotation > this.rotation_max) this.rotation = 0;
 		if (this.speed < 0 && this.rotation < -this.radius * 4) this.rotation = this.rotation_max;
-
-		// update shap count
-		this.ships += this.production / 1500;
+		if (this._owner !== 2) {
+			// update shap count
+			this.ships += this.production / 1000;
+		}
 	}
 
 	ShipHit(ship) {
-		this.ships += ship.value || 1;
-		// explosion effect
-		Fx.explode(ship.pos._x, ship.pos._y);
-		// sound effect
-		window.audio.play("blast");
+		if (ship.owner === this.owner) {
+			this.ships += ship.value;
+		} else {
+			this.ships -= ship.value;
+			// planet is overtaken
+			if (this.ships < 1) {
+				this.owner = ship.owner;
+				// sound effect
+				window.audio.play("takeover");
+				// 
+				let el = galcon.stage.els.el.find(`.planet-outline[data-id="${this.id}"]`);
+				el.removeClass("neutral enemy mine").addClass("mine");
+			}
+			// explosion effect
+			Fx.explode(ship.pos._x, ship.pos._y);
+			// sound effect
+			window.audio.play("blast");
+		}
 	}
 }

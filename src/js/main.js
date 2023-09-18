@@ -17,8 +17,8 @@
 
 
 let Palette = [
-		{ color: "#3366dd", opacity: "aa", name: "mine" },
-		{ color: "#ff5555", opacity: "99", name: "enemy" },
+		{ color: "#3366dd", opacity: "ff", name: "mine" },
+		{ color: "#ff5555", opacity: "ff", name: "enemy" },
 		{ color: "#aaaaaa", opacity: "00", name: "neutral" },
 	];
 

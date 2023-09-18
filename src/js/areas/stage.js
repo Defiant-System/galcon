@@ -44,8 +44,9 @@
 						Main.allships.LaunchShips(from, to, ship_num);
 						// reset
 						return selected.removeClass("selected");
+					} else if (el.hasClass("mine")) {
+						el.addClass("selected");
 					}
-					el.addClass("selected");
 				} else {
 					selected.removeClass("selected");
 				}

@@ -1,8 +1,8 @@
 
 let Surface = {
 	texture: {},
-	maps: "astroid hoth ixchel moon saturn".split(" "),
-	// maps: "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" "),
+	// maps: "astroid hoth ixchel moon saturn".split(" "),
+	maps: "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" "),
 	init() {
 		this.rot = 0;
 		this.images = [...this.maps];
@@ -91,7 +91,7 @@ let Surface = {
 		r += 5;
 		while (len--) {
 			let s1 = len / tot,
-				s2 = (len - .65) / tot;
+				s2 = (len - .3) / tot;
 			ctx.beginPath();
 			ctx.arc(x, y, r, s1*tau, s2*tau, true);
 			ctx.stroke();
