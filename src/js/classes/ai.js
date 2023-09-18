@@ -1,0 +1,6 @@
+
+class AI {
+	constructor() {
+
+	}
+}
