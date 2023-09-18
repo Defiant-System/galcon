@@ -24,41 +24,55 @@ let Surface = {
 			r2 = r << 1,
 			r0 = 1,
 			r1 = r * 1.25,
-			x0 = x - (r * .25),
-			y0 = y - (r * .25),
+			x0 = x - (r * .35),
+			y0 = y - (r * .35),
 			x1 = x0,
 			y1 = y0,
 			gradient = ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
 		
 		gradient.addColorStop(0, "#fff");
-		gradient.addColorStop(.35, "#999");
-		gradient.addColorStop(1, "#555");
+		gradient.addColorStop(.3, "#888");
+		gradient.addColorStop(1, "#222");
 
 		ctx.save();
-		// ctx.translate(x, y);
-		// ctx.rotate((p.tilt * Math.PI) / 180);
-		// ctx.translate(-x, -y);
+		ctx.translate(x, y);
+		ctx.rotate((p.tilt * Math.PI) / 180);
+		ctx.translate(-x, -y);
 
-		// ctx.beginPath();
-		// ctx.arc(x, y, r, 0, tau, true);
-        // ctx.clip();
+		ctx.beginPath();
+		ctx.arc(x, y, r, 0, tau, true);
+        ctx.clip();
 
         if (Surface.texture[p.texture]) {
         	let img = Surface.texture[p.texture],
         		ratio = img.width / img.height,
         		tH = r2,
         		tW = tH * ratio;
-			ctx.drawImage(img, x - r - p.rotation, y - r, tW, tH);
+
+			if (p.speed > 0) {
+				let tX = x - r - p.rotation;
+				ctx.drawImage(img, tX, y - r, tW, tH);
+				if (p.rotation > r2) ctx.drawImage(img, tX + tW, y - r, tW, tH);
+			} else {
+				let tX = x - tW + r - p.rotation;
+				ctx.drawImage(img, tX, y - r, tW, tH);
+				
+				if (p.rotation < -r2) {
+					ctx.drawImage(img, tX - tW, y - r, tW, tH);
+				} else if (p.rotation > 0) {
+					ctx.drawImage(img, tX + tW, y - r, tW, tH);
+				}
+			}
 		}
 
-		// ctx.globalCompositeOperation = "soft-light";
-		ctx.globalCompositeOperation = "multiply";
+		ctx.globalCompositeOperation = "hard-light";
+		// ctx.globalCompositeOperation = "multiply";
 		// ctx.globalCompositeOperation = "screen";
-		// ctx.globalAlpha = .75;
-		ctx.fillStyle = p.color;
-		ctx.beginPath();
-		ctx.arc(x, y, r, 0, tau, true);
-		ctx.fill();
+
+		// ctx.fillStyle = p.color;
+		// ctx.beginPath();
+		// ctx.arc(x, y, r, 0, tau, true);
+		// ctx.fill();
 		
 		// ctx.globalAlpha = .5;
 		ctx.fillStyle = gradient;
