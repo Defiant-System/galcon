@@ -26,6 +26,9 @@ const galcon = {
 		Surface.init();
 		GameUI.init();
 
+		// turn off audio temporarily
+		window.audio.mute = true;
+
 		// DEV-ONLY-START
 		Test.init(this);
 		// DEV-ONLY-END

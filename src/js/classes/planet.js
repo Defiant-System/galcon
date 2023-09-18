@@ -15,7 +15,7 @@ class Planet {
 		this.zpos = new Point();
 		this.owner = owner;
 		this.texture = Surface.textures[texture];
-		this.production = Math.max(production, 15);
+		this.production = Math.max(Math.min(production, 70), 20);
 		this.ships = this.production;
 		this.radius = 15 + Math.round(this.production * .3);
 
@@ -37,14 +37,14 @@ class Planet {
 		// rotate planet
 		this.rotation += this.speed;
 		// update shap count
-		this.ships = this.ships + (this.production / 400);
+		this.ships += this.production / 400;
 	}
 
 	ShipHit(ship) {
 		this.ships += ship.value || 1;
 		// explosion effect
 		Fx.explode(ship.pos._x, ship.pos._y);
-
+		// sound effect
 		window.audio.play("blast");
 	}
 }

@@ -51,5 +51,8 @@ class Shipset {
             }
             _loc_12++;
         }
+
+		// sound effect
+		window.audio.play("launch");
 	}
 }
