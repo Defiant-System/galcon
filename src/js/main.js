@@ -10,6 +10,7 @@
 
 @import "./modules/main.js"
 @import "./modules/fx.js"
+@import "./modules/starfield.js"
 @import "./modules/gameui.js"
 @import "./modules/surface.js"
 @import "./modules/test.js"
@@ -22,6 +23,7 @@ const galcon = {
 
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
+		Starfield.init();
 		Surface.init();
 		GameUI.init();
 

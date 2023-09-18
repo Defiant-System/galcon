@@ -48,6 +48,7 @@ let GameUI = {
 	},
 	render() {
 		let width = this.width,
+			height = this.height,
 			tau = Math.PI * 2,
 			piHalf = Math.PI / 2;
 
@@ -57,6 +58,8 @@ let GameUI = {
 		this.ctx.textAlign = "center";
 		this.ctx.textBaseline = "middle";
 		this.ctx.font = "18px Lucida Console";
+
+		Starfield.render(this.ctx, width, height);
 
 		Main.planets.map(p => {
 			// render planet surface
