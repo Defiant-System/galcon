@@ -19,7 +19,7 @@ class Planet {
 		this.texture = Surface.maps[texture];
 		this.production = production;
 		this.ships = this.owner !== 2 ? Math.max(Math.min(production, 65), 15) : production;
-		this.radius = 15 + Math.round(this.production * .2);
+		this.radius = 18 + Math.round(this.production * .25);
 
 		this.tilt = ((Math.random() * 90) - 45) | 0;
 		this.speed = (Math.random() * 3) - 1.5;
@@ -50,7 +50,7 @@ class Planet {
 		if (this.speed < 0 && this.rotation < -this.radius * 4) this.rotation = this.rotation_max;
 		if (this._owner !== 2) {
 			// update shap count
-			this.ships += this.production / 1000;
+			this.ships += this.production / 500;
 		}
 	}
 

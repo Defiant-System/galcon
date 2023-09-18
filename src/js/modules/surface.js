@@ -81,7 +81,7 @@ let Surface = {
 
 		ctx.save();
 		ctx.translate(x, y);
-		ctx.rotate(this.rot += .0005);
+		ctx.rotate(this.rot += .00035);
 		ctx.translate(-x, -y);
 
 		let tot = 15,

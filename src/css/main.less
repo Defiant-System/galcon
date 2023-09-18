@@ -39,7 +39,6 @@ content {
 			box-shadow: inset -3px 0 3px rgba(#fff,.2),
 						0 0 3px rgba(#fff,.35);
 			border-radius: 50%;
-			cursor: pointer;
 
 			&.selected:after {
 				opacity: 1;
@@ -58,10 +57,12 @@ content {
 			}
 
 			&.mine {
+				cursor: pointer;
+				
 				&:after {
 					border-color: #36d;
 				}
-				
+
 				&:hover:after {
 					opacity: 1;
 				}
