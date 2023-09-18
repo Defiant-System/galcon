@@ -69,25 +69,29 @@ let GameUI = {
 				// this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
 				// this.ctx.stroke();
 
-				// this.ctx.save();
-				// this.ctx.translate(p.pos._x, p.pos._y);
-				
 				let r0 = 1,
-					r1 = p.radius,
-					x0 = p.pos._x - (r1 * .25),
-					y0 = p.pos._y - (r1 * .25),
+					r1 = p.radius * 1.25,
+					x0 = p.pos._x - (p.radius * .25),
+					y0 = p.pos._y - (p.radius * .25),
 					x1 = x0,
 					y1 = y0,
 					gradient = this.ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
 				gradient.addColorStop(0, "#ccc");
-				gradient.addColorStop(1, "#333");
-				// this.ctx.restore();
+				gradient.addColorStop(.35, "#777");
+				gradient.addColorStop(1, "#222");
 
 				this.ctx.fillStyle = gradient;
-				// this.ctx.fillStyle = color +"55";
 				this.ctx.beginPath();
-				this.ctx.arc(p.pos._x, p.pos._y, p.radius - 3, 0, tau, true);
+				this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
 				this.ctx.fill();
+
+				this.ctx.save();
+				this.ctx.globalCompositeOperation = "multiply";
+				this.ctx.fillStyle = color +"55";
+				this.ctx.beginPath();
+				this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
+				this.ctx.fill();
+				this.ctx.restore();
 			} else {
 				this.ctx.putImageData(p.surface, p.pos._x - p.radius, p.pos._y - p.radius, 0, 0, r2, r2);
 				// this.ctx.drawImage(Surface.cvs, p.pos._x - p.radius, p.pos._y - p.radius, r2, r2);
