@@ -20,6 +20,6 @@ let Test = {
 
 		// setTimeout(() => Fx.explode(150, 140), 1e3);
 
-		setTimeout(() => GameUI.fpsControl.stop(), 20e3);
+		setTimeout(() => GameUI.fpsControl.stop(), 10e3);
 	}
 };

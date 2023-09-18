@@ -69,7 +69,22 @@ let GameUI = {
 				// this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
 				// this.ctx.stroke();
 
-				this.ctx.fillStyle = color +"55";
+				// this.ctx.save();
+				// this.ctx.translate(p.pos._x, p.pos._y);
+				
+				let r0 = 1,
+					r1 = p.radius,
+					x0 = p.pos._x - (r1 * .25),
+					y0 = p.pos._y - (r1 * .25),
+					x1 = x0,
+					y1 = y0,
+					gradient = this.ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
+				gradient.addColorStop(0, "#ccc");
+				gradient.addColorStop(1, "#333");
+				// this.ctx.restore();
+
+				this.ctx.fillStyle = gradient;
+				// this.ctx.fillStyle = color +"55";
 				this.ctx.beginPath();
 				this.ctx.arc(p.pos._x, p.pos._y, p.radius - 3, 0, tau, true);
 				this.ctx.fill();
