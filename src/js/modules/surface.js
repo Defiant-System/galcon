@@ -1,7 +1,8 @@
 
 let Surface = {
 	texture: {},
-	maps: "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" "),
+	maps: "astroid hoth ixchel moon saturn".split(" "),
+	// maps: "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" "),
 	init() {
 		this.images = [...this.maps];
 		this.loadTextures();

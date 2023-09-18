@@ -21,9 +21,7 @@ class Planet {
 		this.radius = 15 + Math.round(this.production * .3);
 
 		this.tilt = ((Math.random() * 90) - 45) | 0;
-		// this.speed = ((Math.random() * 10) | 0) / 10;
 		this.speed = (Math.random() * 4) - 2;
-		// this.speed = -2;
 		this.rotation = 0;
 		this.rotation_max = 0;
 

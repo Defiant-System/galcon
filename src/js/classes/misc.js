@@ -1,7 +1,4 @@
 
-let Colors = ["#ff9900", "#ff00ff", "#009999"];
-
-
 class Matrix {
 	constructor(a, b, c, d, tx, ty) {
 		this._a = a;

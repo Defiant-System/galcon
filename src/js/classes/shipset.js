@@ -3,6 +3,7 @@ class Shipset {
 	constructor(area, planets) {
 		this.max_ships = 400;
 		this.max_fleets = 300;
+		this.fleet_id = 0;
 		this._allships = [];
 	}
 
@@ -21,11 +22,11 @@ class Shipset {
 		this._allships.splice(index, 1);
 	}
 
-	LaunchShips(owner, fleet_id, source, target, ship_num) {
+	LaunchShips(owner, source, target, ship_num) {
 		if (source.ships < 1) return;
 		if (ship_num > source.ships) ship_num = source.ships;
 		if (ship_num < 1) ship_num = 1;
-		
+
 		source.ships = source.ships - ship_num;
 		if (source.ships < 0) source.ships = 0;
 
@@ -39,6 +40,7 @@ class Shipset {
         _loc_16.normalize(source.radius + _loc_15 / 6);
         _loc_16 = _loc_16.add(source.pos);
         let _loc_12 = 0;
+       	let fleet_id = this.fleet_id++
 
         while (_loc_12 < ship_num) {
             let _loc_13 = Math.random() * Math.PI * 2;

@@ -16,6 +16,9 @@
 @import "./modules/test.js"
 
 
+let Colors = ["#ff00ff", "#ff9900", "#009999"];
+
+
 const galcon = {
 	init() {
 		// fast references

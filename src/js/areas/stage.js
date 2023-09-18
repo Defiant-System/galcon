@@ -34,7 +34,7 @@
 						let from = Main.getPlanet(selected.data("id")),
 							to = Main.getPlanet(el.data("id")),
 							ship_num = from.ships * 1;
-						Main.allships.LaunchShips(0, 0, from, to, ship_num);
+						Main.allships.LaunchShips(0, from, to, ship_num);
 						// reset
 						return selected.removeClass("selected");
 					}

@@ -39,7 +39,7 @@ let GameUI = {
 			s1.Rotate(this.speed);
 			// collision detection; ships
 			Main.allships.map(s2 => {
-				if (s1 === s2) return;
+				if (s1 === s2 || s1.fleet_id !== s2.fleet_id) return;
 				if (s1.pos.distance(s2.pos) < s1.radius << 1) s1.Collide(s2);
 			});
 			// collision detection; planets
@@ -59,17 +59,13 @@ let GameUI = {
 		this.ctx.textBaseline = "middle";
 		this.ctx.font = "18px Lucida Console";
 
+		// render starfield
 		Starfield.render(this.ctx, width, height);
-
-		Main.planets.map(p => {
-			// render planet surface
-			Surface.render(this.ctx, p);
-		});
-
+		// render planet surface
+		Main.planets.map(p => Surface.render(this.ctx, p));
+		// render ships
 		Main.allships.map(s => {
-			var w = 6,
-				h = w << 1,
-				c = s.vangle + piHalf;
+			var c = s.vangle + piHalf;
 			// rotate
 			this.ctx.save();
 			this.ctx.translate(s.vpos._x, s.vpos._y);
@@ -96,11 +92,10 @@ let GameUI = {
 			this.ctx.translate(-s.vpos._x, -s.vpos._y);
 			this.ctx.restore();
 		});
-
 		// if (Fx._loaded) Fx.explode(150, 140);
 		Fx.render(this.ctx);
-
-		this.drawFps(this.ctx);
+		// FPS 
+		if (this.mode === "dev") this.drawFps(this.ctx);
 	},
 	drawFps(ctx) {
 		let fps = this.fpsControl._log;

@@ -6,9 +6,8 @@ let Test = {
 		// 	let source = Main.planets[0],
 		// 		target = Main.planets[2],
 		// 		owner = source.owner,
-		// 		fleet_id = 1,
 		// 		ship_num = source.ships * .75 | 0;
-		// 	Main.allships.LaunchShips(owner, fleet_id, source, target, ship_num);
+		// 	Main.allships.LaunchShips(owner, source, target, ship_num);
 		// }, 1000);
 
 		// setTimeout(() => {
