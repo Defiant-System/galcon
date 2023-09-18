@@ -59,52 +59,8 @@ let GameUI = {
 		this.ctx.font = "18px Lucida Console";
 
 		Main.planets.map(p => {
-			let color = Colors[p.owner] || "#ffffff",
-				ships = Math.round(p.ships),
-				r2 = p.radius << 1;
-
-			if (this.mode === "dev") {
-				// this.ctx.strokeStyle = color;
-				// this.ctx.beginPath();
-				// this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
-				// this.ctx.stroke();
-
-				let r0 = 1,
-					r1 = p.radius * 1.25,
-					x0 = p.pos._x - (p.radius * .25),
-					y0 = p.pos._y - (p.radius * .25),
-					x1 = x0,
-					y1 = y0,
-					gradient = this.ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
-				gradient.addColorStop(0, "#ccc");
-				gradient.addColorStop(.35, "#777");
-				gradient.addColorStop(1, "#222");
-
-				this.ctx.fillStyle = gradient;
-				this.ctx.beginPath();
-				this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
-				this.ctx.fill();
-
-				this.ctx.save();
-				this.ctx.globalCompositeOperation = "multiply";
-				this.ctx.fillStyle = color +"55";
-				this.ctx.beginPath();
-				this.ctx.arc(p.pos._x, p.pos._y, p.radius, 0, tau, true);
-				this.ctx.fill();
-				this.ctx.restore();
-			} else {
-				this.ctx.putImageData(p.surface, p.pos._x - p.radius, p.pos._y - p.radius, 0, 0, r2, r2);
-				// this.ctx.drawImage(Surface.cvs, p.pos._x - p.radius, p.pos._y - p.radius, r2, r2);
-			}
-
-			// production number
-			this.ctx.save();
-			this.ctx.lineWidth = 3;
-			this.ctx.strokeStyle = "#000";
-			this.ctx.fillStyle = "#fff";
-			this.ctx.strokeText(ships, p.pos._x, p.pos._y+2, r2);
-			this.ctx.fillText(ships, p.pos._x, p.pos._y+2, r2);
-			this.ctx.restore();
+			// render planet surface
+			Surface.render(this.ctx, p);
 		});
 
 		Main.allships.map(s => {

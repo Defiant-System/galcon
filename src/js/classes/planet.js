@@ -14,7 +14,8 @@ class Planet {
 		this.pos = new Point(Math.floor(x), Math.floor(y));
 		this.zpos = new Point();
 		this.owner = owner;
-		this.texture = Surface.textures[texture];
+		this.color = Colors[owner] || "#ffffff";
+		this.texture = Surface.maps[texture];
 		this.production = Math.max(Math.min(production, 70), 20);
 		this.ships = this.production;
 		this.radius = 15 + Math.round(this.production * .3);
@@ -28,12 +29,6 @@ class Planet {
 	}
 
 	Tick() {
-		if (GameUI.mode !== "dev") {
-			// render surface
-			Surface.render(this);
-			// this.surface = Surface.ctx.getImageData(0, 0, 150, 150);
-			this.surface = Surface.getData();
-		}
 		// rotate planet
 		this.rotation += this.speed;
 		// update shap count

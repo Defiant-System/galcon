@@ -36,7 +36,7 @@ let Main = {
 				x = m + this.prand() * (this.winwidth / this.playfield_zoom - (m * 2)),
 				y = m + this.prand() * (this.winheight / this.playfield_zoom - (m * 2)),
 				production = 20 + (this.prand() * 80),
-				texture = Math.random() * Surface.textures.length | 0,
+				texture = Math.random() * Object.keys(Surface.maps).length | 0,
 				owner = 0;
 			this.planets.push(new Planet(x, y, production, owner, id, texture));
 		});
