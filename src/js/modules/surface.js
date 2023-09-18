@@ -4,6 +4,7 @@ let Surface = {
 	maps: "astroid hoth ixchel moon saturn".split(" "),
 	// maps: "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" "),
 	init() {
+		this.rot = 0;
 		this.images = [...this.maps];
 		this.loadTextures();
 	},
@@ -67,6 +68,7 @@ let Surface = {
 		}
 
 		ctx.globalCompositeOperation = "hard-light";
+		// ctx.globalCompositeOperation = "multiply";
 		// ctx.globalCompositeOperation = "screen";
 		
 		// ctx.globalAlpha = .5;
@@ -74,16 +76,31 @@ let Surface = {
 		ctx.beginPath();
 		ctx.arc(x, y, r, 0, tau, true);
 		ctx.fill();
-
-
-		// ctx.globalCompositeOperation = "multiply";
-		// ctx.strokeStyle = "#ff0000";
-		// ctx.lineWidth = 5;
-		// ctx.beginPath();
-		// ctx.arc(x, y, r, 0, tau, true);
-		// ctx.stroke();
-
 		ctx.restore();
+
+
+		this.rot += .0005;
+
+		ctx.save();
+		ctx.translate(x, y);
+		ctx.rotate(this.rot);
+		ctx.translate(-x, -y);
+
+		let tot = 15,
+			len = 15;
+		ctx.strokeStyle = p.color + p.opacity;
+		ctx.lineWidth = 4;
+		r += 5;
+		while (len--) {
+			let s1 = len / tot,
+				s2 = (len - .65) / tot;
+			ctx.beginPath();
+			ctx.arc(x, y, r, s1*tau, s2*tau, true);
+			ctx.stroke();
+		}
+		
+		ctx.restore();
+
 
 		// production number
 		ctx.lineWidth = 3;

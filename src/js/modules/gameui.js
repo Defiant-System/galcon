@@ -79,7 +79,7 @@ let GameUI = {
 			// this.ctx.stroke();
 
 			// ship gui
-			this.ctx.strokeStyle = Colors[s.owner] || "#ffffff";
+			this.ctx.strokeStyle = s.color || "#ffffff";
 			this.ctx.lineJoin = "round";
 			// ship outline
 			this.ctx.beginPath();

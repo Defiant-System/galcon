@@ -22,7 +22,7 @@ class Shipset {
 		this._allships.splice(index, 1);
 	}
 
-	LaunchShips(owner, source, target, ship_num) {
+	LaunchShips(source, target, ship_num) {
 		if (source.ships < 1) return;
 		if (ship_num > source.ships) ship_num = source.ships;
 		if (ship_num < 1) ship_num = 1;
@@ -40,7 +40,8 @@ class Shipset {
         _loc_16.normalize(source.radius + _loc_15 / 6);
         _loc_16 = _loc_16.add(source.pos);
         let _loc_12 = 0;
-       	let fleet_id = this.fleet_id++
+       	let fleet_id = this.fleet_id++;
+       	let owner = source.owner;
 
         while (_loc_12 < ship_num) {
             let _loc_13 = Math.random() * Math.PI * 2;

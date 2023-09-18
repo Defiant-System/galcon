@@ -16,7 +16,11 @@
 @import "./modules/test.js"
 
 
-let Colors = ["#36d", "#ff9900", "#009999"];
+let Palette = [
+		{ color: "#3366dd", opacity: "aa", name: "mine" },
+		{ color: "#ff5555", opacity: "99", name: "enemy" },
+		{ color: "#aaaaaa", opacity: "00", name: "neutral" },
+	];
 
 
 const galcon = {

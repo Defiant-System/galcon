@@ -15,7 +15,7 @@ let Main = {
 
 		// create planets
 		this.planets = [];
-		this.planet_types = ["mine", "enemy", "neutral"];
+
 		// generate random map
 		this.generateMap();
 		// level.planets.map(p => this.planets.push(new Planet(...p)));
@@ -38,7 +38,7 @@ let Main = {
 				y = m + this.prand() * (this.winheight / this.playfield_zoom - (m * 2)),
 				production = 20 + (this.prand() * 80),
 				texture = Math.random() * Object.keys(Surface.maps).length | 0,
-				owner = (Math.random() * 3) | 0;
+				owner = 2;
 			this.planets.push(new Planet(x, y, production, owner, id, texture));
 		});
 		// make sure of distance
@@ -55,11 +55,10 @@ let Main = {
 		this.planets.map((p, i) => {
 			let y = p.pos._y - p.radius,
 				x = p.pos._x - p.radius,
-				d = p.radius << 1,
-				owner = "neutral"; //this.planet_types[p.owner];
-			if (i === 0) owner = "mine";
-			if (i === this.planets.length-1) owner = "enemy";
-			divs.push(`<div class="planet-outline ${owner}" data-id="${p.id}" style="width: ${d}px; height: ${d}px; top: ${y}px; left: ${x}px;"></div>`);
+				d = p.radius << 1;
+			if (i === 0) p.owner = 0;
+			if (i === this.planets.length-1) p.owner = 1;
+			divs.push(`<div class="planet-outline ${Palette[p.owner].name}" data-id="${p.id}" style="width: ${d}px; height: ${d}px; top: ${y}px; left: ${x}px;"></div>`);
 		});
 		APP.stage.els.el.find(".planet-outline").remove();
 		APP.stage.els.el.append(divs.join(""));

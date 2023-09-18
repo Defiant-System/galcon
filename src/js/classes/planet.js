@@ -13,8 +13,9 @@ class Planet {
 		this.id = id;
 		this.pos = new Point(Math.floor(x), Math.floor(y));
 		this.zpos = new Point();
-		this.owner = owner;
-		this.color = Colors[owner] || "#ffffff";
+		this._owner = owner;
+		this.color = Palette[owner].color;
+		this.opacity = Palette[owner].opacity;
 		this.texture = Surface.maps[texture];
 		this.production = Math.max(Math.min(production, 70), 20);
 		this.ships = this.production;
@@ -26,6 +27,16 @@ class Planet {
 		this.rotation_max = 0;
 
 		this.Tick();
+	}
+
+	get owner() {
+		return this._owner;
+	}
+
+	set owner(v) {
+		this.color = Palette[v].color;
+		this.opacity = Palette[v].opacity;
+		this._owner = v;
 	}
 
 	Tick() {

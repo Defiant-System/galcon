@@ -21,6 +21,7 @@ class Ship {
 		this.target = planet;
 		this.fleet_id = fleet_id;
 		this.owner = owner;
+		this.color = Palette[owner].color;
 		this.value = value;
 
 		this.collision_history = [];
