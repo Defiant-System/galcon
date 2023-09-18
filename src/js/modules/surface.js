@@ -79,11 +79,9 @@ let Surface = {
 		ctx.restore();
 
 
-		this.rot += .0005;
-
 		ctx.save();
 		ctx.translate(x, y);
-		ctx.rotate(this.rot);
+		ctx.rotate(this.rot += .0005);
 		ctx.translate(-x, -y);
 
 		let tot = 15,
@@ -98,9 +96,7 @@ let Surface = {
 			ctx.arc(x, y, r, s1*tau, s2*tau, true);
 			ctx.stroke();
 		}
-		
 		ctx.restore();
-
 
 		// production number
 		ctx.lineWidth = 3;
