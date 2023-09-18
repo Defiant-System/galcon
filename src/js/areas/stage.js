@@ -14,9 +14,16 @@
 		let APP = galcon,
 			Self = APP.stage,
 			selected,
+			value,
 			el;
-		//console.log(event);
+		// console.log(event);
 		switch (event.type) {
+			case "pause-game":
+				value = Self.els.el.hasClass("paused");
+				Self.els.el.toggleClass("paused", value);
+				// stops loop
+				GameUI.fpsControl.stop();
+				break;
 			case "generate-map":
 				Main.planets = [];
 				Main.generateMap();

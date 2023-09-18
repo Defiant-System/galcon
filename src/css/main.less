@@ -17,6 +17,14 @@ content {
 		right: 0;
 		bottom: 0;
 		background: url(~/img/bg-02.jpg) 50% 50% no-repeat;
+
+		&:not(.paused) {
+			.planet-outline {
+				&:before {
+					animation: rotate 45s linear infinite;
+				}
+			}
+		}
 		
 		canvas {
 			position: absolute;
@@ -50,7 +58,6 @@ content {
 				bottom: -7px;
 				border: 4px dashed transparent;
 				border-radius: inherit;
-				animation: rotate 45s linear infinite;
 			}
 
 			&:after {
@@ -60,14 +67,14 @@ content {
 				left: -6px;
 				right: -6px;
 				bottom: -6px;
-				border: 2px solid #0ff;
+				border: 2px solid #36d;
 				border-radius: inherit;
 				opacity: 0;
 			}
 
 			&.mine {
 				&:before {
-					border-color: #0ff;
+					border-color: #36d;
 				}
 			}
 			

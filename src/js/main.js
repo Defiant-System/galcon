@@ -16,7 +16,7 @@
 @import "./modules/test.js"
 
 
-let Colors = ["#ff00ff", "#ff9900", "#009999"];
+let Colors = ["#36d", "#ff9900", "#009999"];
 
 
 const galcon = {
@@ -48,9 +48,7 @@ const galcon = {
 				if (event.char !== "space") return;
 				/* falls through */
 			case "pause-game":
-				// stops loop
-				GameUI.fpsControl.stop();
-				break;
+				return Self.stage.dispatch({ type: "pause-game" });
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;
