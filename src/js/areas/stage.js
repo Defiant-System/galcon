@@ -24,6 +24,11 @@
 				// stops loop
 				GameUI.fpsControl.stop();
 				break;
+			case "output-pgn":
+				value = { planets: [] };
+				Main.planets.map(p => value.planets.push([p.pos._x, p.pos._y, p.production, p.owner, p.id, p.texture]));
+				console.log( JSON.stringify(value) );
+				break;
 			case "generate-map":
 				Main.planets = [];
 				Main.generateMap();
@@ -33,6 +38,8 @@
 				// return Fx.explode(event.offsetX, event.offsetY);
 				// return Main.allships.AddShip(event.offsetX, event.offsetY, Main.planets[2]);
 				
+				// TODO: draw line from sorce tp target
+
 				el = $(event.target);
 				selected = Self.els.el.find(".planet-outline.selected");
 				if (el.hasClass("planet-outline")) {

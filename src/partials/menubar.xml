@@ -14,5 +14,6 @@
 		<Menu name="Pause" click="pause-game"/>
 		<Menu type="divider"/>
 		<Menu name="Generate Map" click="generate-map"/>
+		<Menu name="Output PGN" click="output-pgn"/>
 	</Menu>
 </MenuBar>

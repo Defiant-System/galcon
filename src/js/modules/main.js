@@ -33,7 +33,7 @@ let Main = {
 			divs = [];
 		// basic random map
 		[...Array(this.planet_count)].map((e, id) => {
-			let m = 50,
+			let m = 70,
 				x = m + this.prand() * (this.winwidth / this.playfield_zoom - (m * 2)),
 				y = m + this.prand() * (this.winheight / this.playfield_zoom - (m * 2)),
 				production = 20 + (this.prand() * 60),
@@ -58,6 +58,12 @@ let Main = {
 					p3.pos = this.findEmtpySpace(p3, ship_radius);
 				}
 			});
+		});
+		// remove "floats"
+		this.planets.map((p, i) => {
+			p.pos._x = p.pos._x | 0;
+			p.pos._y = p.pos._y | 0;
+			p.radius = p.radius | 0;
 		});
 		// DIV hoverelements
 		this.planets.map((p, i) => {

@@ -11,15 +11,20 @@ class Planet {
 			initialized = false;
 		
 		this.id = id;
-		this.pos = new Point(Math.floor(x), Math.floor(y));
+		this.pos = new Point(x, y);
 		this.zpos = new Point();
 		this._owner = owner;
 		this.color = Palette[owner].color;
 		this.opacity = Palette[owner].opacity;
 		this.texture = Surface.maps[texture];
 		this.production = production;
-		this.ships = this.owner !== 2 ? Math.max(Math.min(production, 65), 15) : production;
-		this.radius = 18 + Math.round(this.production * .25);
+		this.ships = production;
+		this.radius = (this.production * .4) | 0;
+		
+		if (this.owner === 2) {
+			this.radius = Math.min(this.radius + 10, 35);
+			this.production = Math.max(Math.min(production, 65), 15);
+		}
 
 		this.tilt = ((Math.random() * 90) - 45) | 0;
 		this.speed = (Math.random() * 3) - 1.5;
