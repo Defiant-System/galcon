@@ -341,6 +341,19 @@ class Point {
         return Math.sqrt(myX * myX + myY * myY);			
 	}
 
+	direction(point) {
+		var myX = point._x - this._x,
+			myY = point._y - this._y;
+   		return Math.atan2(myY, myX);
+	}
+
+	moveTowards(point, step) {
+		let angle = this.direction(point);
+		this._x += Math.cos(angle) * step;
+		this._y += Math.sin(angle) * step;
+		return this;
+	}
+
 	abs() {
 		this._x = Math.abs(this._x);
 		this._y = Math.abs(this._y);

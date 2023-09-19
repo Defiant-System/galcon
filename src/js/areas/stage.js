@@ -26,7 +26,10 @@
 				break;
 			case "output-pgn":
 				value = { planets: [] };
-				Main.planets.map(p => value.planets.push([p.pos._x, p.pos._y, p.production, p.owner, p.id, p.texture]));
+				Main.planets.map(p => {
+					let texture = Surface.maps.indexOf(p.texture);
+					value.planets.push([p.pos._x, p.pos._y, p.production, p.owner, p.id, texture])
+				});
 				console.log( JSON.stringify(value) );
 				break;
 			case "generate-map":
@@ -49,6 +52,9 @@
 							to = Main.getPlanet(el.data("id")),
 							ship_num = from.ships * .75;
 						Main.allships.LaunchShips(from, to, ship_num);
+
+						Fx.line(from, to);
+
 						// reset
 						return selected.removeClass("selected");
 					} else if (el.hasClass("mine")) {
@@ -56,6 +62,8 @@
 					}
 				} else {
 					selected.removeClass("selected");
+
+					Fx.clearLines();
 				}
 				break;
 		}

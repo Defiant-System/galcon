@@ -18,6 +18,13 @@ let Test = {
 		// }, 1000);
 
 		// setTimeout(() => Fx.explode(150, 140), 1e3);
+		// setTimeout(() => {
+		// 	let from = Main.planets[0],
+		// 		to = Main.planets[3];
+		// 	Fx.line(from, to);
+		// }, 1e3);
+
+		// setTimeout(() => Fx.clearLines(), 3e3);
 
 		// setTimeout(() => GameUI.fpsControl.stop(), 10e3);
 	}

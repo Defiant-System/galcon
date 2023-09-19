@@ -32,9 +32,9 @@ let Surface = {
 			y1 = y0,
 			gradient = ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
 		
-		gradient.addColorStop(0, "#fff");
-		gradient.addColorStop(.3, "#888");
-		gradient.addColorStop(1, "#222");
+		gradient.addColorStop(0, "#ccc");
+		gradient.addColorStop(.3, "#777");
+		gradient.addColorStop(1, "#1e1e1e");
 
 		ctx.save();
 		ctx.translate(x, y);
