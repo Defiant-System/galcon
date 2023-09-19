@@ -11,6 +11,7 @@
 @import "./modules/main.js"
 @import "./modules/fx.js"
 @import "./modules/starfield.js"
+@import "./modules/namegen.js"
 @import "./modules/gameui.js"
 @import "./modules/surface.js"
 @import "./modules/test.js"
