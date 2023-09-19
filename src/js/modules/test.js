@@ -21,8 +21,10 @@ let Test = {
 		// setTimeout(() => {
 		// 	let from = Main.planets[0],
 		// 		to = Main.planets[3];
-		// 	Fx.line(from, to);
+		// 	Fx.line.add(from, to);
 		// }, 1e3);
+
+		// setTimeout(() => Fx.outline.add(Main.planets[0], Palette[0].color), 1e3);
 
 		// setTimeout(() => Fx.clearLines(), 3e3);
 

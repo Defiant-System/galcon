@@ -79,20 +79,22 @@ let Surface = {
 		// ctx.stroke();
 		ctx.restore();
 
+		// fill colver START
 		ctx.save();
-		ctx.globalCompositeOperation = "multiply";
+		ctx.globalCompositeOperation = "overlay";
 		ctx.globalAlpha = .75;
 		ctx.fillStyle = p.color;
 		ctx.beginPath();
 		ctx.arc(x, y, r, 0, tau, true);
 		ctx.fill();
 		ctx.restore();
+		// fill colver END
 
+		/*/ dashed line START
 		ctx.save();
 		ctx.translate(x, y);
 		ctx.rotate(this.rot += .00035);
 		ctx.translate(-x, -y);
-
 		let tot = 15,
 			len = 15;
 		ctx.strokeStyle = p.color + p.opacity;
@@ -106,6 +108,7 @@ let Surface = {
 			ctx.stroke();
 		}
 		ctx.restore();
+		// dashed line END */
 
 		// production number
 		ctx.lineWidth = 3;

@@ -7,11 +7,26 @@ let Fx = {
 	},
 	clearLines() {
 		this.pipe.map((e, i) => {
-			if (e.type === "line") this.pipe.splice(i, 1);
+			if (["line", "outline"].includes(e.type)) this.pipe.splice(i, 1);
 		});
 	},
-	line(from, to) {
-		this.pipe.push({ type: "line", from, to });
+	outline: {
+		add(planet, color) {
+			Fx.pipe.push({ type: "outline", planet, color });
+		},
+		remove(id) {
+			Fx.pipe.map((e, i) => {
+				if (e.type === "outline" && e.planet.id === id) Fx.pipe.splice(i, 1);
+			});
+		}
+	},
+	line: {
+		add(from, to) {
+			Fx.pipe.push({ type: "line", from, to });
+		},
+		remove(id) {
+
+		}
 	},
 	explode(x, y) {
 		this.pipe.push({ type: "explosion", x: x-16, y: y-16, r: 32, frames: [
@@ -23,20 +38,28 @@ let Fx = {
 			] });
 	},
 	render(ctx) {
-		let p1,
-			p2;
+		let tau = Math.PI * 2,
+			p1, p2;
 
 		ctx.save();
 		this.pipe.map((e, i) => {
 			switch (e.type) {
+				case "outline":
+					let p1 = e.planet;
+					// paint
+					ctx.lineWidth = 2.5;
+					ctx.strokeStyle = e.color;
+					ctx.beginPath();
+					ctx.arc(p1.pos._x, p1.pos._y, p1.radius + 5, 0, tau, true);
+					ctx.stroke();
+					break;
 				case "line":
 					p1 = e.from.pos.clone();
 					p2 = e.to.pos.clone();
-
 					// line from and to "orbit"
 					p1.moveTowards(p2, e.from.radius + 5);
 					p2.moveTowards(p1, e.to.radius + 5);
-
+					// paint
 					ctx.lineWidth = 2.5;
 					ctx.strokeStyle = e.from.color;
 					ctx.beginPath();

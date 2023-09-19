@@ -73,9 +73,9 @@ let Main = {
 			let y = p.pos._y - p.radius,
 				x = p.pos._x - p.radius,
 				d = p.radius << 1;
-			divs.push(`<div class="planet-outline ${Palette[p.owner].name}" data-id="${p.id}" style="width: ${d}px; height: ${d}px; top: ${y}px; left: ${x}px;"></div>`);
+			divs.push(`<div class="planet-disc ${Palette[p.owner].name}" data-id="${p.id}" style="width: ${d}px; height: ${d}px; top: ${y}px; left: ${x}px;"></div>`);
 		});
-		APP.stage.els.el.find(".planet-outline").remove();
+		APP.stage.els.el.find(".planet-disc").remove();
 		APP.stage.els.el.append(divs.join(""));
 	},
 	findEmtpySpace(planet, ship_radius) {

@@ -10,7 +10,7 @@
 			canvas: el.find("canvas"),
 		};
 		// bind event handlers
-		this.els.el.on("mouseover mouseout", ".planet-outline", this.dispatch);
+		this.els.el.on("mousedown mouseup mouseover mouseout", this.gameplay);
 	},
 	dispatch(event) {
 		let APP = galcon,
@@ -20,14 +20,6 @@
 			el;
 		// console.log(event);
 		switch (event.type) {
-			// native events
-			case "mouseover":
-				event.target.classList.add("hover");
-				break;
-			case "mouseout":
-				event.target.classList.remove("hover");
-				break;
-			// custom events
 			case "pause-game":
 				value = Self.els.el.hasClass("paused");
 				Self.els.el.toggleClass("paused", value);
@@ -47,13 +39,13 @@
 				Main.generateMap();
 				GameUI.render();
 				break;
-			case "select-planet":
+			case "select-planet1":
 				// return Fx.explode(event.offsetX, event.offsetY);
 				// return Main.allships.AddShip(event.offsetX, event.offsetY, Main.planets[2]);
 				
 				el = $(event.target);
-				selected = Self.els.el.find(".planet-outline.selected");
-				if (el.hasClass("planet-outline")) {
+				selected = Self.els.el.find(".planet-disc.selected");
+				if (el.hasClass("planet-disc")) {
 					if (selected.length) {
 						// let from = selected.map(e => Main.getPlanet(e.getAttribute("data-id"))),
 						let from = Main.getPlanet(selected.data("id")),
@@ -72,6 +64,39 @@
 					selected.removeClass("selected");
 
 					Fx.clearLines();
+				}
+				break;
+		}
+	},
+	gameplay(event) {
+		let APP = galcon,
+			Self = APP.stage,
+			Drag = Self.drag,
+			planet,
+			el;
+		// console.log(event);
+		switch (event.type) {
+			case "mousedown":
+				el = $(event.target);
+				if (el.hasClass("planet-disc")) {
+					// Fx.outline.add(Main.planets[0], Palette[0].color);
+				} else {
+					Fx.clearLines();
+				}
+				break;
+			case "mouseup":
+				break;
+			case "mouseover":
+				el = $(event.target);
+				if (el.data("id")) {
+					planet = Main.getPlanet(+el.data("id"));
+					Fx.outline.add(planet, Palette[0].color);
+				}
+				break;
+			case "mouseout":
+				el = $(event.target);
+				if (el.data("id")) {
+					Fx.outline.remove(+el.data("id"));
 				}
 				break;
 		}

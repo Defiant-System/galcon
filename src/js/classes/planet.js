@@ -10,7 +10,7 @@ class Planet {
 			attack_timer = 0,
 			initialized = false;
 		
-		this.id = id;
+		this.id = id+1;
 		this.pos = new Point(x, y);
 		this.zpos = new Point();
 		this._owner = owner;
@@ -70,7 +70,7 @@ class Planet {
 				// sound effect
 				window.audio.play("takeover");
 				// 
-				let el = galcon.stage.els.el.find(`.planet-outline[data-id="${this.id}"]`);
+				let el = galcon.stage.els.el.find(`.planet-disc[data-id="${this.id}"]`);
 				el.removeClass("neutral enemy mine").addClass("mine");
 			}
 			// explosion effect
