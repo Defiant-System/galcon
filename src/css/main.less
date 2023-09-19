@@ -35,10 +35,12 @@ content {
 		}
 
 		.planet-outline {
+			// display: none;
 			position: absolute;
-			box-shadow: inset -3px -1px 3px rgba(#fff,.175),
+			box-shadow: inset -3px -1px 3px rgba(#fff,.1),
 						0 0 3px rgba(#fff,.5);
 			border-radius: 50%;
+			// mix-blend-mode: multiply;
 
 			&.selected:after {
 				opacity: 1;
@@ -62,9 +64,11 @@ content {
 				&:after {
 					border-color: #36d;
 				}
-
-				&:hover:after {
-					opacity: 1;
+				
+				&.hover {
+					&:after {
+						opacity: 1;
+					}
 				}
 			}
 			

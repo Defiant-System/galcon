@@ -9,6 +9,8 @@
 			el,
 			canvas: el.find("canvas"),
 		};
+		// bind event handlers
+		this.els.el.on("mouseover mouseout", ".planet-outline", this.dispatch);
 	},
 	dispatch(event) {
 		let APP = galcon,
@@ -18,6 +20,14 @@
 			el;
 		// console.log(event);
 		switch (event.type) {
+			// native events
+			case "mouseover":
+				event.target.classList.add("hover");
+				break;
+			case "mouseout":
+				event.target.classList.remove("hover");
+				break;
+			// custom events
 			case "pause-game":
 				value = Self.els.el.hasClass("paused");
 				Self.els.el.toggleClass("paused", value);
@@ -41,8 +51,6 @@
 				// return Fx.explode(event.offsetX, event.offsetY);
 				// return Main.allships.AddShip(event.offsetX, event.offsetY, Main.planets[2]);
 				
-				// TODO: draw line from sorce tp target
-
 				el = $(event.target);
 				selected = Self.els.el.find(".planet-outline.selected");
 				if (el.hasClass("planet-outline")) {

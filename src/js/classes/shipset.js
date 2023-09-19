@@ -54,7 +54,8 @@ class Shipset {
             }
             _loc_12++;
         }
-
+        // clear launch lines
+        Fx.clearLines()
 		// sound effect
 		window.audio.play("launch");
 	}

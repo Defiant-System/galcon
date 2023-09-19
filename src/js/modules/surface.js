@@ -68,16 +68,25 @@ let Surface = {
 		}
 
 		ctx.globalCompositeOperation = "hard-light";
-		// ctx.globalCompositeOperation = "multiply";
 		// ctx.globalCompositeOperation = "screen";
 		
-		// ctx.globalAlpha = .5;
 		ctx.fillStyle = gradient;
+		// ctx.strokeStyle = "#000";
+		// ctx.lineWidth = 5;
+		ctx.beginPath();
+		ctx.arc(x, y, r, 0, tau, true);
+		ctx.fill();
+		// ctx.stroke();
+		ctx.restore();
+
+		ctx.save();
+		ctx.globalCompositeOperation = "multiply";
+		ctx.globalAlpha = .75;
+		ctx.fillStyle = p.color;
 		ctx.beginPath();
 		ctx.arc(x, y, r, 0, tau, true);
 		ctx.fill();
 		ctx.restore();
-
 
 		ctx.save();
 		ctx.translate(x, y);
