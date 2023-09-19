@@ -17,8 +17,9 @@ let Main = {
 		this.planets = [];
 
 		// generate random map
-		this.generateMap();
-		// level.planets.map(p => this.planets.push(new Planet(...p)));
+		// this.generateMap();
+		level.planets.map(p => this.planets.push(new Planet(...p)));
+		this.appendHtml();
 
 		// create shipsets
 		let rect = new Rectangle(0, 0, this.winwidth, this.winheight);
@@ -28,9 +29,7 @@ let Main = {
 		return this.planets.find(p => p.id === +id);
 	},
 	generateMap() {
-		let APP = galcon,
-			ship_radius = Ship._radius << 1,
-			divs = [];
+		let ship_radius = Ship._radius << 1;
 		// basic random map
 		[...Array(this.planet_count)].map((e, id) => {
 			let m = 70,
@@ -65,6 +64,10 @@ let Main = {
 			p.pos._y = p.pos._y | 0;
 			p.radius = p.radius | 0;
 		});
+	},
+	appendHtml() {
+		let APP = galcon,
+			divs = [];
 		// DIV hoverelements
 		this.planets.map((p, i) => {
 			let y = p.pos._y - p.radius,
