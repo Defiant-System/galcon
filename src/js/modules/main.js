@@ -17,8 +17,8 @@ let Main = {
 		this.planets = [];
 
 		// generate random map
-		// this.generateMap();
-		level.planets.map(p => this.planets.push(new Planet(...p)));
+		this.generateMap();
+		// level.planets.map(p => this.planets.push(new Planet(...p)));
 		this.appendHtml();
 
 		// create shipsets
@@ -40,11 +40,11 @@ let Main = {
 				owner = 2;
 			if (id === 0) {
 				owner = 0;
-				production = 100;
+				production = 90;
 			}
 			if (id === this.planet_count-1) {
 				owner = 1;
-				production = 100;
+				production = 90;
 			}
 			this.planets.push(new Planet(x, y, production, owner, id, texture));
 		});

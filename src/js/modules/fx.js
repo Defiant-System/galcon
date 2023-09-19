@@ -55,7 +55,7 @@ let Fx = {
 				case "outline":
 					p1 = e.planet;
 					// paint
-					ctx.lineWidth = 2.5;
+					ctx.lineWidth = 3;
 					ctx.strokeStyle = e.color;
 					ctx.beginPath();
 					ctx.arc(p1.pos._x, p1.pos._y, p1.radius + 5, 0, tau, true);
@@ -68,7 +68,7 @@ let Fx = {
 					p1.moveTowards(p2, e.from.radius + 5);
 					p2.moveTowards(p1, e.to.radius + 5);
 					// paint
-					ctx.lineWidth = 2.5;
+					ctx.lineWidth = 3;
 					ctx.strokeStyle = e.from.color;
 					ctx.beginPath();
 					ctx.moveTo(p1._x, p1._y);

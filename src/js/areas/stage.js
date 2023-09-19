@@ -44,18 +44,11 @@
 				el = $(event.target);
 				if (el.hasClass("mine") && el.data("id")) {
 					let planet = Main.getPlanet(+el.data("id"));
-					// if (Self.selected.find(p => p.id === +el.data("id"))) {
-					// 	Fx.outline.remove(+el.data("id"));
-					// 	Self.selected.map((p, i) => {
-					// 		if (p.id === +el.data("id")) Self.selected.splice(i, 1);
-					// 	});
-					// } else {
-						Self.selected = Self.els.el.find(".planet-disc.mine").map(el => Main.getPlanet(+el.getAttribute("data-id")));
-						Self.selected.map(p => Fx.line.add(p, planet));
-					// }
-				} else {
-					Self.selected = [];
-					Fx.clearLines();
+					Self.selected = Self.els.el.find(".planet-disc.mine").map(el => Main.getPlanet(+el.getAttribute("data-id")));
+					Self.selected.map(p => {
+						Fx.outline.add(p, Palette[planet.owner].color);
+						Fx.line.add(p, planet);
+					});
 				}
 				break;
 		}
@@ -104,7 +97,7 @@
 				break;
 			case "mouseover":
 				el = $(event.target);
-				if (el.data("id")) {
+				if (el.data("id") && Self.selected.length) {
 					planet = Main.getPlanet(+el.data("id"));
 					Fx.outline.add(planet, Palette[0].color);
 					Self.selected.map(p => Fx.line.add(p, planet));

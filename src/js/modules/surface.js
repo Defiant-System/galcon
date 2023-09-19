@@ -58,57 +58,55 @@ let Surface = {
 			} else {
 				let tX = x - tW + r - p.rotation;
 				ctx.drawImage(img, tX, y - r, tW, tH);
-				
-				if (p.rotation < -r2) {
-					ctx.drawImage(img, tX - tW, y - r, tW, tH);
-				} else if (p.rotation > 0) {
-					ctx.drawImage(img, tX + tW, y - r, tW, tH);
-				}
+				if (p.rotation < -r2) ctx.drawImage(img, tX - tW, y - r, tW, tH);
+				else if (p.rotation > 0) ctx.drawImage(img, tX + tW, y - r, tW, tH);
 			}
 		}
 
-		ctx.restore();
-
-		ctx.save();
-		// ctx.translate(.5, .5);
-		ctx.globalCompositeOperation = "hard-light";
-		// ctx.lineWidth = .5;
-		// ctx.strokeStyle = "#000";
+		ctx.globalCompositeOperation = "multiply";
 		ctx.fillStyle = gradient;
 		ctx.beginPath();
 		ctx.arc(x, y, r, 0, tau, true);
-		// ctx.stroke();
 		ctx.fill();
 
 		// fill colver START
 		ctx.globalCompositeOperation = "overlay";
-		// ctx.globalAlpha = .75;
 		ctx.fillStyle = p.color;
 		ctx.beginPath();
 		ctx.arc(x, y, r, 0, tau, true);
 		ctx.fill();
 		// fill colver END
+
 		ctx.restore();
 
-		/*/ dashed line START
-		ctx.save();
-		ctx.translate(x, y);
-		ctx.rotate(this.rot += .00035);
-		ctx.translate(-x, -y);
-		let tot = 15,
-			len = 15;
-		ctx.strokeStyle = p.color + p.opacity;
-		ctx.lineWidth = 4;
-		r += 5;
-		while (len--) {
-			let s1 = len / tot,
-				s2 = (len - .3) / tot;
-			ctx.beginPath();
-			ctx.arc(x, y, r, s1*tau, s2*tau, true);
-			ctx.stroke();
+
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = "#000";
+		ctx.beginPath();
+		ctx.arc(x, y, r, 0, tau, true);
+		ctx.stroke();
+
+		/*/ dashed line START */
+		if (p.owner === 0) {
+			ctx.save();
+			ctx.translate(x, y);
+			ctx.rotate(p.aura += .0075);
+			ctx.translate(-x, -y);
+			let tot = 15,
+				len = 15;
+			ctx.strokeStyle = p.color + "77";
+			ctx.lineWidth = 3;
+			r += 5;
+			while (len--) {
+				let s1 = len / tot,
+					s2 = (len - .6) / tot;
+				ctx.beginPath();
+				ctx.arc(x, y, r, s1*tau, s2*tau, true);
+				ctx.stroke();
+			}
+			ctx.restore();
 		}
-		ctx.restore();
-		// dashed line END */
+		// dashed line END 
 
 		// production number
 		ctx.lineWidth = 3;

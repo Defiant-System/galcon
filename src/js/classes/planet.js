@@ -15,7 +15,6 @@ class Planet {
 		this.zpos = new Point();
 		this._owner = owner;
 		this.color = Palette[owner].color;
-		this.opacity = Palette[owner].opacity;
 		this.texture = Surface.maps[texture];
 		this.production = production;
 		this.ships = production;
@@ -29,6 +28,7 @@ class Planet {
 
 		this.tilt = ((Math.random() * 90) - 45) | 0;
 		this.speed = (Math.random() * 3) - 1.5;
+		this.aura = 0;
 		this.rotation = 0;
 		this.rotation_max = 0;
 
@@ -41,7 +41,6 @@ class Planet {
 
 	set owner(v) {
 		this.color = Palette[v].color;
-		this.opacity = Palette[v].opacity;
 		this._owner = v;
 	}
 
