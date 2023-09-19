@@ -22,8 +22,9 @@ class Shipset {
 		this._allships.splice(index, 1);
 	}
 
-	LaunchShips(source, target, ship_num) {
+	LaunchShips(source, target, percentage) {
 		if (source.ships < 1) return;
+		let ship_num = source.ships * percentage;
 		if (ship_num > source.ships) ship_num = source.ships;
 		if (ship_num < 1) ship_num = 1;
 

@@ -36,7 +36,7 @@ let Starfield = {
 			py = stars[len].y * k + halfHeight;
 
 			if (px >= 0 && px <= width && py >= 0 && py <= height) {
-				shade = (1 - stars[len].z / 64),
+				shade = (1 - stars[len].z / 42),
 				size = shade * 2;
 				ctx.beginPath();
 				ctx.fillStyle = "rgba(255,255,255," + shade + ")";

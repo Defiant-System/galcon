@@ -67,16 +67,12 @@ let Surface = {
 			}
 		}
 
-		ctx.globalCompositeOperation = "hard-light";
 		// ctx.globalCompositeOperation = "screen";
-		
+		ctx.globalCompositeOperation = "hard-light";
 		ctx.fillStyle = gradient;
-		// ctx.strokeStyle = "#000";
-		// ctx.lineWidth = 5;
 		ctx.beginPath();
 		ctx.arc(x, y, r, 0, tau, true);
 		ctx.fill();
-		// ctx.stroke();
 		ctx.restore();
 
 		// fill colver START

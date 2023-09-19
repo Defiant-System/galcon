@@ -37,37 +37,12 @@
 			case "generate-map":
 				Main.planets = [];
 				Main.generateMap();
+				Main.appendHtml();
 				GameUI.render();
-				break;
-			case "select-planet1":
-				// return Fx.explode(event.offsetX, event.offsetY);
-				// return Main.allships.AddShip(event.offsetX, event.offsetY, Main.planets[2]);
-				
-				el = $(event.target);
-				selected = Self.els.el.find(".planet-disc.selected");
-				if (el.hasClass("planet-disc")) {
-					if (selected.length) {
-						// let from = selected.map(e => Main.getPlanet(e.getAttribute("data-id"))),
-						let from = Main.getPlanet(selected.data("id")),
-							to = Main.getPlanet(el.data("id")),
-							ship_num = from.ships * .75;
-						Main.allships.LaunchShips(from, to, ship_num);
-
-						Fx.line(from, to);
-
-						// reset
-						return selected.removeClass("selected");
-					} else if (el.hasClass("mine")) {
-						el.addClass("selected");
-					}
-				} else {
-					selected.removeClass("selected");
-
-					Fx.clearLines();
-				}
 				break;
 		}
 	},
+	selected: [],
 	gameplay(event) {
 		let APP = galcon,
 			Self = APP.stage,
@@ -78,9 +53,24 @@
 		switch (event.type) {
 			case "mousedown":
 				el = $(event.target);
-				if (el.hasClass("planet-disc")) {
-					// Fx.outline.add(Main.planets[0], Palette[0].color);
+				if (el.hasClass("planet-disc") && el.data("id")) {
+					planet = Main.getPlanet(+el.data("id"));
+					
+					Self.selected.push(planet);
+					if (Self.selected.length === 2) {
+						let source = Self.selected[0],
+							target = Self.selected[1],
+							percentage = .5;
+						Main.allships.LaunchShips(source, target, percentage);
+
+						Self.selected = [];
+						Fx.clearLines();
+						return;
+					}
+
+					Fx.outline.add(planet, Palette[planet.owner].color);
 				} else {
+					Self.selected = [];
 					Fx.clearLines();
 				}
 				break;
@@ -91,12 +81,19 @@
 				if (el.data("id")) {
 					planet = Main.getPlanet(+el.data("id"));
 					Fx.outline.add(planet, Palette[0].color);
+
+					if (Self.selected.length) {
+						Fx.line.add(Self.selected[0], planet);
+					}
 				}
 				break;
 			case "mouseout":
 				el = $(event.target);
 				if (el.data("id")) {
-					Fx.outline.remove(+el.data("id"));
+					planet = Main.getPlanet(+el.data("id"));
+					if (!Self.selected.includes(planet)) {
+						Fx.outline.remove(+el.data("id"));
+					}
 				}
 				break;
 		}

@@ -22,8 +22,9 @@ class Planet {
 		this.radius = (this.production * .4) | 0;
 		
 		if (this.owner === 2) {
-			this.radius = Math.min(this.radius + 10, 35);
-			this.production = Math.max(Math.min(production, 65), 15);
+			this.radius = Math.min(this.radius + 20, 35);
+			this.production = Math.max(Math.min(production, 35), 15);
+			this.ships = this.production;
 		}
 
 		this.tilt = ((Math.random() * 90) - 45) | 0;

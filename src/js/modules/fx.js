@@ -6,9 +6,9 @@ let Fx = {
 		this.img.src = "~/img/explosion-32.png";
 	},
 	clearLines() {
-		this.pipe.map((e, i) => {
-			if (["line", "outline"].includes(e.type)) this.pipe.splice(i, 1);
-		});
+		for (let i=this.pipe.length-1; i>=0; i--) {
+			if (["line", "outline"].includes(this.pipe[i].type)) this.pipe.splice(i, 1);
+		}
 	},
 	outline: {
 		add(planet, color) {
@@ -45,7 +45,7 @@ let Fx = {
 		this.pipe.map((e, i) => {
 			switch (e.type) {
 				case "outline":
-					let p1 = e.planet;
+					p1 = e.planet;
 					// paint
 					ctx.lineWidth = 2.5;
 					ctx.strokeStyle = e.color;

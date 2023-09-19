@@ -3,7 +3,7 @@ let Main = {
 	init() {
 		this.grand = 0;
 		this.rseed = Math.random() * 8388607 + 24478357;
-		this.planet_count = 15;
+		this.planet_count = 18;
 
 		this.winzoom = 1;
 		this.winwidth = GameUI.width;
@@ -17,8 +17,8 @@ let Main = {
 		this.planets = [];
 
 		// generate random map
-		// this.generateMap();
-		level.planets.map(p => this.planets.push(new Planet(...p)));
+		this.generateMap();
+		// level.planets.map(p => this.planets.push(new Planet(...p)));
 		this.appendHtml();
 
 		// create shipsets
@@ -35,7 +35,7 @@ let Main = {
 			let m = 70,
 				x = m + this.prand() * (this.winwidth / this.playfield_zoom - (m * 2)),
 				y = m + this.prand() * (this.winheight / this.playfield_zoom - (m * 2)),
-				production = 20 + (this.prand() * 60),
+				production = 10 + (this.prand() * 40),
 				texture = Math.random() * Object.keys(Surface.maps).length | 0,
 				owner = 2;
 			if (id === 0) {
