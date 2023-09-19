@@ -42,7 +42,7 @@ let Surface = {
 		ctx.translate(-x, -y);
 
 		ctx.beginPath();
-		ctx.arc(x, y, r, 0, tau, true);
+		ctx.arc(x, y, r-1, 0, tau, true);
         ctx.clip();
 
         if (Surface.texture[p.texture]) {
@@ -67,24 +67,28 @@ let Surface = {
 			}
 		}
 
-		// ctx.globalCompositeOperation = "screen";
-		ctx.globalCompositeOperation = "hard-light";
-		ctx.fillStyle = gradient;
-		ctx.beginPath();
-		ctx.arc(x, y, r, 0, tau, true);
-		ctx.fill();
 		ctx.restore();
 
-		// fill colver START
 		ctx.save();
+		// ctx.translate(.5, .5);
+		ctx.globalCompositeOperation = "hard-light";
+		// ctx.lineWidth = .5;
+		// ctx.strokeStyle = "#000";
+		ctx.fillStyle = gradient;
+		ctx.beginPath();
+		ctx.arc(x, y, r-1, 0, tau, true);
+		// ctx.stroke();
+		ctx.fill();
+
+		// fill colver START
 		ctx.globalCompositeOperation = "overlay";
-		ctx.globalAlpha = .75;
+		// ctx.globalAlpha = .75;
 		ctx.fillStyle = p.color;
 		ctx.beginPath();
-		ctx.arc(x, y, r, 0, tau, true);
+		ctx.arc(x, y, r+1, 0, tau, true);
 		ctx.fill();
-		ctx.restore();
 		// fill colver END
+		ctx.restore();
 
 		/*/ dashed line START
 		ctx.save();

@@ -29,52 +29,14 @@ content {
 		.planet-disc {
 			// opacity: 0;
 			position: absolute;
-			box-shadow: inset -3px -1px 3px rgba(#fff,.1),
-						0 0 3px rgba(#fff,.5);
+			// box-shadow: inset -3px -1px 3px rgba(#fff,.1);
 			border-radius: 50%;
-			// mix-blend-mode: multiply;
-
-			&.selected:after {
-				opacity: 1;
-			}
-
-			&:after {
-				content: "";
-				position: absolute;
-				top: -6px;
-				left: -6px;
-				right: -6px;
-				bottom: -6px;
-				border: 2px solid transparent;
-				border-radius: inherit;
-				opacity: 0;
-			}
 
 			&.mine {
 				cursor: pointer;
-				
-				&:after {
-					border-color: #36d;
-				}
-
-				&.hover1 {
-					&:after {
-						opacity: 1;
-					}
-				}
 			}
-			
-			&.enemy {
-				&:after {
-					border-color: #f00;
-				}
-			}
-			
-			&.neutral {
-				&:after {
-					border-color: #aaa;
-				}
-			}
+			&.enemy {}
+			&.neutral {}
 		}
 	}
 }
