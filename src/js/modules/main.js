@@ -54,7 +54,7 @@ let Main = {
 				if (p1 === p2) return;
 				if (p1.pos.distance(p2.pos) < p1.radius + p2.radius + ship_radius) {
 					let p3 = p1.radius > p2.radius ? p2 : p1;
-					p3.pos = this.findEmtpySpace(p3, ship_radius);
+					p3.pos = this.findEmtpySpace(p3, ship_radius * 1.5);
 				}
 			});
 		});

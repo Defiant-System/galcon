@@ -40,6 +40,17 @@
 				Main.appendHtml();
 				GameUI.render();
 				break;
+			case "select-all-planets":
+				el = $(event.target);
+				if (el.hasClass("planet-disc") && el.data("id")) {
+					let planet = Main.getPlanet(+el.data("id"));
+					Self.selected = Self.els.el.find(".planet-disc.mine").map(el => Main.getPlanet(+el.getAttribute("data-id")));
+					Self.selected.map(p => Fx.line.add(p, planet));
+				} else {
+					Self.selected = [];
+					Fx.clearLines();
+				}
+				break;
 		}
 	},
 	selected: [],
@@ -68,10 +79,6 @@
 						Fx.clearLines();
 						return;
 					}
-
-					// if (planet.owner === 0) {
-					// 	Fx.line.remove(planet.id);
-					// }
 					Fx.outline.add(planet, Palette[planet.owner].color);
 				} else {
 					Self.selected = [];
@@ -85,10 +92,6 @@
 				if (el.data("id")) {
 					planet = Main.getPlanet(+el.data("id"));
 					Fx.outline.add(planet, Palette[0].color);
-
-					// if (Self.selected.length) {
-					// 	Fx.line.add(Self.selected[0], planet);
-					// }
 					Self.selected.map(p => Fx.line.add(p, planet));
 				}
 				break;
