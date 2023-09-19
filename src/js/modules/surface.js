@@ -42,7 +42,7 @@ let Surface = {
 		ctx.translate(-x, -y);
 
 		ctx.beginPath();
-		ctx.arc(x, y, r-1, 0, tau, true);
+		ctx.arc(x, y, r, 0, tau, true);
         ctx.clip();
 
         if (Surface.texture[p.texture]) {
@@ -76,7 +76,7 @@ let Surface = {
 		// ctx.strokeStyle = "#000";
 		ctx.fillStyle = gradient;
 		ctx.beginPath();
-		ctx.arc(x, y, r-1, 0, tau, true);
+		ctx.arc(x, y, r, 0, tau, true);
 		// ctx.stroke();
 		ctx.fill();
 
@@ -85,7 +85,7 @@ let Surface = {
 		// ctx.globalAlpha = .75;
 		ctx.fillStyle = p.color;
 		ctx.beginPath();
-		ctx.arc(x, y, r+1, 0, tau, true);
+		ctx.arc(x, y, r, 0, tau, true);
 		ctx.fill();
 		// fill colver END
 		ctx.restore();

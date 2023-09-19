@@ -42,10 +42,17 @@
 				break;
 			case "select-all-planets":
 				el = $(event.target);
-				if (el.hasClass("planet-disc") && el.data("id")) {
+				if (el.hasClass("mine") && el.data("id")) {
 					let planet = Main.getPlanet(+el.data("id"));
-					Self.selected = Self.els.el.find(".planet-disc.mine").map(el => Main.getPlanet(+el.getAttribute("data-id")));
-					Self.selected.map(p => Fx.line.add(p, planet));
+					// if (Self.selected.find(p => p.id === +el.data("id"))) {
+					// 	Fx.outline.remove(+el.data("id"));
+					// 	Self.selected.map((p, i) => {
+					// 		if (p.id === +el.data("id")) Self.selected.splice(i, 1);
+					// 	});
+					// } else {
+						Self.selected = Self.els.el.find(".planet-disc.mine").map(el => Main.getPlanet(+el.getAttribute("data-id")));
+						Self.selected.map(p => Fx.line.add(p, planet));
+					// }
 				} else {
 					Self.selected = [];
 					Fx.clearLines();
@@ -66,6 +73,14 @@
 				el = $(event.target);
 				if (el.hasClass("planet-disc") && el.data("id")) {
 					planet = Main.getPlanet(+el.data("id"));
+
+					if (Self.selected.find(p => p.id === planet.id)) {
+						Fx.outline.remove(planet);
+						Self.selected.map((p, i) => {
+							if (p.id === planet.id) Self.selected.splice(i, 1);
+						});
+						return;
+					}
 					
 					Self.selected.push(planet);
 					if (planet.owner !== 0) {
