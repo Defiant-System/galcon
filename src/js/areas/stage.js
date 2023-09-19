@@ -57,17 +57,21 @@
 					planet = Main.getPlanet(+el.data("id"));
 					
 					Self.selected.push(planet);
-					if (Self.selected.length === 2) {
-						let source = Self.selected[0],
-							target = Self.selected[1],
-							percentage = .5;
-						Main.allships.LaunchShips(source, target, percentage);
-
+					if (planet.owner !== 0) {
+						for (let i=0, il=Self.selected.length-1; i<il; i++) {
+							let source = Self.selected[i],
+								target = Self.selected[il],
+								percentage = .5;
+							Main.allships.LaunchShips(source, target, percentage);
+						}
 						Self.selected = [];
 						Fx.clearLines();
 						return;
 					}
 
+					// if (planet.owner === 0) {
+					// 	Fx.line.remove(planet.id);
+					// }
 					Fx.outline.add(planet, Palette[planet.owner].color);
 				} else {
 					Self.selected = [];
@@ -82,9 +86,10 @@
 					planet = Main.getPlanet(+el.data("id"));
 					Fx.outline.add(planet, Palette[0].color);
 
-					if (Self.selected.length) {
-						Fx.line.add(Self.selected[0], planet);
-					}
+					// if (Self.selected.length) {
+					// 	Fx.line.add(Self.selected[0], planet);
+					// }
+					Self.selected.map(p => Fx.line.add(p, planet));
 				}
 				break;
 			case "mouseout":
@@ -94,6 +99,8 @@
 					if (!Self.selected.includes(planet)) {
 						Fx.outline.remove(+el.data("id"));
 					}
+					// remove all lines
+					Fx.clearLines("line");
 				}
 				break;
 		}

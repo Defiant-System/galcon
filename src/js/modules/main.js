@@ -17,8 +17,8 @@ let Main = {
 		this.planets = [];
 
 		// generate random map
-		this.generateMap();
-		// level.planets.map(p => this.planets.push(new Planet(...p)));
+		// this.generateMap();
+		level.planets.map(p => this.planets.push(new Planet(...p)));
 		this.appendHtml();
 
 		// create shipsets

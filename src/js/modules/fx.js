@@ -5,14 +5,17 @@ let Fx = {
 		this.img = new Image();
 		this.img.src = "~/img/explosion-32.png";
 	},
-	clearLines() {
+	clearLines(types="line outline") {
 		for (let i=this.pipe.length-1; i>=0; i--) {
-			if (["line", "outline"].includes(this.pipe[i].type)) this.pipe.splice(i, 1);
+			if (types.split(" ").includes(this.pipe[i].type)) this.pipe.splice(i, 1);
 		}
 	},
 	outline: {
 		add(planet, color) {
-			Fx.pipe.push({ type: "outline", planet, color });
+			let e = { type: "outline", planet, color };
+			// prevents duplicates
+			if (Fx.pipe.find(l => l.type == e.type && l.planet.id == e.planet.id && l.color == e.color)) return;
+			Fx.pipe.push(e);
 		},
 		remove(id) {
 			Fx.pipe.map((e, i) => {
@@ -22,10 +25,15 @@ let Fx = {
 	},
 	line: {
 		add(from, to) {
-			Fx.pipe.push({ type: "line", from, to });
+			let e = { type: "line", from, to };
+			// prevents duplicates
+			if (Fx.pipe.find(l => l.type == e.type && l.from.id == e.from.id && l.to.id == e.to.id)) return;
+			Fx.pipe.push(e);
 		},
 		remove(id) {
-
+			Fx.pipe.map((e, i) => {
+				if (e.type === "line" && e.to.id === id) Fx.pipe.splice(i, 1);
+			});
 		}
 	},
 	explode(x, y) {
