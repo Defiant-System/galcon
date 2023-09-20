@@ -40,7 +40,7 @@ class Ship {
 		let tmp_point = new Point(this.vpos._x - this.ppos._x, this.vpos._y - this.ppos._y);
 		let vector_angle = this.vangle;
 		let diff_angle = Math.atan2(tmp_point._y, tmp_point._x);
-		let move_angle = this.angle_speed * 4 * delta;
+		let move_angle = this.angle_speed * delta * .75;
 
 		if (this.vframe == 0) vector_angle = diff_angle;
         if (diff_angle - vector_angle > Math.PI) vector_angle += Math.PI * 2;

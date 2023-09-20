@@ -85,7 +85,7 @@ let Surface = {
 		ctx.arc(x, y, r, 0, tau, true);
 		ctx.stroke();
 
-		/*/ dashed line START */
+		/*/ dashed line START 
 		if (p.owner === Owner.HUMAN) {
 			ctx.save();
 			ctx.translate(x, y);
@@ -105,7 +105,7 @@ let Surface = {
 			}
 			ctx.restore();
 		}
-		// dashed line END 
+		// dashed line END */
 
 		// production number
 		ctx.lineWidth = 3;
