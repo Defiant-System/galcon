@@ -1,8 +1,9 @@
 
 let Surface = {
 	texture: {},
-	maps: "astroid hoth ixchel moon saturn".split(" "),
-	// maps: "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" "),
+	// maps: "astroid".split(" "),
+	// maps: "astroid hoth ixchel moon saturn".split(" "),
+	maps: "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" "),
 	init() {
 		this.rot = 0;
 		this.images = [...this.maps];
@@ -33,14 +34,15 @@ let Surface = {
 			gradient = ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
 		
 		gradient.addColorStop(0, "#ccc");
-		gradient.addColorStop(.3, "#777");
-		gradient.addColorStop(1, "#1e1e1e");
+		gradient.addColorStop(.3, "#666");
+		gradient.addColorStop(1, "#111");
 
 		ctx.save();
+		// tilt planet
 		ctx.translate(x, y);
 		ctx.rotate((p.tilt * Math.PI) / 180);
 		ctx.translate(-x, -y);
-
+		// clip planet area
 		ctx.beginPath();
 		ctx.arc(x, y, r, 0, tau, true);
         ctx.clip();
@@ -62,38 +64,38 @@ let Surface = {
 				else if (p.rotation > 0) ctx.drawImage(img, tX + tW, y - r, tW, tH);
 			}
 		}
-
-		ctx.globalCompositeOperation = "multiply";
+		// radial gradient
+		ctx.globalCompositeOperation = "hard-light";
 		ctx.fillStyle = gradient;
 		ctx.beginPath();
 		ctx.arc(x, y, r, 0, tau, true);
 		ctx.fill();
 
-		// fill colver START
+		/*/ fill cover START */
 		ctx.globalCompositeOperation = "overlay";
-		ctx.fillStyle = p.color;
+		ctx.fillStyle = "#999";  // p.color
 		ctx.beginPath();
 		ctx.arc(x, y, r, 0, tau, true);
 		ctx.fill();
-		// fill colver END
+		// fill cover END 
 		ctx.restore();
 
-
+		// blank line on planet surface
 		ctx.lineWidth = 1;
 		ctx.strokeStyle = "#000";
 		ctx.beginPath();
 		ctx.arc(x, y, r, 0, tau, true);
 		ctx.stroke();
 
-		/*/ dashed line START 
-		if (p.owner === Owner.HUMAN) {
+		/*/ dashed line START */
+		if (p.owner !== Owner.NEUTRAL) {
 			ctx.save();
 			ctx.translate(x, y);
-			ctx.rotate(p.aura += .0075);
+			ctx.rotate(p.aura);
 			ctx.translate(-x, -y);
 			let tot = 15,
 				len = 15;
-			ctx.strokeStyle = p.color + "77";
+			ctx.strokeStyle = p.color + "bb";
 			ctx.lineWidth = 3;
 			r += 5;
 			while (len--) {
@@ -105,10 +107,13 @@ let Surface = {
 			}
 			ctx.restore();
 		}
-		// dashed line END */
+		// dashed line END 
 
 		// production number
 		ctx.lineWidth = 3;
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		ctx.font = "16px Lucida Console";
 		ctx.strokeStyle = "#000";
 		ctx.fillStyle = "#fff";
 		ctx.strokeText(ships, x, y+2, r2);

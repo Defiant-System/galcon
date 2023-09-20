@@ -23,6 +23,7 @@ class Planet {
 		this.tilt = ((Math.random() * 90) - 45) | 0;
 		this.speed = (Math.random() * 3) - 1.5;
 		this.aura = 0;
+		this.aura_step = owner === Owner.HUMAN ? .0075 : -.0075;
 		this.rotation = 0;
 		this.rotation_max = 0;
 
@@ -35,10 +36,13 @@ class Planet {
 
 	set owner(v) {
 		this.color = Palette[v].color;
+		this.aura_step = v === Owner.HUMAN ? .0075 : -.0075;
 		this._owner = v;
 	}
 
 	Tick() {
+		// aura / dashed line
+		this.aura += this.aura_step;
 		// rotate planet
 		this.rotation += this.speed;
 		if (!this.rotation_max && Surface.texture[this.texture]) {

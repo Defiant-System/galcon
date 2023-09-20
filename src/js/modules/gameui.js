@@ -56,16 +56,13 @@ let GameUI = {
 
 		this.cvs.attr({ width });
 		// this.ctx.clearRect(0, 0, this.width, this.height);
-		this.ctx.lineWidth = 3;
-		this.ctx.textAlign = "center";
-		this.ctx.textBaseline = "middle";
-		this.ctx.font = "18px Lucida Console";
 
 		// render starfield
 		Starfield.render(this.ctx, width, height);
 		// render planet surface
 		Main.planets.map(p => Surface.render(this.ctx, p));
 		// render ships
+		this.ctx.lineWidth = 3;
 		Main.allships.map(s => {
 			var c = s.vangle + piHalf;
 			// rotate
@@ -85,7 +82,7 @@ let GameUI = {
 			this.ctx.lineJoin = "round";
 			// ship outline
 			this.ctx.beginPath();
-			this.ctx.moveTo(0, -9);
+			this.ctx.moveTo(0, -8);
 			this.ctx.lineTo(6, 7);
 			this.ctx.lineTo(-6, 7);
 			this.ctx.closePath();
