@@ -10,6 +10,7 @@ let GameUI = {
 
 		this.area = new Rectangle(0, 0, this.width, this.height);
 		this.speed = 2;
+		this.showFps = false;
 		this.mode = "dev";
 
 		Main.init();
@@ -96,7 +97,7 @@ let GameUI = {
 		// if (Fx._loaded) Fx.explode(150, 140);
 		Fx.render(this.ctx);
 		// FPS 
-		if (this.mode === "dev") this.drawFps(this.ctx);
+		if (this.showFps) this.drawFps(this.ctx);
 	},
 	drawFps(ctx) {
 		let fps = this.fpsControl._log;

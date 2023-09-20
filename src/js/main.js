@@ -17,11 +17,16 @@
 @import "./modules/surface.js"
 @import "./modules/test.js"
 
+let Owner = {
+		NEUTRAL: 0,
+		HUMAN: 1,
+		AI: 2,
+	};
 
 let Palette = [
-		{ color: "#aaaaaa", opacity: "00", name: "neutral" },
-		{ color: "#5577ee", opacity: "ff", name: "player" },
-		{ color: "#ff5555", opacity: "ff", name: "ai" },
+		{ color: "#aaaaaa", name: "neutral" },
+		{ color: "#5577ee", name: "human" },
+		{ color: "#ff5555", name: "ai" },
 	];
 
 let Mission = {
@@ -63,6 +68,9 @@ const galcon = {
 				/* falls through */
 			case "pause-game":
 				return Self.stage.dispatch({ type: "pause-game" });
+			case "toggle-fps":
+			case "generate-map":
+				return Self.stage.dispatch(event);
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;

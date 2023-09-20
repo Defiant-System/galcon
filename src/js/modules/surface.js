@@ -76,7 +76,6 @@ let Surface = {
 		ctx.arc(x, y, r, 0, tau, true);
 		ctx.fill();
 		// fill colver END
-
 		ctx.restore();
 
 
@@ -87,7 +86,7 @@ let Surface = {
 		ctx.stroke();
 
 		/*/ dashed line START */
-		if (p.owner === 1) {
+		if (p.owner === Owner.HUMAN) {
 			ctx.save();
 			ctx.translate(x, y);
 			ctx.rotate(p.aura += .0075);

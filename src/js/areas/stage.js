@@ -40,11 +40,14 @@
 				Main.appendHtml();
 				GameUI.render();
 				break;
+			case "toggle-fps":
+				GameUI.showFps = !GameUI.showFps;
+				return GameUI.showFps;
 			case "select-all-planets":
 				el = $(event.target);
-				if (el.hasClass("mine") && el.data("id")) {
+				if (el.hasClass("human") && el.data("id")) {
 					let planet = Main.getPlanet(+el.data("id"));
-					Self.selected = Self.els.el.find(".planet-disc.mine").map(el => Main.getPlanet(+el.getAttribute("data-id")));
+					Self.selected = Self.els.el.find(".planet-disc.human").map(el => Main.getPlanet(+el.getAttribute("data-id")));
 					Self.selected.map(p => {
 						Fx.outline.add(p, Palette[planet.owner].color);
 						Fx.line.add(p, planet);
@@ -76,7 +79,7 @@
 					}
 					
 					Self.selected.push(planet);
-					if (planet.owner !== 1) {
+					if (planet.owner !== Owner.HUMAN) {
 						for (let i=0, il=Self.selected.length-1; i<il; i++) {
 							let source = Self.selected[i],
 								target = Self.selected[il],
@@ -99,7 +102,7 @@
 				el = $(event.target);
 				if (el.data("id") && Self.selected.length) {
 					planet = Main.getPlanet(+el.data("id"));
-					Fx.outline.add(planet, Palette[0].color);
+					Fx.outline.add(planet, Palette[Owner.HUMAN].color);
 					Self.selected.map(p => Fx.line.add(p, planet));
 				}
 				break;

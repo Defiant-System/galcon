@@ -24,7 +24,7 @@ let Test = {
 		// 	Fx.line.add(from, to);
 		// }, 1e3);
 
-		// setTimeout(() => Fx.outline.add(Main.planets[0], Palette[0].color), 1e3);
+		// setTimeout(() => Fx.outline.add(Main.planets[0], Palette[Owner.HUMAN].color), 1e3);
 
 		// setTimeout(() => Fx.clearLines(), 3e3);
 

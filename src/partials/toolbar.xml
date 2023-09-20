@@ -1,0 +1,16 @@
+<ToolBar>
+	<Group>
+		<Options>
+			<Tool name="Classic" state="active"/>
+			<Tool name="Beast"/>
+			<Tool name="Stealth"/>
+			<Tool name="Vacuum"/>
+			<Tool name="3-way"/>
+		</Options>
+		<Tool name="New Map" click="generate-map"/>
+	</Group>
+	<Group>
+		<Tool name="Stop" click="pause-game"/>
+		<Tool name="FPS" click="toggle-fps"/>
+	</Group>
+</ToolBar>

@@ -18,14 +18,8 @@ class Planet {
 		this.texture = Surface.maps[texture];
 		this.production = production;
 		this.ships = production;
-		this.radius = (this.production * .4) | 0;
+		this.radius = Math.min(23 + ((production ) * .75), 31);
 		
-		if (this.owner === 0) {
-			this.radius = Math.min(this.radius + 20, 35);
-			this.production = Math.max(Math.min(production, 35), 15);
-			this.ships = this.production;
-		}
-
 		this.tilt = ((Math.random() * 90) - 45) | 0;
 		this.speed = (Math.random() * 3) - 1.5;
 		this.aura = 0;
@@ -53,7 +47,7 @@ class Planet {
 		}
 		if (this.speed > 0 && this.rotation > this.rotation_max) this.rotation = 0;
 		if (this.speed < 0 && this.rotation < -this.radius * 4) this.rotation = this.rotation_max;
-		if (this._owner !== 0) {
+		if (this._owner !== Owner.NEUTRAL) {
 			// update shap count
 			this.ships += this.production / 400;
 		}
@@ -70,8 +64,8 @@ class Planet {
 				// sound effect
 				window.audio.play("takeover");
 				// 
-				let el = galcon.stage.els.el.find(`.planet-disc[data-id="${this.id}"]`);
-				el.removeClass("neutral enemy mine").addClass("mine");
+				let el = galcon.stage.els.el.find(`.planet-disc[data-id="${this.id}"]`).removeClass("neutral ai human");
+				if (this.owner === Owner.HUMAN) el.addClass("human");
 			}
 			// explosion effect
 			Fx.explode(ship.pos._x, ship.pos._y);

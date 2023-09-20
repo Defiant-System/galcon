@@ -22,9 +22,6 @@ let Main = {
 		// create game AI
 		this.ai = new AI(2, Mission.CLASSIC, this);
 	},
-	getPlanet(id) {
-		return this.planets.find(p => p.id === +id);
-	},
 	generateMap() {
 		let ship_radius = Ship._radius << 1;
 		// basic random map
@@ -32,15 +29,15 @@ let Main = {
 			let m = 70,
 				x = m + this.prand() * (this.winwidth - (m * 2)),
 				y = m + this.prand() * (this.winheight - (m * 2)),
-				production = 10 + (this.prand() * 40),
+				production = 3 + this.prand() * 29,
 				texture = Math.random() * Object.keys(Surface.maps).length | 0,
-				owner = 0;
+				owner = Owner.NEUTRAL;
 			if (id === 0) {
-				owner = 1;
+				owner = Owner.HUMAN;
 				production = 90;
 			}
 			if (id === this.planet_count-1) {
-				owner = 2;
+				owner = Owner.AI;
 				production = 90;
 			}
 			this.planets.push(new Planet(x, y, production, owner, id, texture));
@@ -61,6 +58,9 @@ let Main = {
 			p.pos._y = p.pos._y | 0;
 			p.radius = p.radius | 0;
 		});
+	},
+	getPlanet(id) {
+		return this.planets.find(p => p.id === +id);
 	},
 	appendHtml() {
 		let APP = galcon,
