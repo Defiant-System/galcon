@@ -34,6 +34,9 @@
 				});
 				console.log( JSON.stringify(value) );
 				break;
+			case "set-bg":
+				Self.els.el.data({ bg: event.arg });
+				break;
 			case "generate-map":
 				Main.planets = [];
 				Main.generateMap();

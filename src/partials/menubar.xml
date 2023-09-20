@@ -13,6 +13,14 @@
 	<Menu for="game-options">
 		<Menu name="Pause" click="pause-game"/>
 		<Menu type="divider"/>
+		<Menu name="Background&#8230;">
+			<Menu name="01" check-group="galcon-bg" click="set-bg" arg="01"/>
+			<Menu name="02" check-group="galcon-bg" click="set-bg" arg="02"/>
+			<Menu name="03" check-group="galcon-bg" click="set-bg" arg="03"/>
+			<Menu name="04" check-group="galcon-bg" click="set-bg" arg="04"/>
+			<Menu name="06" check-group="galcon-bg" click="set-bg" arg="06" is-checked="1"/>
+		</Menu>
+		<Menu type="divider"/>
 		<Menu name="Generate Map" click="generate-map"/>
 		<Menu name="Output PGN" click="output-pgn"/>
 	</Menu>
