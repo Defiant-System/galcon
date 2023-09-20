@@ -4,14 +4,8 @@ let Main = {
 		this.grand = 0;
 		this.rseed = Math.random() * 8388607 + 24478357;
 		this.planet_count = 18;
-
-		this.winzoom = 1;
 		this.winwidth = GameUI.width;
 		this.winheight = GameUI.height;
-
-		this.mission_seed = 0;
-		this.playfield_zoom = 1;
-		this.playfield_center = new Point(this.winwidth / 2, this.winheight / 2);
 
 		// create planets
 		this.planets = [];
@@ -24,6 +18,9 @@ let Main = {
 		// create shipsets
 		let rect = new Rectangle(0, 0, this.winwidth, this.winheight);
 		this.allships = new Shipset(rect, this.planets);
+
+		// create game AI
+		this.ai = new AI(9, Mission.CLASSIC, this);
 	},
 	getPlanet(id) {
 		return this.planets.find(p => p.id === +id);
@@ -33,8 +30,8 @@ let Main = {
 		// basic random map
 		[...Array(this.planet_count)].map((e, id) => {
 			let m = 70,
-				x = m + this.prand() * (this.winwidth / this.playfield_zoom - (m * 2)),
-				y = m + this.prand() * (this.winheight / this.playfield_zoom - (m * 2)),
+				x = m + this.prand() * (this.winwidth - (m * 2)),
+				y = m + this.prand() * (this.winheight - (m * 2)),
 				production = 10 + (this.prand() * 40),
 				texture = Math.random() * Object.keys(Surface.maps).length | 0,
 				owner = 2;
@@ -79,8 +76,8 @@ let Main = {
 		APP.stage.els.el.append(divs.join(""));
 	},
 	findEmtpySpace(planet, ship_radius) {
-		let nX = 40 + this.prand() * (this.winwidth / this.playfield_zoom - 80),
-			nY = 60 + this.prand() * (this.winheight / this.playfield_zoom - 120),
+		let nX = 40 + this.prand() * (this.winwidth - 80),
+			nY = 60 + this.prand() * (this.winheight - 120),
 			nPos = new Point(nX, nY),
 			empty = true;
 		

@@ -17,6 +17,10 @@ content {
 		right: 0;
 		bottom: 0;
 		overflow: hidden;
+
+		&.paused:before {
+			animation-play-state: paused;
+		}
 		
 		&:before {
 			content: "";

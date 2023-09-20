@@ -2,6 +2,7 @@
 @import "./pgn/tutorial.js"
 
 @import "./classes/misc.js"
+@import "./classes/ai.js"
 @import "./classes/gridcell.js"
 @import "./classes/shipset.js"
 @import "./classes/ship.js"
@@ -18,10 +19,18 @@
 
 
 let Palette = [
-		{ color: "#3366dd", opacity: "ff", name: "mine" },
+		{ color: "#5577ee", opacity: "ff", name: "mine" },
 		{ color: "#ff5555", opacity: "ff", name: "enemy" },
 		{ color: "#aaaaaa", opacity: "00", name: "neutral" },
 	];
+
+let Mission = {
+		CLASSIC: 0,
+		STEALTH: 1,
+		VACUUM: 2,
+		BEAST: 3,
+		THREEWAY: 4,
+	};
 
 
 const galcon = {

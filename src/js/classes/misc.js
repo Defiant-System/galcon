@@ -369,36 +369,24 @@ class Point {
 	}
 
 	add(point) {
-		this._x += point._x;
-		this._y += point._y;
-		return this;
+		return new Point(this._x + point._x, this._y + point._y);
 	}
 
 	subtract(point) {
-		this._x -= point._x;
-		this._y -= point._y;
-
-		return this;
+		return new Point(this._x - point._x, this._y - point._y);
 	}
 
 	multiply(value) {
-		this._x *= value;
-		this._y *= value;
-
-		return this;
+		return new Point(this._x * value, this._y * value);
 	}
 
 	divide(value) {
-		this._x /= value;
-		this._y /= value;
-
-		return this;
+		return new Point(this._x / value, this._y / value);
 	}
 
 	empty() {
 		this._x = 0;
 		this._y = 0;
-
 		return this;
 	}
 
