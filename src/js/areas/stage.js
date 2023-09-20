@@ -57,6 +57,13 @@
 					});
 				}
 				break;
+			case "unselect-planet":
+				Self.selected.map((p, i) => {
+					if (p.id === event.planet.id) Self.selected.splice(i, 1);
+				});
+				Fx.line.remove(event.planet.id);
+				Fx.outline.remove(event.planet.id);
+				break;
 		}
 	},
 	selected: [],
@@ -94,10 +101,8 @@
 						return;
 					}
 					Fx.outline.add(planet, Palette[planet.owner].color);
-
-					Self.drag = {
-						el,
-					};
+					// save "drag" planet
+					Self.drag = { el };
 				} else {
 					Self.selected = [];
 					Fx.clearLines();

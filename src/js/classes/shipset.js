@@ -6,6 +6,7 @@ class Shipset {
 		this.max_count = 0;
 		this.min_index = 0;
 		this.fleet_id = 0;
+		this.fleets = [];
 		this._allships = [];
 	}
 

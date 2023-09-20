@@ -9,9 +9,8 @@ let GameUI = {
 		this.cvs.attr({ width: this.width, height: this.height });
 
 		this.area = new Rectangle(0, 0, this.width, this.height);
-		this.speed = 2;
+		this.speed = 2.25;
 		this.showFps = false;
-		this.mode = "dev";
 
 		Main.init();
 		Fx.init();
@@ -91,7 +90,7 @@ let GameUI = {
 			this.ctx.translate(-s.vpos._x, -s.vpos._y);
 			this.ctx.restore();
 		});
-		// if (Fx._loaded) Fx.explode(150, 140);
+		// effects layer
 		Fx.render(this.ctx);
 		// FPS 
 		if (this.showFps) this.drawFps(this.ctx);

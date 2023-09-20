@@ -32,7 +32,7 @@ let Fx = {
 		},
 		remove(id) {
 			Fx.pipe.map((e, i) => {
-				if (e.type === "line" && e.to.id === id) Fx.pipe.splice(i, 1);
+				if (e.type === "line" && (e.from.id === id || e.to.id === id)) Fx.pipe.splice(i, 1);
 			});
 		}
 	},

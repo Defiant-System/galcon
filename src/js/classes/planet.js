@@ -23,7 +23,7 @@ class Planet {
 		this.tilt = ((Math.random() * 90) - 45) | 0;
 		this.speed = (Math.random() * 3) - 1.5;
 		this.aura = 0;
-		this.aura_step = owner === Owner.HUMAN ? .0075 : -.0075;
+		this.aura_step = owner === Owner.HUMAN ? .015 : -.015;
 		this.rotation = 0;
 		this.rotation_max = 0;
 
@@ -36,7 +36,7 @@ class Planet {
 
 	set owner(v) {
 		this.color = Palette[v].color;
-		this.aura_step = v === Owner.HUMAN ? .0075 : -.0075;
+		this.aura_step = v === Owner.HUMAN ? .015 : -.015;
 		this._owner = v;
 	}
 
@@ -68,8 +68,10 @@ class Planet {
 				// sound effect
 				window.audio.play("takeover");
 				// 
-				let el = galcon.stage.els.el.find(`.planet-disc[data-id="${this.id}"]`).removeClass("neutral ai human");
+				let Stage = galcon.stage,
+					el = Stage.els.el.find(`.planet-disc[data-id="${this.id}"]`).removeClass("neutral ai human");
 				if (this.owner === Owner.HUMAN) el.addClass("human");
+				else Stage.dispatch({ type: "unselect-planet", planet: this });
 			}
 			// explosion effect
 			Fx.explode(ship.pos._x, ship.pos._y);
