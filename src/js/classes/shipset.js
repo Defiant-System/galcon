@@ -32,7 +32,7 @@ class Shipset {
 		if (source.ships < 0) source.ships = 0;
 
 		var _loc_10 = ship_num;
-        ship_num = Math.min(ship_num, Math.sqrt(_loc_10 * 18));
+        ship_num = Math.min(ship_num, Math.sqrt(_loc_10 * 21));
         ship_num = Math.max(ship_num, 1);
 
         var _loc_11 = _loc_10 / ship_num;
