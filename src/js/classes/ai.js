@@ -91,7 +91,6 @@ class AI {
 	AILaunch(param1) {
         var _loc_2 = 0;
         var _loc_3 = null;
-        _loc_2 = 0;
         while (_loc_2 < this.planets.length) {
             if (this.planets[_loc_2].owner == Owner.AI && (_loc_3 == null || this.planets[_loc_2].ships > _loc_3.ships)) {
                 _loc_3 = this.planets[_loc_2];
@@ -104,8 +103,8 @@ class AI {
         var _loc_4 = this.AIFindTarget(param1, _loc_3.pos);
         if (this.AIFindTarget(param1, _loc_3.pos) == null) return;
         
-        // this.allships.LaunchShips(Owner.AI, -1, _loc_3, _loc_4, _loc_3.ships * 0.65, this.planets);
-        this.allships.LaunchShips(_loc_3, _loc_4, .65);
+		let fleet_id = this.allships.fleet_id++;
+        this.allships.LaunchShips(_loc_3, _loc_4, fleet_id, .65);
 	}
 	
 	ClassicAI(param1=1) {

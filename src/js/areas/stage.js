@@ -60,7 +60,6 @@
 	gameplay(event) {
 		let APP = galcon,
 			Self = APP.stage,
-			Drag = Self.drag,
 			planet,
 			el;
 		// console.log(event);
@@ -80,23 +79,47 @@
 					
 					Self.selected.push(planet);
 					if (planet.owner !== Owner.HUMAN) {
+						let fleet_id = Main.allships.fleet_id++;
 						for (let i=0, il=Self.selected.length-1; i<il; i++) {
 							let source = Self.selected[i],
 								target = Self.selected[il],
 								percentage = .65;
-							Main.allships.LaunchShips(source, target, percentage);
+							Main.allships.LaunchShips(source, target, fleet_id, percentage);
 						}
 						Self.selected = [];
 						Fx.clearLines();
 						return;
 					}
 					Fx.outline.add(planet, Palette[planet.owner].color);
+
+					Self.drag = {
+						el,
+					};
 				} else {
 					Self.selected = [];
 					Fx.clearLines();
 				}
 				break;
 			case "mouseup":
+				el = $(event.target);
+				if (Self.drag && Self.drag.el[0] !== el[0]) {
+
+					let planet = Main.getPlanet(+el.data("id")),
+						fleet_id = Main.allships.fleet_id++;
+					
+					Self.selected.push(planet);
+
+					for (let i=0, il=Self.selected.length-1; i<il; i++) {
+						let source = Self.selected[i],
+							target = Self.selected[il],
+							percentage = .65;
+						Main.allships.LaunchShips(source, target, fleet_id, percentage);
+					}
+					Self.selected = [];
+					Fx.clearLines();
+
+					delete Self.drag;
+				}
 				break;
 			case "mouseover":
 				el = $(event.target);

@@ -11,8 +11,8 @@ let Main = {
 		this.planets = [];
 
 		// generate random map
-		this.generateMap();
-		// level.planets.map(p => this.planets.push(new Planet(...p)));
+		// this.generateMap();
+		level.planets.map(p => this.planets.push(new Planet(...p)));
 		this.appendHtml();
 
 		// create shipsets
@@ -20,7 +20,7 @@ let Main = {
 		this.allships = new Shipset(rect, this.planets);
 
 		// create game AI
-		this.ai = new AI(2, Mission.CLASSIC, this);
+		this.ai = new AI(1, Mission.CLASSIC, this);
 	},
 	generateMap() {
 		let ship_radius = Ship._radius << 1;

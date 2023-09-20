@@ -24,7 +24,7 @@ class Shipset {
 		this._allships.splice(index, 1);
 	}
 
-	LaunchShips(source, target, percentage) {
+	LaunchShips(source, target, fleet_id, percentage) {
 		if (source.ships < 1) return;
 		let ship_num = source.ships * percentage;
 		if (ship_num > source.ships) ship_num = source.ships;
@@ -43,7 +43,6 @@ class Shipset {
 		_loc_16.normalize(source.radius + _loc_15 / 6);
 		_loc_16 = _loc_16.add(source.pos);
 		let _loc_12 = 0;
-		let fleet_id = this.fleet_id++;
 		let owner = source.owner;
 
 		while (_loc_12 < ship_num) {
@@ -57,8 +56,6 @@ class Shipset {
 			}
 			_loc_12++;
 		}
-		// clear launch lines
-		Fx.clearLines()
 		// sound effect
 		window.audio.play("launch");
 	}

@@ -19,7 +19,7 @@ let Surface = {
 	},
 	render(ctx, p) {
 		let tau = Math.PI * 2,
-			ships = Math.round(p.ships),
+			ships = Math.abs(Math.round(p.ships)),
 			r = p.radius,
 			x = p.pos._x,
 			y = p.pos._y,
