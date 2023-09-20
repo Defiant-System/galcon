@@ -76,11 +76,11 @@
 					}
 					
 					Self.selected.push(planet);
-					if (planet.owner !== 0) {
+					if (planet.owner !== 1) {
 						for (let i=0, il=Self.selected.length-1; i<il; i++) {
 							let source = Self.selected[i],
 								target = Self.selected[il],
-								percentage = .5;
+								percentage = .65;
 							Main.allships.LaunchShips(source, target, percentage);
 						}
 						Self.selected = [];

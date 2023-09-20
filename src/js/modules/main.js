@@ -20,7 +20,7 @@ let Main = {
 		this.allships = new Shipset(rect, this.planets);
 
 		// create game AI
-		this.ai = new AI(9, Mission.CLASSIC, this);
+		this.ai = new AI(2, Mission.CLASSIC, this);
 	},
 	getPlanet(id) {
 		return this.planets.find(p => p.id === +id);
@@ -34,13 +34,13 @@ let Main = {
 				y = m + this.prand() * (this.winheight - (m * 2)),
 				production = 10 + (this.prand() * 40),
 				texture = Math.random() * Object.keys(Surface.maps).length | 0,
-				owner = 2;
-			if (id === 0) {
 				owner = 0;
+			if (id === 0) {
+				owner = 1;
 				production = 90;
 			}
 			if (id === this.planet_count-1) {
-				owner = 1;
+				owner = 2;
 				production = 90;
 			}
 			this.planets.push(new Planet(x, y, production, owner, id, texture));

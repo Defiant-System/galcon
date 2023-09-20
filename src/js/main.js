@@ -19,9 +19,9 @@
 
 
 let Palette = [
-		{ color: "#5577ee", opacity: "ff", name: "mine" },
-		{ color: "#ff5555", opacity: "ff", name: "enemy" },
 		{ color: "#aaaaaa", opacity: "00", name: "neutral" },
+		{ color: "#5577ee", opacity: "ff", name: "player" },
+		{ color: "#ff5555", opacity: "ff", name: "ai" },
 	];
 
 let Mission = {

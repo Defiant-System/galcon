@@ -20,7 +20,7 @@ class Planet {
 		this.ships = production;
 		this.radius = (this.production * .4) | 0;
 		
-		if (this.owner === 2) {
+		if (this.owner === 0) {
 			this.radius = Math.min(this.radius + 20, 35);
 			this.production = Math.max(Math.min(production, 35), 15);
 			this.ships = this.production;
@@ -53,9 +53,9 @@ class Planet {
 		}
 		if (this.speed > 0 && this.rotation > this.rotation_max) this.rotation = 0;
 		if (this.speed < 0 && this.rotation < -this.radius * 4) this.rotation = this.rotation_max;
-		if (this._owner !== 2) {
+		if (this._owner !== 0) {
 			// update shap count
-			this.ships += this.production / 500;
+			this.ships += this.production / 400;
 		}
 	}
 

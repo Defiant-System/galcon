@@ -40,7 +40,6 @@ class AI {
         var _loc_3 = 0;
         _loc_1 = 0;
         while (_loc_1 < this.planets.length) {
-            
             if (this.planets[_loc_1].owner == this.OWNER_HUMAN) {
                 _loc_2 = _loc_2 + this.planets[_loc_1].ships;
             }
@@ -110,7 +109,7 @@ class AI {
             return;
         }
         // this.allships.LaunchShips(this.OWNER_AI, -1, _loc_3, _loc_4, _loc_3.ships * 0.65, this.planets);
-        this.allships.LaunchShips(_loc_4, _loc_3, .65);
+        this.allships.LaunchShips(_loc_3, _loc_4, .65);
 	}
 	
 	ClassicAI(param1=1) {
@@ -127,18 +126,18 @@ class AI {
 			}
 		}
 
-		// if (ai_redirect) {
-		// 	_loc_4 = 0;
-		// 	while (_loc_4 < this.allships.fleets.length) {
-		// 		if (this.allships.fleets[_loc_4].owner == this.OWNER_AI && (ai_frame + _loc_4 * 35) % (_loc_3 * 60 * param1) == 0) {
-		// 			_loc_5 = this.AIFindTarget(false, this.allships.fleets[_loc_4].pos);
-		// 			if (_loc_5 != null) {
-		// 				this.allships.RedirectFleet(this.allships.fleets[_loc_4].id, _loc_5);
-		// 			}
-		// 		}
-		// 		_loc_4++;
-		// 	}
-		// }
+		if (this.ai_redirect) {
+			_loc_4 = 0;
+			while (_loc_4 < this.allships.fleets.length) {
+				if (this.allships.fleets[_loc_4].owner == this.OWNER_AI && (ai_frame + _loc_4 * 35) % (_loc_3 * 60 * param1) == 0) {
+					_loc_5 = this.AIFindTarget(false, this.allships.fleets[_loc_4].pos);
+					if (_loc_5 != null) {
+						this.allships.RedirectFleet(this.allships.fleets[_loc_4].id, _loc_5);
+					}
+				}
+				_loc_4++;
+			}
+		}
 
 		this.ai_frame += 1;
 	}
