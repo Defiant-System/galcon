@@ -21,7 +21,13 @@
 			<Menu name="06" check-group="galcon-bg" click="set-bg" arg="06" is-checked="1"/>
 		</Menu>
 		<Menu type="divider"/>
+		<Menu name="Toggle FPS" click="toggle-fps"/>
 		<Menu name="Generate Map" click="generate-map"/>
 		<Menu name="Output PGN" click="output-pgn"/>
+	</Menu>
+
+	<Menu for="attack-force">
+		<Menu type="caption" name="Attack force:"/>
+		<Menu type="slider" min="0" max="100" value="50" change="set-attack-force"/>
 	</Menu>
 </MenuBar>

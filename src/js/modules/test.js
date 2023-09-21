@@ -13,6 +13,6 @@ let Test = {
 
 		// setTimeout(() => Fx.clearLines(), 3e3);
 
-		// setTimeout(() => GameUI.fpsControl.stop(), 10e3);
+		setTimeout(() => GameUI.fpsControl.stop(), 5e3);
 	}
 };

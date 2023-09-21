@@ -8,9 +8,10 @@
 			<Tool name="3-way"/>
 		</Options>
 		<Tool name="New Map" click="generate-map"/>
-	</Group>
-	<Group>
 		<Tool name="Stop" click="pause-game"/>
 		<Tool name="FPS" click="toggle-fps"/>
+	</Group>
+	<Group>
+		<Select name="Attack force: 65%" width="100" menu="attack-force"></Select>
 	</Group>
 </ToolBar>
