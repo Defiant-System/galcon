@@ -7,6 +7,7 @@
 		let el = window.find(`div[data-area="stage"]`);
 		this.els = {
 			el,
+			toolSelect: window.find(".toolbar-selectbox_ > div:first"),
 			canvas: el.find("canvas"),
 		};
 		// bind event handlers
@@ -33,6 +34,10 @@
 					value.planets.push([p.pos._x, p.pos._y, p.production, p.owner, p.id, texture])
 				});
 				console.log( JSON.stringify(value) );
+				break;
+			case "set-attack-force":
+				Self.els.toolSelect.html(`Attack force: ${event.arg}%`);
+				Self.attack_force = +event.arg / 100;
 				break;
 			case "set-bg":
 				Self.els.el.data({ bg: event.arg });
@@ -67,6 +72,7 @@
 		}
 	},
 	selected: [],
+	attack_force: .65,
 	gameplay(event) {
 		let APP = galcon,
 			Self = APP.stage,
@@ -92,9 +98,8 @@
 						let fleet_id = Main.allships.fleet_id++;
 						for (let i=0, il=Self.selected.length-1; i<il; i++) {
 							let source = Self.selected[i],
-								target = Self.selected[il],
-								percentage = .65;
-							Main.allships.LaunchShips(source, target, fleet_id, percentage);
+								target = Self.selected[il];
+							Main.allships.LaunchShips(source, target, fleet_id, Self.attack_force);
 						}
 						Self.selected = [];
 						Fx.clearLines();
@@ -119,9 +124,8 @@
 
 					for (let i=0, il=Self.selected.length-1; i<il; i++) {
 						let source = Self.selected[i],
-							target = Self.selected[il],
-							percentage = .65;
-						Main.allships.LaunchShips(source, target, fleet_id, percentage);
+							target = Self.selected[il];
+						Main.allships.LaunchShips(source, target, fleet_id, Self.attack_force);
 					}
 					Self.selected = [];
 					Fx.clearLines();

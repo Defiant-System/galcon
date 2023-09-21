@@ -70,6 +70,7 @@ const galcon = {
 				return Self.stage.dispatch({ type: "pause-game" });
 			case "toggle-fps":
 			case "generate-map":
+			case "set-attack-force":
 				return Self.stage.dispatch(event);
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");

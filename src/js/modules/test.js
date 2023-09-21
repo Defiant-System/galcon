@@ -11,8 +11,10 @@ let Test = {
 
 		// setTimeout(() => Fx.outline.add(Main.planets[0], Palette[Owner.HUMAN].color), 1e3);
 
+		// setTimeout(() => window.find(".toolbar-selectbox_").trigger("mousedown"), 900);
+		
 		// setTimeout(() => Fx.clearLines(), 3e3);
 
-		setTimeout(() => GameUI.fpsControl.stop(), 5e3);
+		// setTimeout(() => GameUI.fpsControl.stop(), 1e3);
 	}
 };
