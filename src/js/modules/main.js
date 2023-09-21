@@ -22,26 +22,15 @@ let Main = {
 		// create game AI
 		this.ai = new AI(1, Mission.CLASSIC, this);
 	},
-	generateMap() {
-		let ship_radius = Ship._radius << 1;
+	generateMap(players=1) {
+		let ship_radius = Ship._radius << 1,
+			planet_count = this.planet_count - players - 1; // players + AI
 		// basic random map
-		[...Array(this.planet_count)].map((e, id) => {
-			let m = 70,
-				x = m + this.prand() * (this.winwidth - (m * 2)),
-				y = m + this.prand() * (this.winheight - (m * 2)),
-				production = 3 + this.prand() * 29,
-				texture = Math.random() * Object.keys(Surface.maps).length | 0,
-				owner = Owner.NEUTRAL;
-			if (id === 0) {
-				owner = Owner.HUMAN;
-				production = 90;
-			}
-			if (id === this.planet_count-1) {
-				owner = Owner.AI;
-				production = 90;
-			}
-			this.planets.push(new Planet(x, y, production, owner, id, texture));
-		});
+		[...Array(planet_count)].map(e => this.createPlanet(Owner.NEUTRAL));
+		// insert play planet
+		this.createPlanet(Owner.HUMAN, 50, null, 90);
+		// insert AI planet
+		this.createPlanet(Owner.AI, 790, null, 90);
 		// make sure of distance
 		this.planets.map(p1 => {
 			this.planets.map(p2 => {
@@ -58,6 +47,15 @@ let Main = {
 			p.pos._y = p.pos._y | 0;
 			p.radius = p.radius | 0;
 		});
+	},
+	createPlanet(owner, px, py, pp) {
+		let m = 70,
+			x = px || m + this.prand() * (this.winwidth - (m * 2)),
+			y = py || m + this.prand() * (this.winheight - (m * 2)),
+			production = pp || 3 + this.prand() * 29,
+			texture = Math.random() * Object.keys(Surface.maps).length | 0,
+			id = this.planets.length + 1;
+		this.planets.push(new Planet(x, y, production, owner, id, texture));
 	},
 	getPlanet(id) {
 		return this.planets.find(p => p.id === +id);
