@@ -51,7 +51,12 @@ let GameUI = {
 		let width = this.width,
 			height = this.height,
 			tau = Math.PI * 2,
-			piHalf = Math.PI / 2;
+			piHalf = Math.PI / 2,
+			ships = {
+				"1": [[0,-8], [6,7], [-6,7]],
+				"2": [[0,-8], [6,7], [0,3], [-6,7]],
+				"3": [[0,-8], [4,7], [6,5], [4,7], [0,4], [-4,7], [-6,5], [-4,7]],
+			};
 
 		this.cvs.attr({ width });
 		// this.ctx.clearRect(0, 0, this.width, this.height);
@@ -63,27 +68,19 @@ let GameUI = {
 		// render ships
 		this.ctx.lineWidth = 3;
 		Main.allships.map(s => {
-			var c = s.vangle + piHalf;
+			var c = s.vangle + piHalf,
+				blueprint = ships[s.owner];
 			// rotate
 			this.ctx.save();
 			this.ctx.translate(s.vpos._x, s.vpos._y);
 			this.ctx.rotate(c);
-
-			// debug ring
-			// this.ctx.strokeStyle = "#eeeeee77";
-			// this.ctx.lineWidth = 1;
-			// this.ctx.beginPath();
-			// this.ctx.arc(0, 0, s.ship_radius, 0, tau, true);
-			// this.ctx.stroke();
-
 			// ship gui
 			this.ctx.strokeStyle = s.color || "#ffffff";
 			this.ctx.lineJoin = "round";
 			// ship outline
 			this.ctx.beginPath();
-			this.ctx.moveTo(0, -8);
-			this.ctx.lineTo(6, 7);
-			this.ctx.lineTo(-6, 7);
+			this.ctx.moveTo(...blueprint[0]);
+			blueprint.slice(1).map(p => this.ctx.lineTo(...p));
 			this.ctx.closePath();
 			this.ctx.stroke();
 

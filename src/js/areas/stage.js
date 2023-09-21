@@ -21,6 +21,7 @@
 			el;
 		// console.log(event);
 		switch (event.type) {
+			// custom events
 			case "pause-game":
 				value = Self.els.el.hasClass("paused");
 				Self.els.el.toggleClass("paused", value);
@@ -36,6 +37,9 @@
 				console.log( JSON.stringify(value) );
 				break;
 			case "set-attack-force":
+				// update menu xml node
+				event.xMenu.setAttribute("value", event.arg);
+				// DOM update
 				Self.els.toolSelect.html(`Attack force: ${event.arg}%`);
 				Self.attack_force = +event.arg / 100;
 				break;

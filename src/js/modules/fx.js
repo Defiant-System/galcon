@@ -14,7 +14,7 @@ let Fx = {
 		add(planet, color) {
 			let e = { type: "outline", planet, color };
 			// prevents duplicates
-			if (Fx.pipe.find(l => l.type == e.type && l.planet.id == e.planet.id && l.color == e.color)) return;
+			if (planet && color && Fx.pipe.find(l => l.type == e.type && l.planet.id == e.planet.id && l.color == e.color)) return;
 			Fx.pipe.push(e);
 		},
 		remove(id) {
@@ -27,7 +27,7 @@ let Fx = {
 		add(from, to) {
 			let e = { type: "line", from, to };
 			// prevents duplicates
-			if (Fx.pipe.find(l => l.type == e.type && l.from.id == e.from.id && l.to.id == e.to.id)) return;
+			if (to && from && Fx.pipe.find(l => l.type == e.type && l.from.id == e.from.id && l.to.id == e.to.id)) return;
 			Fx.pipe.push(e);
 		},
 		remove(id) {
