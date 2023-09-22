@@ -7,8 +7,8 @@
 		<meta name="repository" value="https://github.com/Defiant-System/galcon"/>
 		<meta name="width" value="840"/>
 		<meta name="height" value="540"/>
-		<meta name="top" value="120"/>
-		<meta name="left" value="120"/>
+		<meta name="top" value="320"/>
+		<meta name="left" value="220"/>
 		<meta name="minimize"/>
 		<meta name="maximize" value="disabled"/>
 		<meta name="resize" value="disabled"/>
