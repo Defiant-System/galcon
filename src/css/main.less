@@ -1,5 +1,5 @@
 
-background: transparent;
+background: #000;
 overflow: visible;
 
 content {
@@ -13,6 +13,10 @@ content {
 	font-family: "Michroma", sans-serif;
 	font-size: 20px;
 	color: #aaa;
+
+		&.fadeout > div {
+			opacity: 0;
+		}
 
 	h1 {
 		font-family: "Audiowide", sans-serif;
@@ -45,6 +49,7 @@ content {
 		right: 0;
 		bottom: 0;
 		overflow: hidden;
+		transition: opacity 500ms ease-in-out;
 			
 		&:before {
 			content: "";
@@ -63,7 +68,7 @@ content {
 
 		&[data-area="tutorial"] {
 			display: block;
-			
+
 			&:before {
 				background-image: url(~/img/bg-02.jpg);
 				animation: rotate_bg_ccw 1080s linear infinite;

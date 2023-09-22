@@ -2,11 +2,6 @@
 class Shipset {
 	constructor(planets) {
 		this.ship_bounds = new Rectangle(0, 0, GameUI.width, GameUI.height);
-		this.max_ships = 400;
-		this.max_fleets = 300;
-		this.max_count = 0;
-		this.min_index = 0;
-		this.fleet_id = 0;
 		this.fleets = [];
 		this._allships = [];
 	}

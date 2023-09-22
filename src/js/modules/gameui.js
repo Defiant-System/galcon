@@ -12,9 +12,12 @@ let GameUI = {
 		this.speed = 2.25;
 		this.showFps = false;
 	},
-	loop() {
+	loop(overFunc) {
 		let _Main = Main,
 			_GameUI = GameUI;
+		// save reference to "game over" function
+		this.overFunc = overFunc;
+		// FPS control
 		this.fpsControl = karaqu.FpsControl({
 			frames: {
 				10: () => {
@@ -25,12 +28,18 @@ let GameUI = {
 					if (_Main.ai) _Main.ai.Tick();
 					_GameUI.update();
 					_GameUI.render();
-					// _Main.CheckWinLose();
+					_Main.CheckWinLose();
 				},
 			},
 		});
 		// start FPC
 		this.fpsControl.start();
+	},
+	over() {
+		// auto stop loop
+		this.fpsControl.stop();
+		// call "game over" function
+		this.overFunc();
 	},
 	update() {
 		Main.allships.map(s1 => {

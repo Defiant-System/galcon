@@ -4,12 +4,13 @@
 {
 	init() {
 		// fast references
-		let tutorial = window.find(`content > div[data-area="tutorial"]`);
+		let content = window.find("content");
 		this.els = {
-			tutorial,
-			step1: tutorial.find(".step-1"),
-			step2: tutorial.find(".step-2"),
-			step3: tutorial.find(".step-3"),
+			content,
+			tutorial: content.find(`> div[data-area="tutorial"]`),
+			step1: content.find(".step-1"),
+			step2: content.find(".step-2"),
+			step3: content.find(".step-3"),
 		};
 	},
 	dispatch(event) {
@@ -37,7 +38,12 @@
 				// create shipsets
 				Main.allships = new Shipset(Main.planets);
 				// start game loop
-				GameUI.loop();
+				GameUI.loop(() => {
+					let [tut, num] = value.split("-");
+					Self.els.tutorial.cssSequence("fadeout", "transitionend", el => {
+						console.log(el);
+					});
+				});
 				break;
 			case "start-classic":
 				// reset planets
@@ -50,7 +56,9 @@
 				// create game AI
 				Main.ai = new AI(1, Mission.CLASSIC, Main);
 				// start game loop
-				GameUI.loop();
+				GameUI.loop(() => {
+					console.log("Game over");
+				});
 				break;
 			case "start-stealth": break;
 			case "start-3-way": break;
