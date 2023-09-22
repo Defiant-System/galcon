@@ -7,6 +7,7 @@
 		let content = window.find("content");
 		this.els = {
 			content,
+			stage: content.find(`> div[data-area="stage"]`),
 			tutorial: content.find(`> div[data-area="tutorial"]`),
 			step1: content.find(".step-1"),
 			step2: content.find(".step-2"),
@@ -32,6 +33,13 @@
 				Self.els.tutorial.attr({ "class": "show-"+ value });
 				// reset planets
 				Main.planets = [];
+
+				if (Self.els.stage.hasClass("fadeout")) {
+					Self.els.stage.cssSequence("fadein", "transitionend", el => {
+						el.removeClass("fadeout fadein");
+					});
+				}
+
 				// plot tutorial map
 				tutorial[value].planets.map(p => Main.planets.push(new Planet(...p)));
 				Main.appendHtml();
@@ -41,16 +49,17 @@
 				GameUI.loop(() => {
 					let [tut, num] = value.split("-");
 					num++;
-					console.log(num);
-					Self.els.tutorial.cssSequence("fadeout", "transitionend", el => {
+					Self.els.stage.addClass("fadeout");
+
+					Self.els.tutorial.cssSequence("switch-fade", "transitionend", el => {
 						switch (true) {
 							case el.hasClass("step-1"):
 								break;
 							case el.hasClass("step-2"):
-								// Self.dispatch({ type: "start-tutorial", arg: "step-2" });
+								Self.dispatch({ type: "start-tutorial", arg: "step-2" });
 								break;
 							case el.hasClass("step-3"):
-								console.log("start game");
+								// Self.dispatch({ type: "start-tutorial", arg: "step-3" });
 								break;
 						}
 					});

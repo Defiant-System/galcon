@@ -7,6 +7,8 @@
 		let el = window.find(`div[data-area="stage"]`);
 		this.els = {
 			el,
+			content: window.find("content"),
+			gameBg: window.find(".game-bg"),
 			toolSelect: window.find(".toolbar-selectbox_ > div:first"),
 			canvas: el.find("canvas"),
 		};
@@ -23,13 +25,13 @@
 		switch (event.type) {
 			// custom events
 			case "pause-game":
-				value = Self.els.el.hasClass("paused");
+				value = Self.els.content.hasClass("paused");
 				// toggle FPS loop
 				if (!value) {
-					Self.els.el.addClass("paused");
+					Self.els.content.addClass("paused");
 					GameUI.fpsControl.stop();
 				} else {
-					Self.els.el.removeClass("paused");
+					Self.els.content.removeClass("paused");
 					GameUI.fpsControl.start();
 				}
 				return !value;
@@ -49,7 +51,7 @@
 				Self.attack_force = +event.arg / 100;
 				break;
 			case "set-bg":
-				Self.els.el.data({ bg: event.arg });
+				Self.els.gameBg.data({ bg: event.arg });
 				break;
 			case "generate-map":
 				Main.planets = [];

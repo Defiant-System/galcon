@@ -2,7 +2,7 @@
 let GameUI = {
 	init() {
 		// fast references
-		this.cvs = window.find("canvas");
+		this.cvs = window.find("canvas.game");
 		this.ctx = this.cvs[0].getContext("2d", { willReadFrequently: true });
 		this.width = this.cvs.prop("offsetWidth"),
 		this.height = this.cvs.prop("offsetHeight");
