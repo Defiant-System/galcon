@@ -22,29 +22,29 @@
 		// console.log(event);
 		switch (event.type) {
 			// custom events
-			case "start-view":
+			case "intro-view":
+				// make sure correct view is shown
+				Self.els.content.data({ show: "intro" });
 				break;
-			case "new-game":
-				Self.dispatch({ ...event, type: "start-"+ event.arg });
-				return true;
 			case "start-tutorial":
+				// make sure correct view is shown
+				Self.els.content.data({ show: "tutorial" });
+
 				value = event.arg || "step-1";
 				// show "step"
 				Self.els.tutorial.attr({ "class": "show-"+ value });
 				// reset planets
 				Main.planets = [];
-
-				if (Self.els.stage.hasClass("fadeout")) {
-					Self.els.stage.cssSequence("fadein", "transitionend", el => {
-						el.removeClass("fadeout fadein");
-					});
-				}
-
 				// plot tutorial map
 				tutorial[value].planets.map(p => Main.planets.push(new Planet(...p)));
 				Main.appendHtml();
 				// create shipsets
 				Main.allships = new Shipset(Main.planets);
+				// fade in stage
+				if (Self.els.stage.hasClass("fadeout")) {
+					Self.els.stage.cssSequence("fadein", "transitionend", el =>
+						el.removeClass("fadeout fadein"));
+				}
 				// start game loop
 				GameUI.loop(() => {
 					let [tut, num] = value.split("-");
@@ -53,7 +53,6 @@
 
 					Self.els.tutorial.cssSequence("switch-fade", "transitionend", el => {
 						if (!el.hasClass("switch-fade")) return;
-						console.log(num);
 						switch (num) {
 							case 1:
 								break;
@@ -64,13 +63,19 @@
 								Self.dispatch({ type: "start-tutorial", arg: "step-3" });
 								break;
 							case 4:
-								// start classic game
+								console.log("start classic game");
 								break;
 						}
 					});
 
 				});
 				break;
+			case "new-game":
+				// make sure correct view is shown
+				Self.els.content.data({ show: "stage" });
+				// proxy event
+				Self.dispatch({ ...event, type: "start-"+ event.arg });
+				return true;
 			case "start-classic":
 				// reset planets
 				Main.planets = [];

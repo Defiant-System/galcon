@@ -15,6 +15,8 @@ let GameUI = {
 	loop(overFunc) {
 		let _Main = Main,
 			_GameUI = GameUI;
+		// if any already running, stop
+		if (this.fpsControl) this.fpsControl.stop();
 		// save reference to "game over" function
 		this.overFunc = overFunc;
 		// FPS control

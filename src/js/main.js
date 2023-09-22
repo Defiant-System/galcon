@@ -54,6 +54,7 @@ const galcon = {
 			case "generate-map":
 			case "set-attack-fleet":
 				return Self.stage.dispatch(event);
+			case "start-tutorial":
 			case "new-game":
 				return Self.start.dispatch(event);
 			case "open-help":

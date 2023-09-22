@@ -1,6 +1,6 @@
 <ToolBar>
 	<Group width="208px">
-		<Tool name="Tutorial" click="new-game" arg="tutorial"/>
+		<Tool name="Tutorial" click="start-tutorial" arg="step-1"/>
 		<Select name="Attack Fleet: 65%" width="100" menu="attack-fleet"></Select>
 	</Group>
 	<Group>

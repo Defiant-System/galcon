@@ -13,13 +13,35 @@ content {
 	font-family: "Michroma", sans-serif;
 	font-size: 20px;
 	color: #aaa;
-		
+
+	&[data-show="intro"] {
+		> div[data-area="intro"] {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	&[data-show="tutorial"] {
+		> div[data-area="tutorial"],
+		> div[data-area="stage"] {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	&[data-show="stage"] {
+		> div[data-area="stage"] {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
 	&.paused .game-bg:before {
 		animation-play-state: paused;
 	}
 
 	h1 {
-		font-family: "Audiowide", sans-serif;
+		font-family: "Michroma", sans-serif;
 		font-size: 52px;
 		color: #fff;
 		margin: 0 auto 11px;
@@ -50,7 +72,8 @@ content {
 	}
 
 	> div {
-		display: none;
+		opacity: 0;
+		visibility: hidden;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -60,7 +83,8 @@ content {
 
 		&.game-bg {
 			z-index: 1;
-			display: block;
+			opacity: 1;
+			visibility: visible;
 			overflow: hidden;
 
 			&:before {
@@ -81,8 +105,23 @@ content {
 			&[data-bg="06"]:before { background-image: url(~/img/bg-06.jpg); }
 		}
 
+		&[data-area="intro"] {
+			padding: 53px 73px;
+			text-align: center;
+
+			h1 {
+				width: 700px;
+				text-shadow: 0 2px 5px rgba(#000,.5);
+				letter-spacing: 1px;
+				color: rgba(#fff,.4);
+				background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
+				-webkit-background-size: 150px;
+				-webkit-background-clip: text;
+				-webkit-animation: shine 3s infinite;
+			}
+		}
+
 		&[data-area="tutorial"] {
-			display: block;
 			min-height: 0;
 			transition: min-height 400ms;
 
@@ -166,8 +205,6 @@ content {
 		}
 
 		&[data-area="stage"] {
-			display: block;
-			opacity: 1;
 			transition: opacity 500ms ease-in-out;
 
 			&.fadeout {
@@ -204,17 +241,15 @@ content {
 	100% { transform: rotate(0deg); }
 }
 
-
-/* latin */
-@font-face {
-	font-family: 'Audiowide';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: url(~/fonts/Audiowide.woff2) format('woff2');
-	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+@keyframes shine {
+	0%, 10% { background-position: -600px; }
+	20% { background-position: top left; }
+	90% { background-position: top right; }
+	100% { background-position: 600px; }
 }
 
+
+/* latin */
 @font-face {
 	font-family: 'Michroma';
 	font-style: normal;
