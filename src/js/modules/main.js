@@ -8,7 +8,7 @@ let Owner = {
 let Palette = [
 		{ color: "#aaaaaa", name: "neutral" },
 		{ color: "#5577ee", name: "human" },
-		{ color: "#ff3333", name: "ai" },
+		{ color: "#ff5555", name: "ai" },
 	];
 
 let Mission = {
@@ -92,16 +92,86 @@ let Main = {
 	},
 	prand() {
 		[...Array(25)].map(e => this.prandi());
-        return this.prandi();
+		return this.prandi();
 	},
 	prandi() {
-        this.grand += 1;
-        this.rseed = this.rseed << 1;
-        this.rseed = this.rseed | (this.rseed & 1073741824) >> 30;
-        this.rseed = this.rseed ^ (this.rseed & 614924288) >> 9;
-        this.rseed = this.rseed ^ (this.rseed & 4241) << 17;
-        this.rseed = this.rseed ^ (this.rseed & 272629760) >> 23;
-        this.rseed = this.rseed ^ (this.rseed & 318767104) >> 10;
-        return (this.rseed & 16777215) / 16777216;
+		this.grand += 1;
+		this.rseed = this.rseed << 1;
+		this.rseed = this.rseed | (this.rseed & 1073741824) >> 30;
+		this.rseed = this.rseed ^ (this.rseed & 614924288) >> 9;
+		this.rseed = this.rseed ^ (this.rseed & 4241) << 17;
+		this.rseed = this.rseed ^ (this.rseed & 272629760) >> 23;
+		this.rseed = this.rseed ^ (this.rseed & 318767104) >> 10;
+		return (this.rseed & 16777215) / 16777216;
+	},
+	CheckWinLose() {
+		var _loc_1 = 1;
+		var _loc_2 = 0;
+		var _loc_4 = 0;
+			
+		while (_loc_1 < 13) {
+			main.players[_loc_1].ownership = 0;
+			_loc_1++;
+		}
+		_loc_1 = 0;
+			
+		while (_loc_1 < main.planets.length) {
+			if (main.planets[_loc_1].owner != 0) {
+				var _loc_5 = main.players[main.planets[_loc_1].owner];
+				var _loc_6 = _loc_5.ownership + 1;
+				_loc_5.ownership = _loc_6;
+			}
+			_loc_1++;
+		}
+		_loc_2 = 0;
+			
+		while (_loc_2 < main.allships.max_count) {
+			_loc_1 = (main.allships.min_index + _loc_2) % main.allships.alloc_count;
+			if (main.allships.ships[_loc_1] != null) {
+				_loc_4 = main.allships.ships[_loc_1].owner;
+				if (_loc_4 == main.player_id) {
+					var _loc_5 = main.players[_loc_4];
+					var _loc_6 = _loc_5.ownership + 1;
+					_loc_5.ownership = _loc_6;
+				}
+			}
+			_loc_2++;
+		}
+		_loc_1 = 1;
+			
+		while (_loc_1 < 13) {
+			if (main.players[_loc_1].active && !main.players[_loc_1].lost && main.players[_loc_1].ownership == 0) {
+				var _loc_5 = main.players[_loc_1];
+				var _loc_6 = _loc_5.losing + 1;
+				_loc_5.losing = _loc_6;
+				if (_loc_5.losing > 3 * 60) {
+					_loc_5.lost = true;
+					if (_loc_1 == main.player_id) {
+						main.requesters.PopupRequester(main.requesters.REQUESTER_LOSE);
+						main.menuchannel = main.PlaySound(main.leavesound, main.menuchannel);
+						return;
+					}
+				}
+			} else{
+				_loc_5.losing = 0;
+			}
+			_loc_1++;
+		}
+		var _loc_3 = -1;
+		_loc_1 = 1;
+			
+		while (_loc_1 < 13) {
+			if (_loc_5.active && !_loc_5.lost) {
+				if (_loc_3 != -1) {
+					return;
+				}
+				_loc_3 = _loc_1;
+			}
+			_loc_1++;
+		}
+		if (_loc_3 == main.player_id) {
+			main.requesters.PopupRequester(main.requesters.REQUESTER_WIN);
+			main.menuchannel = main.PlaySound(main.stopsound, main.menuchannel);
+		}
 	}
 };

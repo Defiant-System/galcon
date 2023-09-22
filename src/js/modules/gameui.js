@@ -25,6 +25,7 @@ let GameUI = {
 					if (_Main.ai) _Main.ai.Tick();
 					_GameUI.update();
 					_GameUI.render();
+					// _Main.CheckWinLose();
 				},
 			},
 		});
