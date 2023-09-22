@@ -1,36 +1,39 @@
 
+let Owner = {
+		NEUTRAL: 0,
+		HUMAN: 1,
+		AI: 2,
+	};
+
+let Palette = [
+		{ color: "#aaaaaa", name: "neutral" },
+		{ color: "#5577ee", name: "human" },
+		{ color: "#ff5555", name: "ai" },
+	];
+
+let Mission = {
+		CLASSIC: 0,
+		STEALTH: 1,
+		VACUUM: 2,
+		BEAST: 3,
+		THREEWAY: 4,
+	};
+
 let Main = {
 	init() {
 		this.grand = 0;
 		this.rseed = Math.random() * 8388607 + 24478357;
 		this.planet_count = 18;
-		this.winwidth = GameUI.width;
-		this.winheight = GameUI.height;
-
-		// create planets
-		this.planets = [];
-
-		// generate random map
-		this.generateMap();
-		// level.planets.map(p => this.planets.push(new Planet(...p)));
-		this.appendHtml();
-
-		// create shipsets
-		let rect = new Rectangle(0, 0, this.winwidth, this.winheight);
-		this.allships = new Shipset(rect, this.planets);
-
-		// create game AI
-		this.ai = new AI(1, Mission.CLASSIC, this);
 	},
-	generateMap(players=1) {
+	generateMap(ai=1) {
 		let ship_radius = Ship._radius << 1,
-			planet_count = this.planet_count - players - 1; // players + AI
+			planet_count = this.planet_count - ai - 1; // 1 player + AI(s)
 		// basic random map
 		[...Array(planet_count)].map(e => this.createPlanet(Owner.NEUTRAL));
 		// insert play planet
 		this.createPlanet(Owner.HUMAN, 50, null, 90);
 		// insert AI planet
-		this.createPlanet(Owner.AI, 790, null, 90);
+		this.createPlanet(Owner.AI, GameUI.width - 50, null, 90);
 		// make sure of distance
 		this.planets.map(p1 => {
 			this.planets.map(p2 => {
@@ -50,8 +53,8 @@ let Main = {
 	},
 	createPlanet(owner, px, py, pp) {
 		let m = 70,
-			x = px || m + this.prand() * (this.winwidth - (m * 2)),
-			y = py || m + this.prand() * (this.winheight - (m * 2)),
+			x = px || m + this.prand() * (GameUI.width - (m * 2)),
+			y = py || m + this.prand() * (GameUI.height - (m * 2)),
 			production = pp || 3 + this.prand() * 29,
 			texture = Math.random() * Object.keys(Surface.maps).length | 0,
 			id = this.planets.length + 1;
@@ -74,8 +77,8 @@ let Main = {
 		APP.stage.els.el.append(divs.join(""));
 	},
 	findEmtpySpace(planet, ship_radius) {
-		let nX = 40 + this.prand() * (this.winwidth - 80),
-			nY = 60 + this.prand() * (this.winheight - 120),
+		let nX = 40 + this.prand() * (GameUI.width - 80),
+			nY = 60 + this.prand() * (GameUI.height - 120),
 			nPos = new Point(nX, nY),
 			empty = true;
 		

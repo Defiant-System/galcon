@@ -24,10 +24,15 @@
 			// custom events
 			case "pause-game":
 				value = Self.els.el.hasClass("paused");
-				Self.els.el.toggleClass("paused", value);
-				// stops loop
-				GameUI.fpsControl.stop();
-				break;
+				// toggle FPS loop
+				if (!value) {
+					Self.els.el.addClass("paused");
+					GameUI.fpsControl.stop();
+				} else {
+					Self.els.el.removeClass("paused");
+					GameUI.fpsControl.start();
+				}
+				return !value;
 			case "output-pgn":
 				value = { planets: [] };
 				Main.planets.map(p => {
@@ -40,7 +45,7 @@
 				// update menu xml node
 				event.xMenu.setAttribute("value", event.arg);
 				// DOM update
-				Self.els.toolSelect.html(`Attack force: ${event.arg}%`);
+				Self.els.toolSelect.html(`Attack Force: ${event.arg}%`);
 				Self.attack_force = +event.arg / 100;
 				break;
 			case "set-bg":

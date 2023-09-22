@@ -17,26 +17,6 @@
 @import "./modules/surface.js"
 @import "./modules/test.js"
 
-let Owner = {
-		NEUTRAL: 0,
-		HUMAN: 1,
-		AI: 2,
-	};
-
-let Palette = [
-		{ color: "#aaaaaa", name: "neutral" },
-		{ color: "#5577ee", name: "human" },
-		{ color: "#ff5555", name: "ai" },
-	];
-
-let Mission = {
-		CLASSIC: 0,
-		STEALTH: 1,
-		VACUUM: 2,
-		BEAST: 3,
-		THREEWAY: 4,
-	};
-
 
 const galcon = {
 	init() {
@@ -45,6 +25,8 @@ const galcon = {
 
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
+		Fx.init();
+		Main.init();
 		Starfield.init();
 		Surface.init();
 		GameUI.init();
@@ -73,6 +55,8 @@ const galcon = {
 			case "set-attack-force":
 			case "before-menu:attack-force":
 				return Self.stage.dispatch(event);
+			case "new-game":
+				return Self.start.dispatch(event);
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;
@@ -87,6 +71,7 @@ const galcon = {
 				}
 		}
 	},
+	start: @import "./areas/start.js",
 	stage: @import "./areas/stage.js",
 };
 

@@ -1,17 +1,17 @@
 <ToolBar>
-	<Group>
-		<Options>
-			<Tool name="Classic" state="active"/>
-			<Tool name="Beast"/>
-			<Tool name="Stealth"/>
-			<Tool name="Vacuum"/>
-			<Tool name="3-way"/>
-		</Options>
-		<Tool name="New Map" click="generate-map"/>
-		<Tool name="Stop" click="pause-game"/>
-		<Tool name="FPS" click="toggle-fps"/>
+	<Group width="208px">
+		<Tool name="Tutorial" click="new-game" arg="tutorial"/>
+		<Select name="Attack Force: 65%" width="100" menu="attack-force"></Select>
 	</Group>
 	<Group>
-		<Select name="Attack force: 65%" width="100" menu="attack-force"></Select>
+		<Options>
+			<Tool name="Classic" click="new-game" arg="classic"/>
+			<Tool name="Stealth" click="new-game" arg="stealth"/>
+			<Tool name="3-way" click="new-game" arg="3-way"/>
+		</Options>
+	</Group>
+	<Group>
+		<Tool name="Pause" click="pause-game"/>
+		<Tool name="FPS" click="toggle-fps"/>
 	</Group>
 </ToolBar>

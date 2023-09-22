@@ -11,10 +11,8 @@ let GameUI = {
 		this.area = new Rectangle(0, 0, this.width, this.height);
 		this.speed = 2.25;
 		this.showFps = false;
-
-		Main.init();
-		Fx.init();
-
+	},
+	loop() {
 		let _Main = Main,
 			_GameUI = GameUI;
 		this.fpsControl = karaqu.FpsControl({
@@ -28,7 +26,7 @@ let GameUI = {
 					_GameUI.update();
 					_GameUI.render();
 				},
-			}
+			},
 		});
 		// start FPC
 		this.fpsControl.start();
@@ -54,8 +52,10 @@ let GameUI = {
 			piHalf = Math.PI / 2,
 			ships = {
 				"1": [[0,-8], [6,7], [-6,7]],
-				"2": [[0,-8], [6,7], [0,3], [-6,7]],
-				"3": [[0,-8], [4,7], [6,5], [4,7], [0,4], [-4,7], [-6,5], [-4,7]],
+				"2": [[0,-8], [6,7], [-6,7]],
+				"3": [[0,-7], [6,7], [0,10], [-6,7]],
+				"4": [[0,-8], [6,7], [0,3], [-6,7]],
+				"5": [[0,-8], [4,7], [6,5], [4,7], [0,4], [-4,7], [-6,5], [-4,7]],
 			};
 
 		this.cvs.attr({ width });
