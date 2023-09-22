@@ -26,6 +26,7 @@
 			// custom events
 			case "pause-game":
 				value = Self.els.content.hasClass("paused");
+				if (!GameUI.fpsControl) return;
 				// toggle FPS loop
 				if (!value) {
 					Self.els.content.addClass("paused");

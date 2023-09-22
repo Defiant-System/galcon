@@ -11,6 +11,7 @@
 		</Options>
 	</Group>
 	<Group>
+		<Tool name="Sounds"/>
 		<Tool name="Pause" click="pause-game"/>
 		<Tool name="FPS" click="toggle-fps"/>
 	</Group>
