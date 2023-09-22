@@ -2,7 +2,7 @@
 let Test = {
 	init(APP) {
 		
-		setTimeout(() => window.find(`.toolbar-tool_[data-arg="classic"]`).trigger("click"), 300);
+		setTimeout(() => window.find(`.toolbar-tool_[data-arg="tutorial"]`).trigger("click"), 300);
 
 		// setTimeout(() => Fx.explode(150, 140), 1e3);
 		// setTimeout(() => {

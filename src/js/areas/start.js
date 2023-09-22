@@ -21,8 +21,8 @@
 				// reset planets
 				Main.planets = [];
 				// plot tutorial map
-				level.planets.map(p => Main.planets.push(new Planet(...p)));
-				Main.appendHtml();
+				// level.planets.map(p => Main.planets.push(new Planet(...p)));
+				// Main.appendHtml();
 				break;
 			case "start-classic":
 				// reset planets
