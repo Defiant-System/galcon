@@ -141,6 +141,7 @@ let Main = {
 			if (!player.lost && player.ownership <= 0) {
 				player.losing++;
 				if (player.losing > 90) {
+					// console.log("player lost", player);
 					player.lost = true;
 					return GameUI.over();
 				}

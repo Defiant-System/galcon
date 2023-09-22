@@ -40,9 +40,21 @@
 				// start game loop
 				GameUI.loop(() => {
 					let [tut, num] = value.split("-");
+					num++;
+					console.log(num);
 					Self.els.tutorial.cssSequence("fadeout", "transitionend", el => {
-						console.log(el);
+						switch (true) {
+							case el.hasClass("step-1"):
+								break;
+							case el.hasClass("step-2"):
+								// Self.dispatch({ type: "start-tutorial", arg: "step-2" });
+								break;
+							case el.hasClass("step-3"):
+								console.log("start game");
+								break;
+						}
 					});
+
 				});
 				break;
 			case "start-classic":

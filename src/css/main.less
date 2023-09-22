@@ -14,10 +14,6 @@ content {
 	font-size: 20px;
 	color: #aaa;
 
-		&.fadeout > div {
-			opacity: 0;
-		}
-
 	h1 {
 		font-family: "Audiowide", sans-serif;
 		font-size: 52px;
@@ -49,7 +45,6 @@ content {
 		right: 0;
 		bottom: 0;
 		overflow: hidden;
-		transition: opacity 500ms ease-in-out;
 			
 		&:before {
 			content: "";
@@ -68,7 +63,7 @@ content {
 
 		&[data-area="tutorial"] {
 			display: block;
-
+			
 			&:before {
 				background-image: url(~/img/bg-02.jpg);
 				animation: rotate_bg_ccw 1080s linear infinite;
@@ -85,14 +80,52 @@ content {
 				visibility: hidden;
 				text-align: center;
 				pointer-events: none;
+				transition: opacity 500ms ease-in-out;
 			}
 
-			&.show-step-1 .step-1 { opacity: 1; visibility: visible; }
-			&.show-step-2 .step-2 { opacity: 1; visibility: visible; }
-			&.show-step-3 .step-3 { opacity: 1; visibility: visible; }
+			&.show-step-1 {
+				&.fadeout {
+					.step-1 {
+						opacity: 0;
+					}
 
-			.step-1 {
+					.step-2 {
+						opacity: 1;
+						visibility: visible;
+						transition-delay: 400ms;
+					}
+				}
 
+				.step-1 {
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+
+			&.show-step-2 {
+				&.fadeout {
+					.step-2 {
+						opacity: 0;
+					}
+
+					.step-3 {
+						opacity: 1;
+						visibility: visible;
+						transition-delay: 400ms;
+					}
+				}
+
+				.step-2 {
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+
+			&.show-step-3 {
+				.step-3 {
+					opacity: 1;
+					visibility: visible;
+				}
 			}
 		}
 

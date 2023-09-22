@@ -4,6 +4,7 @@ class Shipset {
 		this.ship_bounds = new Rectangle(0, 0, GameUI.width, GameUI.height);
 		this.fleets = [];
 		this._allships = [];
+		this.fleet_id = 1; // just a counter
 	}
 
 	map(func) {
