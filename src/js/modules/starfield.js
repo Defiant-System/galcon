@@ -1,11 +1,11 @@
 
 let Starfield = {
 	init() {
-		this.max_depth = 32;
-		this.stars = [...Array(63)].map(e => ({
+		this.max_depth = 48;
+		this.stars = [...Array(64)].map(e => ({
 			x: this.rnd(-25, 25),
 			y: this.rnd(-25, 25),
-			z: this.rnd(1, 32)
+			z: this.rnd(1, this.max_depth)
 		}));
 	},
 	rnd(min, max) {
@@ -36,7 +36,7 @@ let Starfield = {
 			py = stars[len].y * k + halfHeight;
 
 			if (px >= 0 && px <= width && py >= 0 && py <= height) {
-				shade = (1 - stars[len].z / 42),
+				shade = (1 - stars[len].z / 64),
 				size = shade * 2;
 				ctx.beginPath();
 				ctx.fillStyle = "rgba(255,255,255," + shade + ")";

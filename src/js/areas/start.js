@@ -3,11 +3,19 @@
 
 {
 	init() {
-		
+		// fast references
+		let tutorial = window.find(`content > div[data-area="tutorial"]`);
+		this.els = {
+			tutorial,
+			step1: tutorial.find(".step-1"),
+			step2: tutorial.find(".step-2"),
+			step3: tutorial.find(".step-3"),
+		};
 	},
 	dispatch(event) {
 		let APP = galcon,
 			Self = APP.start,
+			value,
 			el;
 		// console.log(event);
 		switch (event.type) {
@@ -18,10 +26,13 @@
 				Self.dispatch({ ...event, type: "start-"+ event.arg });
 				return true;
 			case "start-tutorial":
+				value = event.arg || "step-1";
+				// show "step"
+				Self.els.tutorial.attr({ "class": "show-"+ value });
 				// reset planets
 				Main.planets = [];
 				// plot tutorial map
-				tutorial.step1.planets.map(p => Main.planets.push(new Planet(...p)));
+				tutorial[value].planets.map(p => Main.planets.push(new Planet(...p)));
 				Main.appendHtml();
 				// create shipsets
 				Main.allships = new Shipset(Main.planets);

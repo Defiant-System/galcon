@@ -8,7 +8,7 @@ let Owner = {
 let Palette = [
 		{ color: "#aaaaaa", name: "neutral" },
 		{ color: "#5577ee", name: "human" },
-		{ color: "#ff5555", name: "ai" },
+		{ color: "#ff3333", name: "ai" },
 	];
 
 let Mission = {
@@ -55,10 +55,10 @@ let Main = {
 		let m = 70,
 			x = px || m + this.prand() * (GameUI.width - (m * 2)),
 			y = py || m + this.prand() * (GameUI.height - (m * 2)),
-			production = pp || 3 + this.prand() * 29,
-			texture = Math.random() * Object.keys(Surface.maps).length | 0,
-			id = this.planets.length + 1;
-		this.planets.push(new Planet(x, y, production, owner, id, texture));
+			ships = pp || 3 + this.prand() * 29,
+			radius = Math.min(23 + (ships * .75), 31) | 0,
+			texture = Math.random() * Object.keys(Surface.maps).length | 0;
+		this.planets.push(new Planet(x, y, radius, ships, owner, texture));
 	},
 	getPlanet(id) {
 		return this.planets.find(p => p.id === +id);
@@ -71,9 +71,9 @@ let Main = {
 			let y = p.pos._y - p.radius,
 				x = p.pos._x - p.radius,
 				d = p.radius << 1;
-			divs.push(`<div class="planet-disc ${Palette[p.owner].name}" data-id="${p.id}" style="width: ${d}px; height: ${d}px; top: ${y}px; left: ${x}px;"></div>`);
+			divs.push(`<div class="planet ${Palette[p.owner].name}" data-id="${p.id}" style="width: ${d}px; height: ${d}px; top: ${y}px; left: ${x}px;"></div>`);
 		});
-		APP.stage.els.el.find(".planet-disc").remove();
+		APP.stage.els.el.find(".planet").remove();
 		APP.stage.els.el.append(divs.join(""));
 	},
 	findEmtpySpace(planet, ship_radius) {

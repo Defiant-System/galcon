@@ -9,7 +9,7 @@ content {
 	right: 0;
 	bottom: 0;
 	border-radius: inherit;
-	line-height: 1.5;
+	line-height: 1.35;
 	font-family: "Michroma", sans-serif;
 	font-size: 20px;
 	color: #aaa;
@@ -22,7 +22,7 @@ content {
 	}
 
 	h2 {
-		font-size: 42px;
+		font-size: 40px;
 		color: #fff;
 		margin: 0 auto 11px;
 	}
@@ -63,7 +63,6 @@ content {
 
 		&[data-area="tutorial"] {
 			display: block;
-			padding: 47px 73px;
 			
 			&:before {
 				background-image: url(~/img/bg-02.jpg);
@@ -71,8 +70,12 @@ content {
 			}
 
 			> div {
-				position: relative;
-				z-index: 2;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				padding: 53px 73px;
 				opacity: 0;
 				visibility: hidden;
 				text-align: center;
@@ -90,7 +93,7 @@ content {
 
 		&[data-area="stage"] {
 			display: block;
-			
+
 			&:before {
 				background-image: url(~/img/bg-06.jpg);
 				animation: rotate_bg_cw 1080s linear infinite;
@@ -110,7 +113,7 @@ content {
 				height: 100%;
 			}
 
-			.planet-disc {
+			.planet {
 				position: absolute;
 				box-shadow: inset -3px -1px 3px rgba(#fff,.1);
 				border-radius: 50%;

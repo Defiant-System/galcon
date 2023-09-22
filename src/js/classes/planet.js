@@ -1,6 +1,6 @@
 
 class Planet {
-	constructor(x, y, production, owner, id, texture) {
+	constructor(x, y, radius, ships, owner, texture) {
 		let zradius = 0,
 			attacker = 0,
 			selected = false,
@@ -10,15 +10,15 @@ class Planet {
 			attack_timer = 0,
 			initialized = false;
 		
-		this.id = id+1;
+		this.id = Main.planets.length + 1;
 		this.pos = new Point(x, y);
 		this.zpos = new Point();
 		this._owner = owner;
 		this.color = Palette[owner].color;
 		this.texture = Surface.maps[texture];
-		this.production = production;
-		this.ships = production;
-		this.radius = Math.min(23 + ((production ) * .75), 31);
+		this.radius = radius;
+		this.ships = ships;
+		this.production = radius / 200;
 		
 		this.tilt = ((Math.random() * 90) - 45) | 0;
 		this.speed = (Math.random() * 3) - 1.5;
@@ -53,7 +53,7 @@ class Planet {
 		if (this.speed < 0 && this.rotation < -this.radius * 4) this.rotation = this.rotation_max;
 		if (this._owner !== Owner.NEUTRAL) {
 			// update shap count
-			this.ships += this.production / 400;
+			this.ships += this.production;
 		}
 	}
 
@@ -69,7 +69,7 @@ class Planet {
 				window.audio.play("takeover");
 				// 
 				let Stage = galcon.stage,
-					el = Stage.els.el.find(`.planet-disc[data-id="${this.id}"]`).removeClass("neutral ai human");
+					el = Stage.els.el.find(`.planet[data-id="${this.id}"]`).removeClass("neutral ai human");
 				if (this.owner === Owner.HUMAN) el.addClass("human");
 				else Stage.dispatch({ type: "unselect-planet", planet: this });
 			}

@@ -64,7 +64,7 @@
 				el = $(event.target);
 				if (el.hasClass("human") && el.data("id")) {
 					let planet = Main.getPlanet(+el.data("id"));
-					Self.selected = Self.els.el.find(".planet-disc.human").map(el => Main.getPlanet(+el.getAttribute("data-id")));
+					Self.selected = Self.els.el.find(".planet.human").map(el => Main.getPlanet(+el.getAttribute("data-id")));
 					Self.selected.map(p => {
 						Fx.outline.add(p, Palette[planet.owner].color);
 						Fx.line.add(p, planet);
@@ -91,7 +91,7 @@
 		switch (event.type) {
 			case "mousedown":
 				el = $(event.target);
-				if (el.hasClass("planet-disc") && el.data("id")) {
+				if (el.hasClass("planet") && el.data("id")) {
 					planet = Main.getPlanet(+el.data("id"));
 
 					if (Self.selected.find(p => p.id === planet.id)) {
