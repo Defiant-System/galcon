@@ -4,7 +4,7 @@ let Test = {
 		
 		// setTimeout(() => window.find(`.toolbar-tool_[data-arg="classic"]`).trigger("click"), 300);
 		// setTimeout(() => window.find(`.toolbar-tool_[data-arg="tutorial"]`).trigger("click"), 300);
-		setTimeout(() => APP.start.dispatch({ type: "start-tutorial", arg: "step-2" }), 300);
+		setTimeout(() => APP.start.dispatch({ type: "start-tutorial", arg: "step-1" }), 300);
 
 		// setTimeout(() => Main.allships.LaunchShips(Main.planets[0], Main.planets[1], 1, .65), 1e3);
 		// setTimeout(() => Main.allships.LaunchShips(Main.planets[0], Main.planets[2], 1, .65), 1e3);

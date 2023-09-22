@@ -83,6 +83,12 @@ content {
 
 		&[data-area="tutorial"] {
 			display: block;
+			min-height: 0;
+			transition: min-height 400ms;
+
+			&.switch-fade {
+				min-height: 1px;
+			}
 			
 			> div {
 				position: absolute;
@@ -95,7 +101,7 @@ content {
 				visibility: hidden;
 				text-align: center;
 				pointer-events: none;
-				transition: opacity 500ms ease-in-out;
+				transition: opacity 350ms ease-in-out;
 			}
 
 			&.show-step-1 {
@@ -115,6 +121,9 @@ content {
 					opacity: 1;
 					visibility: visible;
 				}
+
+				.step-2,
+				.step-3 { opacity: 0; }
 			}
 
 			&.show-step-2 {
@@ -134,13 +143,25 @@ content {
 					opacity: 1;
 					visibility: visible;
 				}
+
+				.step-1,
+				.step-3 { opacity: 0; }
 			}
 
 			&.show-step-3 {
+				&.switch-fade {
+					.step-3 {
+						opacity: 0;
+					}
+				}
+
 				.step-3 {
 					opacity: 1;
 					visibility: visible;
 				}
+
+				.step-1,
+				.step-2 { opacity: 0; }
 			}
 		}
 

@@ -52,14 +52,19 @@
 					Self.els.stage.addClass("fadeout");
 
 					Self.els.tutorial.cssSequence("switch-fade", "transitionend", el => {
-						switch (true) {
-							case el.hasClass("step-1"):
+						if (!el.hasClass("switch-fade")) return;
+						console.log(num);
+						switch (num) {
+							case 1:
 								break;
-							case el.hasClass("step-2"):
+							case 2:
 								Self.dispatch({ type: "start-tutorial", arg: "step-2" });
 								break;
-							case el.hasClass("step-3"):
-								// Self.dispatch({ type: "start-tutorial", arg: "step-3" });
+							case 3:
+								Self.dispatch({ type: "start-tutorial", arg: "step-3" });
+								break;
+							case 4:
+								// start classic game
 								break;
 						}
 					});
