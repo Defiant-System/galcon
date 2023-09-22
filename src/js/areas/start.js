@@ -21,8 +21,12 @@
 				// reset planets
 				Main.planets = [];
 				// plot tutorial map
-				// level.planets.map(p => Main.planets.push(new Planet(...p)));
-				// Main.appendHtml();
+				tutorial.step1.planets.map(p => Main.planets.push(new Planet(...p)));
+				Main.appendHtml();
+				// create shipsets
+				Main.allships = new Shipset(Main.planets);
+				// start game loop
+				GameUI.loop();
 				break;
 			case "start-classic":
 				// reset planets
@@ -31,8 +35,7 @@
 				Main.generateMap();
 				Main.appendHtml();
 				// create shipsets
-				let rect = new Rectangle(0, 0, GameUI.width, GameUI.height);
-				Main.allships = new Shipset(rect, Main.planets);
+				Main.allships = new Shipset(Main.planets);
 				// create game AI
 				Main.ai = new AI(1, Mission.CLASSIC, Main);
 				// start game loop

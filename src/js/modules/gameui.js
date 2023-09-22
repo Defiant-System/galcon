@@ -22,7 +22,7 @@ let GameUI = {
 					_Main.planets.map(p => p.Tick());
 				},
 				60: () => {
-					_Main.ai.Tick();
+					// _Main.ai.Tick();
 					_GameUI.update();
 					_GameUI.render();
 				},
