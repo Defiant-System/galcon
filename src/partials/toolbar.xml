@@ -1,7 +1,7 @@
 <ToolBar>
 	<Group width="208px">
 		<Tool name="Tutorial" click="new-game" arg="tutorial"/>
-		<Select name="Attack Force: 65%" width="100" menu="attack-force"></Select>
+		<Select name="Attack Fleet: 65%" width="100" menu="attack-fleet"></Select>
 	</Group>
 	<Group>
 		<Options>

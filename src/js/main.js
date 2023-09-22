@@ -52,8 +52,7 @@ const galcon = {
 				return Self.stage.dispatch({ type: "pause-game" });
 			case "toggle-fps":
 			case "generate-map":
-			case "set-attack-force":
-			case "before-menu:attack-force":
+			case "set-attack-fleet":
 				return Self.stage.dispatch(event);
 			case "new-game":
 				return Self.start.dispatch(event);

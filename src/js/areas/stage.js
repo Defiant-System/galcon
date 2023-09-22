@@ -41,7 +41,7 @@
 				});
 				console.log( JSON.stringify(value) );
 				break;
-			case "set-attack-force":
+			case "set-attack-fleet":
 				// update menu xml node
 				event.xMenu.setAttribute("value", event.arg);
 				// DOM update
