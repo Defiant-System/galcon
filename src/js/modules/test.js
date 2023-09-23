@@ -4,10 +4,9 @@ let Test = {
 		
 		// - "pause" view
 		// - "Get Ready" view
-		// - start game after tutorial
 
-		// setTimeout(() => window.find(`.toolbar-tool_[data-arg="classic"]`).trigger("click"), 300);
-		// setTimeout(() => window.find(`.toolbar-tool_[data-arg="tutorial"]`).trigger("click"), 300);
+		// setTimeout(() => window.find(`li[data-arg="classic"]`).trigger("click"), 300);
+		// setTimeout(() => window.find(`li[data-arg="tutorial"]`).trigger("click"), 300);
 		// setTimeout(() => APP.start.dispatch({ type: "start-tutorial", arg: "step-3" }), 300);
 		
 		// setTimeout(() => Fx.outline.add(Main.planets[0], "#ff9900"), 500);
