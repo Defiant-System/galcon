@@ -47,11 +47,12 @@ const galcon = {
 		switch (event.type) {
 			case "window.init":
 				break;
-			case "window.keystroke":
-				if (event.char !== "space") return;
-				/* falls through */
-			case "pause-game":
-				return Self.stage.dispatch({ type: "pause-game" });
+			case "window.focus":
+			case "window.blur":
+				let [a, b] = event.type.split(".");
+				Self.start.dispatch({ type: "pause-game", state: b });
+				Self.stage.dispatch({ type: "pause-game", state: b });
+				return;
 			case "toggle-fps":
 			case "generate-map":
 			case "set-attack-fleet":

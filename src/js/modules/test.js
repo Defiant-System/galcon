@@ -2,9 +2,13 @@
 let Test = {
 	init(APP) {
 		
+		// - "pause" view
+		// - "Get Ready" view
+		// - start game after tutorial
+
 		// setTimeout(() => window.find(`.toolbar-tool_[data-arg="classic"]`).trigger("click"), 300);
 		// setTimeout(() => window.find(`.toolbar-tool_[data-arg="tutorial"]`).trigger("click"), 300);
-		setTimeout(() => APP.start.dispatch({ type: "start-tutorial", arg: "step-2" }), 300);
+		// setTimeout(() => APP.start.dispatch({ type: "start-tutorial", arg: "step-2" }), 300);
 		
 		// setTimeout(() => Fx.outline.add(Main.planets[0], "#ff9900"), 500);
 
@@ -31,6 +35,6 @@ let Test = {
 		
 		// setTimeout(() => Fx.clearLines(), 3e3);
 
-		// setTimeout(() => GameUI.fpsControl.stop(), 1e3);
+		// setTimeout(() => GameUI.fpsControl.stop(), 2e3);
 	}
 };

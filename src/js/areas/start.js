@@ -22,6 +22,18 @@
 		// console.log(event);
 		switch (event.type) {
 			// custom events
+			case "pause-game":
+				value = Self.els.content.hasClass("paused");
+				if (!Self.startfield) return;
+				// toggle FPS loop
+				if (!value || event.state === "blur") {
+					Self.els.content.addClass("paused");
+					Self.startfield.stop();
+				} else {
+					Self.els.content.removeClass("paused");
+					Self.startfield.start();
+				}
+				break;
 			case "intro-view":
 				// make sure correct view is shown
 				Self.els.content.removeClass("success failure").data({ show: "intro" });
@@ -45,6 +57,8 @@
 				Self.els.tutorial.attr({ "class": "show-"+ value });
 				// reset planets
 				Main.planets = [];
+				// reset stage selected
+				APP.stage.selected = [];
 				// plot tutorial map
 				tutorial[value].planets.map(p => Main.planets.push(new Planet(...p)));
 				Main.appendHtml();

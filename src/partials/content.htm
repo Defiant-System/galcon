@@ -5,6 +5,17 @@
 
 	<div data-area="intro">
 		<h1>Galactic<br/>Conquest</h1>
+
+		<ul>
+			<li data-click="start-tutorial">Tutorial</li>
+		</ul>
+
+		<ul>
+			<li data-click="new-game" arg="classic">Classic</li>
+			<li data-click="new-game" arg="stealth">Stealth</li>
+			<li data-click="new-game" arg="3-way">3-way</li>
+			<li data-click="new-game" arg="billiards">Billiards</li>
+		</ul>
 	</div>
 
 	<div data-area="tutorial">
@@ -51,6 +62,27 @@
 
 	<div data-context="game-options" data-dbl-click="select-all-planets" data-area="stage">
 		<canvas class="game"></canvas>
+	</div>
+
+	<div data-area="game-dock">
+		<ul class="dock">
+			<li>Main Menu</li>
+			<li>Pause</li>
+			<li>Attack Fleed: 65%</li>
+			<li>Music</li>
+			<li>Sound Fx</li>
+			<li>FPS</li>
+		</ul>
+	</div>
+
+	<!-- for getready -->
+	<div class="view-get-ready" data-click="start-game">
+		<h2>Get Ready</h2>
+	</div>
+
+	<!-- for game paused -->
+	<div class="view-pause" data-click="resume-game">
+		<h2>Paused</h2>
 	</div>
 
 	<!-- for game won / lost -->

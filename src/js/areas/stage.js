@@ -28,14 +28,14 @@
 				value = Self.els.content.hasClass("paused");
 				if (!GameUI.fpsControl) return;
 				// toggle FPS loop
-				if (!value) {
+				if (!value || event.state === "blur") {
 					Self.els.content.addClass("paused");
 					GameUI.fpsControl.stop();
 				} else {
 					Self.els.content.removeClass("paused");
 					GameUI.fpsControl.start();
 				}
-				return !value;
+				break;
 			case "output-pgn":
 				value = { planets: [] };
 				Main.planets.map(p => {
