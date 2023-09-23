@@ -24,11 +24,11 @@
 			// custom events
 			case "intro-view":
 				// make sure correct view is shown
-				Self.els.content.removeClass("success").data({ show: "intro" });
+				Self.els.content.removeClass("success failure").data({ show: "intro" });
 				break;
 			case "start-tutorial":
 				// make sure correct view is shown
-				Self.els.content.removeClass("success").data({ show: "tutorial" });
+				Self.els.content.removeClass("success failure").data({ show: "tutorial" });
 
 				value = event.arg || "step-1";
 				// show "step"
@@ -72,7 +72,7 @@
 				break;
 			case "new-game":
 				// make sure correct view is shown
-				Self.els.content.removeClass("success").data({ show: "stage" });
+				Self.els.content.removeClass("success failure").data({ show: "stage" });
 				// proxy event
 				Self.dispatch({ ...event, type: "start-"+ event.arg });
 				return true;
@@ -87,9 +87,10 @@
 				// create game AI
 				Main.ai = new AI(1, Mission.CLASSIC, Main);
 				// start game loop
-				GameUI.loop(() => {
-					// fireworks
-					Self.els.content.addClass("success");
+				GameUI.loop(looser => {
+					// fireworks or not
+					let name = looser.type === "ai" ? "success" : "failure";
+					Self.els.content.addClass(name);
 				});
 				break;
 			case "start-stealth": break;

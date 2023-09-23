@@ -53,14 +53,20 @@
 		<canvas class="game"></canvas>
 	</div>
 
-	<!-- for game won -->
+	<!-- for game won / lost -->
 	<div class="view-success" data-click="new-game" data-arg="classic">
 		<div class="distort"></div>
-		<h2>Nice job!</h2>
-		<span>Click for another conquest</span>
-		<div class="pyro">
-			<div class="before"></div>
-			<div class="after"></div>
+		<div class="lost">
+			<h2>Better luck next time</h2>
+			<span>Click to try again</span>
+		</div>
+		<div class="won">
+			<h2>Nice job!</h2>
+			<span>Click for another conquest</span>
+			<div class="pyro">
+				<div class="before"></div>
+				<div class="after"></div>
+			</div>
 		</div>
 	</div>
 </content>

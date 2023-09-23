@@ -17,6 +17,8 @@ let GameUI = {
 			_GameUI = GameUI;
 		// if any already running, stop
 		if (this.fpsControl) this.fpsControl.stop();
+		// reset fx pipe
+		Fx.clearLines();
 		// save reference to "game over" function
 		this.overFunc = overFunc;
 		// FPS control
@@ -37,11 +39,11 @@ let GameUI = {
 		// start FPC
 		this.fpsControl.start();
 	},
-	over() {
+	over(looser) {
 		// auto stop loop
 		this.fpsControl.stop();
 		// call "game over" function
-		this.overFunc();
+		this.overFunc(looser);
 	},
 	update() {
 		Main.allships.map(s1 => {

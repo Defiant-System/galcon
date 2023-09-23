@@ -143,7 +143,7 @@ let Main = {
 				if (player.losing > 90) {
 					// console.log("player lost", player);
 					player.lost = true;
-					return GameUI.over();
+					return GameUI.over(player);
 				}
 			} else{
 				player.losing = 0;
