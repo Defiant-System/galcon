@@ -87,7 +87,8 @@
 								Self.dispatch({ type: "start-tutorial", arg: "step-3" });
 								break;
 							case 4:
-								console.log("start classic game");
+								Self.els.stage.removeClass("fadein fadeout");
+								Self.dispatch({ type: "new-game", arg: "classic" });
 								break;
 						}
 					});
@@ -95,10 +96,12 @@
 				});
 				break;
 			case "new-game":
+				// get arg
+				value = event.arg || $(event.target).data("arg");
 				// make sure correct view is shown
 				Self.els.content.removeClass("success failure").data({ show: "stage" });
 				// proxy event
-				Self.dispatch({ ...event, type: "start-"+ event.arg });
+				Self.dispatch({ ...event, type: "start-"+ value });
 				return true;
 			case "start-classic":
 				// reset planets
