@@ -13,10 +13,13 @@ let GameUI = {
 		this.showFps = false;
 	},
 	loop(overFunc) {
-		let _Main = Main,
+		let APP = galcon,
+			_Main = Main,
 			_GameUI = GameUI;
 		// if any already running, stop
 		if (this.fpsControl) this.fpsControl.stop();
+		// stop intro view starfield
+		APP.start.startfield.stop();
 		// reset fx pipe
 		Fx.clearLines();
 		// save reference to "game over" function
@@ -76,7 +79,7 @@ let GameUI = {
 		// this.ctx.clearRect(0, 0, this.width, this.height);
 
 		// render starfield
-		Starfield.render(this.ctx, width, height);
+		Starfield.render();
 		// render planet surface
 		Main.planets.map(p => Surface.render(this.ctx, p));
 		// render ships

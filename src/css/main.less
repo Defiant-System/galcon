@@ -155,8 +155,9 @@ content {
 				position: relative;
 				width: 400px;
 				text-shadow: 0 0 2px rgba(#eef,.25);
-				letter-spacing: 1px;
-				color: rgba(#eef,.1);
+				line-height: 1;
+				letter-spacing: 3px;
+				color: rgba(#aaf,.1);
 				background: #000 -webkit-gradient(linear, left top, left bottom, from(#000), to(#000),
 					color-stop(0.0, #004),
 					color-stop(0.05, #004),
@@ -182,7 +183,7 @@ content {
 				) 0 0;
 				-webkit-background-size: 160px;
 				-webkit-background-clip: text;
-				-webkit-animation: shine 5s alternate infinite;
+				animation: shine 5s infinite linear;
 
 				&:before {
 					content: "Galactic Conquest";
@@ -193,8 +194,8 @@ content {
 					bottom: 0;
 					z-index: -1;
 					font: inherit;
-					text-shadow: 0 0 2px rgba(#eef,.25),
-								0 0 7px rgba(#eef,.75);
+					text-shadow: 0 0 3px rgba(#eef,.2),
+								0 0 7px rgba(#eef,.5);
 				}
 			}
 		}

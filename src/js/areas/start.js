@@ -25,6 +25,16 @@
 			case "intro-view":
 				// make sure correct view is shown
 				Self.els.content.removeClass("success failure").data({ show: "intro" });
+				// FPS control
+				Self.startfield = karaqu.FpsControl({
+					fps: 60,
+					callback() {
+						// render starfield
+						Starfield.render();
+					},
+				});
+				// start fps loop
+				Self.startfield.start();
 				break;
 			case "start-tutorial":
 				// make sure correct view is shown

@@ -30,6 +30,8 @@ const galcon = {
 		Starfield.init();
 		Surface.init();
 		GameUI.init();
+		// show intro view
+		this.start.dispatch({ type: "intro-view" });
 
 		// turn off audio temporarily
 		window.audio.mute = true;

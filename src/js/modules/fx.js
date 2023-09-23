@@ -7,7 +7,11 @@ let Fx = {
 	},
 	clearLines(types="line outline") {
 		for (let i=this.pipe.length-1; i>=0; i--) {
-			if (types.split(" ").includes(this.pipe[i].type)) this.pipe.splice(i, 1);
+			let e = this.pipe[i];
+			if (types.split(" ").includes(e.type)) {
+				if (e.planet) e.planet.selected = false;
+				this.pipe.splice(i, 1);
+			}
 		}
 	},
 	outline: {
@@ -15,11 +19,15 @@ let Fx = {
 			let e = { type: "outline", planet, color };
 			// prevents duplicates
 			if (planet && color && Fx.pipe.find(l => l.type == e.type && l.planet.id == e.planet.id && l.color == e.color)) return;
+			planet.selected = true;
 			Fx.pipe.push(e);
 		},
 		remove(id) {
 			Fx.pipe.map((e, i) => {
-				if (e.type === "outline" && e.planet.id === id) Fx.pipe.splice(i, 1);
+				if (e.type === "outline" && e.planet.id === id) {
+					e.planet.selected = false;
+					Fx.pipe.splice(i, 1);
+				}
 			});
 		}
 	},
@@ -55,8 +63,10 @@ let Fx = {
 				case "outline":
 					p1 = e.planet;
 					// paint
-					ctx.lineWidth = 3;
+					ctx.shadowBlur = 4;
+					ctx.lineWidth = 2;
 					ctx.strokeStyle = e.color;
+					ctx.shadowColor = e.color;
 					ctx.beginPath();
 					ctx.arc(p1.pos._x, p1.pos._y, p1.radius + 5, 0, tau, true);
 					ctx.stroke();
@@ -68,14 +78,17 @@ let Fx = {
 					p1.moveTowards(p2, e.from.radius + 5);
 					p2.moveTowards(p1, e.to.radius + 5);
 					// paint
-					ctx.lineWidth = 3;
+					ctx.shadowBlur = 4;
+					ctx.lineWidth = 2;
 					ctx.strokeStyle = e.from.color;
+					ctx.shadowColor = e.from.color;
 					ctx.beginPath();
 					ctx.moveTo(p1._x, p1._y);
 					ctx.lineTo(p2._x, p2._y);
 					ctx.stroke();
 					break;
 				case "explosion":
+					ctx.shadowBlur = 0;
 					ctx.globalCompositeOperation = "lighter";
 					let f = e.frames.shift();
 					if (!f) return this.pipe.splice(i, 1);

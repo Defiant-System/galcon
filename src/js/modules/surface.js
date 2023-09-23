@@ -88,7 +88,7 @@ let Surface = {
 		ctx.stroke();
 
 		/*/ dashed line START */
-		if (p.owner !== Owner.NEUTRAL) {
+		if (p.owner !== Owner.NEUTRAL && !p.selected) {
 			ctx.save();
 			ctx.translate(x, y);
 			ctx.rotate(p.aura);

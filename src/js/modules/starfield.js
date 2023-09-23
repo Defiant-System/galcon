@@ -36,7 +36,7 @@ let Starfield = {
 		this.cvs.attr({ width });
 		// draw stars
 		while (len--) {
-			stars[len].z -= 0.005;
+			stars[len].z -= 0.01;
 			if (stars[len].z <= 0) {
 				stars[len].x = this.rnd(-25, 25);
 				stars[len].y = this.rnd(-25, 25);
