@@ -7,10 +7,43 @@ let GameUI = {
 		this.width = this.cvs.prop("offsetWidth"),
 		this.height = this.cvs.prop("offsetHeight");
 		this.cvs.attr({ width: this.width, height: this.height });
+		// prepare ship blueprints
+		this.bluePrintShips();
 
 		this.area = new Rectangle(0, 0, this.width, this.height);
 		this.speed = 2.25;
 		this.showFps = false;
+	},
+	bluePrintShips() {
+		let prints = [
+				[[10,2], [14,18], [17,10], [14,18], [6,18], [3,10], [6,18]],
+				[[10,2], [16,18], [4,18]],
+				[[10,2], [16,16], [10,18], [4,16]],
+				[[10,2], [16,18], [10,16], [4,18]],
+			];
+		// loop prints
+		this.ships = prints.map(p => {
+			let cvs = document.createElement("canvas"),
+				ctx = cvs.getContext("2d", { willReadFrequently: true }),
+				colorize = color => {
+					ctx.fillStyle = color;
+					ctx.fillRect(0,0,20,20);
+					return cvs;
+				};
+			cvs.width = 20;
+			cvs.height = 20;
+			ctx.lineWidth = 3;
+			ctx.strokeStyle = "#fff";
+			ctx.lineJoin = "round";
+			// ship outline
+			ctx.beginPath();
+			ctx.moveTo(...p[0]);
+			p.slice(1).map(e => ctx.lineTo(...e));
+			ctx.closePath();
+			ctx.stroke();
+			ctx.globalCompositeOperation = "source-in";
+			return { cvs, ctx, colorize };
+		});
 	},
 	loop(overFunc) {
 		let APP = galcon,
@@ -66,14 +99,7 @@ let GameUI = {
 		let width = this.width,
 			height = this.height,
 			tau = Math.PI * 2,
-			piHalf = Math.PI / 2,
-			ships = {
-				"1": [[0,-8], [6,7], [-6,7]],
-				"2": [[0,-8], [6,7], [-6,7]],
-				"3": [[0,-7], [6,7], [0,10], [-6,7]],
-				"4": [[0,-8], [6,7], [0,3], [-6,7]],
-				"5": [[0,-8], [4,7], [6,5], [4,7], [0,4], [-4,7], [-6,5], [-4,7]],
-			};
+			piHalf = Math.PI / 2;
 
 		this.cvs.attr({ width });
 		// this.ctx.clearRect(0, 0, this.width, this.height);
@@ -82,26 +108,17 @@ let GameUI = {
 		Starfield.render();
 		// render planet surface
 		Main.planets.map(p => Surface.render(this.ctx, p));
+
 		// render ships
 		this.ctx.lineWidth = 3;
 		Main.allships.map(s => {
 			var c = s.vangle + piHalf,
-				blueprint = ships[s.owner];
+				ship = this.ships[s.owner].colorize(s.color);
 			// rotate
 			this.ctx.save();
 			this.ctx.translate(s.vpos._x, s.vpos._y);
 			this.ctx.rotate(c);
-			// ship gui
-			this.ctx.strokeStyle = s.color || "#ffffff";
-			this.ctx.lineJoin = "round";
-			// ship outline
-			this.ctx.beginPath();
-			this.ctx.moveTo(...blueprint[0]);
-			blueprint.slice(1).map(p => this.ctx.lineTo(...p));
-			this.ctx.closePath();
-			this.ctx.stroke();
-
-			this.ctx.translate(-s.vpos._x, -s.vpos._y);
+			this.ctx.drawImage(ship, -10, -10);
 			this.ctx.restore();
 		});
 		// effects layer
