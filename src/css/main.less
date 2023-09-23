@@ -137,13 +137,35 @@ content {
 
 			h1 {
 				width: 700px;
-				text-shadow: 0 2px 5px rgba(#000,.5);
+				text-shadow: 0 2px 1px rgba(#000,.75);
 				letter-spacing: 1px;
-				color: rgba(#fff,.4);
-				background: #222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat;
-				-webkit-background-size: 150px;
+				color: rgba(#fff,.1);
+				background: #000 -webkit-gradient(linear, left top, left bottom, from(#000), to(#000),
+					color-stop(0.0, #000),
+					color-stop(0.05, #000),
+					color-stop(0.125, #bbb),
+					color-stop(0.125, #000),
+					color-stop(0.20, #ddd),
+					color-stop(0.20, #111),
+					color-stop(0.30, #eee),
+					color-stop(0.30, #222),
+					color-stop(0.425, #fff),
+					color-stop(0.425, #222),
+					color-stop(0.5, #fff),
+					color-stop(0.575, #222),
+					color-stop(0.575, #fff),
+					color-stop(0.70, #222),
+					color-stop(0.70, #eee),
+					color-stop(0.80, #111),
+					color-stop(0.80, #ddd),
+					color-stop(0.875, #000),
+					color-stop(0.875, #bbb),
+					color-stop(0.95, #000),
+					color-stop(1.0, #000)
+				) 0 0;
+				-webkit-background-size: 160px;
 				-webkit-background-clip: text;
-				-webkit-animation: shine 3s infinite;
+				-webkit-animation: shine 11s alternate infinite;
 			}
 		}
 
@@ -263,10 +285,29 @@ content {
 			right: 0;
 			bottom: 0;
 			z-index: 99;
-			background: rgba(#000,.35);
-			backdrop-filter: blur(2px);
 			transition: opacity 300ms ease-in-out 100ms;
 			perspective: 100px;
+
+			.distort {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				overflow: hidden;
+				
+				&:before {
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background: rgba(#000,.35);
+					backdrop-filter: blur(2px);
+					filter: url(#distort);
+				}
+			}
 
 			h2 {
 				position: absolute;
@@ -314,13 +355,6 @@ content {
 @keyframes rotate_bg_ccw {
 	0%   { transform: rotate(360deg); }
 	100% { transform: rotate(0deg); }
-}
-
-@keyframes shine {
-	0%, 10% { background-position: -600px; }
-	20% { background-position: top left; }
-	90% { background-position: top right; }
-	100% { background-position: 600px; }
 }
 
 
@@ -433,6 +467,11 @@ content {
 	40% { color: #bff; }
 	60% { color: #bbf; }
 	80% { color: #bfb; }
+}
+
+@keyframes shine {
+	0%   { background-position: 0 px; }
+	100% { background-position: 0 160px; }
 }
 
 
