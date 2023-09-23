@@ -181,24 +181,39 @@ content {
 		}
 
 		&[data-area="game-dock"] {
-			top: auto;
+			// top: auto;
 			z-index: 2;
 			opacity: 1;
 			visibility: visible;
+			overflow: hidden;
+			pointer-events: none;
 
 			ul.dock {
 				// background: rgba(#36f, .35);
 				position: absolute;
-				bottom: 23px;
+				bottom: -41px;
 				left: 50%;
 				transform: translateX(-50%);
-				// margin-left: -140px;
-				// width: 280px;
 				display: block;
 				list-style: none;
 				font-size: 0;
 				border: 3px solid rgba(#36f, .35);
 				border-radius: 11px;
+				pointer-events: all;
+				transition: bottom 150ms ease-in-out;
+
+				&:after {
+					content: "";
+					position: absolute;
+					top: 100%;
+					left: 0;
+					right: 0;
+					height: 20px;
+				}
+
+				&:hover {
+					bottom: 7px;
+				}
 
 				[class^="icon-"] {
 					opacity: .5;
