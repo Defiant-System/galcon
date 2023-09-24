@@ -7,7 +7,6 @@
 		let el = window.find(`div[data-area="stage"]`);
 		this.els = {
 			el,
-			content: window.find("content"),
 			gameBg: window.find(".game-bg"),
 			toolSelect: window.find(".toolbar-selectbox_ > div:first"),
 			canvas: el.find("canvas"),
@@ -24,18 +23,6 @@
 		// console.log(event);
 		switch (event.type) {
 			// custom events
-			case "pause-game":
-				value = Self.els.content.hasClass("paused");
-				if (!GameUI.fpsControl) return;
-				// toggle FPS loop
-				if (!value || event.state === "blur") {
-					Self.els.content.addClass("paused");
-					GameUI.fpsControl.stop();
-				} else {
-					Self.els.content.removeClass("paused");
-					GameUI.fpsControl.start();
-				}
-				break;
 			case "output-pgn":
 				value = { planets: [] };
 				Main.planets.map(p => {

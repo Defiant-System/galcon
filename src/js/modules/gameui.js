@@ -81,6 +81,12 @@ let GameUI = {
 		// call "game over" function
 		this.overFunc(looser);
 	},
+	resetAll() {
+		// reset all
+		delete this.overFunc;
+		this.planets = [];
+		Fx.clearLines();
+	},
 	update() {
 		Main.allships.map(s1 => {
 			// move ship

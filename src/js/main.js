@@ -50,8 +50,7 @@ const galcon = {
 			case "window.focus":
 			case "window.blur":
 				let [a, b] = event.type.split(".");
-				Self.start.dispatch({ type: "pause-game", state: b });
-				Self.stage.dispatch({ type: "pause-game", state: b });
+				Self.dock.dispatch({ type: "toggle-play", state: b });
 				return;
 			case "toggle-fps":
 			case "generate-map":

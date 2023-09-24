@@ -76,7 +76,7 @@ let Main = {
 		APP.stage.els.el.find(".planet").remove();
 		APP.stage.els.el.append(divs.join(""));
 
-		// reset playser
+		// reset player
 		let players = {};
 		this.planets
 			.filter(p => p.owner > 0)
