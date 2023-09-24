@@ -46,6 +46,11 @@ content {
 		.game-bg:before {
 			animation-play-state: paused;
 		}
+
+		> div.view-pause {
+			opacity: 1;
+			visibility: visible;
+		}
 	}
 
 	&.failure {
@@ -100,6 +105,8 @@ content {
 		font-size: 40px;
 		color: #fff;
 		margin: 0 auto 11px;
+		text-shadow: 0 0 3px rgba(#fff,.35),
+						0 0 11px rgba(#fff,.75);
 	}
 
 	h3 {
@@ -542,6 +549,35 @@ content {
 			}
 		}
 
+		&.view-pause {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			text-align: center;
+			overflow: hidden;
+
+			&:before {
+				content: "";
+				position: absolute;
+				top: -5px;
+				left: -5px;
+				right: -5px;
+				bottom: -5px;
+				background: rgba(#000,.25);
+				backdrop-filter: blur(1px);
+				filter: url(#galcon-noise);
+			}
+
+			h2 {
+				position: absolute;
+				top: 43%;
+				left: 0;
+				right: 0;
+			}
+		}
+
 		&.view-success {
 			opacity: 0;
 			visibility: hidden;
@@ -571,7 +607,7 @@ content {
 					bottom: 0;
 					background: rgba(#000,.35);
 					backdrop-filter: blur(2px);
-					filter: url(#distort);
+					filter: url(#galcon-noise);
 				}
 			}
 
