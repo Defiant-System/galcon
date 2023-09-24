@@ -79,18 +79,18 @@
 		<canvas class="game"></canvas>
 	</div>
 
-	<div data-area="game-dock">
-		<ul class="dock">
-			<li><i class="icon-menu"></i></li>
+	<div data-area="dock">
+		<ul class="dock autohide1">
+			<li data-click="go-to-intro"><i class="icon-menu"></i></li>
 			<!-- <li><i class="icon-play"></i></li> -->
-			<li><i class="icon-pause"></i></li>
+			<li data-click="toggle-play"><i class="icon-pause"></i></li>
 			<li class="range-item">
 				<span class="range"><span></span></span>
 				<b class="attack-fleet">65%</b>
 			</li>
-			<li><i class="icon-music"></i></li>
-			<li><i class="icon-sound-fx"></i></li>
-			<li><i class="icon-fps"></i></li>
+			<li data-click="toggle-music"><i class="icon-music"></i></li>
+			<li data-click="toggle-sound"><i class="icon-sound-fx"></i></li>
+			<li data-click="toggle-fps"><i class="icon-fps"></i></li>
 		</ul>
 	</div>
 

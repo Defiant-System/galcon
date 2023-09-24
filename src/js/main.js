@@ -76,6 +76,7 @@ const galcon = {
 	},
 	start: @import "./areas/start.js",
 	stage: @import "./areas/stage.js",
+	dock: @import "./areas/dock.js",
 };
 
 window.exports = galcon;

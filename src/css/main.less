@@ -191,7 +191,7 @@ content {
 			ul.dock {
 				// background: rgba(#36f, .35);
 				position: absolute;
-				bottom: -41px;
+				bottom: 7px;
 				left: 50%;
 				transform: translateX(-50%);
 				display: block;
@@ -202,6 +202,23 @@ content {
 				pointer-events: all;
 				transition: bottom 150ms ease-in-out;
 
+				&.autohide {
+					bottom: -41px;
+
+					&:hover {
+						bottom: 7px;
+					}
+				}
+
+				&:before {
+					content: "";
+					position: absolute;
+					top: -21px;
+					left: 0;
+					right: 0;
+					height: 21px;
+				}
+
 				&:after {
 					content: "";
 					position: absolute;
@@ -209,10 +226,6 @@ content {
 					left: 0;
 					right: 0;
 					height: 20px;
-				}
-
-				&:hover {
-					bottom: 7px;
 				}
 
 				[class^="icon-"] {
@@ -261,13 +274,15 @@ content {
 
 						.attack-fleet {
 							position: absolute;
-							top: -37px;
+							top: -31px;
 							left: 0;
 							right: 0;
 							text-align: center;
+							line-height: 1;
 							font-size: 24px;
 							font-family: "Lucida Console";
 							color: #369;
+							pointer-events: none;
 						}
 
 						.range {
