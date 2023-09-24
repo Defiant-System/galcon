@@ -51,8 +51,6 @@ let GameUI = {
 			_GameUI = GameUI;
 		// if any already running, stop
 		if (this.fpsControl) this.fpsControl.stop();
-		// stop intro view starfield
-		APP.start.startfield.stop();
 		// reset fx pipe
 		Fx.clearLines();
 		// save reference to "game over" function

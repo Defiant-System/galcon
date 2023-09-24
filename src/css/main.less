@@ -40,15 +40,10 @@ content {
 		}
 	}
 
-	&.paused {
+	&.freeze {
 		div[data-area="intro"] h1,
 		.game-bg:before {
 			animation-play-state: paused;
-		}
-
-		> div.view-pause {
-			opacity: 1;
-			visibility: visible;
 		}
 	}
 
@@ -143,7 +138,7 @@ content {
 		&.icon-3-way { background-image: url(~/icons/icon-3-way.png); }
 		&.icon-billiards { background-image: url(~/icons/icon-billiards.png); }
 
-		&.icon-menu { background-image: url(~/icons/icon-menu.png); }
+		&.icon-menu { background-image: url(~/icons/icon-menu.png); left: 1px; }
 		&.icon-play { background-image: url(~/icons/icon-play.png); }
 		&.icon-pause { background-image: url(~/icons/icon-pause.png); }
 		&.icon-sound-fx { background-image: url(~/icons/icon-sound-fx.png); }
@@ -395,6 +390,7 @@ content {
 					cursor: pointer;
 					position: relative;
 					padding: 5px 0;
+					background: rgba(#024,.35);
 					border: 3px solid rgba(#36f, .35);
 					transition: all 100ms;
 

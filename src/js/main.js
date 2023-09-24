@@ -45,13 +45,13 @@ const galcon = {
 			el;
 		// console.log(event);
 		switch (event.type) {
+			// system events
 			case "window.init":
 				break;
 			case "window.focus":
 			case "window.blur":
-				let [a, b] = event.type.split(".");
-				Self.dock.dispatch({ type: "toggle-play", state: b });
-				return;
+				return Self.dock.dispatch(event);
+			// custom events
 			case "toggle-play":
 				return Self.dock.dispatch(event);
 			case "toggle-fps":
