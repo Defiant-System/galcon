@@ -24,6 +24,7 @@
 		switch (event.type) {
 			// custom events
 			case "goto-intro":
+				console.log(123);
 				GameUI.resetAll();
 				break;
 			case "toggle-play":

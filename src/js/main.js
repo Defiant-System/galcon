@@ -52,6 +52,8 @@ const galcon = {
 				let [a, b] = event.type.split(".");
 				Self.dock.dispatch({ type: "toggle-play", state: b });
 				return;
+			case "toggle-play":
+				return Self.dock.dispatch(event);
 			case "toggle-fps":
 			case "generate-map":
 			case "set-attack-fleet":
