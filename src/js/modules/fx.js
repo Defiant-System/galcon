@@ -86,6 +86,12 @@ let Fx = {
 					ctx.moveTo(p1._x, p1._y);
 					ctx.lineTo(p2._x, p2._y);
 					ctx.stroke();
+
+					ctx.beginPath();
+					ctx.moveTo(p2._x-7, p2._y-7);
+					ctx.lineTo(p2._x, p2._y);
+					ctx.lineTo(p2._x-7, p2._y+7);
+					ctx.stroke();
 					break;
 				case "explosion":
 					ctx.shadowBlur = 0;

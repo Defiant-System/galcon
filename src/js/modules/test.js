@@ -7,7 +7,7 @@ let Test = {
 
 		// setTimeout(() => window.find(`li[data-arg="classic"]`).trigger("click"), 300);
 		// setTimeout(() => window.find(`li[data-arg="tutorial"]`).trigger("click"), 300);
-		// setTimeout(() => APP.start.dispatch({ type: "start-tutorial", arg: "step-1" }), 300);
+		setTimeout(() => APP.start.dispatch({ type: "start-tutorial", arg: "step-1" }), 300);
 
 		// setTimeout(() => window.find(`li[data-click="toggle-play"]`).trigger("click"), 300);
 

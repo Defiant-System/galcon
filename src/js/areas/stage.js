@@ -136,7 +136,7 @@
 				el = $(event.target);
 				if (el.data("id") && Self.selected.length) {
 					planet = Main.getPlanet(+el.data("id"));
-					Fx.outline.add(planet, Palette[Owner.HUMAN].color);
+					// Fx.outline.add(planet, Palette[Owner.HUMAN].color);
 					Self.selected.map(p => Fx.line.add(p, planet));
 				}
 				break;
