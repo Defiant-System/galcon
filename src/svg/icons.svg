@@ -1,14 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
 
 	<defs>
-		<filter id="galcon-crystal">
-			<feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="turbulence"/>
-			<feDisplacementMap in2="turbulence" in="SourceGraphic" scale="13" xChannelSelector="R" yChannelSelector="G"/>
-		</filter>
-
 		<filter id="galcon-noise">
-			<feTurbulence baseFrequency="0.02 0.5" result="noise" numOctaves="2" />
-			<feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="R"></feDisplacementMap>
+			<feTurbulence baseFrequency="0.02 0.05" result="noise" numOctaves="2">
+				<animate attributeName="baseFrequency" from="0.02 0.05" to="0.02 0.01" dur="20s" repeatCount="indefinite" />
+			</feTurbulence>
+			<feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="R"/>
 		</filter>
 	</defs>
 

@@ -9,7 +9,7 @@ let Test = {
 		// setTimeout(() => window.find(`li[data-arg="tutorial"]`).trigger("click"), 300);
 		// setTimeout(() => APP.start.dispatch({ type: "start-tutorial", arg: "step-3" }), 300);
 
-		setTimeout(() => window.find(`li[data-click="toggle-play"]`).trigger("click"), 300);
+		// setTimeout(() => window.find(`li[data-click="toggle-play"]`).trigger("click"), 300);
 
 		// setTimeout(() => Fx.outline.add(Main.planets[0], "#ff9900"), 500);
 
