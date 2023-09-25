@@ -65,7 +65,7 @@ let GameUI = {
 					_Main.planets.map(p => p.Tick());
 				},
 				60: () => {
-					if (_Main.ai) _Main.ai.Tick();
+					if (_GameUI.fpsControl && _Main.ai) _Main.ai.Tick();
 					_GameUI.update();
 					_GameUI.render();
 					_Main.CheckWinLose();
@@ -73,7 +73,7 @@ let GameUI = {
 			},
 		});
 		// start FPC
-		this.fpsControl.start();
+		// this.fpsControl.start();
 	},
 	over(looser) {
 		// auto stop loop

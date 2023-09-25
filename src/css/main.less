@@ -265,7 +265,7 @@ content {
 
 		&[data-area="dock"] {
 			// top: auto;
-			z-index: 3;
+			z-index: 101;
 			opacity: 1;
 			visibility: visible;
 			overflow: hidden;
@@ -597,18 +597,6 @@ content {
 			overflow: hidden;
 			padding-top: 21%;
 
-			h2 {
-				position: relative;
-				left: 0;
-				right: 0;
-			}
-
-			ul.menu {
-				width: 140px;
-			}
-		}
-
-		&.view-pause {
 			&:before {
 				content: "";
 				position: absolute;
@@ -619,6 +607,16 @@ content {
 				background: rgba(#000,.35);
 				backdrop-filter: blur(2px);
 				filter: url(#galcon-noise);
+			}
+
+			h2 {
+				position: relative;
+				left: 0;
+				right: 0;
+			}
+
+			ul.menu {
+				width: 140px;
 			}
 		}
 

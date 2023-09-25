@@ -87,6 +87,11 @@
 
 				});
 				break;
+			case "ready-start-game":
+				APP.dock.els.ul.addClass("autohide");
+				Self.els.content.removeClass("get-ready");
+				GameUI.fpsControl.start();
+				break;
 			case "new-game":
 				// get arg
 				value = event.arg || $(event.target).data("arg");
@@ -96,8 +101,6 @@
 				Self.dispatch({ ...event, type: "start-"+ value });
 				return true;
 			case "start-classic":
-				Self.els.content.addClass("get-ready");
-				return;
 				// reset planets
 				Main.planets = [];
 				// generate random map
@@ -112,7 +115,10 @@
 					// fireworks or not
 					let name = looser.type === "ai" ? "success" : "failure";
 					Self.els.content.addClass(name);
+					APP.dock.els.ul.removeClass("autohide");
 				});
+				// show "get-ready view"
+				Self.els.content.addClass("get-ready");
 				break;
 			case "start-stealth": break;
 			case "start-3-way": break;

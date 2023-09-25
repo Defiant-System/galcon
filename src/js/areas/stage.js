@@ -31,9 +31,6 @@
 				});
 				console.log( JSON.stringify(value) );
 				break;
-			case "ready-start-game":
-				
-				break;
 			case "set-bg":
 				Self.els.gameBg.data({ bg: event.arg });
 				break;

@@ -55,8 +55,8 @@ const galcon = {
 			case "toggle-play":
 				return Self.dock.dispatch(event);
 			case "generate-map":
-			case "ready-start-game":
 				return Self.stage.dispatch(event);
+			case "ready-start-game":
 			case "start-tutorial":
 			case "new-game":
 				return Self.start.dispatch(event);

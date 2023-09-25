@@ -3,7 +3,7 @@
 	<defs>
 		<filter id="galcon-noise">
 			<feTurbulence baseFrequency="0.02 0.05" result="noise" numOctaves="2">
-				<animate attributeName="baseFrequency" from="0.02 0.05" to="0.02 0.01" dur="3s" repeatCount="3" />
+				<!-- <animate attributeName="baseFrequency" from="0.02 0.05" to="0.02 0.01" dur="50s" repeatCount="1" /> -->
 			</feTurbulence>
 			<feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="R"/>
 		</filter>

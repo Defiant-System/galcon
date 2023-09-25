@@ -8,6 +8,7 @@
 		this.els = {
 			dock,
 			doc: $(document),
+			ul: dock.find("ul.dock"),
 			content: window.find("content"),
 			playPause: dock.find(`li[data-click="toggle-play"] i`),
 			range: dock.find(".range"),
