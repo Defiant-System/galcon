@@ -28,12 +28,16 @@
 			case "window.focus":
 				if (Self.els.content.hasClass("get-ready")) return;
 				Self.els.content.removeClass("freeze");
-				Self.dispatch({ type: "toggle-play", state: "play" });
+				if (!Self.els.content.hasClass("paused")) {
+					Self.dispatch({ type: "toggle-play", state: "play" });
+				}
 				break;
 			case "window.blur":
 				if (Self.els.content.hasClass("get-ready")) return;
 				Self.els.content.addClass("freeze");
-				Self.dispatch({ type: "toggle-play", state: "pause" });
+				if (!Self.els.content.hasClass("paused")) {
+					Self.dispatch({ type: "toggle-play", state: "pause" });
+				}
 				break;
 			// custom events
 			case "goto-intro":
@@ -47,9 +51,10 @@
 				if (event.state) value = event.state === "pause";
 
 				el.prop({ className: value ? "icon-play" : "icon-pause" });
-				// pause / play everything
-				Self.els.content.toggleClass("paused", !value);
-
+				if (!event.state) {
+					// pause / play everything
+					Self.els.content.toggleClass("paused", !value);
+				}
 				if (GameUI.fpsControl) {
 					GameUI.fpsControl[value ? "stop" : "start"]();
 				} else {

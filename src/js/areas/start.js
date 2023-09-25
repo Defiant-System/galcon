@@ -77,6 +77,8 @@
 								break;
 							case 3:
 								Self.dispatch({ type: "start-tutorial", arg: "step-3" });
+								// show dock
+								APP.dock.els.ul.removeClass("autohide");
 								break;
 							case 4:
 								Self.els.stage.removeClass("fadein fadeout");

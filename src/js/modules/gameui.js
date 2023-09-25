@@ -55,6 +55,8 @@ let GameUI = {
 		Fx.clearLines();
 		// stop starfield
 		APP.start.starfield.stop();
+		// autohide dock
+		APP.dock.els.ul.addClass("autohide");
 		// save reference to "game over" function
 		this.overFunc = overFunc;
 		// FPS control
