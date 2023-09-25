@@ -63,12 +63,34 @@
 			Drag = Self.drag;
 		switch (event.type) {
 			case "mousedown":
+				let el = $(event.target),
+					knob = el.find("span"),
+					drag = {
+						knob,
+						min: 9,
+						max: +el.prop("offsetWidth") - +knob.prop("offsetWidth") - 9,
+						click: event.clientX - knob.offset().left,
+						field: el.parent().find(".attack-fleet"),
+					};
+				// prepare range knob
+				// drag.el.css({  });
+
+				Self.drag = drag;
+				// cover app
+				Self.els.content.addClass("cover");
 				// bind event handlers
 				Self.els.doc.on("mousemove mouseup", Self.doRange);
 				break;
 			case "mousemove":
+				let left = Math.min(Math.max(event.clientX - Drag.click, Drag.min), Drag.max),
+					val = Math.invLerp(Drag.min, Drag.max, left) * 100 | 0;
+				Drag.knob.css({ left });
+				// attack fleet size
+				Drag.field.html(`${val}%`);
 				break;
 			case "mouseup":
+				// uncover app
+				Self.els.content.removeClass("cover");
 				// unbind event handlers
 				Self.els.doc.off("mousemove mouseup", Self.doRange);
 				break;

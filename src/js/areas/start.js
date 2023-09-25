@@ -26,7 +26,7 @@
 				// make sure correct view is shown
 				Self.els.content.removeClass("success failure").data({ show: "intro" });
 
-				if (Self.starfield) Self.starfield.stop();
+				if (Self.starfield) Self.starfield.start();
 				else {
 					// FPS control
 					Self.starfield = karaqu.FpsControl({
