@@ -1,9 +1,10 @@
 
 class Shipset {
-	constructor(planets) {
+	constructor(planets, stealth) {
 		this.ship_bounds = new Rectangle(0, 0, GameUI.width, GameUI.height);
 		this.fleets = [];
 		this._allships = [];
+		this._stealth = stealth;
 		this.fleet_id = 1; // just a counter
 	}
 
@@ -12,7 +13,7 @@ class Shipset {
 	}
 
 	AddShip(x, y, planet, fleet_id, owner, value) {
-		let ship = new Ship(x, y, planet, fleet_id, owner, value);
+		let ship = new Ship(x, y, planet, fleet_id, owner, value, this._stealth);
 		this._allships.push(ship);
 		return true;
 	}

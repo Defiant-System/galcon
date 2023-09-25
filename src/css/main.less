@@ -20,7 +20,7 @@ content {
 			visibility: visible;
 
 			h1 {
-				// animation: shine 7s infinite alternate;
+				animation: shine 11s infinite alternate;
 			}
 		}
 	}
@@ -56,6 +56,10 @@ content {
 		> div.view-pause {
 			opacity: 1;
 			visibility: visible;
+
+			&:before {
+				filter: url(#galcon-noise);
+			}
 		}
 	}
 
@@ -76,6 +80,12 @@ content {
 			h2 {
 				color: #ccc;
 			}
+
+			.distort {
+				&:before {
+					filter: url(#galcon-noise);
+				}
+			}
 		}
 	}
 
@@ -83,6 +93,10 @@ content {
 		.view-get-ready {
 			opacity: 1;
 			visibility: visible;
+
+			&:before {
+				filter: url(#galcon-noise);
+			}
 		}
 	}
 
@@ -492,7 +506,7 @@ content {
 					color-stop(0.95, #004),
 					color-stop(1.0, #004)
 				) 0 0;
-				-webkit-background-size: 160px;
+				-webkit-background-size: 210px;
 				-webkit-background-clip: text;
 
 				&:before {
@@ -641,7 +655,7 @@ content {
 				bottom: -5px;
 				background: rgba(#000,.35);
 				backdrop-filter: blur(2px);
-				filter: url(#galcon-noise);
+				// filter: url(#galcon-noise);
 			}
 
 			h2 {
@@ -692,7 +706,7 @@ content {
 					bottom: 0;
 					background: rgba(#000,.35);
 					backdrop-filter: blur(2px);
-					filter: url(#galcon-noise);
+					// filter: url(#galcon-noise);
 				}
 			}
 
@@ -858,7 +872,7 @@ content {
 
 @keyframes shine {
 	0%   { background-position: 0 px; }
-	100% { background-position: 0 160px; }
+	100% { background-position: 0 210px; }
 }
 
 

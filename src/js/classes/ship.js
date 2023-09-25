@@ -3,11 +3,16 @@ class Ship {
 
 	static _radius = 10;
 
-	constructor(x, y, planet, fleet_id, owner, value) {
+	constructor(x, y, planet, fleet_id, owner, value, stealth) {
 		this.pos = new Point(x, y);
 		this.ppos = new Point(x, y);
 		this.vpos = new Point(x, y);
 		this.dv = new Point(0, 0);
+
+		if (owner !== Owner.HUMAN) {
+			this.opacity = 60;
+			this.stealth = stealth ? 1 : null;
+		}
 
 		this.speed = 0.65;
 		this.angle_speed = Math.PI / 64;
@@ -55,7 +60,10 @@ class Ship {
 
 	Move(rect, delta, smooth) {
 		this.collision_num = 0;
-		
+		if (this.stealth && this.opacity > 0) {
+			this.opacity -= this.stealth;
+		}
+
 		let tmp_point = new Point();
 		tmp_point._x = this.pos._x - this.ppos._x;
 		tmp_point._y = this.pos._y - this.ppos._y;

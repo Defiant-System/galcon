@@ -122,10 +122,14 @@ let GameUI = {
 		Main.allships.map(s => {
 			var c = s.vangle + piHalf,
 				ship = this.ships[s.owner].colorize(s.color);
+			if (ship.opacity <= 0) return;
 			// rotate
 			this.ctx.save();
 			this.ctx.translate(s.vpos._x, s.vpos._y);
 			this.ctx.rotate(c);
+			if (s.stealth !== null) {
+				this.ctx.globalAlpha = s.opacity / 60;
+			}
 			this.ctx.drawImage(ship, -10, -10);
 			this.ctx.restore();
 		});

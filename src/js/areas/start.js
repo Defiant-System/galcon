@@ -123,7 +123,26 @@
 				// show "get-ready view"
 				Self.els.content.addClass("get-ready");
 				break;
-			case "start-stealth": break;
+			case "start-stealth":
+				// reset planets
+				Main.planets = [];
+				// generate random map
+				Main.generateMap();
+				Main.appendHtml();
+				// create shipsets
+				Main.allships = new Shipset(Main.planets, true);
+				// create game AI
+				Main.ai = new AI(1, Mission.CLASSIC, Main);
+				// start game loop
+				GameUI.loop(looser => {
+					// fireworks or not
+					let name = looser.type === "ai" ? "success" : "failure";
+					Self.els.content.addClass(name);
+					APP.dock.els.ul.removeClass("autohide");
+				});
+				// show "get-ready view"
+				Self.els.content.addClass("get-ready");
+				break;
 			case "start-3-way": break;
 			case "test-map":
 				// make sure correct view is shown
