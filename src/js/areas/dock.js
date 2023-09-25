@@ -66,16 +66,24 @@
 				let el = $(event.target),
 					knob = el.find("span"),
 					drag = {
+						el,
 						knob,
 						min: 9,
 						max: +el.prop("offsetWidth") - +knob.prop("offsetWidth") - 9,
-						click: event.clientX - knob.offset().left,
+						click: event.clientX,
 						field: el.parent().find(".attack-fleet"),
 						stage: galcon.stage,
-					};
+					},
+					moveX = Math.min(Math.max(event.offsetX - (+knob.prop("offsetWidth") * .5), drag.min), drag.max);
+				// exit if disabled
+				if (el.parent().hasClass("disabled")) return;
 				// prepare range knob
-				// drag.el.css({  });
-
+				knob.css({ left: moveX });
+				// update click value
+				drag.click -= moveX;
+				// keep "hover" effect
+				el.parent().addClass("active");
+				// save reference to drag object
 				Self.drag = drag;
 				// cover app
 				Self.els.content.addClass("cover");
@@ -92,6 +100,8 @@
 				Drag.stage.attack_force = val;
 				break;
 			case "mouseup":
+				// reset range UI
+				Drag.el.parent().removeClass("active");
 				// uncover app
 				Self.els.content.removeClass("cover");
 				// unbind event handlers

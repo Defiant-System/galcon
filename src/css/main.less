@@ -264,7 +264,15 @@ content {
 						border-left: 3px solid rgba(#36f, .35);
 					}
 
-					&:hover {
+					&.disabled {
+						[class^="icon-"] {
+							// filter: grayscale(1);
+							opacity: .2;
+						}
+					}
+
+					&.active,
+					&:hover:not(.disabled) {
 						&:before {
 							content: "";
 							position: absolute;
@@ -284,6 +292,17 @@ content {
 					&.range-item {
 						width: 160px;
 						padding: 0;
+
+						&.disabled {
+							.attack-fleet {
+								opacity: 0;
+								visibility: hidden;
+							}
+
+							.range {
+								opacity: .35;
+							}
+						}
 
 						.attack-fleet {
 							position: absolute;
