@@ -63,25 +63,29 @@
 				break;
 			case "toggle-music":
 				// toggle music
+				// icon UI update
+				Self.els.ul.find(`li[data-click="toggle-music"]`).toggleClass("active", window.audio.mute);
 				break;
 			case "toggle-sound":
-				// icon UI update
-				event.el.toggleClass("active", !window.audio.mute);
 				// toggle sound effects
 				window.audio.mute = event.mute || !window.audio.mute;
+				// icon UI update
+				Self.els.ul.find(`li[data-click="toggle-sound"]`).toggleClass("active", window.audio.mute);
 				break;
 			case "toggle-fps":
-				// icon UI update
-				event.el.toggleClass("active", GameUI.showFps);
 				// toggle fps box
-				GameUI.showFps = !GameUI.showFps;
+				GameUI.showFps = event.show || !GameUI.showFps;
+				// icon UI update
+				Self.els.ul.find(`li[data-click="toggle-fps"]`).toggleClass("active", !GameUI.showFps);
 				break;
 		}
 	},
 	doRange(event) {
-		let Self = galcon.dock,
+		let APP = galcon,
+			Self = APP.dock,
 			Drag = Self.drag;
 		switch (event.type) {
+			// native event
 			case "mousedown":
 				let el = $(event.target),
 					knob = el.find("span"),
@@ -92,7 +96,7 @@
 						max: +el.prop("offsetWidth") - +knob.prop("offsetWidth") - 9,
 						click: event.clientX,
 						field: el.parent().find(".attack-fleet"),
-						stage: galcon.stage,
+						stage: APP.stage,
 					},
 					moveX = Math.min(Math.max(event.offsetX - (+knob.prop("offsetWidth") * .5), drag.min), drag.max);
 				// exit if disabled
@@ -115,6 +119,7 @@
 			case "mousemove":
 				let left = Math.min(Math.max(event.clientX - Drag.click, Drag.min), Drag.max),
 					val = Math.invLerp(Drag.min, Drag.max, left);
+				console.log( left );
 				Drag.knob.css({ left });
 				// attack fleet size
 				Drag.field.html(`${val * 100 | 0}%`);
@@ -130,6 +135,13 @@
 				Self.els.content.removeClass("cover");
 				// unbind event handlers
 				Self.els.doc.off("mousemove mouseup", Self.doRange);
+				break;
+			// custom event
+			case "set-value":
+				let v = event.value || .65;
+				Self.els.dock.find(".range span").css({ left: Math.lerp(9, 133, v) });
+				Self.els.dock.find(".attack-fleet").html(`${v * 100 | 0}%`);
+				APP.stage.attack_force = v;
 				break;
 		}
 	}

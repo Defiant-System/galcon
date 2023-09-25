@@ -20,10 +20,10 @@
 
 
 let Pref = {
-		Sound: false,
-		Music: false,
-		Fps: true,
-		Attack: .65,
+		"Sound": false,
+		"Music": true,
+		"Fps": false,
+		"Attack": .65,
 	};
 
 
@@ -31,6 +31,8 @@ const galcon = {
 	init() {
 		// fast references
 		this.content = window.find("content");
+		// get settings, if any
+		this.settings = window.settings.getItem("settings") || { ...Pref };
 
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
@@ -39,6 +41,8 @@ const galcon = {
 		Starfield.init();
 		Surface.init();
 		GameUI.init();
+		// show intro view
+		this.dispatch({ type: "apply-settings" });
 		// show intro view
 		this.start.dispatch({ type: "intro-view" });
 
@@ -58,6 +62,12 @@ const galcon = {
 			case "window.blur":
 				return Self.dock.dispatch(event);
 			// custom events
+			case "apply-settings":
+				if (Self.settings.Sound === false) Self.dock.dispatch({ type: "toggle-sound", mute: true });
+				if (Self.settings.Music === false) Self.dock.dispatch({ type: "toggle-music", mute: true });
+				if (Self.settings.Fps === true) Self.dock.dispatch({ type: "toggle-fps", show: true });
+				if (Self.settings.Attack) Self.dock.doRange({ type: "set-value", value: Self.settings.Attack });
+				break;
 			case "toggle-play":
 				return Self.dock.dispatch(event);
 			case "generate-map":

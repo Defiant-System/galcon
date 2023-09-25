@@ -135,7 +135,7 @@ let GameUI = {
 		if (this.showFps) this.drawFps(this.ctx);
 	},
 	drawFps(ctx) {
-		let fps = this.fpsControl._log;
+		let fps = this.fpsControl ? this.fpsControl._log : [];
 		ctx.save();
 		ctx.translate(this.width - 109, this.height - 49);
 		// draw box
