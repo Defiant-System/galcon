@@ -55,7 +55,9 @@
 				break;
 			case "toggle-music": break;
 			case "toggle-sound": break;
-			case "toggle-fps": break;
+			case "toggle-fps":
+				GameUI.showFps = !GameUI.showFps;
+				return GameUI.showFps;
 		}
 	},
 	doRange(event) {

@@ -31,12 +31,8 @@
 				});
 				console.log( JSON.stringify(value) );
 				break;
-			case "set-attack-fleet":
-				// update menu xml node
-				event.xMenu.setAttribute("value", event.arg);
-				// DOM update
-				Self.els.toolSelect.html(`Attack Force: ${event.arg}%`);
-				Self.attack_force = +event.arg / 100;
+			case "ready-start-game":
+				
 				break;
 			case "set-bg":
 				Self.els.gameBg.data({ bg: event.arg });
@@ -47,9 +43,6 @@
 				Main.appendHtml();
 				GameUI.render();
 				break;
-			case "toggle-fps":
-				GameUI.showFps = !GameUI.showFps;
-				return GameUI.showFps;
 			case "select-all-planets":
 				el = $(event.target);
 				if (el.hasClass("human") && el.data("id")) {

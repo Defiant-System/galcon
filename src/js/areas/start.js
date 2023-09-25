@@ -24,7 +24,7 @@
 			// custom events
 			case "intro-view":
 				// make sure correct view is shown
-				Self.els.content.removeClass("success failure").data({ show: "intro" });
+				Self.els.content.removeClass("success failure get-ready").data({ show: "intro" });
 
 				if (Self.starfield) Self.starfield.start();
 				else {
@@ -42,7 +42,7 @@
 				break;
 			case "start-tutorial":
 				// make sure correct view is shown
-				Self.els.content.removeClass("success failure").data({ show: "tutorial" });
+				Self.els.content.removeClass("success failure get-ready").data({ show: "tutorial" });
 
 				value = event.arg || "step-1";
 				// show "step"
@@ -91,11 +91,13 @@
 				// get arg
 				value = event.arg || $(event.target).data("arg");
 				// make sure correct view is shown
-				Self.els.content.removeClass("success failure").data({ show: "stage" });
+				Self.els.content.removeClass("success failure get-ready").data({ show: "stage" });
 				// proxy event
 				Self.dispatch({ ...event, type: "start-"+ value });
 				return true;
 			case "start-classic":
+				Self.els.content.addClass("get-ready");
+				return;
 				// reset planets
 				Main.planets = [];
 				// generate random map

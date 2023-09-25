@@ -6,14 +6,14 @@
 	<div data-area="intro">
 		<h1>Galactic<br/>Conquest</h1>
 
-		<ul>
+		<ul class="menu">
 			<li data-click="start-tutorial">
 				<i class="icon-tutorial"></i>
 				Tutorial
 			</li>
 		</ul>
 
-		<ul>
+		<ul class="menu">
 			<li data-click="new-game" data-arg="classic">
 				<i class="icon-classic"></i>
 				Classic
@@ -80,22 +80,28 @@
 	</div>
 
 	<div data-area="dock">
-		<ul class="dock autohide1">
-			<li data-click="goto-intro" class="disabled"><i class="icon-menu"></i></li>
-			<li data-click="toggle-play" class="disabled"><i class="icon-pause"></i></li>
-			<li class="range-item disabled">
+		<ul class="dock">
+			<li data-click="goto-intro"><i class="icon-menu"></i></li>
+			<li data-click="toggle-play"><i class="icon-pause"></i></li>
+			<li class="range-item">
 				<span class="range"><span></span></span>
 				<b class="attack-fleet">65%</b>
 			</li>
 			<li data-click="toggle-music"><i class="icon-music"></i></li>
 			<li data-click="toggle-sound"><i class="icon-sound-fx"></i></li>
-			<li data-click="toggle-fps" class="disabled"><i class="icon-fps"></i></li>
+			<li data-click="toggle-fps"><i class="icon-fps"></i></li>
 		</ul>
 	</div>
 
 	<!-- for getready -->
-	<div class="view-get-ready" data-click="start-game">
+	<div class="view-get-ready">
 		<h2>Get Ready</h2>
+
+		<ul class="menu">
+			<li data-click="ready-start-game">
+				Start
+			</li>
+		</ul>
 	</div>
 
 	<!-- for game paused -->

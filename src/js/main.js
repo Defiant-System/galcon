@@ -54,9 +54,8 @@ const galcon = {
 			// custom events
 			case "toggle-play":
 				return Self.dock.dispatch(event);
-			case "toggle-fps":
 			case "generate-map":
-			case "set-attack-fleet":
+			case "ready-start-game":
 				return Self.stage.dispatch(event);
 			case "start-tutorial":
 			case "new-game":

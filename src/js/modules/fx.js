@@ -9,7 +9,7 @@ let Fx = {
 			ctx = cvs.getContext("2d", { willReadFrequently: true });
 		cvs.width = 18;
 		cvs.height = 20;
-		ctx.fillStyle = Palette[Owner.HUMAN].color;
+		ctx.fillStyle = "#55eeee";
 		// ship outline
 		ctx.beginPath();
 		ctx.moveTo(9, 2);
@@ -82,8 +82,8 @@ let Fx = {
 					// paint
 					ctx.shadowBlur = 4;
 					ctx.lineWidth = 2;
-					ctx.strokeStyle = e.color;
-					ctx.shadowColor = e.color;
+					ctx.strokeStyle =
+					ctx.shadowColor = "#55eeee";
 					ctx.beginPath();
 					ctx.arc(p1.pos._x, p1.pos._y, p1.radius + 5, 0, tau, true);
 					ctx.stroke();
@@ -97,8 +97,8 @@ let Fx = {
 					// paint
 					ctx.shadowBlur = 4;
 					ctx.lineWidth = 2;
-					ctx.strokeStyle = e.from.color;
-					ctx.shadowColor = e.from.color;
+					ctx.strokeStyle =
+					ctx.shadowColor = "#55eeee";
 					ctx.beginPath();
 					ctx.moveTo(p1._x, p1._y);
 					ctx.lineTo(p2._x, p2._y);
