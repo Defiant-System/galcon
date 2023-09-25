@@ -264,8 +264,8 @@ class Point {
 	}
 
 	direction(point) {
-		var myX = point._x - this._x,
-			myY = point._y - this._y;
+		var myX = point ? point._x - this._x : this._x,
+			myY = point ? point._y - this._y : this._y;
    		return Math.atan2(myY, myX);
 	}
 

@@ -4,6 +4,21 @@ let Fx = {
 		this.pipe = [];
 		this.img = new Image();
 		this.img.src = "~/img/explosion-32.png";
+
+		let cvs = document.createElement("canvas"),
+			ctx = cvs.getContext("2d", { willReadFrequently: true });
+		cvs.width = 18;
+		cvs.height = 20;
+		ctx.fillStyle = Palette[Owner.HUMAN].color;
+		// ship outline
+		ctx.beginPath();
+		ctx.moveTo(9, 2);
+		ctx.lineTo(16, 18);
+		ctx.lineTo(2, 18);
+		ctx.closePath();
+		ctx.fill();
+
+		this.arrowHead = { cvs, ctx };
 	},
 	clearLines(types="line outline") {
 		for (let i=this.pipe.length-1; i>=0; i--) {
@@ -54,7 +69,9 @@ let Fx = {
 			] });
 	},
 	render(ctx) {
-		let tau = Math.PI * 2,
+		let arrowHead = this.arrowHead.cvs,
+			tau = Math.PI * 2,
+			piHalf = Math.PI / 2,
 			p1, p2;
 
 		ctx.save();
@@ -86,12 +103,12 @@ let Fx = {
 					ctx.moveTo(p1._x, p1._y);
 					ctx.lineTo(p2._x, p2._y);
 					ctx.stroke();
-
-					ctx.beginPath();
-					ctx.moveTo(p2._x-7, p2._y-7);
-					ctx.lineTo(p2._x, p2._y);
-					ctx.lineTo(p2._x-7, p2._y+7);
-					ctx.stroke();
+					// arrow head
+					ctx.save();
+					ctx.translate(p2._x, p2._y);
+					ctx.rotate(p1.direction(p2) + piHalf);
+					ctx.drawImage(arrowHead, -9, -5);
+					ctx.restore();
 					break;
 				case "explosion":
 					ctx.shadowBlur = 0;

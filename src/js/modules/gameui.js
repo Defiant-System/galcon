@@ -53,6 +53,8 @@ let GameUI = {
 		if (this.fpsControl) this.fpsControl.stop();
 		// reset fx pipe
 		Fx.clearLines();
+		// stop starfield
+		APP.start.starfield.stop();
 		// save reference to "game over" function
 		this.overFunc = overFunc;
 		// FPS control

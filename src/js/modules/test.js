@@ -11,7 +11,9 @@ let Test = {
 
 		// setTimeout(() => window.find(`li[data-click="toggle-play"]`).trigger("click"), 300);
 
+		setTimeout(() => Fx.line.add(Main.planets[0], Main.planets[1]), 500);
 		// setTimeout(() => Fx.outline.add(Main.planets[0], "#ff9900"), 500);
+		// setTimeout(() => Fx.outline.add(Main.planets[0], Palette[Owner.HUMAN].color), 1e3);
 
 		// setTimeout(() => Main.allships.LaunchShips(Main.planets[0], Main.planets[1], 1, .65), 1e3);
 		// setTimeout(() => Main.allships.LaunchShips(Main.planets[0], Main.planets[2], 1, .65), 1e3);
@@ -30,12 +32,11 @@ let Test = {
 		// 	});
 		// }, 1500);
 
-		// setTimeout(() => Fx.outline.add(Main.planets[0], Palette[Owner.HUMAN].color), 1e3);
 
 		// setTimeout(() => window.find(".toolbar-selectbox_").trigger("mousedown"), 900);
 		
 		// setTimeout(() => Fx.clearLines(), 3e3);
 
-		// setTimeout(() => GameUI.fpsControl.stop(), 2e3);
+		setTimeout(() => GameUI.fpsControl.stop(), 2e3);
 	}
 };
