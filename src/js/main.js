@@ -19,6 +19,14 @@
 @import "./modules/test.js"
 
 
+let Pref = {
+		Sound: false,
+		Music: false,
+		Fps: true,
+		Attack: .65,
+	};
+
+
 const galcon = {
 	init() {
 		// fast references

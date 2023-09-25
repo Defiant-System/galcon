@@ -3,10 +3,8 @@ let Test = {
 	init(APP) {
 		
 		// return;
-		// - "pause" view
-		// - "Get Ready" view
 
-		// setTimeout(() => APP.start.dispatch({ type: "test-map" }), 300);
+		setTimeout(() => APP.start.dispatch({ type: "test-map" }), 300);
 
 		// setTimeout(() => window.find(`li[data-arg="classic"]`).trigger("click"), 300);
 		// setTimeout(() => window.find(`li[data-arg="tutorial"]`).trigger("click"), 300);
@@ -40,6 +38,6 @@ let Test = {
 		
 		// setTimeout(() => Fx.clearLines(), 3e3);
 
-		// setTimeout(() => GameUI.fpsControl.stop(), 2e3);
+		setTimeout(() => GameUI.fpsControl.stop(), 2e3);
 	}
 };

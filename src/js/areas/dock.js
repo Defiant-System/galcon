@@ -105,6 +105,8 @@
 				el.parent().addClass("active");
 				// save reference to drag object
 				Self.drag = drag;
+				// prevent hiding
+				Self.els.ul.removeClass("autohide");
 				// cover app
 				Self.els.content.addClass("cover");
 				// bind event handlers
@@ -122,6 +124,8 @@
 			case "mouseup":
 				// reset range UI
 				Drag.el.parent().removeClass("active");
+				// autohide dock
+				Self.els.ul.addClass("autohide");
 				// uncover app
 				Self.els.content.removeClass("cover");
 				// unbind event handlers
