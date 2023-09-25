@@ -26,10 +26,12 @@
 		switch (event.type) {
 			// system events
 			case "window.focus":
+				if (Self.els.content.hasClass("get-ready")) return;
 				Self.els.content.removeClass("freeze");
 				Self.dispatch({ type: "toggle-play", state: "play" });
 				break;
 			case "window.blur":
+				if (Self.els.content.hasClass("get-ready")) return;
 				Self.els.content.addClass("freeze");
 				Self.dispatch({ type: "toggle-play", state: "pause" });
 				break;
@@ -54,11 +56,21 @@
 					APP.start.starfield[value ? "stop" : "start"]();
 				}
 				break;
-			case "toggle-music": break;
-			case "toggle-sound": break;
+			case "toggle-music":
+				// toggle music
+				break;
+			case "toggle-sound":
+				// icon UI update
+				event.el.toggleClass("active", !window.audio.mute);
+				// toggle sound effects
+				window.audio.mute = event.mute || !window.audio.mute;
+				break;
 			case "toggle-fps":
+				// icon UI update
+				event.el.toggleClass("active", GameUI.showFps);
+				// toggle fps box
 				GameUI.showFps = !GameUI.showFps;
-				return GameUI.showFps;
+				break;
 		}
 	},
 	doRange(event) {

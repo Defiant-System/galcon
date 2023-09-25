@@ -33,9 +33,6 @@ const galcon = {
 		// show intro view
 		this.start.dispatch({ type: "intro-view" });
 
-		// turn off audio temporarily
-		window.audio.mute = true;
-
 		// DEV-ONLY-START
 		Test.init(this);
 		// DEV-ONLY-END

@@ -84,8 +84,9 @@
 								break;
 						}
 					});
-
 				});
+				// start loop
+				GameUI.fpsControl.start();
 				break;
 			case "ready-start-game":
 				APP.dock.els.ul.addClass("autohide");
