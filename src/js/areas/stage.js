@@ -27,7 +27,7 @@
 				value = { planets: [] };
 				Main.planets.map(p => {
 					let texture = Surface.maps.indexOf(p.texture);
-					value.planets.push([p.pos._x, p.pos._y, p.production, p.owner, p.id, texture])
+					value.planets.push([p.pos._x, p.pos._y, p.radius, p.ships, p.owner, texture])
 				});
 				console.log( JSON.stringify(value) );
 				break;

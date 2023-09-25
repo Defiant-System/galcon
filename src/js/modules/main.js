@@ -23,6 +23,7 @@ let Main = {
 	init() {
 		this.grand = 0;
 		this.rSeed = Math.random() * 8388607 + 24478357;
+		this.planets = [];
 		this.planetCount = 18;
 	},
 	generateMap(ai=1) {

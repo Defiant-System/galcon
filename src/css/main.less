@@ -52,6 +52,13 @@ content {
 		}
 	}
 
+	&.paused {
+		> div.view-pause {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
 	&.freeze {
 		div[data-area="intro"] h1,
 		.game-bg:before {
@@ -280,11 +287,13 @@ content {
 			pointer-events: none;
 
 			ul.dock {
-				// background: rgba(#36f, .35);
+				background: rgba(#36f, .125);
 				position: absolute;
 				bottom: 7px;
 				left: 50%;
-				transform: translateX(-50%);
+				// width: 370px;
+				margin-left: -160px;
+				// transform: translateX(-50%);
 				display: block;
 				list-style: none;
 				font-size: 0;

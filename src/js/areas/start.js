@@ -123,6 +123,25 @@
 				break;
 			case "start-stealth": break;
 			case "start-3-way": break;
+			case "test-map":
+				// make sure correct view is shown
+				Self.els.content.removeClass("success failure get-ready").data({ show: "stage" });
+				// reset planets
+				Main.planets = [];
+				// plot tutorial map
+				testMap.planets.map(p => Main.planets.push(new Planet(...p)));
+				Main.appendHtml();
+				// create shipsets
+				Main.allships = new Shipset(Main.planets);
+				// create game AI
+				Main.ai = new AI(1, Mission.CLASSIC, Main);
+				// start game loop
+				GameUI.loop(() => {
+					console.log("test ended");
+				});
+				// start loop
+				GameUI.fpsControl.start();
+				break;
 		}
 	}
 }

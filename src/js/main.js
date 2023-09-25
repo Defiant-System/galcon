@@ -1,5 +1,6 @@
 
 @import "./pgn/tutorial.js"
+@import "./pgn/test.js"
 
 @import "./classes/misc.js"
 @import "./classes/ai.js"

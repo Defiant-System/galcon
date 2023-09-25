@@ -6,9 +6,11 @@ let Test = {
 		// - "pause" view
 		// - "Get Ready" view
 
+		setTimeout(() => APP.start.dispatch({ type: "test-map" }), 300);
+
 		// setTimeout(() => window.find(`li[data-arg="classic"]`).trigger("click"), 300);
 		// setTimeout(() => window.find(`li[data-arg="tutorial"]`).trigger("click"), 300);
-		setTimeout(() => APP.start.dispatch({ type: "start-tutorial", arg: "step-3" }), 300);
+		// setTimeout(() => APP.start.dispatch({ type: "start-tutorial", arg: "step-3" }), 300);
 
 		// setTimeout(() => window.find(`li[data-click="toggle-play"]`).trigger("click"), 300);
 
