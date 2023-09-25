@@ -71,6 +71,7 @@
 						max: +el.prop("offsetWidth") - +knob.prop("offsetWidth") - 9,
 						click: event.clientX - knob.offset().left,
 						field: el.parent().find(".attack-fleet"),
+						stage: galcon.stage,
 					};
 				// prepare range knob
 				// drag.el.css({  });
@@ -83,10 +84,12 @@
 				break;
 			case "mousemove":
 				let left = Math.min(Math.max(event.clientX - Drag.click, Drag.min), Drag.max),
-					val = Math.invLerp(Drag.min, Drag.max, left) * 100 | 0;
+					val = Math.invLerp(Drag.min, Drag.max, left);
 				Drag.knob.css({ left });
 				// attack fleet size
-				Drag.field.html(`${val}%`);
+				Drag.field.html(`${val * 100 | 0}%`);
+				// update global value
+				Drag.stage.attack_force = val;
 				break;
 			case "mouseup":
 				// uncover app
