@@ -47,6 +47,8 @@
 				break;
 			case "toggle-play":
 				el = Self.els.playPause;
+				if (el.parent().hasClass("disabled")) return;
+				
 				value = el.hasClass("icon-pause");
 				if (event.state) value = event.state === "pause";
 
