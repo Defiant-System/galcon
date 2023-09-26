@@ -31,10 +31,23 @@ let Main = {
 			planetCount = this.planetCount - ai - 1; // 1 player + AI(s)
 		// basic random map
 		[...Array(planetCount)].map(e => this.createPlanet(Owner.NEUTRAL));
-		// insert play planet
-		this.createPlanet(Owner.HUMAN, 50, null, 90);
-		// insert AI planet
-		this.createPlanet(Owner.AI, GameUI.width - 50, null, 90);
+
+		if (ai === 2) {
+			// insert player planet
+			let rand = Math.random() * 30;
+			this.createPlanet(Owner.HUMAN, GameUI.width * .5 + rand, GameUI.height - 80, 90);
+			// insert AIs planet
+			rand = Math.random() * 30 - 15;
+			this.createPlanet(Owner.AI, 55, 60 + rand, 50, 23);
+			rand = Math.random() * 30 - 15;
+			this.createPlanet(Owner.AI, GameUI.width - 55, 60 + rand, 50, 23);
+		} else {
+			// insert player planet
+			this.createPlanet(Owner.HUMAN, 50, null, 90);
+			// insert AI planet
+			this.createPlanet(Owner.AI, GameUI.width - 50, null, 90);
+		}
+
 		// make sure of distance
 		this.planets.map(p1 => {
 			this.planets.map(p2 => {
@@ -52,12 +65,12 @@ let Main = {
 			p.radius = p.radius | 0;
 		});
 	},
-	createPlanet(owner, px, py, pp) {
+	createPlanet(owner, px, py, pp, pr) {
 		let m = 70,
 			x = px || m + this.prand() * (GameUI.width - (m * 2)),
 			y = py || m + this.prand() * (GameUI.height - (m * 2)),
 			ships = pp || 3 + this.prand() * 29,
-			radius = Math.min(23 + (ships * .75), 31) | 0,
+			radius = pr || Math.min(19 + (ships * .75), 31) | 0,
 			texture = Math.random() * Object.keys(Surface.maps).length | 0;
 		this.planets.push(new Planet(x, y, radius, ships, owner, texture));
 	},

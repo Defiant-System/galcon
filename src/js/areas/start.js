@@ -112,7 +112,7 @@
 				// create shipsets
 				Main.allships = new Shipset(Main.planets);
 				// create game AI
-				Main.ai = new AI(1, Mission.CLASSIC, Main);
+				Main.ai = new AI(Mission.CLASSIC);
 				// start game loop
 				GameUI.loop(looser => {
 					// fireworks or not
@@ -130,9 +130,9 @@
 				Main.generateMap();
 				Main.appendHtml();
 				// create shipsets
-				Main.allships = new Shipset(Main.planets, true);
+				Main.allships = new Shipset(Main.planets, true); // second param is for "stealth"
 				// create game AI
-				Main.ai = new AI(1, Mission.CLASSIC, Main);
+				Main.ai = new AI(Mission.STEALTH);
 				// start game loop
 				GameUI.loop(looser => {
 					// fireworks or not
@@ -143,7 +143,26 @@
 				// show "get-ready view"
 				Self.els.content.addClass("get-ready");
 				break;
-			case "start-3-way": break;
+			case "start-3-way":
+				// reset planets
+				Main.planets = [];
+				// generate random map
+				Main.generateMap(2);
+				Main.appendHtml();
+				// create shipsets
+				Main.allships = new Shipset(Main.planets);
+				// create game AI
+				Main.ai = new AI(Mission.THREEWAY);
+				// start game loop
+				GameUI.loop(looser => {
+					// fireworks or not
+					let name = looser.type === "ai" ? "success" : "failure";
+					Self.els.content.addClass(name);
+					APP.dock.els.ul.removeClass("autohide");
+				});
+				// show "get-ready view"
+				Self.els.content.addClass("get-ready");
+				break;
 			case "test-map":
 				// make sure correct view is shown
 				Self.els.content.removeClass("success failure get-ready").data({ show: "stage" });
@@ -155,7 +174,7 @@
 				// create shipsets
 				Main.allships = new Shipset(Main.planets);
 				// create game AI
-				Main.ai = new AI(1, Mission.CLASSIC, Main);
+				Main.ai = new AI(Mission.CLASSIC);
 				// start game loop
 				GameUI.loop(() => {
 					console.log("test ended");

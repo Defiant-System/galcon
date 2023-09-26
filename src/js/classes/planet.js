@@ -1,15 +1,6 @@
 
 class Planet {
 	constructor(x, y, radius, ships, owner, texture) {
-		let zradius = 0,
-			attacker = 0,
-			selected = false,
-			hover_select = false,
-			takeover = false,
-			local_game = true,
-			attack_timer = 0,
-			initialized = false;
-		
 		this.id = Main.planets.length + 1;
 		this.pos = new Point(x, y);
 		this.zpos = new Point();

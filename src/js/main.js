@@ -20,6 +20,7 @@
 
 
 let Pref = {
+		"Difficulty": 1,
 		"Sound": false,
 		"Music": true,
 		"Fps": false,

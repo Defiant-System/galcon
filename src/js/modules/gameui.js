@@ -127,9 +127,7 @@ let GameUI = {
 			this.ctx.save();
 			this.ctx.translate(s.vpos._x, s.vpos._y);
 			this.ctx.rotate(c);
-			if (s.stealth !== null) {
-				this.ctx.globalAlpha = s.opacity / 60;
-			}
+			if (s.stealth !== null) this.ctx.globalAlpha = s.opacity / 60;
 			this.ctx.drawImage(ship, -10, -10);
 			this.ctx.restore();
 		});
