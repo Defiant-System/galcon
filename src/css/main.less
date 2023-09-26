@@ -16,24 +16,24 @@ content {
 
 	&[data-theme="01"] {
 		div.game-bg:before { background-image: url(~/img/bg-01.jpg); }
+		div[data-area="dock"] ul.dock:after,
+		ul.menu:before { backdrop-filter: hue-rotate(45deg) brightness(1.25); }
+		div[data-area="dock"] ul.dock li.range-item .attack-fleet { color: #a3a; }
 
-		ul.menu {
-			&:before {
-				backdrop-filter: hue-rotate(45deg);
-			}
-		}
 	}
 
 	&[data-theme="02"] {
 		div.game-bg:before { background-image: url(~/img/bg-02.jpg); }
+		div[data-area="dock"] ul.dock:after,
+		ul.menu:before { backdrop-filter: hue-rotate(145deg) brightness(1.25); }
+		div[data-area="dock"] ul.dock li.range-item .attack-fleet { color: #e97; }
 	}
 
 	&[data-theme="03"] {
 		div.game-bg:before { background-image: url(~/img/bg-03.jpg); }
-	}
-
-	&[data-theme="04"] {
-		div.game-bg:before { background-image: url(~/img/bg-04.jpg); }
+		div[data-area="dock"] ul.dock:after,
+		ul.menu:before { backdrop-filter: brightness(1.15); }
+		div[data-area="dock"] ul.dock li.range-item .attack-fleet { color: #79e; }
 	}
 
 
@@ -198,7 +198,6 @@ content {
 			bottom: 0;
 			z-index: 1;
 			border-radius: 11px;
-			// backdrop-filter: hue-rotate(45deg);
 			pointer-events: none;
 		}
 
@@ -335,7 +334,7 @@ content {
 				bottom: 7px;
 				left: 50%;
 				// width: 370px;
-				margin-left: -160px;
+				margin-left: -180px;
 				// transform: translateX(-50%);
 				display: block;
 				list-style: none;
@@ -359,16 +358,19 @@ content {
 					top: -21px;
 					left: 0;
 					right: 0;
-					height: 21px;
+					bottom: -21px;
 				}
 
 				&:after {
 					content: "";
 					position: absolute;
-					top: 100%;
-					left: 0;
-					right: 0;
-					height: 20px;
+					top: -3px;
+					left: -3px;
+					right: -3px;
+					bottom: -3px;
+					z-index: 1;
+					border-radius: 11px;
+					pointer-events: none;
 				}
 
 				[class^="icon-"] {

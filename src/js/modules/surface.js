@@ -1,8 +1,6 @@
 
 let Surface = {
 	texture: {},
-	// maps: "astroid".split(" "),
-	// maps: "astroid hoth ixchel moon saturn".split(" "),
 	maps: "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" "),
 	init() {
 		this.rot = 0;
