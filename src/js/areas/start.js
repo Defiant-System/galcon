@@ -90,9 +90,24 @@
 				// start loop
 				GameUI.fpsControl.start();
 				break;
-			case "ready-start-game":
+			case "show-get-ready-view":
+				// show "get-ready view"
+				Self.els.content.addClass("get-ready");
+				// disable dock / pause button
+				APP.dock.els.ul.find(`li[data-click="toggle-play"]`).addClass("disabled");
+				break;
+			case "hide-get-ready-view":
+				// enable dock / pause button
+				APP.dock.els.ul.find(`li[data-click="toggle-play"]`).addClass("disabled");
+				// auto-hide dock
 				APP.dock.els.ul.addClass("autohide");
+				// show "get-ready view"
 				Self.els.content.removeClass("get-ready");
+				break;
+			case "ready-start-game":
+				// show "get-ready view"
+				Self.dispatch({ type: "hide-get-ready-view" });
+				// start game loop
 				GameUI.fpsControl.start();
 				break;
 			case "new-game":
@@ -121,7 +136,7 @@
 					APP.dock.els.ul.removeClass("autohide");
 				});
 				// show "get-ready view"
-				Self.els.content.addClass("get-ready");
+				Self.dispatch({ type: "show-get-ready-view" });
 				break;
 			case "start-stealth":
 				// create game AI
@@ -141,7 +156,7 @@
 					APP.dock.els.ul.removeClass("autohide");
 				});
 				// show "get-ready view"
-				Self.els.content.addClass("get-ready");
+				Self.dispatch({ type: "show-get-ready-view" });
 				break;
 			case "start-3-way":
 				// create game AI
@@ -161,7 +176,7 @@
 					APP.dock.els.ul.removeClass("autohide");
 				});
 				// show "get-ready view"
-				Self.els.content.addClass("get-ready");
+				Self.dispatch({ type: "show-get-ready-view" });
 				break;
 			case "test-map":
 				// make sure correct view is shown
