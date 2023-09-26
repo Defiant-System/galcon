@@ -10,7 +10,7 @@ let Palette = [
 		{ color: "#aaaaaa", name: "neutral" },
 		{ color: "#5577ee", name: "human" },
 		{ color: "#ff5555", name: "ai" },
-		{ color: "#990099", name: "ai" },
+		{ color: "#dd55dd", name: "ai" },
 	];
 
 let Mission = {
@@ -25,28 +25,28 @@ let Main = {
 		this.grand = 0;
 		this.rSeed = Math.random() * 8388607 + 24478357;
 		this.planets = [];
-		this.planetCount = 18;
+		this.planetCount = 20;
 	},
-	generateMap(ai=1) {
+	generateMap() {
 		let shipRadius = Ship._radius << 1,
-			planetCount = this.planetCount - ai - 1; // 1 player + AI(s)
+			planetCount = this.planetCount - Main.ai.length - 1; // 1 player + AI(s)
 		// basic random map
 		[...Array(planetCount)].map(e => this.createPlanet(Owner.NEUTRAL));
 
-		if (ai === 2) {
+		if (Main.ai.length === 2) {
 			// insert player planet
 			let rand = Math.random() * 30;
 			this.createPlanet(Owner.HUMAN, GameUI.width * .5 + rand, GameUI.height - 80, 90);
 			// insert AIs planet
 			rand = Math.random() * 30 - 15;
-			this.createPlanet(Owner.AI, 55, 60 + rand, 50, 23);
+			this.createPlanet(Main.ai[0].id, 55, 60 + rand, 90);
 			rand = Math.random() * 30 - 15;
-			this.createPlanet(Owner.AI, GameUI.width - 55, 60 + rand, 50, 23);
+			this.createPlanet(Main.ai[1].id, GameUI.width - 55, 60 + rand, 90);
 		} else {
 			// insert player planet
 			this.createPlanet(Owner.HUMAN, 50, null, 90);
 			// insert AI planet
-			this.createPlanet(Owner.AI, GameUI.width - 50, null, 90);
+			this.createPlanet(Main.ai[0].id, GameUI.width - 50, null, 90);
 		}
 
 		// make sure of distance
@@ -156,9 +156,12 @@ let Main = {
 			if (!player.lost && player.ownership <= 0) {
 				player.losing++;
 				if (player.losing > 90) {
-					// console.log("player lost", player);
 					player.lost = true;
-					return GameUI.over(player);
+					if (playerKeys.length > 2 && player.type === "ai") {
+						delete this.players[k];
+					} else {
+						return GameUI.over(player);
+					}
 				}
 			} else{
 				player.losing = 0;

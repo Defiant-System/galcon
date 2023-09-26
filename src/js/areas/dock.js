@@ -119,7 +119,6 @@
 			case "mousemove":
 				let left = Math.min(Math.max(event.clientX - Drag.click, Drag.min), Drag.max),
 					val = Math.invLerp(Drag.min, Drag.max, left);
-				console.log( left );
 				Drag.knob.css({ left });
 				// attack fleet size
 				Drag.field.html(`${val * 100 | 0}%`);

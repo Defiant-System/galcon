@@ -1,13 +1,11 @@
 
 class AI {
-	constructor(mission_type) {
+	constructor(id) {
 		let Settings = galcon.settings;
 
+		this.id = id;
 		this.ai_difficulty = Settings.Difficulty;
-		this.mission_type = mission_type;
 		this.main = Main;
-		this.planets = this.main.planets;
-		this.allships = this.main.allships;
 
 		this.ai_seed = this.main.prand();
 		this.ai_frame = 0;
@@ -20,16 +18,46 @@ class AI {
 		this.ai_beast_ships = [2, 4, 7, 9, 12, 15, 18, 20, 23, 25];
 		this.ai_beast_planets = [6, 8, 10, 12, 13, 13, 13, 13, 13, 13];
 
-        this.OWNER_HUMAN = Owner.HUMAN;
-        this.OWNER_AI = Owner.AI;
+        this.OWNER_OPPO = [Owner.HUMAN];
+        this.OWNER_ME = id;
+	}
+
+	Ready(oppo) {
+		// exclude "me"
+		if (oppo.includes(this.id)) oppo.splice(this.id, 1);
+        this.OWNER_OPPO = oppo;
+		this.planets = this.main.planets;
+		this.allships = this.main.allships;
 	}
 
 	Tick() {
-		switch(this.mission_type) {
-			case Mission.CLASSIC: return this.ClassicAI();
-			case Mission.STEALTH: return this.ClassicAI();
-			case Mission.THREEWAY: return this.ThreewayAI();
+		var _loc_4 = 0;
+		var _loc_5 = null;
+		var _loc_2 = this.ai_rand[this.ai_difficulty];
+		var _loc_3 = this.ai_speed[this.ai_difficulty];
+
+		if (Math.round(this.ai_frame + this.ai_seed * 2) % _loc_3 == 0) {
+			if (this.main.prand() * 100 < _loc_2) {
+				this.AILaunch(false);
+			} else{
+				this.AILaunch(true);
+			}
 		}
+
+		if (this.ai_redirect) {
+			_loc_4 = 0;
+			while (_loc_4 < this.allships.fleets.length) {
+				if (this.allships.fleets[_loc_4].owner == this.OWNER_ME && (this.ai_frame + _loc_4 * 35) % (_loc_3 * 60 * param1) == 0) {
+					_loc_5 = this.AIFindTarget(false, this.allships.fleets[_loc_4].pos);
+					if (_loc_5 != null) {
+						this.allships.RedirectFleet(this.allships.fleets[_loc_4].id, _loc_5);
+					}
+				}
+				_loc_4++;
+			}
+		}
+
+		this.ai_frame += 1;
 	}
 
 	AIWinning() {
@@ -39,10 +67,10 @@ class AI {
         var _loc_3 = 0;
         _loc_1 = 0;
         while (_loc_1 < this.planets.length) {
-            if (this.planets[_loc_1].owner == this.OWNER_HUMAN) {
+            if (this.OWNER_OPPO.includes(this.planets[_loc_1].owner)) {
                 _loc_2 = _loc_2 + this.planets[_loc_1].ships;
             }
-            if (this.planets[_loc_1].owner == this.OWNER_AI) {
+            if (this.planets[_loc_1].owner == this.OWNER_ME) {
                 _loc_3 = _loc_3 + this.planets[_loc_1].ships;
             }
             _loc_1++;
@@ -51,10 +79,10 @@ class AI {
         while (_loc_4 < this.allships.max_count) {
             _loc_1 = (this.allships.min_index + _loc_4) % this.allships.alloc_count;
             if (this.allships.ships[_loc_1] != null) {
-                if (this.allships.ships[_loc_1].owner == this.OWNER_HUMAN) {
+                if (this.OWNER_OPPO.includes(this.allships.ships[_loc_1].owner)) {
                     _loc_2 = _loc_2 + this.allships.ships[_loc_1].value;
                 }
-                if (this.allships.ships[_loc_1].owner == this.OWNER_AI) {
+                if (this.allships.ships[_loc_1].owner == this.OWNER_ME) {
                     _loc_3 = _loc_3 + this.allships.ships[_loc_1].value;
                 }
             }
@@ -73,7 +101,7 @@ class AI {
         var _loc_9 = this.AIWinning();
         _loc_3 = 0;
         while (_loc_3 < this.planets.length) {
-            if (this.planets[_loc_3].owner != this.OWNER_AI && !(_loc_9 && this.planets[_loc_3].owner == Owner.NEUTRAL)) {
+            if (this.planets[_loc_3].owner != this.OWNER_ME && !(_loc_9 && this.planets[_loc_3].owner == Owner.NEUTRAL)) {
                 if (param1) {
                     _loc_7 = this.main.prand();
                 } else{
@@ -94,7 +122,7 @@ class AI {
         var _loc_2 = 0;
         var _loc_3 = null;
         while (_loc_2 < this.planets.length) {
-            if (this.planets[_loc_2].owner == this.OWNER_AI && (_loc_3 == null || this.planets[_loc_2].ships > _loc_3.ships)) {
+            if (this.planets[_loc_2].owner == this.OWNER_ME && (_loc_3 == null || this.planets[_loc_2].ships > _loc_3.ships)) {
                 _loc_3 = this.planets[_loc_2];
             }
             _loc_2++;
@@ -107,49 +135,5 @@ class AI {
         
 		let fleet_id = this.allships.fleet_id++;
         this.allships.LaunchShips(_loc_3, _loc_4, fleet_id, .65);
-	}
-	
-	ClassicAI(param1=1) {
-		var _loc_4 = 0;
-		var _loc_5 = null;
-		var _loc_2 = this.ai_rand[this.ai_difficulty];
-		var _loc_3 = this.ai_speed[this.ai_difficulty];
-
-		if (Math.round(this.ai_frame + this.ai_seed * this.OWNER_AI) % _loc_3 == 0) {
-			if (this.main.prand() * 100 < _loc_2) {
-				this.AILaunch(false);
-			} else{
-				this.AILaunch(true);
-			}
-		}
-
-		if (this.ai_redirect) {
-			_loc_4 = 0;
-			while (_loc_4 < this.allships.fleets.length) {
-				if (this.allships.fleets[_loc_4].owner == this.OWNER_AI && (this.ai_frame + _loc_4 * 35) % (_loc_3 * 60 * param1) == 0) {
-					_loc_5 = this.AIFindTarget(false, this.allships.fleets[_loc_4].pos);
-					if (_loc_5 != null) {
-						this.allships.RedirectFleet(this.allships.fleets[_loc_4].id, _loc_5);
-					}
-				}
-				_loc_4++;
-			}
-		}
-
-		this.ai_frame += 1;
-	}
-
-	ThreewayAI() {
-        var _loc_1 = (Main.prand() * 1000 | 0) % 2;
-        
-        this.OWNER_AI = 2;
-        this.OWNER_HUMAN = _loc_1 == 0 ? 1 : 3;
-        this.ClassicAI(3);
-
-        this.OWNER_AI = 3;
-        this.OWNER_HUMAN = _loc_1 == 0 ? 1 : 2;
-        this.ClassicAI(3);
-        
-        this.ai_frame -= 1;
 	}
 }

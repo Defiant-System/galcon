@@ -104,6 +104,8 @@
 				Self.dispatch({ ...event, type: "start-"+ value });
 				return true;
 			case "start-classic":
+				// create game AI
+				Main.ai = [new AI(2)];
 				// reset planets
 				Main.planets = [];
 				// generate random map
@@ -111,8 +113,6 @@
 				Main.appendHtml();
 				// create shipsets
 				Main.allships = new Shipset(Main.planets);
-				// create game AI
-				Main.ai = new AI(Mission.CLASSIC);
 				// start game loop
 				GameUI.loop(looser => {
 					// fireworks or not
@@ -124,6 +124,8 @@
 				Self.els.content.addClass("get-ready");
 				break;
 			case "start-stealth":
+				// create game AI
+				Main.ai = [new AI(2)];
 				// reset planets
 				Main.planets = [];
 				// generate random map
@@ -131,8 +133,6 @@
 				Main.appendHtml();
 				// create shipsets
 				Main.allships = new Shipset(Main.planets, true); // second param is for "stealth"
-				// create game AI
-				Main.ai = new AI(Mission.STEALTH);
 				// start game loop
 				GameUI.loop(looser => {
 					// fireworks or not
@@ -144,15 +144,15 @@
 				Self.els.content.addClass("get-ready");
 				break;
 			case "start-3-way":
+				// create game AI
+				Main.ai = [new AI(2), new AI(3)];
 				// reset planets
 				Main.planets = [];
 				// generate random map
-				Main.generateMap(2);
+				Main.generateMap();
 				Main.appendHtml();
 				// create shipsets
 				Main.allships = new Shipset(Main.planets);
-				// create game AI
-				Main.ai = new AI(Mission.THREEWAY);
 				// start game loop
 				GameUI.loop(looser => {
 					// fireworks or not
@@ -166,6 +166,8 @@
 			case "test-map":
 				// make sure correct view is shown
 				Self.els.content.removeClass("success failure get-ready").data({ show: "stage" });
+				// create game AI
+				Main.ai = [new AI(2), new AI(3)];
 				// reset planets
 				Main.planets = [];
 				// plot tutorial map
@@ -173,10 +175,8 @@
 				Main.appendHtml();
 				// create shipsets
 				Main.allships = new Shipset(Main.planets);
-				// create game AI
-				Main.ai = new AI(Mission.CLASSIC);
 				// start game loop
-				GameUI.loop(() => {
+				GameUI.loop(looser => {
 					// fireworks or not
 					let name = looser.type === "ai" ? "success" : "failure";
 					Self.els.content.addClass(name);

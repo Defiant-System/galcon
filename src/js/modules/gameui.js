@@ -51,6 +51,9 @@ let GameUI = {
 			_GameUI = GameUI;
 		// if any already running, stop
 		if (this.fpsControl) this.fpsControl.stop();
+		// set AI opponents (for 3-way mode)
+		let players = [Owner.HUMAN, ...Main.ai.map(ai => ai.id)];
+		Main.ai.map(ai => ai.Ready(players));
 		// reset fx pipe
 		Fx.clearLines();
 		// stop starfield
@@ -67,7 +70,7 @@ let GameUI = {
 					_Main.planets.map(p => p.Tick());
 				},
 				60: () => {
-					if (_GameUI.fpsControl && _Main.ai) _Main.ai.Tick();
+					if (_GameUI.fpsControl) _Main.ai.map(ai => ai.Tick());
 					_GameUI.update();
 					_GameUI.render();
 					_Main.CheckWinLose();
