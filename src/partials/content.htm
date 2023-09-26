@@ -109,13 +109,18 @@
 		<h2>Paused</h2>
 	</div>
 
-	<!-- for game won / lost -->
-	<div class="view-success" data-click="new-game" data-arg="classic">
+	<!-- for game lost -->
+	<div class="view-failure" data-click="intro-view">
 		<div class="distort"></div>
 		<div class="lost">
 			<h2>Better luck next time</h2>
-			<span>Click to try again</span>
+			<span>Click for start menu</span>
 		</div>
+	</div>
+
+	<!-- for game won -->
+	<div class="view-success" data-click="new-game" data-arg="classic">
+		<div class="distort"></div>
 		<div class="won">
 			<h2>Nice job!</h2>
 			<span>Click for another conquest</span>

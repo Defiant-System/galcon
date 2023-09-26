@@ -58,4 +58,8 @@ class Shipset {
 		// sound effect
 		window.audio.play("launch");
 	}
+
+	RedirectFleet(fleet_id, planet) {
+		console.log( "redirect fleet to:", fleet_id );
+	}
 }

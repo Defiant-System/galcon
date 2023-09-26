@@ -71,11 +71,9 @@ content {
 	}
 
 	&.failure {
-		.view-success {
+		.view-failure {
 			opacity: 1;
 			visibility: visible;
-
-			.won { display: none; }
 
 			h2 {
 				color: #ccc;
@@ -677,6 +675,7 @@ content {
 			}
 		}
 
+		&.view-failure,
 		&.view-success {
 			opacity: 0;
 			visibility: hidden;
@@ -696,6 +695,7 @@ content {
 				right: 0;
 				bottom: 0;
 				overflow: hidden;
+				border-radius: inherit;
 
 				&:before {
 					content: "";
@@ -726,7 +726,9 @@ content {
 				text-align: center;
 				font-size: 24px;
 			}
+		}
 
+		&.view-success {
 			.pyro {
 				position: absolute;
 				top: 0;

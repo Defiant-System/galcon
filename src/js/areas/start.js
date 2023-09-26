@@ -177,7 +177,10 @@
 				Main.ai = new AI(Mission.CLASSIC);
 				// start game loop
 				GameUI.loop(() => {
-					console.log("test ended");
+					// fireworks or not
+					let name = looser.type === "ai" ? "success" : "failure";
+					Self.els.content.addClass(name);
+					APP.dock.els.ul.removeClass("autohide");
 				});
 				// start loop
 				GameUI.fpsControl.start();

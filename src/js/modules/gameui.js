@@ -11,7 +11,7 @@ let GameUI = {
 		this.bluePrintShips();
 
 		this.area = new Rectangle(0, 0, this.width, this.height);
-		this.speed = 2.25;
+		this.speed = 2.5;
 		this.showFps = false;
 	},
 	bluePrintShips() {

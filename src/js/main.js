@@ -20,7 +20,7 @@
 
 
 let Pref = {
-		"Difficulty": 1,
+		"Difficulty": 9,
 		"Sound": false,
 		"Music": true,
 		"Fps": false,
@@ -73,6 +73,7 @@ const galcon = {
 				return Self.dock.dispatch(event);
 			case "generate-map":
 				return Self.stage.dispatch(event);
+			case "intro-view":
 			case "ready-start-game":
 			case "start-tutorial":
 			case "new-game":

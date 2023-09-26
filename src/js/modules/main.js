@@ -3,20 +3,21 @@ let Owner = {
 		NEUTRAL: 0,
 		HUMAN: 1,
 		AI: 2,
+		AI2: 3,
 	};
 
 let Palette = [
 		{ color: "#aaaaaa", name: "neutral" },
 		{ color: "#5577ee", name: "human" },
 		{ color: "#ff5555", name: "ai" },
+		{ color: "#990099", name: "ai" },
 	];
 
 let Mission = {
 		CLASSIC: 0,
 		STEALTH: 1,
-		VACUUM: 2,
-		BEAST: 3,
-		THREEWAY: 4,
+		THREEWAY: 2,
+		BILLIADS: 3,
 	};
 
 let Main = {

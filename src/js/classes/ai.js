@@ -3,7 +3,7 @@ class AI {
 	constructor(mission_type) {
 		let Settings = galcon.settings;
 
-		this.ai_difficulty = galcon.settings.Difficulty;
+		this.ai_difficulty = Settings.Difficulty;
 		this.mission_type = mission_type;
 		this.main = Main;
 		this.planets = this.main.planets;
@@ -11,8 +11,7 @@ class AI {
 
 		this.ai_seed = this.main.prand();
 		this.ai_frame = 0;
-		this.ai_showships = Settings.Difficulty < 4;
-		this.ai_redirect = true; // Settings.Difficulty > 5;
+		this.ai_redirect = Settings.Difficulty > 5;
 
         this.ai_ships = [50, 65, 75, 75, 85, 100, 100, 120, 135, 150];
 		this.ai_rand = [0, 25, 50, 50, 75, 100, 100, 100, 100, 100];
