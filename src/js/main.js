@@ -36,7 +36,7 @@ const galcon = {
 		this.settings = window.settings.getItem("settings") || { ...Pref };
 
 		// random background
-		this.content.find("> div.game-bg").data({ bg: `0${Math.random() * 4 | 0}` });
+		// this.content.data({ theme: `0${(Math.random() * 4) + 1 | 0}` });
 
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());

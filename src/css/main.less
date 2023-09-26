@@ -14,6 +14,29 @@ content {
 	font-size: 20px;
 	color: #aaa;
 
+	&[data-theme="01"] {
+		div.game-bg:before { background-image: url(~/img/bg-01.jpg); }
+
+		ul.menu {
+			&:before {
+				backdrop-filter: hue-rotate(45deg);
+			}
+		}
+	}
+
+	&[data-theme="02"] {
+		div.game-bg:before { background-image: url(~/img/bg-02.jpg); }
+	}
+
+	&[data-theme="03"] {
+		div.game-bg:before { background-image: url(~/img/bg-03.jpg); }
+	}
+
+	&[data-theme="04"] {
+		div.game-bg:before { background-image: url(~/img/bg-04.jpg); }
+	}
+
+
 	&[data-show="intro"] {
 		> div[data-area="intro"] {
 			opacity: 1;
@@ -160,10 +183,24 @@ content {
 	}
 
 	ul.menu {
+		position: relative;
 		margin: 17px auto;
 		display: block;
 		list-style: none;
 		color: #369;
+
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1;
+			border-radius: 11px;
+			// backdrop-filter: hue-rotate(45deg);
+			pointer-events: none;
+		}
 
 		[class^="icon-"] {
 			position: absolute;
@@ -282,12 +319,6 @@ content {
 				background: 50% 50%/contain no-repeat;
 				animation: rotate_bg_ccw 1080s linear infinite;
 			}
-			
-			&[data-bg="01"]:before { background-image: url(~/img/bg-01.jpg); }
-			&[data-bg="02"]:before { background-image: url(~/img/bg-02.jpg); }
-			&[data-bg="03"]:before { background-image: url(~/img/bg-03.jpg); }
-			&[data-bg="04"]:before { background-image: url(~/img/bg-04.jpg); }
-			&[data-bg="06"]:before { background-image: url(~/img/bg-06.jpg); }
 		}
 
 		&[data-area="dock"] {
