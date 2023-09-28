@@ -1,7 +1,8 @@
 
 class Shipset {
 	constructor(planets, stealth) {
-		this.ship_bounds = new Rectangle(0, 0, GameUI.width, GameUI.height);
+		let rect = new Rectangle(0, 0, GameUI.width, GameUI.height);
+		this.tree = new Quadtree(rect);
 		this.fleets = [];
 		this._allships = [];
 		this._stealth = stealth;

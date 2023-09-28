@@ -71,7 +71,9 @@ let GameUI = {
 				},
 				60: () => {
 					if (_GameUI.fpsControl) _Main.ai.map(ai => ai.Tick());
+					// console.time("update");
 					_GameUI.update();
+					// console.timeEnd("update");
 					_GameUI.render();
 					_Main.CheckWinLose();
 				},
@@ -93,10 +95,18 @@ let GameUI = {
 		Fx.clearLines();
 	},
 	update() {
+		Main.allships.tree.clear();
+
 		Main.allships.map(s1 => {
 			// move ship
 			s1.Move(this.area, this.speed, true);
 			s1.Rotate(this.speed);
+
+			Main.allships.tree.insert(s1);
+
+			// let candidates = Main.allships.tree.retrieve(s1.rect);
+			// console.log( candidates.length );
+
 			// collision detection; ships
 			Main.allships.map(s2 => {
 				if (s1 === s2 || s1.fleet_id !== s2.fleet_id) return;

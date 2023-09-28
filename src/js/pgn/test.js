@@ -33,8 +33,8 @@ let testMap = {
 	ships: [],
 };
 
-for (let i=0; i<200; i++) {
-	let b = 10,
+for (let i=0; i<300; i++) {
+	let b = 15,
 		m = 20,
 		x = 30 + ((i % b) * m),
 		y = 30 + (Math.floor(i / b) * m),

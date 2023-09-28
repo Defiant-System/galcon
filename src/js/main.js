@@ -4,10 +4,9 @@
 
 @import "./classes/misc.js"
 @import "./classes/ai.js"
-@import "./classes/gridcell.js"
+@import "./classes/quadtree.js"
 @import "./classes/shipset.js"
 @import "./classes/ship.js"
-@import "./classes/fleet.js"
 @import "./classes/planet.js"
 
 @import "./modules/main.js"

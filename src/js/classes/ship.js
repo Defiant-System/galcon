@@ -41,6 +41,13 @@ class Ship {
 		Ship._radius = v;
 	}
 
+	get rect() {
+		let x = this.pos._x - this._radius,
+			y = this.pos._y - this._radius,
+			wh = this._radius * 2;
+		return { x, y, width: wh, height: wh };
+	}
+
 	Rotate(delta) {
 		let tmp_point = new Point(this.vpos._x - this.ppos._x, this.vpos._y - this.ppos._y);
 		let vector_angle = this.vangle;
