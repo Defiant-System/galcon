@@ -9,8 +9,8 @@ class Ship {
 		this.vpos = new Point(x, y);
 		this.dv = new Point(0, 0);
 
-		this._width = this._radius * 2;
-		this._height = this._radius * 2;
+		this.width = 20;
+		this.height = 20;
 
 		if (owner !== Owner.HUMAN) {
 			this.opacity = 60;
@@ -46,8 +46,6 @@ class Ship {
 
 	get x() { return this.pos._x; }
 	get y() { return this.pos._y; }
-	get width() { return this._radius; }
-	get height() { return this._radius; }
 
 	Rotate(delta) {
 		let tmp_point = new Point(this.vpos._x - this.ppos._x, this.vpos._y - this.ppos._y);

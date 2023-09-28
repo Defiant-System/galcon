@@ -4,7 +4,8 @@ let Test = {
 		
 		// return;
 
-		setTimeout(() => APP.start.dispatch({ type: "test-map" }), 300);
+		// setTimeout(() => window.find(`li[data-click="toggle-fps"]`).trigger("click"), 200);
+		// setTimeout(() => APP.start.dispatch({ type: "test-map" }), 300);
 
 		// setTimeout(() => APP.start.els.content.addClass("failure"), 300);
 		
@@ -40,9 +41,7 @@ let Test = {
 
 
 		// setTimeout(() => window.find(".toolbar-selectbox_").trigger("mousedown"), 900);
-		
 		// setTimeout(() => Fx.clearLines(), 3e3);
-
-		// setTimeout(() => GameUI.fpsControl.stop(), 2e3);
+		// setTimeout(() => GameUI.fpsControl.stop(), 1e3);
 	}
 };

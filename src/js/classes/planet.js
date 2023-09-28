@@ -7,6 +7,8 @@ class Planet {
 		this._owner = owner;
 		this.color = Palette[owner].color;
 		this.texture = Surface.maps[texture];
+		this.width =
+		this.height = radius * 2;
 		this.radius = radius;
 		this.ships = ships;
 		this.production = radius / 200;
@@ -20,6 +22,9 @@ class Planet {
 
 		this.Tick();
 	}
+
+	get x() { return this.pos._x - this.radius; }
+	get y() { return this.pos._y - this.radius; }
 
 	get owner() {
 		return this._owner;

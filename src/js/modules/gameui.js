@@ -71,9 +71,7 @@ let GameUI = {
 				},
 				60: () => {
 					if (_GameUI.fpsControl) _Main.ai.map(ai => ai.Tick());
-					// console.time("update");
 					_GameUI.update();
-					// console.timeEnd("update");
 					_GameUI.render();
 					_Main.CheckWinLose();
 				},
@@ -96,24 +94,25 @@ let GameUI = {
 	},
 	update() {
 		Main.allships.tree.clear();
-
+		// add planets to quad tree
+		Main.planets.map(p => Main.allships.tree.insert(p));
+		// move / rotate ships
 		Main.allships.map(s1 => {
-			// move ship
 			s1.Move(this.area, this.speed, true);
 			s1.Rotate(this.speed);
-
+			// insert ship into quad tree
 			Main.allships.tree.insert(s1);
-
-			// let candidates = Main.allships.tree.retrieve(s1);
-			// console.log( candidates.length );
-
-			// collision detection; ships
-			Main.allships.map(s2 => {
-				if (s1 === s2 || s1.fleet_id !== s2.fleet_id) return;
-				if (s1.pos.distance(s2.pos) < s1.radius << 1) s1.Collide(s2);
-			});
-			// collision detection; planets
-			Main.planets.map(p => s1.CollidePlanet(p));
+		});
+		// loop neighbours
+		Main.allships.map(s1 => {
+			Main.allships.tree.retrieve(s1)
+				.map(s2 => {
+					// collision detection; planets
+					if (s2.production) s1.CollidePlanet(s2);
+					if (s1 === s2 || s1.fleet_id !== s2.fleet_id) return;
+					// collision detection; ships
+					if (s1.pos.distance(s2.pos) < s1.radius << 1) s1.Collide(s2);
+				});
 		});
 	},
 	render() {
@@ -149,7 +148,7 @@ let GameUI = {
 			var bounds = node.bounds;
 			//no subnodes? draw the current node
 			if (node.nodes.length === 0) {
-				this.ctx.strokeStyle = "#f00";
+				this.ctx.strokeStyle = "#ff000055";
 				this.ctx.strokeRect(bounds.x, bounds.y, bounds.width, bounds.height);
 			//has subnodes? drawQuadtree them!
 			} else {
