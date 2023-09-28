@@ -62,6 +62,9 @@ const galcon = {
 			// system events
 			case "window.init":
 				break;
+			case "window.keystroke":
+				if (event.char === "space") Self.dock.dispatch({ type: "toggle-play" });
+				break;
 			case "window.focus":
 			case "window.blur":
 				return Self.dock.dispatch(event);

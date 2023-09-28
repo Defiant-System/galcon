@@ -182,7 +182,7 @@
 				// make sure correct view is shown
 				Self.els.content.removeClass("success failure get-ready").data({ show: "stage" });
 				// create game AI
-				Main.ai = [new AI(2), new AI(3)];
+				Main.ai = (testMap.ais || []).map(a => new AI(a));;
 				// reset planets
 				Main.planets = [];
 				// plot tutorial map
@@ -190,6 +190,11 @@
 				Main.appendHtml();
 				// create shipsets
 				Main.allships = new Shipset(Main.planets);
+				// add ships, if any
+				(testMap.ships || []).map(s => {
+					s[2] = Main.planets[s[2]];
+					Main.allships.AddShip(...s);
+				});
 				// start game loop
 				GameUI.loop(looser => {
 					// fireworks or not

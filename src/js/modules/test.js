@@ -4,7 +4,7 @@ let Test = {
 		
 		// return;
 
-		// setTimeout(() => APP.start.dispatch({ type: "test-map" }), 300);
+		setTimeout(() => APP.start.dispatch({ type: "test-map" }), 300);
 
 		// setTimeout(() => APP.start.els.content.addClass("failure"), 300);
 		
