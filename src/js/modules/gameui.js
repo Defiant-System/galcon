@@ -104,7 +104,7 @@ let GameUI = {
 
 			Main.allships.tree.insert(s1);
 
-			// let candidates = Main.allships.tree.retrieve(s1.rect);
+			// let candidates = Main.allships.tree.retrieve(s1);
 			// console.log( candidates.length );
 
 			// collision detection; ships
@@ -131,7 +131,6 @@ let GameUI = {
 		Main.planets.map(p => Surface.render(this.ctx, p));
 
 		// render ships
-		this.ctx.lineWidth = 3;
 		Main.allships.map(s => {
 			var c = s.vangle + piHalf,
 				ship = this.ships[s.owner].colorize(s.color);
@@ -144,6 +143,25 @@ let GameUI = {
 			this.ctx.drawImage(ship, -10, -10);
 			this.ctx.restore();
 		});
+
+
+		var drawQuadtree = node => {
+			var bounds = node.bounds;
+			//no subnodes? draw the current node
+			if (node.nodes.length === 0) {
+				this.ctx.strokeStyle = "#f00";
+				this.ctx.strokeRect(bounds.x, bounds.y, bounds.width, bounds.height);
+			//has subnodes? drawQuadtree them!
+			} else {
+				for (var i=0;i<node.nodes.length;i=i+1) {
+					drawQuadtree(node.nodes[i]);
+				}
+			}
+		};
+		this.ctx.lineWidth = 1;
+		drawQuadtree(Main.allships.tree);
+
+
 		// effects layer
 		Fx.render(this.ctx);
 		// FPS 

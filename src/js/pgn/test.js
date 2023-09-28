@@ -34,7 +34,7 @@ let testMap = {
 };
 
 for (let i=0; i<300; i++) {
-	let b = 15,
+	let b = 12,
 		m = 20,
 		x = 30 + ((i % b) * m),
 		y = 30 + (Math.floor(i / b) * m),

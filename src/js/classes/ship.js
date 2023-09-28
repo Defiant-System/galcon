@@ -9,6 +9,9 @@ class Ship {
 		this.vpos = new Point(x, y);
 		this.dv = new Point(0, 0);
 
+		this._width = this._radius * 2;
+		this._height = this._radius * 2;
+
 		if (owner !== Owner.HUMAN) {
 			this.opacity = 60;
 			this.stealth = stealth ? 1 : null;
@@ -41,12 +44,10 @@ class Ship {
 		Ship._radius = v;
 	}
 
-	get rect() {
-		let x = this.pos._x - this._radius,
-			y = this.pos._y - this._radius,
-			wh = this._radius * 2;
-		return { x, y, width: wh, height: wh };
-	}
+	get x() { return this.pos._x; }
+	get y() { return this.pos._y; }
+	get width() { return this._radius; }
+	get height() { return this._radius; }
 
 	Rotate(delta) {
 		let tmp_point = new Point(this.vpos._x - this.ppos._x, this.vpos._y - this.ppos._y);

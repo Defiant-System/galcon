@@ -54,12 +54,12 @@ class Quadtree {
 
 	getIndex(pRect) {
 		var indexes = [],
-			verticalMidpoint    = this.bounds.x + (this.bounds.width/2),
-			horizontalMidpoint  = this.bounds.y + (this.bounds.height/2),
+			verticalMidpoint = this.bounds.x + (this.bounds.width/2),
+			horizontalMidpoint = this.bounds.y + (this.bounds.height/2),
 			startIsNorth = pRect.y < horizontalMidpoint,
-			startIsWest  = pRect.x < verticalMidpoint,
-			endIsEast    = pRect.x + pRect.width > verticalMidpoint,
-			endIsSouth   = pRect.y + pRect.height > horizontalMidpoint;    
+			startIsWest = pRect.x < verticalMidpoint,
+			endIsEast = pRect.x + pRect.width > verticalMidpoint,
+			endIsSouth = pRect.y + pRect.height > horizontalMidpoint;    
 		//top-right quad
 		if(startIsNorth && endIsEast) {
 			indexes.push(0);
@@ -85,7 +85,6 @@ class Quadtree {
 		//if we have subnodes, call insert on matching subnodes
 		if(this.nodes.length) {
 			indexes = this.getIndex(pRect);
-	 
 			for(i=0; i<indexes.length; i++) {
 				this.nodes[indexes[i]].insert(pRect);     
 			}
