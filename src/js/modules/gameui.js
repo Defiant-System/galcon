@@ -157,8 +157,8 @@ let GameUI = {
 				}
 			}
 		};
-		this.ctx.lineWidth = 1;
-		drawQuadtree(Main.allships.tree);
+		// this.ctx.lineWidth = 1;
+		// drawQuadtree(Main.allships.tree);
 
 
 		// effects layer

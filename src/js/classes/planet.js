@@ -20,6 +20,8 @@ class Planet {
 		this.rotation = 0;
 		this.rotation_max = 0;
 
+		this.lines = {};
+
 		this.Tick();
 	}
 
@@ -34,6 +36,20 @@ class Planet {
 		this.color = Palette[v].color;
 		this.aura_step = v === Owner.HUMAN ? .015 : -.015;
 		this._owner = v;
+	}
+
+	calcLines(planets) {
+		planets.map(p => {
+			if (p.id === this.id) return;
+			let p1 = this.pos.clone(),
+				p2 = p.pos.clone();
+			// line from and to "orbit"
+			p1.moveTowards(p2, this.radius + 5);
+			p2.moveTowards(p1, p.radius + 5);
+
+			let angle = p1.direction(p2) + Math.PI / 2;
+			this.lines[`${this.id}-${p.id}`] = { p1, p2, angle };
+		});
 	}
 
 	Tick() {

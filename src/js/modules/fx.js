@@ -51,7 +51,7 @@ let Fx = {
 			let e = { type: "line", from, to };
 			// prevents duplicates
 			if (to && from && Fx.pipe.find(l => l.type == e.type && l.from.id == e.from.id && l.to.id == e.to.id)) return;
-			Fx.pipe.push(e);
+			if (to.id !== from.id) Fx.pipe.push(e);
 		},
 		remove(id) {
 			Fx.pipe.map((e, i) => {
@@ -72,53 +72,53 @@ let Fx = {
 		let arrowHead = this.arrowHead.cvs,
 			tau = Math.PI * 2,
 			piHalf = Math.PI / 2,
+			line,
 			p1, p2;
 
-		ctx.save();
 		this.pipe.map((e, i) => {
 			switch (e.type) {
 				case "outline":
+					ctx.save();
 					p1 = e.planet;
 					// paint
 					ctx.shadowBlur = 4;
 					ctx.lineWidth = 2;
-					ctx.strokeStyle =
+					ctx.strokeStyle = "#55eeee";
 					ctx.shadowColor = "#55eeee";
 					ctx.beginPath();
 					ctx.arc(p1.pos._x, p1.pos._y, p1.radius + 5, 0, tau, true);
 					ctx.stroke();
+					ctx.restore();
 					break;
 				case "line":
-					p1 = e.from.pos.clone();
-					p2 = e.to.pos.clone();
-					// line from and to "orbit"
-					p1.moveTowards(p2, e.from.radius + 5);
-					p2.moveTowards(p1, e.to.radius + 5);
+					ctx.save();
+					line = e.from.lines[`${e.from.id}-${e.to.id}`];
+					if (!line) console.log(`${e.from.id}-${e.to.id}`);
 					// paint
 					ctx.shadowBlur = 4;
 					ctx.lineWidth = 2;
-					ctx.strokeStyle =
+					ctx.strokeStyle = "#55eeee";
 					ctx.shadowColor = "#55eeee";
 					ctx.beginPath();
-					ctx.moveTo(p1._x, p1._y);
-					ctx.lineTo(p2._x, p2._y);
+					ctx.moveTo(line.p1._x, line.p1._y);
+					ctx.lineTo(line.p2._x, line.p2._y);
 					ctx.stroke();
 					// arrow head
-					ctx.save();
-					ctx.translate(p2._x, p2._y);
-					ctx.rotate(p1.direction(p2) + piHalf);
+					ctx.translate(line.p2._x, line.p2._y);
+					ctx.rotate(line.angle);
 					ctx.drawImage(arrowHead, -9, -5);
 					ctx.restore();
 					break;
 				case "explosion":
+					ctx.save();
 					ctx.shadowBlur = 0;
 					ctx.globalCompositeOperation = "lighter";
 					let f = e.frames.shift();
 					if (!f) return this.pipe.splice(i, 1);
 					ctx.drawImage(this.img, f[0], f[1], e.r, e.r, e.x, e.y, e.r, e.r);
+					ctx.restore();
 					break;
 			}
 		});
-		ctx.restore();
 	}
 };

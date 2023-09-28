@@ -6,6 +6,8 @@ class Shipset {
 		this._allships = [];
 		this._stealth = stealth;
 		this.fleet_id = 1; // just a counter
+
+		planets.map(p => p.calcLines(planets));
 	}
 
 	map(func) {
