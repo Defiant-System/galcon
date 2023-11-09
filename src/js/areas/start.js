@@ -48,6 +48,7 @@
 				// show "step"
 				Self.els.tutorial.attr({ "class": "show-"+ value });
 				// reset planets
+				Main.ai = [];
 				Main.planets = [];
 				// reset stage selected
 				APP.stage.selected = [];
