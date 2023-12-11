@@ -162,13 +162,13 @@ class Rectangle {
 	}
 
 	union(rectangle) {
-		this._topLeft._x = rocket88.min(this._topLeft._x, rectangle._topLeft._x);
-		this._topLeft._y = rocket88.min(this._topLeft._y, rectangle._topLeft._y);
+		this._topLeft._x = Math.min(this._topLeft._x, rectangle._topLeft._x);
+		this._topLeft._y = Math.min(this._topLeft._y, rectangle._topLeft._y);
 		
-		var myRight = rocket88.max(this.right, rectangle.right);
+		var myRight = Math.max(this.right, rectangle.right);
 		this.size.width = myRight - this._topLeft._x;
 
-		var myBottom = rocket88.max(this.right, rectangle.right);
+		var myBottom = Math.max(this.right, rectangle.right);
 		this.size.height = myRight - this._topLeft._y;
 
 		return this;
@@ -214,7 +214,7 @@ class Rectangle {
 	}
 
 	clone() {
-		return new rocket88.Rectangle(this._topLeft._x, this._topLeft._y, this._size.width, this._size.height);
+		return new Rectangle(this._topLeft._x, this._topLeft._y, this._size.width, this._size.height);
 	}
 
 	copy(rectangle) {
