@@ -1,7 +1,8 @@
 # Galcon
+<img src="public/icon.svg" width=200 height=200>
 
 TODO:
-- [ ] save settings on close
+- [x] save settings on close
 - [ ] redirect fleet
 - [x] add quad-tree for faster loop
 - [x] improve draw line to planets
