@@ -104,7 +104,7 @@
 				break;
 			case "mouseup":
 				el = $(event.target);
-				if (Self.drag && Self.drag.el[0] !== el[0]) {
+				if (el.hasClass("planet") && Self.drag && Self.drag.el[0] !== el[0]) {
 
 					let planet = Main.getPlanet(+el.data("id")),
 						fleet_id = Main.allships.fleet_id++;
