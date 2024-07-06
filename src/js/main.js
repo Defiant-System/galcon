@@ -21,7 +21,7 @@
 let Pref = {
 		"Difficulty": 1,
 		"Sound": false,
-		"Music": true,
+		"Music": false,
 		"Fps": false,
 		"Attack": .65,
 	};
@@ -61,6 +61,10 @@ const galcon = {
 			// system events
 			case "window.init":
 				break;
+			case "window.close":
+				// save settings
+				window.settings.setItem("settings", Self.settings);
+				break;
 			case "window.keystroke":
 				if (event.char === "space") Self.dock.dispatch({ type: "toggle-play" });
 				break;
@@ -70,7 +74,7 @@ const galcon = {
 			// custom events
 			case "apply-settings":
 				if (Self.settings.Sound === false) Self.dock.dispatch({ type: "toggle-sound", mute: true });
-				if (Self.settings.Music === false) Self.dock.dispatch({ type: "toggle-music", mute: true });
+				if (Self.settings.Music === true) Self.dock.dispatch({ type: "toggle-music", play: true });
 				if (Self.settings.Fps === true) Self.dock.dispatch({ type: "toggle-fps", show: true });
 				if (Self.settings.Attack) Self.dock.doRange({ type: "set-value", value: Self.settings.Attack });
 				break;

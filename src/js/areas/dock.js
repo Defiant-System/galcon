@@ -64,12 +64,25 @@
 				}
 				break;
 			case "toggle-music":
-				// toggle music
+				// update settings
+				APP.settings.Music = event.play || !APP.settings.Music;
+
+				if (!APP.settings.Music) {
+					if (window.midi.playing) window.midi.pause();
+				} else {
+					window.midi.play({
+						path: "/cdn/midi/music/Theme - Star Wars Cantina Band.mid",
+						reverb: "cathedral",
+						volume: .35,
+						loop: true,
+					});
+				}
 				// icon UI update
-				Self.els.ul.find(`li[data-click="toggle-music"]`).toggleClass("active", window.audio.mute);
+				Self.els.ul.find(`li[data-click="toggle-music"]`).toggleClass("active", !APP.settings.Music);
 				break;
 			case "toggle-sound":
 				// toggle sound effects
+				APP.settings.Sound =
 				window.audio.mute = event.mute || !window.audio.mute;
 				// icon UI update
 				Self.els.ul.find(`li[data-click="toggle-sound"]`).toggleClass("active", window.audio.mute);

@@ -149,12 +149,39 @@ content {
 		}
 	}
 
-	h1 {
-		font-family: "Michroma", sans-serif;
-		font-size: 52px;
-		color: #fff;
-		margin: 0 auto 11px;
+	.logo {
+		position: relative;
+		margin: 0 auto 37px;
+		width: 445px;
+		height: 133px;
+
+		svg {
+			width: inherit;
+			height: inherit;
+			filter: drop-shadow(0 1px 0 hsl(174, 5%, 80%))
+					drop-shadow(0 2px 0 hsl(174, 5%, 75%))
+					drop-shadow(0 3px 1px hsl(174, 5%, 67%))
+					drop-shadow(0 4px 0 hsl(174, 5%, 59%))
+					drop-shadow(0 5px 0 hsl(174, 5%, 51%))
+					drop-shadow(0 6px 0 hsl(174, 5%, 43%))
+					// drop-shadow(0 7px 0 hsl(174, 5%, 61%))
+					// drop-shadow(0 8px 0 hsl(174, 5%, 60%))
+					// drop-shadow(0 0 5px rgba(0, 0, 0, .05))
+					// drop-shadow(0 1px 3px rgba(0, 0, 0, .2))
+					// drop-shadow(0 3px 5px rgba(0, 0, 0, .2))
+					drop-shadow(0 3px 11px rgba(#000,.2))
+					drop-shadow(0 5px 11px rgba(#000,.2))
+					drop-shadow(0 7px 21px rgba(#000,.3))
+					sepia(1) brightness(1.15) saturate(5) hue-rotate(225deg);
+		}
 	}
+
+	// h1 {
+	// 	font-family: "Michroma", sans-serif;
+	// 	font-size: 52px;
+	// 	color: #fff;
+	// 	margin: 0 auto 11px;
+	// }
 
 	h2 {
 		font-size: 40px;
@@ -503,56 +530,56 @@ content {
 		}
 
 		&[data-area="intro"] {
-			padding: 31px 73px;
+			padding: 27px 73px;
 			text-align: center;
 
-			h1 {
-				position: relative;
-				width: 400px;
-				margin-bottom: 43px;
-				line-height: 1;
-				letter-spacing: 3px;
-				color: rgba(#aaf,.1);
-				text-shadow: 0 0 2px rgba(#eef,.25);
-				background: #000 -webkit-gradient(linear, left top, left bottom, from(#000), to(#000),
-					color-stop(0.0, #004),
-					color-stop(0.05, #004),
-					color-stop(0.125, #bbf),
-					color-stop(0.125, #004),
-					color-stop(0.20, #ddf),
-					color-stop(0.20, #115),
-					color-stop(0.30, #eef),
-					color-stop(0.30, #226),
-					color-stop(0.425, #eef),
-					color-stop(0.425, #226),
-					color-stop(0.5, #eef),
-					color-stop(0.575, #226),
-					color-stop(0.575, #eef),
-					color-stop(0.70, #226),
-					color-stop(0.70, #eef),
-					color-stop(0.80, #115),
-					color-stop(0.80, #ddf),
-					color-stop(0.875, #004),
-					color-stop(0.875, #bbf),
-					color-stop(0.95, #004),
-					color-stop(1.0, #004)
-				) 0 0;
-				-webkit-background-size: 210px;
-				-webkit-background-clip: text;
+			// h1 {
+			// 	position: relative;
+			// 	width: 400px;
+			// 	margin-bottom: 43px;
+			// 	line-height: 1;
+			// 	letter-spacing: 3px;
+			// 	color: rgba(#aaf,.1);
+			// 	text-shadow: 0 0 2px rgba(#eef,.25);
+			// 	background: #000 -webkit-gradient(linear, left top, left bottom, from(#000), to(#000),
+			// 		color-stop(0.0, #004),
+			// 		color-stop(0.05, #004),
+			// 		color-stop(0.125, #bbf),
+			// 		color-stop(0.125, #004),
+			// 		color-stop(0.20, #ddf),
+			// 		color-stop(0.20, #115),
+			// 		color-stop(0.30, #eef),
+			// 		color-stop(0.30, #226),
+			// 		color-stop(0.425, #eef),
+			// 		color-stop(0.425, #226),
+			// 		color-stop(0.5, #eef),
+			// 		color-stop(0.575, #226),
+			// 		color-stop(0.575, #eef),
+			// 		color-stop(0.70, #226),
+			// 		color-stop(0.70, #eef),
+			// 		color-stop(0.80, #115),
+			// 		color-stop(0.80, #ddf),
+			// 		color-stop(0.875, #004),
+			// 		color-stop(0.875, #bbf),
+			// 		color-stop(0.95, #004),
+			// 		color-stop(1.0, #004)
+			// 	) 0 0;
+			// 	-webkit-background-size: 210px;
+			// 	-webkit-background-clip: text;
 
-				&:before {
-					content: "Galactic Conquest";
-					position: absolute;
-					top: 0;
-					left: 0;
-					right: 0;
-					bottom: 0;
-					z-index: -1;
-					font: inherit;
-					text-shadow: 0 0 3px rgba(#eef,.2),
-								0 0 7px rgba(#eef,.5);
-				}
-			}
+			// 	&:before {
+			// 		content: "Galactic Conquest";
+			// 		position: absolute;
+			// 		top: 0;
+			// 		left: 0;
+			// 		right: 0;
+			// 		bottom: 0;
+			// 		z-index: -1;
+			// 		font: inherit;
+			// 		text-shadow: 0 0 3px rgba(#eef,.2),
+			// 					0 0 7px rgba(#eef,.5);
+			// 	}
+			// }
 
 			ul {
 				width: 220px;
