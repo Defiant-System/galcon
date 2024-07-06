@@ -14,27 +14,27 @@ content {
 	font-size: 20px;
 	color: #aaa;
 
-	&[data-theme="01"] {
-		div.game-bg:before { background-image: url(~/img/bg-01.jpg); }
-		div[data-area="dock"] ul.dock:after,
-		ul.menu:before { backdrop-filter: hue-rotate(45deg) brightness(1.25); }
-		div[data-area="dock"] ul.dock li.range-item .attack-fleet { color: #a3a; }
+	// &[data-theme="01"] {
+	// 	// div.game-bg:before { background-image: url(~/img/bg-01.jpg); }
+	// 	div[data-area="dock"] ul.dock:after,
+	// 	ul.menu:before { backdrop-filter: hue-rotate(45deg) brightness(1.25); }
+	// 	div[data-area="dock"] ul.dock li.range-item .attack-fleet { color: #a3a; }
 
-	}
+	// }
 
-	&[data-theme="02"] {
-		div.game-bg:before { background-image: url(~/img/bg-02.jpg); }
-		div[data-area="dock"] ul.dock:after,
-		ul.menu:before { backdrop-filter: hue-rotate(145deg) brightness(1.25); }
-		div[data-area="dock"] ul.dock li.range-item .attack-fleet { color: #e97; }
-	}
+	// &[data-theme="02"] {
+	// 	// div.game-bg:before { background-image: url(~/img/bg-02.jpg); }
+	// 	div[data-area="dock"] ul.dock:after,
+	// 	ul.menu:before { backdrop-filter: hue-rotate(145deg) brightness(1.25); }
+	// 	div[data-area="dock"] ul.dock li.range-item .attack-fleet { color: #e97; }
+	// }
 
-	&[data-theme="03"] {
-		div.game-bg:before { background-image: url(~/img/bg-03.jpg); }
-		div[data-area="dock"] ul.dock:after,
-		ul.menu:before { backdrop-filter: brightness(1.15); }
-		div[data-area="dock"] ul.dock li.range-item .attack-fleet { color: #79e; }
-	}
+	// &[data-theme="03"] {
+	// 	// div.game-bg:before { background-image: url(~/img/bg-03.jpg); }
+	// 	div[data-area="dock"] ul.dock:after,
+	// 	ul.menu:before { backdrop-filter: brightness(1.15); }
+	// 	div[data-area="dock"] ul.dock li.range-item .attack-fleet { color: #79e; }
+	// }
 
 
 	&[data-show="intro"] {
@@ -681,6 +681,7 @@ content {
 			}
 
 			.planet {
+				background: rgba(#fff,.1);
 				position: absolute;
 				box-shadow: inset -3px -1px 3px rgba(#fff,.1);
 				border-radius: 50%;

@@ -41,7 +41,7 @@
 				break;
 			// custom events
 			case "goto-intro":
-				if (APP.start.starfield) APP.start.starfield.stop();
+				// if (APP.start.starfield) APP.start.starfield.stop();
 				if (GameUI.fpsControl) GameUI.fpsControl.stop();
 				APP.start.dispatch({ type: "intro-view" });
 				break;
@@ -60,7 +60,7 @@
 				if (GameUI.fpsControl) {
 					GameUI.fpsControl[value ? "stop" : "start"]();
 				} else {
-					APP.start.starfield[value ? "stop" : "start"]();
+					// APP.start.starfield[value ? "stop" : "start"]();
 				}
 				break;
 			case "toggle-music":

@@ -35,13 +35,13 @@ const galcon = {
 		this.settings = window.settings.getItem("settings") || { ...Pref };
 
 		// random background
-		this.content.data({ theme: `0${(Math.random() * 3) + 1 | 0}` });
+		// this.content.data({ theme: `0${(Math.random() * 3) + 1 | 0}` });
 
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
 		Fx.init();
 		Main.init();
-		Starfield.init();
+		// Starfield.init();
 		Surface.init();
 		GameUI.init();
 		// show intro view

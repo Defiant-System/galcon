@@ -26,13 +26,14 @@
 			case "output-pgn":
 				value = { planets: [] };
 				Main.planets.map(p => {
-					let texture = Surface.maps.indexOf(p.texture);
-					value.planets.push([p.pos._x, p.pos._y, p.radius, p.ships, p.owner, texture])
+					// let texture = Surface.maps.indexOf(p.texture);
+					// value.planets.push([p.pos._x, p.pos._y, p.radius, p.ships, p.owner, texture])
+					value.planets.push([p.pos._x, p.pos._y, p.radius, p.ships, p.owner])
 				});
 				console.log( JSON.stringify(value) );
 				break;
 			case "set-bg":
-				Self.els.gameBg.data({ bg: event.arg });
+				// Self.els.gameBg.data({ bg: event.arg });
 				break;
 			case "generate-map":
 				Main.planets = [];

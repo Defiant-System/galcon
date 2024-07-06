@@ -26,19 +26,19 @@
 				// make sure correct view is shown
 				Self.els.content.removeClass("success failure get-ready").data({ show: "intro" });
 
-				if (Self.starfield) Self.starfield.start();
-				else {
-					// FPS control
-					Self.starfield = karaqu.FpsControl({
-						fps: 60,
-						callback() {
-							// render starfield
-							Starfield.render();
-						},
-					});
-					// start fps loop
-					Self.starfield.start();
-				}
+				// if (Self.starfield) Self.starfield.start();
+				// else {
+				// 	// FPS control
+				// 	Self.starfield = karaqu.FpsControl({
+				// 		fps: 60,
+				// 		callback() {
+				// 			// render starfield
+				// 			Starfield.render();
+				// 		},
+				// 	});
+				// 	// start fps loop
+				// 	Self.starfield.start();
+				// }
 				break;
 			case "start-tutorial":
 				// make sure correct view is shown

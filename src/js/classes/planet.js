@@ -1,12 +1,13 @@
 
 class Planet {
-	constructor(x, y, radius, ships, owner, texture) {
+	constructor(x, y, radius, ships, owner) {
 		this.id = Main.planets.length + 1;
 		this.pos = new Point(x, y);
 		this.zpos = new Point();
 		this._owner = owner;
 		this.color = Palette[owner].color;
-		this.texture = Surface.maps[texture];
+		// this.texture = Surface.maps[texture];
+		this.TAU = Math.PI * 2;
 		this.width =
 		this.height = radius * 2;
 		this.radius = radius;
@@ -56,13 +57,13 @@ class Planet {
 		// aura / dashed line
 		this.aura += this.aura_step;
 		// rotate planet
-		this.rotation += this.speed;
-		if (!this.rotation_max && Surface.texture[this.texture]) {
-			let ratio = Surface.texture[this.texture].width / Surface.texture[this.texture].height;
-			this.rotation_max = (ratio * (this.radius * 2)) | 0;
-		}
-		if (this.speed > 0 && this.rotation > this.rotation_max) this.rotation = 0;
-		if (this.speed < 0 && this.rotation < -this.radius * 4) this.rotation = this.rotation_max;
+		// this.rotation += this.speed;
+		// if (!this.rotation_max && Surface.texture[this.texture]) {
+		// 	let ratio = Surface.texture[this.texture].width / Surface.texture[this.texture].height;
+		// 	this.rotation_max = (ratio * (this.radius * 2)) | 0;
+		// }
+		// if (this.speed > 0 && this.rotation > this.rotation_max) this.rotation = 0;
+		// if (this.speed < 0 && this.rotation < -this.radius * 4) this.rotation = this.rotation_max;
 		if (this._owner !== Owner.NEUTRAL) {
 			// update shap count
 			this.ships += this.production;
@@ -90,5 +91,44 @@ class Planet {
 			// sound effect
 			window.audio.play("blast");
 		}
+	}
+
+	render(ctx) {
+		let ships = Math.abs(Math.round(this.ships)),
+			r = this.radius,
+			x = this.pos._x,
+			y = this.pos._y,
+			r2 = r << 1;
+
+		/*/ dashed line START */
+		if (this.owner !== Owner.NEUTRAL && !this.selected) {
+			ctx.save();
+			ctx.translate(x, y);
+			ctx.rotate(this.aura);
+			ctx.translate(-x, -y);
+			let tot = 15,
+				len = 15;
+			ctx.strokeStyle = this.color + "bb";
+			ctx.lineWidth = 3;
+			r += 5;
+			while (len--) {
+				let s1 = len / tot,
+					s2 = (len - .6) / tot;
+				ctx.beginPath();
+				ctx.arc(x, y, r, s1*this.TAU, s2*this.TAU, true);
+				ctx.stroke();
+			}
+			ctx.restore();
+		}
+		// dashed line END 
+
+		// production number
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		ctx.font = "16px Lucida Console";
+		ctx.strokeStyle = "#000";
+		ctx.fillStyle = "#fff";
+		ctx.strokeText(ships, x, y+2, r2);
+		ctx.fillText(ships, x, y+2, r2);
 	}
 }

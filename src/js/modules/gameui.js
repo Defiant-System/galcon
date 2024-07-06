@@ -57,7 +57,7 @@ let GameUI = {
 		// reset fx pipe
 		Fx.clearLines();
 		// stop starfield
-		APP.start.starfield.stop();
+		// APP.start.starfield.stop();
 		// autohide dock
 		APP.dock.els.ul.addClass("autohide");
 		// save reference to "game over" function
@@ -125,9 +125,10 @@ let GameUI = {
 		// this.ctx.clearRect(0, 0, this.width, this.height);
 
 		// render starfield
-		Starfield.render();
+		// Starfield.render();
 		// render planet surface
-		Main.planets.map(p => Surface.render(this.ctx, p));
+		// Main.planets.map(p => Surface.render(this.ctx, p));
+		Main.planets.map(p => p.render(this.ctx));
 
 		// render ships
 		Main.allships.map(s => {

@@ -71,9 +71,9 @@ let Main = {
 			x = px || m + this.prand() * (GameUI.width - (m * 2)),
 			y = py || m + this.prand() * (GameUI.height - (m * 2)),
 			ships = pp || 3 + this.prand() * 29,
-			radius = pr || Math.min(19 + (ships * .75), 31) | 0,
-			texture = Math.random() * Object.keys(Surface.maps).length | 0;
-		this.planets.push(new Planet(x, y, radius, ships, owner, texture));
+			radius = pr || Math.min(19 + (ships * .75), 31) | 0;
+			// texture = Math.random() * Object.keys(Surface.maps).length | 0;
+		this.planets.push(new Planet(x, y, radius, ships, owner));
 	},
 	getPlanet(id) {
 		return this.planets.find(p => p.id === +id);
