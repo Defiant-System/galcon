@@ -2,6 +2,7 @@
 let Anim = {
 	init(canvas) {
 		// initial values
+		this.images = [];
 		this.paused = false;
 		this.TAU = Math.PI * 2;
 
@@ -28,6 +29,19 @@ let Anim = {
 				}
 				break;
 			case "create-scene":
+				// get bg image
+				let request = new Request("~/img/bg-02.jpg");
+				fetch(request).then(async resp => {
+					let blob = await resp.blob(),
+						img = await createImageBitmap(blob);
+					// image to be used in "draw"
+					Self.bgImage = img;
+					Self.bgRotation = 0;
+					// start rendering
+					Self.draw();
+				});
+
+				// starfield
 				Self.maxDepth = 64;
 				Self.stars = [];
 
@@ -40,9 +54,6 @@ let Anim = {
 						z: Utils.random(1, Self.maxDepth) | 0
 					});
 				}
-
-				// start rendering
-				Self.draw();
 				break;
 		}
 	},
@@ -60,6 +71,8 @@ let Anim = {
 				stars[len].z = Utils.random(1, Self.maxDepth) | 0
 			}
 		}
+		// miniscule rotation
+		Self.bgRotation += .0001;
 	},
 	draw() {
 		let Self = Anim,
@@ -75,6 +88,14 @@ let Anim = {
 		cvs.width = Self.width;
 		cvs.height = Self.height;
 		
+		// bg image
+		ctx.save();
+		ctx.translate(halfWidth, halfHeight)
+		ctx.rotate(Self.bgRotation)
+		ctx.drawImage(Self.bgImage, -512, -512); // image w & h: 1024px
+		ctx.restore();
+		
+
 		while (len--) {
 			k  = 128 / stars[len].z,
 			px = stars[len].x * k + halfWidth,

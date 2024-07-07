@@ -71,8 +71,17 @@ const galcon = {
 				if (event.char === "space") Self.dock.dispatch({ type: "toggle-play" });
 				break;
 			case "window.focus":
+				// resume background worker
+				Bg.dispatch({ type: "resume" });
+				// forward event to dock
+				Self.dock.dispatch(event);
+				break;
 			case "window.blur":
-				return Self.dock.dispatch(event);
+				// resume background worker
+				Bg.dispatch({ type: "pause" });
+				// forward event to dock
+				Self.dock.dispatch(event);
+				break;
 			// custom events
 			case "apply-settings":
 				if (Self.settings.Sound === false) Self.dock.dispatch({ type: "toggle-sound", mute: true });
