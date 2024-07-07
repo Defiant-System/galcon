@@ -121,7 +121,7 @@ content {
 
 	.logo {
 		position: relative;
-		margin: 0 auto 37px;
+		margin: 0 auto 43px;
 		width: 445px;
 		height: 133px;
 
@@ -144,6 +144,41 @@ content {
 					drop-shadow(0 5px 11px rgba(#000,.2))
 					drop-shadow(0 7px 21px rgba(#000,.3));
 					// sepia(1) brightness(1.15) saturate(5) hue-rotate(225deg);
+		}
+
+		.star {
+			position: absolute;
+			top: 25px;
+			right: 25px;
+			// animation: movestar 0.5s linear; // forwards
+
+			&:before {
+				content: "";
+				position: absolute;
+				top: -25px;
+				left: -25px;
+				width: 50px;
+				height: 50px;
+				// transform: rotate(0) scale(0);
+				background: linear-gradient(-5deg, #fff 2%, #ffffff00 8%),
+							linear-gradient(-85deg, #fff 2%, #ffffff00 8%),
+							linear-gradient(5deg, #fff 2%, #ffffff00 8%),
+							linear-gradient(85deg, #fff 2%, #ffffff00 8%),
+							linear-gradient(5deg, #ffffff00 92%, #fff 98%),
+							linear-gradient(85deg, #ffffff00 92%, #fff 98%),
+							linear-gradient(-5deg, #ffffff00 92%, #fff 98%),
+							linear-gradient(-85deg, #ffffff00 92%, #fff 98%);
+				background-position: 0% 0%,
+									0% 0%,
+									100% 0%,
+									100% 0%,
+									0% 100%,
+									0% 100%,
+									100% 100%,
+									100% 100%;
+				background-size: 50% 50%;
+				background-repeat: no-repeat;
+			}
 		}
 	}
 
