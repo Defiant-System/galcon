@@ -12,10 +12,8 @@
 @import "./modules/main.js"
 @import "./modules/bg.js";
 @import "./modules/fx.js"
-@import "./modules/starfield.js"
 @import "./modules/namegen.js"
 @import "./modules/gameui.js"
-@import "./modules/surface.js"
 @import "./modules/test.js"
 
 
@@ -34,9 +32,6 @@ const galcon = {
 		this.content = window.find("content");
 		// get settings, if any
 		this.settings = window.settings.getItem("settings") || { ...Pref };
-
-		// random background
-		// this.content.data({ theme: `0${(Math.random() * 3) + 1 | 0}` });
 
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());

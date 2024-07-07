@@ -33,6 +33,8 @@ let Bg = {
 			case "dispose":
 				Self.worker.terminate();
 				break;
+			default:
+				Self.worker.postMessage(event);
 		}
 	}
 };

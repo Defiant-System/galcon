@@ -20,8 +20,10 @@ let Surface = {
 			Self.texture[name] = img;
 
 			if (Self.images.length) Self.loadTextures();
-			// Surface is ready
-			else Anim.draw();
+			else {
+				// Surface is ready
+				Anim.draw();
+			}
 		});
 	},
 	update(p) {
@@ -67,7 +69,6 @@ let Surface = {
 		let ratio = img.width / img.height,
 			tH = r2,
 			tW = tH * ratio;
-
 		if (p.speed > 0) {
 			let tX = x - r - p.rotation;
 			ctx.drawImage(img, tX, y - r, tW, tH);
@@ -82,13 +83,6 @@ let Surface = {
 		// radial gradient
 		ctx.globalCompositeOperation = "hard-light";
 		ctx.fillStyle = gradient;
-		ctx.beginPath();
-		ctx.arc(x, y, r+1, 0, this.TAU);
-		ctx.fill();
-
-		/*/ fill cover START */
-		ctx.globalCompositeOperation = "overlay";
-		ctx.fillStyle = "#999";  // p.color
 		ctx.beginPath();
 		ctx.arc(x, y, r+1, 0, this.TAU);
 		ctx.fill();

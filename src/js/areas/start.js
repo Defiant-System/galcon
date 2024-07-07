@@ -27,6 +27,7 @@
 				let starIndex = (Math.random() * 9 | 0) + 1,
 					timer = ((Math.random() * 15 | 0) * 100) + 800;
 				setTimeout(() => {
+					if (Self.els.content.data("show") !== "intro") return;
 					Self.els.star.cssSequence(`twinkle-${starIndex}`, "animationend", el => {
 						// reset star element
 						el.removeClass(`twinkle-${starIndex}`);
@@ -40,6 +41,8 @@
 				Self.els.content.removeClass("success failure get-ready").data({ show: "intro" });
 				// twinkle star
 				Self.dispatch({ type: "twinkle-star" });
+				// reset planets
+				Bg.dispatch({ type: "clear-planets" });
 				break;
 			case "start-tutorial":
 				// make sure correct view is shown

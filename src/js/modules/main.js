@@ -91,6 +91,10 @@ let Main = {
 		APP.stage.els.el.find(".planet").remove();
 		APP.stage.els.el.append(divs.join(""));
 
+		// show planets in worker
+		let planets = this.planets.map(p => ({ r: p.radius, x: p.pos._x, y: p.pos._y }));
+		Bg.dispatch({ type: "add-planets", planets });
+
 		// reset player
 		let players = {};
 		this.planets

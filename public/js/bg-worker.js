@@ -19,8 +19,10 @@ let Surface = {
 			Self.texture[name] = img;
 
 			if (Self.images.length) Self.loadTextures();
-			// Surface is ready
-			else Anim.draw();
+			else {
+				// Surface is ready
+				Anim.draw();
+			}
 		});
 	},
 	update(p) {
@@ -66,7 +68,6 @@ let Surface = {
 		let ratio = img.width / img.height,
 			tH = r2,
 			tW = tH * ratio;
-
 		if (p.speed > 0) {
 			let tX = x - r - p.rotation;
 			ctx.drawImage(img, tX, y - r, tW, tH);
@@ -81,13 +82,6 @@ let Surface = {
 		// radial gradient
 		ctx.globalCompositeOperation = "hard-light";
 		ctx.fillStyle = gradient;
-		ctx.beginPath();
-		ctx.arc(x, y, r+1, 0, this.TAU);
-		ctx.fill();
-
-		/*/ fill cover START */
-		ctx.globalCompositeOperation = "overlay";
-		ctx.fillStyle = "#999";  // p.color
 		ctx.beginPath();
 		ctx.arc(x, y, r+1, 0, this.TAU);
 		ctx.fill();
@@ -143,15 +137,12 @@ let Anim = {
 					// Self.draw();
 				});
 
-				// add temp planets
-				Self.planets.push({ x: 100, y: 100, r: 50, tilt: 15, texture: 3, speed: .15, rotation: 0 });
-
 				// starfield
 				Self.maxDepth = 64;
 				Self.stars = [];
 
 				// stars
-				let count = 192;
+				let count = 128;
 				while (count--) {
 					Self.stars.push({
 						x: Utils.random(-25, 25) | 0,
@@ -161,6 +152,16 @@ let Anim = {
 				}
 				break;
 			case "add-planets":
+				// add planets
+				Self.planets = event.planets.map(p => {
+					let tilt = ((Math.random() * 90) - 45) | 0,
+						texture = (Math.random() * (Object.keys(Surface.maps).length - 1)) | 0,
+						speed = (Math.random() * .5) - .25;
+					return { ...p, tilt, texture, speed, rotation: 0 };
+				});
+				break;
+			case "clear-planets":
+				Self.planets = [];
 				break;
 		}
 	},

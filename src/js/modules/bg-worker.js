@@ -47,15 +47,12 @@ let Anim = {
 					// Self.draw();
 				});
 
-				// add temp planets
-				Self.planets.push({ x: 100, y: 100, r: 50, tilt: 15, texture: 3, speed: .15, rotation: 0 });
-
 				// starfield
 				Self.maxDepth = 64;
 				Self.stars = [];
 
 				// stars
-				let count = 192;
+				let count = 128;
 				while (count--) {
 					Self.stars.push({
 						x: Utils.random(-25, 25) | 0,
@@ -65,6 +62,16 @@ let Anim = {
 				}
 				break;
 			case "add-planets":
+				// add planets
+				Self.planets = event.planets.map(p => {
+					let tilt = ((Math.random() * 90) - 45) | 0,
+						texture = (Math.random() * (Object.keys(Surface.maps).length - 1)) | 0,
+						speed = (Math.random() * .5) - .25;
+					return { ...p, tilt, texture, speed, rotation: 0 };
+				});
+				break;
+			case "clear-planets":
+				Self.planets = [];
 				break;
 		}
 	},

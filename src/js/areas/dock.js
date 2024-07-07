@@ -89,6 +89,7 @@
 				break;
 			case "toggle-fps":
 				// toggle fps box
+				APP.settings.Fps =
 				GameUI.showFps = event.show || !GameUI.showFps;
 				// icon UI update
 				Self.els.ul.find(`li[data-click="toggle-fps"]`).toggleClass("active", !GameUI.showFps);
