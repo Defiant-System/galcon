@@ -22,5 +22,8 @@ let Surface = {
 			if (Self.images.length) Self.loadTextures();
 			else Self.ready = true;
 		});
+	},
+	render(ctx, p) {
+		
 	}
 };
