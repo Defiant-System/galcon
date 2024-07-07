@@ -25,7 +25,7 @@
 			// custom events
 			case "twinkle-star":
 				let starIndex = (Math.random() * 9 | 0) + 1,
-					timer = (Math.random() * 15 | 0) * 100;
+					timer = ((Math.random() * 15 | 0) * 100) + 800;
 				setTimeout(() => {
 					Self.els.star.cssSequence(`twinkle-${starIndex}`, "animationend", el => {
 						// reset star element
