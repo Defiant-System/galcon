@@ -14,12 +14,12 @@ class Planet {
 		this.ships = ships;
 		this.production = radius / 200;
 		
-		this.tilt = ((Math.random() * 90) - 45) | 0;
-		this.speed = (Math.random() * 3) - 1.5;
+		// this.tilt = ((Math.random() * 90) - 45) | 0;
+		// this.speed = (Math.random() * 3) - 1.5;
 		this.aura = 0;
 		this.aura_step = owner === Owner.HUMAN ? .015 : -.015;
-		this.rotation = 0;
-		this.rotation_max = 0;
+		// this.rotation = 0;
+		// this.rotation_max = 0;
 
 		this.lines = {};
 

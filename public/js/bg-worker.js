@@ -1,9 +1,9 @@
 let Surface = {
-	ready: false,
 	texture: {},
 	maps: "astroid gaia gas_giant hoth ixchel jupiter mars mercury moon muunilinst pluto quom saturn sun tatooine venus".split(" "),
 	init() {
-		this.rot = 0;
+		this.TAU = Math.PI * 2;
+		this.piDeg = Math.PI / 180;
 		this.images = [...this.maps];
 		this.loadTextures();
 	},
@@ -19,11 +19,80 @@ let Surface = {
 			Self.texture[name] = img;
 
 			if (Self.images.length) Self.loadTextures();
-			else Self.ready = true;
+			// Surface is ready
+			else Anim.draw();
 		});
 	},
+	update(p) {
+		let img = this.texture[this.maps[p.texture]];
+		// rotate planet
+		p.rotation += p.speed;
+		if (!p.rotation_max && img) {
+			let ratio = img.width / img.height;
+			p.rotation_max = (ratio * (p.r * 2)) | 0;
+		}
+		if (p.speed > 0 && p.rotation > p.rotation_max) p.rotation = 0;
+		if (p.speed < 0 && p.rotation < -p.r * 4) p.rotation = p.rotation_max;
+	},
 	render(ctx, p) {
-		
+		let img = this.texture[this.maps[p.texture]],
+			r = p.r,
+			x = p.x,
+			y = p.y,
+			r2 = r << 1,
+			r0 = 1,
+			r1 = r * 1.25,
+			x0 = x - (r * .35),
+			y0 = y - (r * .35),
+			x1 = x0,
+			y1 = y0,
+			gradient = ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
+
+		gradient.addColorStop(0, "#ccc");
+		gradient.addColorStop(.3, "#666");
+		gradient.addColorStop(1, "#181818");
+
+		ctx.save();
+		// tilt planet
+		ctx.translate(x, y);
+		ctx.rotate(p.tilt * this.piDeg);
+		ctx.translate(-x, -y);
+		// clip planet area
+		ctx.beginPath();
+		ctx.arc(x, y, r, 0, this.TAU);
+		ctx.clip();
+
+
+		let ratio = img.width / img.height,
+			tH = r2,
+			tW = tH * ratio;
+
+		if (p.speed > 0) {
+			let tX = x - r - p.rotation;
+			ctx.drawImage(img, tX, y - r, tW, tH);
+			if (p.rotation > r2) ctx.drawImage(img, tX + tW, y - r, tW, tH);
+		} else {
+			let tX = x - tW + r - p.rotation;
+			ctx.drawImage(img, tX, y - r, tW, tH);
+			if (p.rotation < -r2) ctx.drawImage(img, tX - tW, y - r, tW, tH);
+			else if (p.rotation > 0) ctx.drawImage(img, tX + tW, y - r, tW, tH);
+		}
+
+		// radial gradient
+		ctx.globalCompositeOperation = "hard-light";
+		ctx.fillStyle = gradient;
+		ctx.beginPath();
+		ctx.arc(x, y, r+1, 0, this.TAU);
+		ctx.fill();
+
+		/*/ fill cover START */
+		ctx.globalCompositeOperation = "overlay";
+		ctx.fillStyle = "#999";  // p.color
+		ctx.beginPath();
+		ctx.arc(x, y, r+1, 0, this.TAU);
+		ctx.fill();
+
+		ctx.restore();
 	}
 };
 
@@ -33,6 +102,7 @@ let Anim = {
 	init(canvas) {
 		// initial values
 		this.images = [];
+		this.planets = [];
 		this.paused = false;
 		this.TAU = Math.PI * 2;
 
@@ -70,8 +140,11 @@ let Anim = {
 					Self.bgImage = img;
 					Self.bgRotation = 0;
 					// start rendering
-					Self.draw();
+					// Self.draw();
 				});
+
+				// add temp planets
+				Self.planets.push({ x: 100, y: 100, r: 50, tilt: 15, texture: 3, speed: .15, rotation: 0 });
 
 				// starfield
 				Self.maxDepth = 64;
@@ -97,6 +170,10 @@ let Anim = {
 			stars = Self.stars,
 			len = stars.length;
 
+		// update planets
+		Self.planets.map(p => Surface.update(p));
+
+		// starfield planets
 		while (len--) {
 			stars[len].z -= 0.01;
 			if (stars[len].z <= 0) {
@@ -105,7 +182,7 @@ let Anim = {
 				stars[len].z = Utils.random(1, Self.maxDepth) | 0;
 			}
 		}
-		// miniscule rotation
+		// miniscule bg-image rotation
 		Self.bgRotation += .00005;
 	},
 	draw() {
@@ -128,7 +205,9 @@ let Anim = {
 		ctx.rotate(Self.bgRotation);
 		ctx.drawImage(Self.bgImage, -512, -512); // image w & h: 1024px
 		ctx.restore();
-		
+
+		// draw planets
+		Self.planets.map(p => Surface.render(ctx, p));
 
 		while (len--) {
 			k  = 128 / stars[len].z,

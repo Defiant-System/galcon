@@ -6,6 +6,7 @@ let Anim = {
 	init(canvas) {
 		// initial values
 		this.images = [];
+		this.planets = [];
 		this.paused = false;
 		this.TAU = Math.PI * 2;
 
@@ -43,8 +44,11 @@ let Anim = {
 					Self.bgImage = img;
 					Self.bgRotation = 0;
 					// start rendering
-					Self.draw();
+					// Self.draw();
 				});
+
+				// add temp planets
+				Self.planets.push({ x: 100, y: 100, r: 50, tilt: 15, texture: 3, speed: .15, rotation: 0 });
 
 				// starfield
 				Self.maxDepth = 64;
@@ -70,6 +74,10 @@ let Anim = {
 			stars = Self.stars,
 			len = stars.length;
 
+		// update planets
+		Self.planets.map(p => Surface.update(p));
+
+		// starfield planets
 		while (len--) {
 			stars[len].z -= 0.01;
 			if (stars[len].z <= 0) {
@@ -78,7 +86,7 @@ let Anim = {
 				stars[len].z = Utils.random(1, Self.maxDepth) | 0
 			}
 		}
-		// miniscule rotation
+		// miniscule bg-image rotation
 		Self.bgRotation += .00005;
 	},
 	draw() {
@@ -101,7 +109,9 @@ let Anim = {
 		ctx.rotate(Self.bgRotation)
 		ctx.drawImage(Self.bgImage, -512, -512); // image w & h: 1024px
 		ctx.restore();
-		
+
+		// draw planets
+		Self.planets.map(p => Surface.render(ctx, p));
 
 		while (len--) {
 			k  = 128 / stars[len].z,
