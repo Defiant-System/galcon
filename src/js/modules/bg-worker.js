@@ -1,10 +1,15 @@
 
+@import "./surface.js"
+
+
 let Anim = {
 	init(canvas) {
 		// initial values
 		this.images = [];
 		this.paused = false;
 		this.TAU = Math.PI * 2;
+
+		Surface.init();
 
 		// setTimeout(() => { this.paused = true }, 300);
 	},
@@ -74,7 +79,7 @@ let Anim = {
 			}
 		}
 		// miniscule rotation
-		Self.bgRotation += .0001;
+		Self.bgRotation += .00005;
 	},
 	draw() {
 		let Self = Anim,
