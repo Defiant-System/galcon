@@ -161,11 +161,11 @@ let GameUI = {
 		// this.ctx.lineWidth = 1;
 		// drawQuadtree(Main.allships.tree);
 
+		// FPS 
+		if (this.showFps) this.drawFps(this.ctx);
 
 		// effects layer
 		Fx.render(this.ctx);
-		// FPS 
-		if (this.showFps) this.drawFps(this.ctx);
 	},
 	drawFps(ctx) {
 		let fps = this.fpsControl ? this.fpsControl._log : [];

@@ -2,6 +2,7 @@
 let Fx = {
 	init() {
 		this.pipe = [];
+		this.TAU = Math.PI * 2;
 		this.img = new Image();
 		this.img.src = "~/img/explosion-32.png";
 
@@ -70,8 +71,6 @@ let Fx = {
 	},
 	render(ctx) {
 		let arrowHead = this.arrowHead.cvs,
-			tau = Math.PI * 2,
-			piHalf = Math.PI / 2,
 			line,
 			p1, p2;
 
@@ -86,7 +85,7 @@ let Fx = {
 					ctx.strokeStyle = "#55eeee";
 					ctx.shadowColor = "#55eeee";
 					ctx.beginPath();
-					ctx.arc(p1.pos._x, p1.pos._y, p1.radius + 5, 0, tau, true);
+					ctx.arc(p1.pos._x, p1.pos._y, p1.radius + 5, 0, this.TAU, true);
 					ctx.stroke();
 					ctx.restore();
 					break;

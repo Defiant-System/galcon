@@ -1,4 +1,7 @@
 <Application>
+	<Build>
+		<task action1="skip" source="src/js/modules/bg-worker.js" destination="public/js/bg-worker.js"/>
+	</Build>
 	<Head>
 		<meta name="id" value="galcon"/>
 		<meta name="title" value="Galactic Conquest" version="1.33"/>

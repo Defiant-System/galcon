@@ -10,6 +10,7 @@
 @import "./classes/planet.js"
 
 @import "./modules/main.js"
+@import "./modules/bg.js";
 @import "./modules/fx.js"
 @import "./modules/starfield.js"
 @import "./modules/namegen.js"
@@ -39,10 +40,11 @@ const galcon = {
 
 		// init sub objects
 		Object.keys(this).filter(i => this[i].init).map(i => this[i].init());
+		Bg.init();
 		Fx.init();
 		Main.init();
 		// Starfield.init();
-		Surface.init();
+		// Surface.init();
 		GameUI.init();
 		// show intro view
 		this.dispatch({ type: "apply-settings" });
