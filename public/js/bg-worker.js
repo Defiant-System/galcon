@@ -54,6 +54,8 @@ let Anim = {
 					});
 				}
 				break;
+			case "add-planets":
+				break;
 		}
 	},
 	update(Self) {
