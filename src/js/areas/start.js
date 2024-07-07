@@ -7,6 +7,7 @@
 		let content = window.find("content");
 		this.els = {
 			content,
+			star: content.find(`.logo .star`),
 			stage: content.find(`> div[data-area="stage"]`),
 			tutorial: content.find(`> div[data-area="tutorial"]`),
 			step1: content.find(".step-1"),
@@ -22,23 +23,23 @@
 		// console.log(event);
 		switch (event.type) {
 			// custom events
+			case "twinkle-star":
+				let starIndex = (Math.random() * 9 | 0) + 1,
+					timer = (Math.random() * 15 | 0) * 100;
+				setTimeout(() => {
+					Self.els.star.cssSequence(`twinkle-${starIndex}`, "animationend", el => {
+						// reset star element
+						el.removeClass(`twinkle-${starIndex}`);
+						// twinkle again
+						Self.dispatch({ type: "twinkle-star" });
+					});
+				}, timer);
+				break;
 			case "intro-view":
 				// make sure correct view is shown
 				Self.els.content.removeClass("success failure get-ready").data({ show: "intro" });
-
-				// if (Self.starfield) Self.starfield.start();
-				// else {
-				// 	// FPS control
-				// 	Self.starfield = karaqu.FpsControl({
-				// 		fps: 60,
-				// 		callback() {
-				// 			// render starfield
-				// 			Starfield.render();
-				// 		},
-				// 	});
-				// 	// start fps loop
-				// 	Self.starfield.start();
-				// }
+				// twinkle star
+				Self.dispatch({ type: "twinkle-star" });
 				break;
 			case "start-tutorial":
 				// make sure correct view is shown

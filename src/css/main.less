@@ -134,23 +134,33 @@ content {
 					drop-shadow(0 3px 0 hsl(256, 55%, 67%))
 					drop-shadow(0 4px 0 hsl(256, 55%, 59%))
 					drop-shadow(0 5px 0 hsl(256, 55%, 51%))
-					drop-shadow(0 6px 0 hsl(256, 55%, 43%))
+					drop-shadow(0 6px 0 hsl(256, 55%, 43%));
 					// drop-shadow(0 7px 0 hsl(174, 5%, 61%))
 					// drop-shadow(0 8px 0 hsl(174, 5%, 60%))
 					// drop-shadow(0 0 5px rgba(0, 0, 0, .05))
 					// drop-shadow(0 1px 3px rgba(0, 0, 0, .2))
 					// drop-shadow(0 3px 5px rgba(0, 0, 0, .2))
-					drop-shadow(0 3px 11px rgba(#000,.2))
-					drop-shadow(0 5px 11px rgba(#000,.2))
-					drop-shadow(0 7px 21px rgba(#000,.3));
+					// drop-shadow(0 3px 11px rgba(#000,.2))
+					// drop-shadow(0 5px 11px rgba(#000,.2))
+					// drop-shadow(0 7px 21px rgba(#000,.3));
 					// sepia(1) brightness(1.15) saturate(5) hue-rotate(225deg);
 		}
 
 		.star {
 			position: absolute;
-			top: 25px;
-			right: 25px;
-			// animation: movestar 0.5s linear; // forwards
+			opacity: 0;
+			transform: scale(0);
+			// top: 34px; right: 12px;
+			
+			&.twinkle-1 { top: 34px; right: 12px; animation: twinkle 1000ms linear forwards; }
+			&.twinkle-2 { top: 89px; right: 155px; animation: twinkle 1000ms linear forwards; }
+			&.twinkle-3 { top: 120px; right: 44px; animation: twinkle 1000ms linear forwards; }
+			&.twinkle-4 { top: 23px; right: 186px; animation: twinkle 1000ms linear forwards; }
+			&.twinkle-5 { top: 111px; left: 171px; animation: twinkle 1000ms linear forwards; }
+			&.twinkle-6 { top: 34px; left: 2px; animation: twinkle 1000ms linear forwards; }
+			&.twinkle-7 { top: 124px; left: 118px; animation: twinkle 1000ms linear forwards; }
+			&.twinkle-8 { top: 13px; left: 49px; animation: twinkle 1000ms linear forwards; }
+			&.twinkle-9 { top: 103px; left: 24px; animation: twinkle 1000ms linear forwards; }
 
 			&:before {
 				content: "";
@@ -159,7 +169,6 @@ content {
 				left: -25px;
 				width: 50px;
 				height: 50px;
-				// transform: rotate(0) scale(0);
 				background: linear-gradient(-5deg, #fff 2%, #ffffff00 8%),
 							linear-gradient(-85deg, #fff 2%, #ffffff00 8%),
 							linear-gradient(5deg, #fff 2%, #ffffff00 8%),
@@ -178,6 +187,7 @@ content {
 									100% 100%;
 				background-size: 50% 50%;
 				background-repeat: no-repeat;
+				// transform: rotate(0) scale(0);
 			}
 		}
 	}
@@ -875,6 +885,14 @@ content {
 @keyframes shine {
 	0%   { background-position: 0 px; }
 	100% { background-position: 0 210px; }
+}
+
+
+@keyframes twinkle {
+	0%   { opacity: 0; transform: rotate(0deg) scale(.25); }
+	35%  { opacity: 1; transform: rotate(30deg) scale(1.0); }
+	65%  { opacity: 1; transform: rotate(80deg) scale(1.0); }
+	100% { opacity: 0; transform: rotate(110deg) scale(.5); }
 }
 
 
