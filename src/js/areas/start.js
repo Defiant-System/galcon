@@ -41,8 +41,6 @@
 				Self.els.content.removeClass("success failure get-ready").data({ show: "intro" });
 				// twinkle star
 				Self.dispatch({ type: "twinkle-star" });
-				// reset planets
-				Bg.dispatch({ type: "clear-planets" });
 				break;
 			case "start-tutorial":
 				// make sure correct view is shown
