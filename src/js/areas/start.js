@@ -126,6 +126,8 @@
 				Main.ai = [new AI(2)];
 				// reset planets
 				Main.planets = [];
+				// reset stage selected
+				APP.stage.selected = [];
 				// generate random map
 				Main.generateMap();
 				Main.appendHtml();
@@ -146,6 +148,8 @@
 				Main.ai = [new AI(2)];
 				// reset planets
 				Main.planets = [];
+				// reset stage selected
+				APP.stage.selected = [];
 				// generate random map
 				Main.generateMap();
 				Main.appendHtml();
@@ -166,6 +170,8 @@
 				Main.ai = [new AI(2), new AI(3)];
 				// reset planets
 				Main.planets = [];
+				// reset stage selected
+				APP.stage.selected = [];
 				// generate random map
 				Main.generateMap();
 				Main.appendHtml();
@@ -188,6 +194,8 @@
 				Main.ai = (testMap.ais || []).map(a => new AI(a));;
 				// reset planets
 				Main.planets = [];
+				// reset stage selected
+				APP.stage.selected = [];
 				// plot tutorial map
 				testMap.planets.map(p => Main.planets.push(new Planet(...p)));
 				Main.appendHtml();
