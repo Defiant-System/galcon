@@ -82,9 +82,13 @@ class Planet {
 				window.audio.play("takeover");
 				// 
 				let Stage = galcon.stage,
-					el = Stage.els.el.find(`.planet[data-id="${this.id}"]`).removeClass("neutral ai human");
+					el = Stage.els.el.find(`.planet[data-id="${this.id}"]`).removeClass("neutral ai-1 ai-2 human");
 				if (this.owner === Owner.HUMAN) el.addClass("human");
-				else Stage.dispatch({ type: "unselect-planet", planet: this });
+				else {
+					Stage.dispatch({ type: "unselect-planet", planet: this });
+					// element classname
+					el.addClass(Palette[this._owner].name);
+				}
 			}
 			// explosion effect
 			Fx.explode(ship.pos._x, ship.pos._y);

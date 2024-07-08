@@ -621,16 +621,46 @@ content {
 			}
 
 			.planet {
-				// background: rgba(#fff,.1);
 				position: absolute;
-				box-shadow: inset -3px -1px 3px rgba(#fff,.1);
 				border-radius: 50%;
 
 				&.human {
 					cursor: pointer;
+					background: #7bf;
+					box-shadow: 0 0 20px 20px rgba(#acf,.1),
+								inset -10px -10px 20px rgba(#123,.9),
+								-1px -1px 2px 0 rgba(#bbf,.5),
+								0 0 3px 2px rgba(#024,.35);
 				}
-				&.ai {}
-				&.neutral {}
+
+				&.ai-1 {
+					background: #fbb;
+					box-shadow: 0 0 20px 20px rgba(#fff,.1),
+								inset -10px -10px 20px rgba(#000,.9),
+								-1px -1px 2px 0 rgba(#fbb,.5),
+								0 0 3px 2px rgba(#b22,.5);
+				}
+
+				&.ai-2 {
+					background: #fbf;
+					box-shadow: 0 0 20px 20px rgba(#fff,.1),
+								inset -10px -10px 20px rgba(#000,.9),
+								-1px -1px 2px 0 rgba(#fbf,.5),
+								0 0 3px 2px rgba(#b2b,.5);
+				}
+				
+				&.neutral {
+					background: #888;
+					box-shadow: 0 0 20px 20px rgba(#fff,.1),
+								inset -10px -10px 20px rgba(#000,.9),
+								-1px -1px 2px 0 rgba(#bbb,.5),
+								0 0 3px 2px rgba(#bbb,.2);
+				}
+			}
+
+			canvas.game {
+				z-index: 2;
+				pointer-events: none;
 			}
 		}
 

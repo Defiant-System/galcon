@@ -10,7 +10,7 @@ let Anim = {
 		this.paused = false;
 		this.TAU = Math.PI * 2;
 
-		Surface.init();
+		// Surface.init();
 
 		// setTimeout(() => { this.paused = true }, 300);
 	},
@@ -44,7 +44,7 @@ let Anim = {
 					Self.bgImage = img;
 					Self.bgRotation = 0;
 					// start rendering
-					// Self.draw();
+					Self.draw();
 				});
 
 				// starfield
@@ -82,11 +82,11 @@ let Anim = {
 			len = stars.length;
 
 		// update planets
-		Self.planets.map(p => Surface.update(p));
+		// Self.planets.map(p => Surface.update(p));
 
 		// starfield planets
 		while (len--) {
-			stars[len].z -= 0.01;
+			stars[len].z -= 0.005;
 			if (stars[len].z <= 0) {
 				stars[len].x = Utils.random(-25, 25) | 0;
 				stars[len].y = Utils.random(-25, 25) | 0;
@@ -118,7 +118,7 @@ let Anim = {
 		ctx.restore();
 
 		// draw planets
-		Self.planets.map(p => Surface.render(ctx, p));
+		// Self.planets.map(p => Surface.render(ctx, p));
 
 		while (len--) {
 			k  = 128 / stars[len].z,

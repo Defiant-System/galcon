@@ -2,15 +2,15 @@
 let Owner = {
 		NEUTRAL: 0,
 		HUMAN: 1,
-		AI: 2,
+		AI1: 2,
 		AI2: 3,
 	};
 
 let Palette = [
-		{ color: "#aaaaaa", name: "neutral" },
-		{ color: "#5577ee", name: "human" },
-		{ color: "#ff5555", name: "ai" },
-		{ color: "#dd55dd", name: "ai" },
+		{ color: "#aaaaaa", name: "neutral", type: "neutral" },
+		{ color: "#5577ee", name: "human", type: "human" },
+		{ color: "#ff5555", name: "ai-1", type: "ai" },
+		{ color: "#dd55dd", name: "ai-2", type: "ai" },
 	];
 
 let Mission = {
@@ -104,7 +104,7 @@ let Main = {
 					losing: 0,
 					ownership: 0,
 					lost: false,
-					type: Palette[p.owner].name,
+					type: Palette[p.owner].type,
 				};
 			});
 		this.players = players;

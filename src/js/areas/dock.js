@@ -82,8 +82,9 @@
 				break;
 			case "toggle-sound":
 				// toggle sound effects
-				APP.settings.Sound =
 				window.audio.mute = event.mute || !window.audio.mute;
+				// save to app settings
+				APP.settings.Sound = !window.audio.mute;
 				// icon UI update
 				Self.els.ul.find(`li[data-click="toggle-sound"]`).toggleClass("active", window.audio.mute);
 				break;
