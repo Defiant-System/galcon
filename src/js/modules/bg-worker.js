@@ -1,7 +1,4 @@
 
-@import "./surface.js"
-
-
 let Anim = {
 	init(canvas) {
 		// initial values

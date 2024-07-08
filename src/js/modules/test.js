@@ -5,7 +5,7 @@ let Test = {
 		// return;
 
 		// setTimeout(() => window.find(`li[data-click="toggle-fps"]`).trigger("click"), 200);
-		setTimeout(() => APP.start.dispatch({ type: "test-map" }), 300);
+		// setTimeout(() => APP.start.dispatch({ type: "test-map" }), 300);
 
 		// setTimeout(() => APP.start.els.content.addClass("failure"), 300);
 		

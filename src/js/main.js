@@ -12,7 +12,6 @@
 @import "./modules/main.js"
 @import "./modules/bg.js";
 @import "./modules/fx.js"
-@import "./modules/namegen.js"
 @import "./modules/gameui.js"
 @import "./modules/test.js"
 
