@@ -22,6 +22,7 @@
 			<stop offset="61%" stop-color="#eef" />
 			<stop offset="62%" stop-color="#888" />
 			<stop offset="100%" stop-color="#ccc" />
+			<!-- <animate attributeName="y1" dur="5s" values=".05;.2;.05" repeatCount="indefinite" /> -->
 		</linearGradient>
 		<linearGradient id="SVG-GR-2" x1=".5" y1="0" x2=".5" y2=".9">
 			<stop offset="0%" stop-color="#55b" />
