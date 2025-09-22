@@ -58,6 +58,10 @@ const galcon = {
 			case "window.init":
 				break;
 			case "window.close":
+				// start loop
+				GameUI.fpsControl.stop();
+				// resume background worker
+				Bg.dispatch({ type: "pause" });
 				// save settings
 				window.settings.setItem("settings", Self.settings);
 				break;
