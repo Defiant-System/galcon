@@ -13,6 +13,10 @@
 			playPause: dock.find(`li[data-click="toggle-play"] i`),
 			range: dock.find(".range"),
 		};
+
+		// music info
+		this.tune = { name: "tune-1" };
+
 		// bind event handlers
 		this.els.range.on("mousedown", this.doRange);
 	},
@@ -67,18 +71,35 @@
 				// update settings
 				APP.settings.Music = event.play || !APP.settings.Music;
 
-				if (!APP.settings.Music) {
-					if (window.midi.playing) window.midi.pause();
-				} else {
-					window.midi.play({
-						path: "/cdn/midi/music/Theme - Star Wars Cantina Band.mid",
-						reverb: "cathedral",
-						volume: .35,
-						loop: true,
-					});
+				if (!Self.tune.song) {
+					let opt = {
+							onend: e => {
+								if (!Self.tune.song) return;
+
+								let [a, b] = Self.tune.name.split("-");
+								b = (+b) + 1;
+								// next tune
+								if (b > 2) b = 1;
+								Self.tune.name = "tune-"+ b;
+								// play next song
+								playSong();
+							}
+						},
+						playSong = () => window.audio.play(Self.tune.name, opt)
+												.then(song => Self.tune.song = song);
+					playSong();
+
+					// icon UI update
+					Self.els.ul.find(`li[data-click="toggle-music"]`).addClass("active");
+
+					return true;
+				} else if (Self.tune.song) {
+					// icon UI update
+					Self.els.ul.find(`li[data-click="toggle-music"]`).removeClass("active");
+
+					Self.tune.song.stop();
+					delete Self.tune.song;
 				}
-				// icon UI update
-				Self.els.ul.find(`li[data-click="toggle-music"]`).toggleClass("active", !APP.settings.Music);
 				break;
 			case "toggle-sound":
 				// toggle sound effects

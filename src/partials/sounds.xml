@@ -1,4 +1,6 @@
 <Sounds>
+	<i id="tune-1" url="/cdn/audio/chiptune/corruption.mod"/>
+	<i id="tune-2" url="/cdn/audio/chiptune/cydonian_sky.xm"/>
 	<i id="blast" url="~/audio/blast.ogg"/>
 	<i id="launch" url="~/audio/launch.wav"/>
 	<i id="takeover" url="~/audio/takeover.ogg"/>
